@@ -1,16 +1,42 @@
 const phoneDisplay = "0661 26 03 45";
 const phoneHref = "tel:+212661260345";
 const whatsappHref = "https://wa.me/212661260345";
-const mapsHref =
-  "https://www.google.com/maps/search/?api=1&query=13%20avenue%20Moulay%20Ali%20Ch%C3%A9rif%20appt%202%20Cit%C3%A9%20Massira%20I%20T%C3%A9mara";
+const cabinetAddress =
+  "13, avenue Moulay Ali Chérif, appartement n°2, Cité Massira I, 12020 Témara";
+const mapsQuery =
+  "13 avenue Moulay Ali Cherif appartement 2 Cite Massira I Temara";
+const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  mapsQuery,
+)}`;
+const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
+  mapsQuery,
+)}&output=embed`;
 
 const services = [
-  "Diabète type 1, type 2 et diabète gestationnel",
-  "Thyroïde, goitre, nodules et cancers thyroïdiens",
-  "Nutrition, obésité et maladies métaboliques",
-  "SOPK, hyperandrogénie, puberté précoce ou retardée",
-  "Pathologies surrénaliennes, hypophysaires et parathyroïdiennes",
-  "Hyperprolactinémie, hypoglycémies et troubles hormonaux",
+  {
+    title: "Diabète et équilibre glycémique",
+    text: "Suivi du diabète de type 1, type 2, diabète gestationnel et situations de déséquilibre glycémique.",
+  },
+  {
+    title: "Thyroïde, goitre et nodules",
+    text: "Bilan, surveillance et orientation dans les troubles thyroïdiens, nodules, goitre et cancers thyroïdiens.",
+  },
+  {
+    title: "Nutrition et maladies métaboliques",
+    text: "Accompagnement médical autour du poids, du métabolisme, de l’insulinorésistance et de la prévention.",
+  },
+  {
+    title: "Troubles hormonaux féminins",
+    text: "Prise en charge du SOPK, de l’hyperandrogénie, de l’hirsutisme et des troubles de la puberté.",
+  },
+  {
+    title: "Surrénales, hypophyse, parathyroïdes",
+    text: "Exploration et suivi des pathologies endocriniennes complexes avec pédagogie et méthode.",
+  },
+  {
+    title: "Suivi dans la durée",
+    text: "Des décisions expliquées simplement, pour que le patient comprenne son traitement et avance sereinement.",
+  },
 ];
 
 const credentials = [
@@ -33,19 +59,34 @@ const gallery = [
     src: "/cabinet-accueil.png",
     alt: "Illustration photoréaliste d’un accueil de cabinet médical moderne",
     label: "Accueil",
-    title: "Un espace calme dès l’arrivée",
+    title: "Une première impression calme, claire, rassurante.",
   },
   {
     src: "/cabinet-consultation.png",
     alt: "Illustration photoréaliste d’un bureau de consultation endocrinologique",
     label: "Consultation",
-    title: "Des examens et suivis structurés",
+    title: "Un espace pensé pour écouter, examiner et expliquer.",
   },
   {
     src: "/cabinet-nutrition.png",
     alt: "Illustration photoréaliste d’un suivi nutritionnel et métabolique",
     label: "Nutrition",
-    title: "Prévention, équilibre et métabolisme",
+    title: "Prévention, équilibre et accompagnement métabolique.",
+  },
+];
+
+const patientJourney = [
+  {
+    title: "Comprendre",
+    text: "Le temps d’écouter les symptômes, l’histoire médicale et les inquiétudes du patient.",
+  },
+  {
+    title: "Expliquer",
+    text: "Des mots simples pour rendre les bilans, les hormones et les traitements plus lisibles.",
+  },
+  {
+    title: "Suivre",
+    text: "Un plan de suivi clair, adapté au quotidien du patient et à son rythme de vie.",
   },
 ];
 
@@ -54,6 +95,7 @@ export default function Home() {
     <main>
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
+      <div className="grain-overlay" />
 
       <header className="site-header">
         <a className="brand-mark" href="#accueil" aria-label="Accueil">
@@ -67,41 +109,47 @@ export default function Home() {
           <a href="#contact">Contact</a>
         </nav>
         <a className="header-cta" href={phoneHref}>
-          Appeler
+          Rendez-vous
         </a>
       </header>
 
       <section id="accueil" className="hero section-shell">
         <div className="hero-copy">
-          <p className="eyebrow">Cabinet d’endocrinologie à Témara</p>
+          <p className="eyebrow">Endocrinologue diabétologue à Témara</p>
           <h1>
-            Une prise en charge hormonale, métabolique et nutritionnelle claire,
-            humaine et précise.
+            Ici, on soigne aussi la part d’inquiétude qui vient avec le
+            diagnostic.
           </h1>
           <p className="hero-lead">
-            Le cabinet du Dr Sonia Abahou accompagne les patients dans le suivi
-            du diabète, de la thyroïde, de la nutrition et des troubles
-            endocriniens avec une approche rigoureuse et rassurante.
+            Le cabinet du Dr Sonia Abahou accompagne chaque patient avec une
+            médecine précise, attentive et compréhensible : diabète, thyroïde,
+            nutrition, troubles hormonaux et maladies métaboliques.
           </p>
           <div className="hero-actions" aria-label="Actions rapides">
             <a className="primary-button" href={phoneHref}>
-              Prendre rendez-vous
+              Appeler le cabinet
             </a>
             <a className="secondary-button" href={whatsappHref}>
-              WhatsApp
+              Écrire sur WhatsApp
             </a>
           </div>
           <div className="trust-strip" aria-label="Informations principales">
-            <span>Endocrinologie</span>
+            <span>Arabe & français</span>
             <span>Diabétologie</span>
-            <span>Nutrition</span>
-            <span>Maladies métaboliques</span>
+            <span>Thyroïde</span>
+            <span>Nutrition médicale</span>
           </div>
         </div>
 
         <div className="hero-visual" aria-label="Portrait du Dr Sonia Abahou">
+          <div className="halo-disc" />
           <div className="pulse-orbit orbit-a" />
           <div className="pulse-orbit orbit-b" />
+          <div className="metabolic-sphere">
+            <span />
+            <span />
+            <span />
+          </div>
           <div className="portrait-card">
             <img
               src="/dr-sonia-abahou.jpg"
@@ -109,16 +157,16 @@ export default function Home() {
             />
             <div className="portrait-caption">
               <span>Dr Sonia Abahou</span>
-              <strong>Endocrinologue — Diabétologue</strong>
+              <strong>Endocrinologie · Diabétologie · Nutrition</strong>
             </div>
           </div>
           <div className="floating-card card-glucose">
-            <span>Suivi diabète</span>
-            <strong>Type 1 & 2</strong>
+            <span>Diabète</span>
+            <strong>Suivi structuré</strong>
           </div>
           <div className="floating-card card-thyroid">
             <span>Thyroïde</span>
-            <strong>Bilan & suivi</strong>
+            <strong>Bilan & orientation</strong>
           </div>
         </div>
       </section>
@@ -129,15 +177,26 @@ export default function Home() {
           <span>Thyroïde</span>
           <span>Nutrition</span>
           <span>SOPK</span>
-          <span>Maladies métaboliques</span>
-          <span>Endocrinologie</span>
+          <span>Métabolisme</span>
+          <span>Hormones</span>
+          <span>Diabète</span>
+          <span>Thyroïde</span>
+          <span>Nutrition</span>
+          <span>SOPK</span>
+          <span>Métabolisme</span>
+          <span>Hormones</span>
         </div>
       </section>
 
-      <section id="expertise" className="section-shell split-section">
+      <section id="expertise" className="section-shell split-section reveal-section">
         <div>
           <p className="eyebrow">Parcours médical</p>
-          <h2>Un profil d’expertise pour des décisions médicales nettes.</h2>
+          <h2>Une expertise solide, présentée avec simplicité.</h2>
+          <p className="section-text">
+            Un bon site médical ne doit pas impressionner pour impressionner. Il
+            doit d’abord transmettre une sensation essentielle : “je suis entre
+            de bonnes mains”.
+          </p>
         </div>
         <div className="credential-grid">
           {credentials.map((item) => (
@@ -149,33 +208,56 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="soins" className="section-shell care-section">
-        <div className="section-heading">
-          <p className="eyebrow">Consultations & suivis</p>
-          <h2>Les principaux motifs pris en charge au cabinet.</h2>
+      <section className="section-shell promise-section reveal-section">
+        <div className="promise-card">
+          <p className="eyebrow">La promesse du cabinet</p>
+          <h2>Des explications claires. Des décisions médicales posées.</h2>
           <p>
-            Une vitrine pensée pour rassurer dès les premières secondes:
-            expertise visible, parcours simple, contact immédiat.
+            Face au diabète, à un trouble thyroïdien ou à un déséquilibre
+            hormonal, beaucoup de patients arrivent avec des résultats, des
+            doutes et parfois de la peur. Le rôle du cabinet est de transformer
+            cette confusion en plan de suivi clair, humain et réaliste.
           </p>
         </div>
-        <div className="care-grid">
-          {services.map((service, index) => (
-            <article key={service} className="care-card">
+        <div className="journey-grid">
+          {patientJourney.map((item, index) => (
+            <article key={item.title} className="journey-card">
               <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{service}</h3>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="section-shell gallery-section">
+      <section id="soins" className="section-shell care-section reveal-section">
+        <div className="section-heading">
+          <p className="eyebrow">Consultations & suivis</p>
+          <h2>Les motifs pris en charge au cabinet.</h2>
+          <p>
+            Le contenu est volontairement clair : un patient doit comprendre en
+            quelques secondes si le cabinet peut l’aider.
+          </p>
+        </div>
+        <div className="care-grid">
+          {services.map((service, index) => (
+            <article key={service.title} className="care-card">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{service.title}</h3>
+              <p>{service.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-shell gallery-section reveal-section">
         <div className="section-heading">
           <p className="eyebrow">Le cabinet en images</p>
-          <h2>Une ambiance médicale premium, claire et rassurante.</h2>
+          <h2>Une présence visuelle premium, sans perdre la chaleur humaine.</h2>
           <p>
-            Visuels illustratifs temporaires pour donner de la présence au site.
-            Ils pourront être remplacés par les vraies photos du cabinet dès
-            qu’elles seront disponibles.
+            Ces images sont illustratives et servent à donner une direction
+            visuelle. Elles pourront être remplacées par les vraies photos du
+            cabinet pour une version finale encore plus authentique.
           </p>
         </div>
         <div className="gallery-grid">
@@ -201,26 +283,41 @@ export default function Home() {
           <h2>Écouter, expliquer, suivre — sans jargon inutile.</h2>
         </div>
         <p>
-          Arabe et français parlés au cabinet pour faciliter la compréhension,
-          l’adhésion au traitement et le suivi dans la durée.
+          Parce qu’un traitement fonctionne mieux quand le patient comprend ce
+          qui se passe dans son corps, le cabinet met la pédagogie au cœur de la
+          consultation.
         </p>
       </section>
 
-      <section id="cabinet" className="section-shell cabinet-section">
+      <section id="cabinet" className="section-shell cabinet-section reveal-section">
         <div className="glass-panel">
-          <p className="eyebrow">Informations pratiques</p>
+          <p className="eyebrow">Accès au cabinet</p>
           <h2>Cabinet situé à Massira I, Témara.</h2>
-          <p>
-            13, avenue Moulay Ali Chérif, appartement n°2, Cité Massira I,
-            12020, Témara.
-          </p>
+          <p>{cabinetAddress}</p>
           <div className="contact-actions">
-            <a className="primary-button" href={mapsHref}>
-              Obtenir l’itinéraire
+            <a
+              className="primary-button"
+              href={mapsHref}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Ouvrir l’itinéraire GPS
             </a>
             <a className="secondary-button" href={phoneHref}>
               {phoneDisplay}
             </a>
+          </div>
+        </div>
+        <div className="map-card" aria-label="Carte GPS du cabinet">
+          <iframe
+            src={mapEmbedSrc}
+            title="Carte GPS du cabinet Dr Sonia Abahou à Témara"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+          <div className="map-overlay">
+            <span>GPS</span>
+            <strong>Massira I · Témara</strong>
           </div>
         </div>
         <div className="hours-panel">
@@ -236,10 +333,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="final-cta section-shell">
+      <section id="contact" className="final-cta section-shell reveal-section">
         <div>
           <p className="eyebrow">Rendez-vous</p>
-          <h2>Un contact direct, visible et rassurant.</h2>
+          <h2>Un site pensé pour rassurer avant même le premier appel.</h2>
           <p>
             Pour confirmer les disponibilités, contactez le cabinet par appel ou
             WhatsApp. En cas d’urgence vitale, contactez immédiatement les

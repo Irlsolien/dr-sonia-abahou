@@ -11,7 +11,7 @@ const figtree = Figtree({
 export const metadata: Metadata = {
   title: "Dr Sonia Abahou | Endocrinologue Diabétologue à Témara",
   description:
-    "Cabinet du Dr Sonia Abahou à Témara: endocrinologie, diabétologie, nutrition, thyroïde et maladies métaboliques.",
+    "Cabinet du Dr Sonia Abahou à Témara : endocrinologie, diabétologie, nutrition, thyroïde, troubles hormonaux et maladies métaboliques.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Dr Sonia Abahou | Cabinet d’endocrinologie à Témara",
     description:
-      "Prise en charge du diabète, de la thyroïde, de la nutrition et des troubles hormonaux à Témara.",
+      "Une prise en charge claire et humaine du diabète, de la thyroïde, de la nutrition et des troubles hormonaux à Témara.",
     type: "website",
     locale: "fr_MA",
   },
