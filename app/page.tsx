@@ -28,6 +28,27 @@ const hours = [
   ["Vendredi", "10:00 — 17:00"],
 ];
 
+const gallery = [
+  {
+    src: "/cabinet-accueil.png",
+    alt: "Illustration photoréaliste d’un accueil de cabinet médical moderne",
+    label: "Accueil",
+    title: "Un espace calme dès l’arrivée",
+  },
+  {
+    src: "/cabinet-consultation.png",
+    alt: "Illustration photoréaliste d’un bureau de consultation endocrinologique",
+    label: "Consultation",
+    title: "Des examens et suivis structurés",
+  },
+  {
+    src: "/cabinet-nutrition.png",
+    alt: "Illustration photoréaliste d’un suivi nutritionnel et métabolique",
+    label: "Nutrition",
+    title: "Prévention, équilibre et métabolisme",
+  },
+];
+
 export default function Home() {
   return (
     <main>
@@ -143,6 +164,32 @@ export default function Home() {
               <span>{String(index + 1).padStart(2, "0")}</span>
               <h3>{service}</h3>
             </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-shell gallery-section">
+        <div className="section-heading">
+          <p className="eyebrow">Le cabinet en images</p>
+          <h2>Une ambiance médicale premium, claire et rassurante.</h2>
+          <p>
+            Visuels illustratifs temporaires pour donner de la présence au site.
+            Ils pourront être remplacés par les vraies photos du cabinet dès
+            qu’elles seront disponibles.
+          </p>
+        </div>
+        <div className="gallery-grid">
+          {gallery.map((image, index) => (
+            <figure
+              key={image.src}
+              className={index === 0 ? "gallery-card gallery-large" : "gallery-card"}
+            >
+              <img src={image.src} alt={image.alt} loading="lazy" />
+              <figcaption>
+                <span>{image.label}</span>
+                <strong>{image.title}</strong>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </section>
