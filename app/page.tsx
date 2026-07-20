@@ -8,9 +8,6 @@ const mapsQuery =
 const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   mapsQuery,
 )}`;
-const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
-  mapsQuery,
-)}&output=embed`;
 
 const services = [
   {
@@ -317,16 +314,21 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <div className="map-card" aria-label="Carte GPS du cabinet">
-          <iframe
-            src={mapEmbedSrc}
-            title="Carte GPS du cabinet Dr Sonia Abahou à Témara"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+        <div className="map-card" aria-label="Accès GPS du cabinet">
+          <div className="map-illustration" aria-hidden="true">
+            <span className="map-route route-a" />
+            <span className="map-route route-b" />
+            <span className="map-route route-c" />
+            <span className="map-pin">
+              <span>SA</span>
+            </span>
+          </div>
           <div className="map-overlay">
             <span>GPS</span>
             <strong>Massira I · Témara</strong>
+            <a href={mapsHref} target="_blank" rel="noreferrer">
+              Voir sur Google Maps
+            </a>
           </div>
         </div>
         <div className="hours-panel">
@@ -361,6 +363,21 @@ export default function Home() {
           </a>
         </div>
       </section>
+
+      <footer className="site-footer section-shell">
+        <div>
+          <strong>Dr Sonia Abahou</strong>
+          <p>
+            Site d’information du cabinet. Les contenus ne remplacent pas une
+            consultation médicale.
+          </p>
+        </div>
+        <nav aria-label="Liens légaux">
+          <a href="/mentions-legales">Mentions légales</a>
+          <a href="/confidentialite">Confidentialité</a>
+          <a href="/cookies">Cookies</a>
+        </nav>
+      </footer>
     </main>
   );
 }
