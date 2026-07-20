@@ -286,7 +286,7 @@ export default function Home() {
         <div className="signal-line" />
         <div>
           <p>Approche médicale</p>
-          <h2>Écouter, expliquer, suivre — sans jargon inutile.</h2>
+          <h2>Écouter, expliquer, suivre.</h2>
         </div>
         <p>
           Parce qu’un traitement fonctionne mieux quand le patient comprend ce
