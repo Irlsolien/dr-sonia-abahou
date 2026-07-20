@@ -758,6 +758,22 @@ h3 {
     background 240ms ease;
 }
 
+.care-card::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.86) 48%, rgba(255, 255, 255, 0.4) 100%),
+    var(--care-visual) right -18px bottom -22px / min(58%, 270px) auto no-repeat;
+  content: "";
+  opacity: 0.74;
+  transform: scale(1);
+  transition:
+    opacity 300ms ease,
+    transform 560ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    filter 300ms ease;
+}
+
 .care-card::after {
   position: absolute;
   right: -52px;
@@ -774,7 +790,15 @@ h3 {
   transform: scale(1.55);
 }
 
+.care-card:hover::before {
+  opacity: 0.92;
+  filter: saturate(1.12);
+  transform: scale(1.045) translate3d(8px, -6px, 0);
+}
+
 .care-card > span {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   width: 52px;
   height: 52px;
@@ -802,6 +826,30 @@ h3 {
 .care-card p {
   margin-bottom: 0;
   font-size: 1rem;
+}
+
+.care-diabetes {
+  --care-visual: url("/care-diabetes.svg");
+}
+
+.care-thyroid {
+  --care-visual: url("/care-thyroid.svg");
+}
+
+.care-nutrition {
+  --care-visual: url("/care-nutrition.svg");
+}
+
+.care-hormones {
+  --care-visual: url("/care-hormones.svg");
+}
+
+.care-endocrine {
+  --care-visual: url("/care-endocrine.svg");
+}
+
+.care-followup {
+  --care-visual: url("/care-followup.svg");
 }
 
 .gallery-section {

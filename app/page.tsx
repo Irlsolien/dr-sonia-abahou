@@ -16,26 +16,32 @@ const services = [
   {
     title: "Diabète et équilibre glycémique",
     text: "Suivi du diabète de type 1, type 2, diabète gestationnel et situations de déséquilibre glycémique.",
+    visualClass: "care-diabetes",
   },
   {
     title: "Thyroïde, goitre et nodules",
     text: "Bilan, surveillance et orientation dans les troubles thyroïdiens, nodules, goitre et cancers thyroïdiens.",
+    visualClass: "care-thyroid",
   },
   {
     title: "Nutrition et maladies métaboliques",
     text: "Accompagnement médical autour du poids, du métabolisme, de l’insulinorésistance et de la prévention.",
+    visualClass: "care-nutrition",
   },
   {
     title: "Troubles hormonaux féminins",
     text: "Prise en charge du SOPK, de l’hyperandrogénie, de l’hirsutisme et des troubles de la puberté.",
+    visualClass: "care-hormones",
   },
   {
     title: "Surrénales, hypophyse, parathyroïdes",
     text: "Exploration et suivi des pathologies endocriniennes complexes avec pédagogie et méthode.",
+    visualClass: "care-endocrine",
   },
   {
     title: "Suivi dans la durée",
     text: "Des décisions expliquées simplement, pour que le patient comprenne son traitement et avance sereinement.",
+    visualClass: "care-followup",
   },
 ];
 
@@ -241,7 +247,10 @@ export default function Home() {
         </div>
         <div className="care-grid">
           {services.map((service, index) => (
-            <article key={service.title} className="care-card">
+            <article
+              key={service.title}
+              className={`care-card ${service.visualClass}`}
+            >
               <span>{String(index + 1).padStart(2, "0")}</span>
               <h3>{service.title}</h3>
               <p>{service.text}</p>
