@@ -21,7 +21,7 @@
 @theme inline {
   --color-background: var(--color-background);
   --color-foreground: var(--color-foreground);
-  --font-sans: var(--font-figtree);
+  --font-sans: var(--font-medical-ui);
 }
 
 * {
@@ -41,7 +41,12 @@ body {
     radial-gradient(circle at 84% 2%, rgba(7, 150, 173, 0.2), transparent 28rem),
     linear-gradient(135deg, #eefdfa 0%, #f8ffff 46%, #eff7ff 100%);
   color: var(--color-foreground);
-  font-family: var(--font-figtree), "Noto Sans", Arial, sans-serif;
+  font-family:
+    var(--font-medical-ui),
+    "Segoe UI",
+    Inter,
+    Arial,
+    sans-serif;
 }
 
 body::before {

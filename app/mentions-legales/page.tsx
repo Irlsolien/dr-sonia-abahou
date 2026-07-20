@@ -77,6 +77,17 @@ export default function LegalNoticePage() {
         </article>
 
         <article>
+          <h2>Déontologie médicale</h2>
+          <p>
+            Le site a une finalité informative : présentation du cabinet, des
+            domaines de consultation, des horaires et des coordonnées. Les textes
+            médicaux doivent être validés par le médecin responsable avant
+            publication et rester conformes aux règles déontologiques applicables
+            à l’exercice de la médecine au Maroc.
+          </p>
+        </article>
+
+        <article>
           <h2>Droit applicable</h2>
           <p>
             Le site est édité au Maroc. Les règles relatives à la protection des

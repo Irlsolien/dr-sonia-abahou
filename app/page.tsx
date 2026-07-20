@@ -1,6 +1,10 @@
 const phoneDisplay = "0661 26 03 45";
 const phoneHref = "tel:+212661260345";
-const whatsappHref = "https://wa.me/212661260345";
+const whatsappMessage =
+  "Bonjour, je souhaite prendre rendez-vous au cabinet du Dr Sonia Abahou.";
+const whatsappHref = `https://wa.me/212661260345?text=${encodeURIComponent(
+  whatsappMessage,
+)}`;
 const cabinetAddress =
   "13, avenue Moulay Ali Chérif, appartement n°2, Cité Massira I, 12020 Témara";
 const mapsQuery =
@@ -93,9 +97,52 @@ const patientJourney = [
   },
 ];
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  name: "Dr Sonia Abahou",
+  description:
+    "Cabinet d’endocrinologie, diabétologie, nutrition et maladies métaboliques à Témara.",
+  image: "https://dr-sonia-abahou.vercel.app/dr-sonia-abahou.jpg",
+  url: "https://dr-sonia-abahou.vercel.app/",
+  telephone: "+212661260345",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress:
+      "13, avenue Moulay Ali Chérif, appartement n°2, Cité Massira I",
+    postalCode: "12020",
+    addressLocality: "Témara",
+    addressCountry: "MA",
+  },
+  medicalSpecialty: [
+    "Endocrinology",
+    "Diabetology",
+    "Nutrition",
+    "MetabolicDiseases",
+  ],
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Wednesday", "Friday"],
+      opens: "10:00",
+      closes: "17:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Tuesday", "Thursday"],
+      opens: "10:00",
+      closes: "15:00",
+    },
+  ],
+};
+
 export default function Home() {
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
       <div className="grain-overlay" />
@@ -120,13 +167,13 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow">Endocrinologue diabétologue à Témara</p>
           <h1>
-            Ici, on soigne aussi la part d’inquiétude qui vient avec le
-            diagnostic.
+            Une prise en charge claire du diabète, de la thyroïde et du
+            métabolisme.
           </h1>
           <p className="hero-lead">
-            Le cabinet du Dr Sonia Abahou accompagne chaque patient avec une
-            médecine précise, attentive et compréhensible : diabète, thyroïde,
-            nutrition, troubles hormonaux et maladies métaboliques.
+            Le cabinet du Dr Sonia Abahou reçoit les patients pour le suivi du
+            diabète, des troubles thyroïdiens, de la nutrition médicale, des
+            troubles hormonaux et des maladies métaboliques.
           </p>
           <div className="hero-actions" aria-label="Actions rapides">
             <a className="primary-button" href={phoneHref}>
@@ -194,11 +241,11 @@ export default function Home() {
       <section id="expertise" className="section-shell split-section reveal-section">
         <div>
           <p className="eyebrow">Parcours médical</p>
-          <h2>Une expertise solide, présentée avec simplicité.</h2>
+          <h2>Un parcours médical présenté avec clarté.</h2>
           <p className="section-text">
-            Un bon site médical ne doit pas impressionner pour impressionner. Il
-            doit d’abord transmettre une sensation essentielle : “je suis entre
-            de bonnes mains”.
+            Les informations essentielles du cabinet sont réunies pour permettre
+            au patient d’identifier rapidement les domaines de consultation et
+            les modalités de prise de contact.
           </p>
         </div>
         <div className="credential-grid">
@@ -213,13 +260,12 @@ export default function Home() {
 
       <section className="section-shell promise-section reveal-section">
         <div className="promise-card">
-          <p className="eyebrow">La promesse du cabinet</p>
-          <h2>Des explications claires. Des décisions médicales posées.</h2>
+          <p className="eyebrow">Approche du cabinet</p>
+          <h2>Écoute, explications et suivi médical.</h2>
           <p>
             Face au diabète, à un trouble thyroïdien ou à un déséquilibre
-            hormonal, beaucoup de patients arrivent avec des résultats, des
-            doutes et parfois de la peur. Le rôle du cabinet est de transformer
-            cette confusion en plan de suivi clair, humain et réaliste.
+            hormonal, la consultation permet de faire le point sur les symptômes,
+            les examens et les objectifs du suivi médical.
           </p>
         </div>
         <div className="journey-grid">
@@ -238,8 +284,8 @@ export default function Home() {
           <p className="eyebrow">Consultations & suivis</p>
           <h2>Les motifs pris en charge au cabinet.</h2>
           <p>
-            Le contenu est volontairement clair : un patient doit comprendre en
-            quelques secondes si le cabinet peut l’aider.
+            Les principaux domaines de consultation sont présentés de façon
+            simple afin d’orienter le patient vers le bon suivi médical.
           </p>
         </div>
         <div className="care-grid">
@@ -259,11 +305,10 @@ export default function Home() {
       <section className="section-shell gallery-section reveal-section">
         <div className="section-heading">
           <p className="eyebrow">Le cabinet en images</p>
-          <h2>Une présence visuelle premium, sans perdre la chaleur humaine.</h2>
+          <h2>Un aperçu visuel du cadre de consultation.</h2>
           <p>
-            Ces images sont illustratives et servent à donner une direction
-            visuelle. Elles pourront être remplacées par les vraies photos du
-            cabinet pour une version finale encore plus authentique.
+            Ces visuels sont illustratifs et pourront être remplacés par les
+            photos réelles du cabinet dès qu’elles seront disponibles.
           </p>
         </div>
         <div className="gallery-grid">
@@ -353,7 +398,7 @@ export default function Home() {
       <section id="contact" className="final-cta section-shell reveal-section">
         <div>
           <p className="eyebrow">Rendez-vous</p>
-          <h2>Un site pensé pour rassurer avant même le premier appel.</h2>
+          <h2>Contacter le cabinet simplement.</h2>
           <p>
             Pour confirmer les disponibilités, contactez le cabinet par appel ou
             WhatsApp. En cas d’urgence vitale, contactez immédiatement les

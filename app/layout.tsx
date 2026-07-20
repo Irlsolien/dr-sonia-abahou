@@ -1,12 +1,5 @@
 import type { Metadata } from "next";
-import { Figtree } from "next/font/google";
 import "./globals.css";
-
-const figtree = Figtree({
-  variable: "--font-figtree",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Dr Sonia Abahou | Endocrinologue Diabétologue à Témara",
@@ -19,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Dr Sonia Abahou | Cabinet d’endocrinologie à Témara",
     description:
-      "Une prise en charge claire et humaine du diabète, de la thyroïde, de la nutrition et des troubles hormonaux à Témara.",
+      "Informations pratiques du cabinet : diabète, thyroïde, nutrition et troubles hormonaux à Témara.",
     type: "website",
     locale: "fr_MA",
   },
@@ -32,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={`${figtree.variable} antialiased`}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
