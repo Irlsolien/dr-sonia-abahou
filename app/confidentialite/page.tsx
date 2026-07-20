@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité | Dr Sonia Abahou",
@@ -10,9 +11,9 @@ export default function PrivacyPage() {
   return (
     <main className="legal-page">
       <section className="legal-hero section-shell">
-        <a className="legal-back" href="/">
+        <Link className="legal-back" href="/">
           ← Retour au site
-        </a>
+        </Link>
         <p className="eyebrow">Données personnelles</p>
         <h1>Politique de confidentialité</h1>
         <p>

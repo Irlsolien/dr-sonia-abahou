@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Politique cookies | Dr Sonia Abahou",
@@ -10,9 +11,9 @@ export default function CookiesPage() {
   return (
     <main className="legal-page">
       <section className="legal-hero section-shell">
-        <a className="legal-back" href="/">
+        <Link className="legal-back" href="/">
           ← Retour au site
-        </a>
+        </Link>
         <p className="eyebrow">Cookies</p>
         <h1>Politique cookies</h1>
         <p>

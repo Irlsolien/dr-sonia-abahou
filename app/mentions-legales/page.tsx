@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Mentions légales | Dr Sonia Abahou",
@@ -10,9 +11,9 @@ export default function LegalNoticePage() {
   return (
     <main className="legal-page">
       <section className="legal-hero section-shell">
-        <a className="legal-back" href="/">
+        <Link className="legal-back" href="/">
           ← Retour au site
-        </a>
+        </Link>
         <p className="eyebrow">Cadre légal</p>
         <h1>Mentions légales</h1>
         <p>

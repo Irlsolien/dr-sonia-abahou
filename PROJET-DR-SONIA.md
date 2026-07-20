@@ -125,6 +125,8 @@ Réalisé :
 - JSON-LD `Physician` ;
 - site statique rapide ;
 - suppression de la dépendance Google Fonts pour éviter les builds bloqués.
+- `og:image` pour les partages WhatsApp/Facebook.
+- images cabinet converties en WebP compressé.
 
 À faire après validation du deal :
 
@@ -197,9 +199,9 @@ public/
   robots.txt
   sitemap.xml
   dr-sonia-abahou.jpg
-  cabinet-accueil.png
-  cabinet-consultation.png
-  cabinet-nutrition.png
+  cabinet-accueil.webp
+  cabinet-consultation.webp
+  cabinet-nutrition.webp
   care-diabetes.svg
   care-thyroid.svg
   care-nutrition.svg
@@ -217,6 +219,25 @@ npm run build
 ```
 
 Le build génère un site statique compatible Vercel.
+
+## 12.1 Nettoyage technique réalisé
+
+Le projet initial contenait des résidus du starter Vinext / Cloudflare / D1 / Drizzle / ChatGPT Auth.
+
+Fichiers et dossiers retirés du projet applicatif :
+
+- `worker/`
+- `db/`
+- `drizzle/`
+- `examples/`
+- `build/`
+- `tests/`
+- `.openai/`
+- `app/chatgpt-auth.ts`
+- `vite.config.ts`
+- `drizzle.config.ts`
+
+Le projet est maintenant assumé comme un site vitrine **Next.js statique sur Vercel**.
 
 ## 13. Déploiement
 

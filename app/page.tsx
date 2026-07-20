@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const phoneDisplay = "0661 26 03 45";
 const phoneHref = "tel:+212661260345";
 const whatsappMessage =
@@ -63,19 +65,19 @@ const hours = [
 
 const gallery = [
   {
-    src: "/cabinet-accueil.png",
+    src: "/cabinet-accueil.webp",
     alt: "Illustration photoréaliste d’un accueil de cabinet médical moderne",
     label: "Accueil",
     title: "Une première impression calme, claire, rassurante.",
   },
   {
-    src: "/cabinet-consultation.png",
+    src: "/cabinet-consultation.webp",
     alt: "Illustration photoréaliste d’un bureau de consultation endocrinologique",
     label: "Consultation",
     title: "Un espace pensé pour écouter, examiner et expliquer.",
   },
   {
-    src: "/cabinet-nutrition.png",
+    src: "/cabinet-nutrition.webp",
     alt: "Illustration photoréaliste d’un suivi nutritionnel et métabolique",
     label: "Nutrition",
     title: "Prévention, équilibre et accompagnement métabolique.",
@@ -201,9 +203,12 @@ export default function Home() {
             <span />
           </div>
           <div className="portrait-card">
-            <img
+            <Image
               src="/dr-sonia-abahou.jpg"
               alt="Portrait du Dr Sonia Abahou, endocrinologue à Témara"
+              width={420}
+              height={470}
+              priority
             />
             <div className="portrait-caption">
               <span>Dr Sonia Abahou</span>
@@ -317,7 +322,13 @@ export default function Home() {
               key={image.src}
               className={index === 0 ? "gallery-card gallery-large" : "gallery-card"}
             >
-              <img src={image.src} alt={image.alt} loading="lazy" />
+              <Image
+                src={image.src}
+                alt={image.alt}
+                width={900}
+                height={720}
+                loading="lazy"
+              />
               <figcaption>
                 <span>{image.label}</span>
                 <strong>{image.title}</strong>
