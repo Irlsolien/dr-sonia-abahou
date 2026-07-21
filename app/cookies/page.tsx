@@ -1,10 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { absoluteUrl, siteName } from "../seo";
 
 export const metadata: Metadata = {
   title: "Politique cookies | Dr Sonia Abahou",
   description:
     "Politique cookies du site du cabinet Dr Sonia Abahou à Témara.",
+  alternates: {
+    canonical: "/cookies",
+  },
+  openGraph: {
+    title: "Politique cookies | Dr Sonia Abahou",
+    description:
+      "Politique cookies du site du cabinet Dr Sonia Abahou à Témara.",
+    url: "/cookies",
+    siteName,
+    type: "website",
+    locale: "fr_MA",
+  },
+  twitter: {
+    card: "summary",
+    title: "Politique cookies | Dr Sonia Abahou",
+    description:
+      "Politique cookies du site du cabinet Dr Sonia Abahou à Témara.",
+    images: [absoluteUrl("/dr-sonia-abahou.jpg")],
+  },
 };
 
 export default function CookiesPage() {

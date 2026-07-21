@@ -1,0 +1,19 @@
+{
+  "name": "Dr Sonia Abahou - Endocrinologue Diabétologue à Témara",
+  "short_name": "Dr Sonia Abahou",
+  "description": "Cabinet d’endocrinologie, diabétologie, nutrition et maladies métaboliques à Témara.",
+  "lang": "fr-MA",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#eefdfa",
+  "theme_color": "#0796ad",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

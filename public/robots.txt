@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
 
+# Internal preview route, not meant for search engines.
+Disallow: /_sites-preview/
+
+# Technical/private paths, kept out of crawl if added later.
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+
 Sitemap: https://dr-sonia-abahou.vercel.app/sitemap.xml

@@ -1,10 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { absoluteUrl, siteName } from "../seo";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité | Dr Sonia Abahou",
   description:
     "Politique de confidentialité du site du cabinet Dr Sonia Abahou à Témara.",
+  alternates: {
+    canonical: "/confidentialite",
+  },
+  openGraph: {
+    title: "Politique de confidentialité | Dr Sonia Abahou",
+    description:
+      "Politique de confidentialité du site du cabinet Dr Sonia Abahou à Témara.",
+    url: "/confidentialite",
+    siteName,
+    type: "website",
+    locale: "fr_MA",
+  },
+  twitter: {
+    card: "summary",
+    title: "Politique de confidentialité | Dr Sonia Abahou",
+    description:
+      "Politique de confidentialité du site du cabinet Dr Sonia Abahou à Témara.",
+    images: [absoluteUrl("/dr-sonia-abahou.jpg")],
+  },
 };
 
 export default function PrivacyPage() {

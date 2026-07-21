@@ -1,52 +1,28 @@
 import Image from "next/image";
+import Link from "next/link";
+import {
+  absoluteUrl,
+  clinicAddress,
+  clinicPhoneDisplay,
+  clinicPhoneInternational,
+  clinicPostalCode,
+  clinicStreetAddress,
+  faqItems,
+  mapsQuery,
+  services,
+  siteName,
+  siteUrl,
+  whatsappMessage,
+  whatsappPhone,
+} from "./seo";
 
-const phoneDisplay = "0661 26 03 45";
-const phoneHref = "tel:+212661260345";
-const whatsappMessage =
-  "Bonjour, je souhaite prendre rendez-vous au cabinet du Dr Sonia Abahou.";
-const whatsappHref = `https://wa.me/212661260345?text=${encodeURIComponent(
+const phoneHref = `tel:${clinicPhoneInternational}`;
+const whatsappHref = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(
   whatsappMessage,
 )}`;
-const cabinetAddress =
-  "13, avenue Moulay Ali Chérif, appartement n°2, Cité Massira I, 12020 Témara";
-const mapsQuery =
-  "13 avenue Moulay Ali Cherif appartement 2 Cite Massira I Temara";
 const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   mapsQuery,
 )}`;
-
-const services = [
-  {
-    title: "Diabète et équilibre glycémique",
-    text: "Suivi du diabète de type 1, type 2, diabète gestationnel et situations de déséquilibre glycémique.",
-    visualClass: "care-diabetes",
-  },
-  {
-    title: "Thyroïde, goitre et nodules",
-    text: "Bilan, surveillance et orientation dans les troubles thyroïdiens, nodules, goitre et cancers thyroïdiens.",
-    visualClass: "care-thyroid",
-  },
-  {
-    title: "Nutrition et maladies métaboliques",
-    text: "Accompagnement médical autour du poids, du métabolisme, de l’insulinorésistance et de la prévention.",
-    visualClass: "care-nutrition",
-  },
-  {
-    title: "Troubles hormonaux féminins",
-    text: "Prise en charge du SOPK, de l’hyperandrogénie, de l’hirsutisme et des troubles de la puberté.",
-    visualClass: "care-hormones",
-  },
-  {
-    title: "Surrénales, hypophyse, parathyroïdes",
-    text: "Exploration et suivi des pathologies endocriniennes complexes avec pédagogie et méthode.",
-    visualClass: "care-endocrine",
-  },
-  {
-    title: "Suivi dans la durée",
-    text: "Des décisions expliquées simplement, pour que le patient comprenne son traitement et avance sereinement.",
-    visualClass: "care-followup",
-  },
-];
 
 const credentials = [
   "Spécialiste en Diabétologie, Endocrinologie, Nutrition et Maladies Métaboliques",
@@ -101,27 +77,36 @@ const patientJourney = [
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Physician",
+  "@type": ["Physician", "MedicalClinic"],
+  "@id": `${siteUrl}/#clinic`,
   name: "Dr Sonia Abahou",
+  alternateName: siteName,
   description:
     "Cabinet d’endocrinologie, diabétologie, nutrition et maladies métaboliques à Témara.",
-  image: "https://dr-sonia-abahou.vercel.app/dr-sonia-abahou.jpg",
-  url: "https://dr-sonia-abahou.vercel.app/",
-  telephone: "+212661260345",
+  image: absoluteUrl("/dr-sonia-abahou.jpg"),
+  logo: absoluteUrl("/favicon.svg"),
+  url: `${siteUrl}/`,
+  telephone: clinicPhoneInternational,
   address: {
     "@type": "PostalAddress",
-    streetAddress:
-      "13, avenue Moulay Ali Chérif, appartement n°2, Cité Massira I",
-    postalCode: "12020",
+    streetAddress: clinicStreetAddress,
+    postalCode: clinicPostalCode,
     addressLocality: "Témara",
     addressCountry: "MA",
   },
+  areaServed: ["Témara", "Rabat", "Skhirat", "Harhoura"],
+  availableLanguage: ["fr", "ar"],
   medicalSpecialty: [
     "Endocrinology",
-    "Diabetology",
     "Nutrition",
-    "MetabolicDiseases",
+    "Diabetes",
   ],
+  availableService: services.map((service) => ({
+    "@type": "MedicalProcedure",
+    name: service.title,
+    description: service.text,
+    url: absoluteUrl(`/${service.slug}`),
+  })),
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -138,12 +123,49 @@ const structuredData = {
   ],
 };
 
+const faqStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+
+const websiteStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
+  name: siteName,
+  url: `${siteUrl}/`,
+  inLanguage: "fr-MA",
+  publisher: {
+    "@id": `${siteUrl}/#clinic`,
+  },
+};
+
 export default function Home() {
   return (
     <main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteStructuredData),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqStructuredData),
+        }}
       />
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
@@ -302,6 +324,28 @@ export default function Home() {
               <span>{String(index + 1).padStart(2, "0")}</span>
               <h3>{service.title}</h3>
               <p>{service.text}</p>
+              <Link className="text-link" href={`/${service.slug}`}>
+                En savoir plus
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-shell faq-section reveal-section">
+        <div className="section-heading">
+          <p className="eyebrow">Questions fréquentes</p>
+          <h2>Informations pratiques avant la consultation.</h2>
+          <p>
+            Ces réponses restent générales et seront ajustées avec les consignes
+            précises du cabinet dès qu’elles seront disponibles.
+          </p>
+        </div>
+        <div className="faq-grid">
+          {faqItems.map((item) => (
+            <article key={item.question} className="faq-card">
+              <h3>{item.question}</h3>
+              <p>{item.answer}</p>
             </article>
           ))}
         </div>
@@ -355,7 +399,7 @@ export default function Home() {
         <div className="glass-panel">
           <p className="eyebrow">Accès au cabinet</p>
           <h2>Cabinet situé à Massira I, Témara.</h2>
-          <p>{cabinetAddress}</p>
+          <p>{clinicAddress}</p>
           <div className="contact-actions">
             <a
               className="primary-button"
@@ -366,7 +410,7 @@ export default function Home() {
               Ouvrir l’itinéraire GPS
             </a>
             <a className="secondary-button" href={phoneHref}>
-              {phoneDisplay}
+              {clinicPhoneDisplay}
             </a>
           </div>
         </div>
@@ -434,10 +478,15 @@ export default function Home() {
             consultation médicale.
           </p>
         </div>
-        <nav aria-label="Liens légaux">
-          <a href="/mentions-legales">Mentions légales</a>
-          <a href="/confidentialite">Confidentialité</a>
-          <a href="/cookies">Cookies</a>
+        <nav aria-label="Liens du site">
+          {services.map((service) => (
+            <Link key={service.slug} href={`/${service.slug}`}>
+              {service.title}
+            </Link>
+          ))}
+          <Link href="/mentions-legales">Mentions légales</Link>
+          <Link href="/confidentialite">Confidentialité</Link>
+          <Link href="/cookies">Cookies</Link>
         </nav>
       </footer>
     </main>

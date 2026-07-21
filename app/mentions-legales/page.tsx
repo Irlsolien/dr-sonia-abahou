@@ -1,10 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { absoluteUrl, siteName } from "../seo";
 
 export const metadata: Metadata = {
   title: "Mentions légales | Dr Sonia Abahou",
   description:
     "Mentions légales du site du cabinet Dr Sonia Abahou, endocrinologue diabétologue à Témara.",
+  alternates: {
+    canonical: "/mentions-legales",
+  },
+  openGraph: {
+    title: "Mentions légales | Dr Sonia Abahou",
+    description:
+      "Mentions légales du site du cabinet Dr Sonia Abahou, endocrinologue diabétologue à Témara.",
+    url: "/mentions-legales",
+    siteName,
+    type: "website",
+    locale: "fr_MA",
+  },
+  twitter: {
+    card: "summary",
+    title: "Mentions légales | Dr Sonia Abahou",
+    description:
+      "Mentions légales du site du cabinet Dr Sonia Abahou, endocrinologue diabétologue à Témara.",
+    images: [absoluteUrl("/dr-sonia-abahou.jpg")],
+  },
 };
 
 export default function LegalNoticePage() {
