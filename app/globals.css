@@ -549,6 +549,7 @@ h3 {
   min-height: 650px;
   place-items: center;
   perspective: 1200px;
+  transform: translateY(clamp(-118px, -6vw, -70px));
 }
 
 .hero-monogram-watermark {
@@ -2547,6 +2548,7 @@ h3 {
 
   .hero-visual {
     min-height: 510px;
+    transform: none;
   }
 
   .hero-lead {
