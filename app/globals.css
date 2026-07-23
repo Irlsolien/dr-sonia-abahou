@@ -619,7 +619,7 @@ h3 {
   aspect-ratio: 1 / 1.12;
   width: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center 38%;
   filter: saturate(1.04) contrast(1.02);
 }
 
