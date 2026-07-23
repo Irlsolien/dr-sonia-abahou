@@ -52,7 +52,7 @@ export default function LegalNoticePage() {
           </p>
           <ul>
             <li>Adresse : 13, avenue Moulay Ali Chérif, appartement n°2, Cité Massira I, 12020 Témara, Maroc.</li>
-            <li>Téléphone : 0661 26 03 45.</li>
+            <li>Téléphone : 05 37 60 63 64.</li>
             <li>Directrice de publication : Dr Sonia Abahou.</li>
             <li>Informations administratives professionnelles : à compléter par le cabinet si nécessaire.</li>
           </ul>

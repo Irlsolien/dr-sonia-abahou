@@ -7,11 +7,10 @@ import {
   clinicPhoneDisplay,
   clinicPhoneInternational,
   faqItems,
+  mapsQuery,
   services,
   siteName,
   siteUrl,
-  whatsappMessage,
-  whatsappPhone,
 } from "../seo";
 
 type ServicePageProps = {
@@ -21,8 +20,8 @@ type ServicePageProps = {
 };
 
 const phoneHref = `tel:${clinicPhoneInternational}`;
-const whatsappHref = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(
-  whatsappMessage,
+const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  mapsQuery,
 )}`;
 
 function findService(slug: string) {
@@ -157,8 +156,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <a className="primary-button" href={phoneHref}>
             Appeler le cabinet
           </a>
-          <a className="secondary-button" href={whatsappHref}>
-            Écrire sur WhatsApp
+          <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
+            Voir l’itinéraire
           </a>
         </div>
       </section>
@@ -220,8 +219,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <a className="primary-button" href={phoneHref}>
             Appeler le cabinet
           </a>
-          <a className="secondary-button" href={whatsappHref}>
-            Écrire sur WhatsApp
+          <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
+            Voir l’itinéraire
           </a>
         </div>
       </section>

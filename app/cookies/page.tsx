@@ -55,8 +55,7 @@ export default function CookiesPage() {
         <article>
           <h2>Services externes</h2>
           <p>
-            Certains liens ouvrent des services tiers, notamment WhatsApp et
-            Google Maps. Ces services peuvent appliquer leurs propres règles de
+            Certains liens ouvrent des services tiers, notamment Google Maps. Ces services peuvent appliquer leurs propres règles de
             confidentialité et déposer leurs propres cookies lorsque l’utilisateur
             choisit de les ouvrir.
           </p>

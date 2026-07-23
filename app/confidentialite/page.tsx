@@ -53,7 +53,7 @@ export default function PrivacyPage() {
           </p>
           <p>
             Pour toute demande relative aux données personnelles, le cabinet peut
-            être contacté par téléphone au 0661 26 03 45.
+            être contacté par téléphone au 05 37 60 63 64.
           </p>
         </article>
 
@@ -63,7 +63,7 @@ export default function PrivacyPage() {
             Le site vitrine ne comporte pas de formulaire médical et ne collecte
             pas directement de dossier patient. Certaines données peuvent toutefois
             être traitées lorsque l’utilisateur choisit volontairement de contacter
-            le cabinet par téléphone, WhatsApp ou lien externe.
+            le cabinet par téléphone ou via un lien externe.
           </p>
           <ul>
             <li>Données d’identification et de contact communiquées volontairement.</li>
@@ -129,7 +129,7 @@ export default function PrivacyPage() {
             Les données peuvent être accessibles au cabinet, à ses prestataires
             techniques strictement nécessaires au fonctionnement du site, et aux
             services tiers utilisés volontairement par l’utilisateur, comme
-            WhatsApp ou Google Maps lorsqu’il clique sur ces liens.
+            Google Maps lorsqu’il clique sur ce lien.
           </p>
         </article>
 

@@ -1,9 +1,8 @@
 export const siteUrl = "https://dr-sonia-abahou.vercel.app";
 export const siteName = "Dr Sonia Abahou";
 export const clinicName = "Cabinet Dr Sonia Abahou";
-export const clinicPhoneDisplay = "0661 26 03 45";
-export const clinicPhoneInternational = "+212661260345";
-export const whatsappPhone = "212661260345";
+export const clinicPhoneDisplay = "05 37 60 63 64";
+export const clinicPhoneInternational = "+212537606364";
 export const clinicAddress =
   "13, avenue Moulay Ali Chérif, appartement n°2, Cité Massira I, 12020 Témara";
 export const clinicStreetAddress =
@@ -14,8 +13,6 @@ export const clinicCountry = "MA";
 export const defaultOgImage = "/dr-sonia-abahou.jpg";
 export const lastModified = "2026-07-21";
 
-export const whatsappMessage =
-  "Bonjour, je souhaite prendre rendez-vous au cabinet du Dr Sonia Abahou.";
 
 export const mapsQuery =
   "13 avenue Moulay Ali Cherif appartement 2 Cite Massira I Temara";
@@ -142,7 +139,7 @@ export const faqItems = [
   {
     question: "Comment prendre rendez-vous au cabinet ?",
     answer:
-      "Le cabinet peut être contacté par téléphone ou WhatsApp afin de confirmer les disponibilités et les modalités pratiques du rendez-vous.",
+      "Le cabinet peut être contacté par téléphone afin de confirmer les disponibilités et les modalités pratiques du rendez-vous.",
   },
   {
     question: "Quels documents apporter pour une première consultation ?",

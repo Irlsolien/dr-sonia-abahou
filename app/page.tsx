@@ -12,14 +12,9 @@ import {
   services,
   siteName,
   siteUrl,
-  whatsappMessage,
-  whatsappPhone,
 } from "./seo";
 
 const phoneHref = `tel:${clinicPhoneInternational}`;
-const whatsappHref = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(
-  whatsappMessage,
-)}`;
 const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   mapsQuery,
 )}`;
@@ -203,8 +198,8 @@ export default function Home() {
             <a className="primary-button" href={phoneHref}>
               Appeler le cabinet
             </a>
-            <a className="secondary-button" href={whatsappHref}>
-              Écrire sur WhatsApp
+            <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
+              Voir l’itinéraire
             </a>
           </div>
           <div className="trust-strip" aria-label="Informations principales">
@@ -456,7 +451,7 @@ export default function Home() {
           <h2>Contacter le cabinet simplement.</h2>
           <p>
             Pour confirmer les disponibilités, contactez le cabinet par appel ou
-            WhatsApp. En cas d’urgence vitale, contactez immédiatement les
+            téléphone. En cas d’urgence vitale, contactez immédiatement les
             services d’urgence.
           </p>
         </div>
@@ -464,8 +459,8 @@ export default function Home() {
           <a className="primary-button" href={phoneHref}>
             Appeler le cabinet
           </a>
-          <a className="secondary-button" href={whatsappHref}>
-            Écrire sur WhatsApp
+          <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
+            Voir l’itinéraire
           </a>
         </div>
       </section>
