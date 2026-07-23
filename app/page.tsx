@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SocialTooltip, type SocialItem } from "@/components/ui/social-media";
 import {
   absoluteUrl,
   clinicAddress,
@@ -18,6 +19,23 @@ const phoneHref = `tel:${clinicPhoneInternational}`;
 const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   mapsQuery,
 )}`;
+
+const socialLinks: SocialItem[] = [
+  {
+    href: "#",
+    ariaLabel: "LinkedIn du cabinet Dr Sonia Abahou",
+    tooltip: "LinkedIn",
+    color: "#0A66C2",
+    icon: "linkedin",
+  },
+  {
+    href: "#",
+    ariaLabel: "Instagram du cabinet Dr Sonia Abahou",
+    tooltip: "Instagram",
+    color: "#E1306C",
+    icon: "instagram",
+  },
+];
 
 const credentials = [
   "Spécialiste en Diabétologie, Endocrinologie, Nutrition et Maladies Métaboliques",
@@ -529,11 +547,14 @@ export default function Home() {
             consultation médicale.
           </p>
         </div>
-        <nav aria-label="Liens du site">
-          <Link href="/mentions-legales">Mentions légales</Link>
-          <Link href="/confidentialite">Confidentialité</Link>
-          <Link href="/cookies">Cookies</Link>
-        </nav>
+        <div className="footer-actions">
+          <SocialTooltip items={socialLinks} />
+          <nav aria-label="Liens du site">
+            <Link href="/mentions-legales">Mentions légales</Link>
+            <Link href="/confidentialite">Confidentialité</Link>
+            <Link href="/cookies">Cookies</Link>
+          </nav>
+        </div>
       </footer>
     </main>
   );
