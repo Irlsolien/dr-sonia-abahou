@@ -474,11 +474,6 @@ export default function Home() {
           </p>
         </div>
         <nav aria-label="Liens du site">
-          {services.map((service) => (
-            <Link key={service.slug} href={`/${service.slug}`}>
-              {service.title}
-            </Link>
-          ))}
           <Link href="/mentions-legales">Mentions légales</Link>
           <Link href="/confidentialite">Confidentialité</Link>
           <Link href="/cookies">Cookies</Link>
