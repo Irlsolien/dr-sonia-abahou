@@ -188,7 +188,8 @@ img {
 .site-header nav a,
 .header-cta,
 .primary-button,
-.secondary-button {
+.secondary-button,
+.video-button {
   min-height: 44px;
   border-radius: 999px;
   transition:
@@ -235,7 +236,8 @@ img {
 
 .header-cta,
 .primary-button,
-.secondary-button {
+.secondary-button,
+.video-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -259,9 +261,19 @@ img {
   color: var(--color-primary-deep);
 }
 
+.video-button {
+  border: 1px solid rgba(200, 155, 60, 0.38);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 228, 230, 0.8)),
+    radial-gradient(circle at right, rgba(200, 155, 60, 0.24), transparent 12rem);
+  color: var(--color-primary-deep);
+  box-shadow: 0 14px 34px rgba(180, 35, 42, 0.12);
+}
+
 .header-cta:hover,
 .primary-button:hover,
-.secondary-button:hover {
+.secondary-button:hover,
+.video-button:hover {
   transform: translateY(-3px) scale(1.015);
 }
 
@@ -1285,6 +1297,199 @@ h3 {
   max-width: 820px;
 }
 
+.teleconsultation-teaser,
+.setup-note {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 48px;
+  padding: clamp(28px, 5vw, 52px);
+  border: 1px solid rgba(180, 35, 42, 0.16);
+  border-radius: 38px;
+  background:
+    linear-gradient(135deg, rgba(42, 11, 13, 0.92), rgba(127, 29, 29, 0.88)),
+    radial-gradient(circle at right, rgba(251, 113, 133, 0.2), transparent 26rem);
+  color: white;
+  box-shadow: 0 30px 90px rgba(42, 11, 13, 0.16);
+}
+
+.teleconsultation-teaser h2,
+.teleconsultation-teaser p,
+.setup-note h2,
+.setup-note p {
+  color: inherit;
+}
+
+.teleconsultation-teaser .eyebrow,
+.setup-note .eyebrow {
+  color: #fecdd3;
+}
+
+.teleconsultation-page {
+  min-height: 100vh;
+  padding: 32px 0 70px;
+}
+
+.teleconsultation-hero {
+  padding: 34px 0 30px;
+}
+
+.teleconsultation-hero h1 {
+  max-width: 920px;
+  margin-bottom: 18px;
+  font-size: clamp(3.2rem, 7.4vw, 7rem);
+}
+
+.teleconsultation-hero > p {
+  max-width: 780px;
+  color: var(--color-muted);
+  font-size: clamp(1.08rem, 1.8vw, 1.28rem);
+  line-height: 1.7;
+}
+
+.teleconsultation-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 42px;
+}
+
+.teleconsultation-step {
+  min-height: 260px;
+  padding: 24px;
+  border: 1px solid rgba(180, 35, 42, 0.14);
+  border-radius: 30px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(255, 241, 242, 0.68));
+  box-shadow: 0 20px 70px rgba(180, 35, 42, 0.08);
+}
+
+.teleconsultation-step span {
+  display: inline-grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  margin-bottom: 32px;
+  border-radius: 18px;
+  background: var(--color-ink);
+  color: white;
+  font-weight: 950;
+}
+
+.teleconsultation-step h2 {
+  margin-bottom: 12px;
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+}
+
+.setup-note {
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 241, 242, 0.78)),
+    radial-gradient(circle at right, rgba(251, 113, 133, 0.18), transparent 24rem);
+  color: var(--color-foreground);
+}
+
+.booking-section {
+  margin-bottom: 60px;
+}
+
+.booking-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.42fr) minmax(0, 0.58fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.booking-copy,
+.booking-widget-card,
+.payment-panel {
+  border: 1px solid rgba(180, 35, 42, 0.15);
+  border-radius: 34px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 24px 80px rgba(180, 35, 42, 0.1);
+  backdrop-filter: blur(18px);
+}
+
+.booking-copy {
+  position: sticky;
+  top: 118px;
+  padding: clamp(24px, 4vw, 38px);
+}
+
+.privacy-note {
+  margin-top: 28px;
+  padding: 18px;
+  border: 1px solid rgba(200, 155, 60, 0.3);
+  border-radius: 24px;
+  background: rgba(255, 248, 231, 0.86);
+}
+
+.privacy-note strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--color-ink);
+}
+
+.privacy-note p {
+  margin-bottom: 0;
+  font-size: 0.96rem;
+}
+
+.booking-widget-card {
+  min-width: 0;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.calendly-inline-widget {
+  min-width: 320px;
+  min-height: 760px;
+}
+
+.payment-panel {
+  display: none;
+  grid-template-columns: minmax(0, 0.9fr) minmax(260px, 1.1fr) auto;
+  gap: 24px;
+  align-items: center;
+  margin-top: 18px;
+  padding: clamp(24px, 4vw, 38px);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 245, 245, 0.88)),
+    radial-gradient(circle at right, rgba(200, 155, 60, 0.18), transparent 24rem);
+}
+
+.payment-panel.is-visible {
+  display: grid;
+  animation: revealUp 520ms ease both;
+}
+
+.payment-details {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.payment-details div {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 14px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(180, 35, 42, 0.12);
+}
+
+.payment-details dt {
+  color: var(--color-muted);
+  font-weight: 850;
+}
+
+.payment-details dd {
+  margin: 0;
+  color: var(--color-ink);
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
 .site-footer {
   display: flex;
   align-items: center;
@@ -1743,6 +1948,10 @@ h3 {
   .section-heading,
   .cabinet-section,
   .final-cta,
+  .teleconsultation-teaser,
+  .setup-note,
+  .booking-grid,
+  .payment-panel,
   .diagnostic-band,
   .promise-section {
     grid-template-columns: 1fr;
@@ -1811,6 +2020,18 @@ h3 {
   .site-footer nav {
     justify-content: flex-start;
   }
+
+  .teleconsultation-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .booking-copy {
+    position: static;
+  }
+
+  .payment-panel.is-visible {
+    display: grid;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1848,6 +2069,7 @@ h3 {
   .gallery-section,
   .cabinet-section,
   .final-cta,
+  .teleconsultation-teaser,
   .promise-section {
     padding: 58px 0;
   }
@@ -2132,6 +2354,59 @@ h3 {
     border-radius: 24px;
   }
 
+  .teleconsultation-page {
+    padding-top: 18px;
+  }
+
+  .teleconsultation-hero h1 {
+    font-size: clamp(2.35rem, 13vw, 4rem);
+  }
+
+  .teleconsultation-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .teleconsultation-step {
+    min-height: auto;
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .teleconsultation-step span {
+    margin-bottom: 22px;
+  }
+
+  .teleconsultation-teaser,
+  .setup-note {
+    gap: 20px;
+    padding: 28px 22px;
+    border-radius: 30px;
+  }
+
+  .booking-section {
+    width: min(100% - 14px, 1180px);
+  }
+
+  .booking-copy,
+  .booking-widget-card,
+  .payment-panel {
+    border-radius: 26px;
+  }
+
+  .booking-widget-card {
+    padding: 4px;
+  }
+
+  .calendly-inline-widget {
+    min-width: 320px;
+    min-height: 820px;
+  }
+
+  .payment-details div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
   .hero-actions,
   .contact-actions,
   .cta-stack {
@@ -2139,7 +2414,8 @@ h3 {
   }
 
   .primary-button,
-  .secondary-button {
+  .secondary-button,
+  .video-button {
     width: 100%;
   }
 }

@@ -177,9 +177,9 @@ export default function Home() {
           <a href="#cabinet">Cabinet</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a className="header-cta" href={phoneHref}>
-          Rendez-vous
-        </a>
+        <Link className="header-cta" href="/teleconsultation">
+          Téléconsultation
+        </Link>
       </header>
 
       <section id="accueil" className="hero section-shell">
@@ -201,6 +201,9 @@ export default function Home() {
             <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
               Voir l’itinéraire
             </a>
+            <Link className="video-button" href="/teleconsultation">
+              Réserver une téléconsultation vidéo
+            </Link>
           </div>
           <div className="trust-strip" aria-label="Informations principales">
             <span>Arabe & français</span>
@@ -463,6 +466,21 @@ export default function Home() {
             Voir l’itinéraire
           </a>
         </div>
+      </section>
+
+      <section className="section-shell teleconsultation-teaser reveal-section">
+        <div>
+          <p className="eyebrow">Téléconsultation vidéo</p>
+          <h2>Un parcours simple pour réserver à distance.</h2>
+          <p>
+            Choisissez votre créneau, effectuez le virement, envoyez votre
+            justificatif, puis recevez la confirmation définitive de votre
+            téléconsultation.
+          </p>
+        </div>
+        <Link className="primary-button" href="/teleconsultation">
+          Réserver une téléconsultation vidéo
+        </Link>
       </section>
 
       <footer className="site-footer section-shell">

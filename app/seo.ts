@@ -13,9 +13,22 @@ export const clinicCountry = "MA";
 export const defaultOgImage = "/dr-sonia-abahou.jpg";
 export const lastModified = "2026-07-21";
 
-
 export const mapsQuery =
   "13 avenue Moulay Ali Cherif appartement 2 Cite Massira I Temara";
+
+export const teleconsultation = {
+  calendlyUrl: "https://calendly.com/dr-sonia-abahou/teleconsultation-video",
+  amount: "À compléter",
+  beneficiaryName: "Dr Sonia Abahou",
+  bankName: "À compléter",
+  ribOrIban: "À compléter",
+  proofWhatsapp: "212537606364",
+  proofEmail: "cabinet@example.com",
+  proofMessage:
+    "Bonjour, je vous envoie le justificatif de paiement pour ma téléconsultation vidéo avec le Dr Sonia Abahou.",
+  emailInstructions:
+    "Votre rendez-vous sera définitivement confirmé après réception du paiement par virement bancaire. Merci d’envoyer le justificatif au cabinet.",
+} as const;
 
 export const services = [
   {
