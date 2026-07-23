@@ -22,14 +22,14 @@ const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
 
 const socialLinks: SocialItem[] = [
   {
-    href: "#",
+    href: "https://www.linkedin.com/in/sonia-abahou-38896237/",
     ariaLabel: "LinkedIn du cabinet Dr Sonia Abahou",
     tooltip: "LinkedIn",
     color: "#0A66C2",
     icon: "linkedin",
   },
   {
-    href: "#",
+    href: "https://www.instagram.com/sonia_abahou/",
     ariaLabel: "Instagram du cabinet Dr Sonia Abahou",
     tooltip: "Instagram",
     color: "#E1306C",
