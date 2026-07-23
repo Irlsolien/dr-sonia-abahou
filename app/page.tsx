@@ -211,6 +211,18 @@ export default function Home() {
             <span>Thyroïde</span>
             <span>Nutrition médicale</span>
           </div>
+          <div className="hero-proof" aria-label="Points de confiance">
+            <article>
+              <span>01</span>
+              <strong>Consultation spécialisée</strong>
+              <p>Un suivi centré sur l’endocrinologie, le diabète et le métabolisme.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <strong>Explications claires</strong>
+              <p>Des décisions médicales expliquées simplement, avec des mots accessibles.</p>
+            </article>
+          </div>
         </div>
 
         <div className="hero-visual" aria-label="Portrait du Dr Sonia Abahou">
@@ -234,6 +246,11 @@ export default function Home() {
               <span>Dr Sonia Abahou</span>
               <strong>Endocrinologie · Diabétologie · Nutrition</strong>
             </div>
+          </div>
+          <div className="doctor-status-card">
+            <span>Cabinet à Témara</span>
+            <strong>Massira I</strong>
+            <p>Accueil sur rendez-vous confirmé par le cabinet.</p>
           </div>
           <div className="floating-card card-glucose">
             <span>Diabète</span>
@@ -304,6 +321,25 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section-shell signature-section reveal-section">
+        <div className="signature-visual" aria-hidden="true">
+          <span className="signature-ring" />
+          <span className="signature-line line-a" />
+          <span className="signature-line line-b" />
+          <span className="signature-dot dot-a" />
+          <span className="signature-dot dot-b" />
+        </div>
+        <div className="signature-copy">
+          <p className="eyebrow">Signature médicale</p>
+          <h2>Une consultation qui transforme l’inquiétude en compréhension.</h2>
+          <p>
+            Le cabinet met l’accent sur une médecine lisible : comprendre les
+            symptômes, interpréter les bilans, expliquer les objectifs et avancer
+            avec un plan de suivi réaliste.
+          </p>
+        </div>
+      </section>
+
       <section id="soins" className="section-shell care-section reveal-section">
         <div className="section-heading">
           <p className="eyebrow">Consultations & suivis</p>
@@ -317,7 +353,9 @@ export default function Home() {
           {services.map((service, index) => (
             <article
               key={service.title}
-              className={`care-card ${service.visualClass}`}
+              className={`care-card ${service.visualClass} ${
+                index === 0 ? "care-card-featured" : ""
+              }`}
             >
               <span>{String(index + 1).padStart(2, "0")}</span>
               <h3>{service.title}</h3>
@@ -453,7 +491,7 @@ export default function Home() {
           <p className="eyebrow">Rendez-vous</p>
           <h2>Contacter le cabinet simplement.</h2>
           <p>
-            Pour confirmer les disponibilités, contactez le cabinet par appel ou
+            Pour confirmer les disponibilités, contactez le cabinet par
             téléphone. En cas d’urgence vitale, contactez immédiatement les
             services d’urgence.
           </p>
