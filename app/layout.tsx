@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SiteInteractionFeedback } from "@/components/site-interaction-feedback";
 import { absoluteUrl, defaultOgImage, siteName, siteUrl } from "./seo";
 
 export const metadata: Metadata = {
@@ -84,7 +85,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr-MA">
-      <body>{children}</body>
+      <body>
+        {children}
+        <SiteInteractionFeedback />
+      </body>
     </html>
   );
 }
