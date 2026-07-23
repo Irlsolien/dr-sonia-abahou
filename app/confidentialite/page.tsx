@@ -63,14 +63,11 @@ export default function PrivacyPage() {
             Le site vitrine ne comporte pas de formulaire médical et ne collecte
             pas directement de dossier patient. Certaines données peuvent toutefois
             être traitées lorsque l’utilisateur choisit volontairement de contacter
-            le cabinet par téléphone, via un lien externe ou via la page de
-            réservation de téléconsultation.
+            le cabinet par téléphone, WhatsApp ou via un lien externe.
           </p>
           <ul>
             <li>Données d’identification et de contact communiquées volontairement.</li>
             <li>Informations nécessaires à la prise de rendez-vous ou à la réponse à une demande.</li>
-            <li>Données de réservation transmises à Calendly : nom, prénom, e-mail, téléphone, créneau choisi et motif général.</li>
-            <li>Données techniques nécessaires à la génération d’un lien de visioconférence Zoom lorsque ce service est connecté.</li>
             <li>Données techniques minimales liées à la consultation du site par l’hébergeur.</li>
           </ul>
         </article>
@@ -95,14 +92,8 @@ export default function PrivacyPage() {
             communiquées dans un cadre approprié avec le cabinet.
           </p>
           <p>
-            Le formulaire de réservation de téléconsultation ne doit contenir
-            qu’un motif général. Les documents médicaux sensibles ne doivent pas
-            être transmis via Calendly, Zoom, WhatsApp ou un canal non validé par
-            le cabinet.
-          </p>
-          <p>
             Si le cabinet met ultérieurement en place un formulaire médical, un
-            espace patient ou une application de suivi, un cadre spécifique sera
+            espace patient, une téléconsultation ou une application de suivi, un cadre spécifique sera
             nécessaire : information claire, consentement, sécurité renforcée,
             durée de conservation adaptée et formalités CNDP lorsque requises.
           </p>
@@ -138,7 +129,7 @@ export default function PrivacyPage() {
             Les données peuvent être accessibles au cabinet, à ses prestataires
             techniques strictement nécessaires au fonctionnement du site, et aux
             services tiers utilisés volontairement par l’utilisateur, comme
-            Google Maps, Calendly ou Zoom lorsqu’il clique sur ces services.
+            Google Maps ou WhatsApp lorsqu’il clique sur ces services.
           </p>
         </article>
 

@@ -56,20 +56,9 @@ export default function CookiesPage() {
           <h2>Services externes</h2>
           <p>
             Certains liens ou modules ouvrent des services tiers, notamment
-            Google Maps, Calendly et Zoom. Ces services peuvent appliquer leurs
+            Google Maps ou WhatsApp. Ces services peuvent appliquer leurs
             propres règles de confidentialité et déposer leurs propres cookies
-            lorsque l’utilisateur choisit de les ouvrir ou d’utiliser le module
-            de réservation.
-          </p>
-        </article>
-
-        <article>
-          <h2>Réservation Calendly</h2>
-          <p>
-            La page de téléconsultation peut charger un module Calendly intégré.
-            Ce module est fourni par Calendly et peut utiliser des cookies ou
-            technologies similaires nécessaires à la réservation, à la sécurité et
-            au bon fonctionnement du calendrier.
+            lorsque l’utilisateur choisit de les ouvrir.
           </p>
         </article>
 
@@ -95,9 +84,10 @@ export default function CookiesPage() {
         <article>
           <h2>Évolution</h2>
           <p>
-            Si un outil de mesure d’audience ou un autre service tiers est ajouté
-            ultérieurement, cette politique devra être mise à jour et un
-            mécanisme de consentement devra être ajouté lorsque nécessaire.
+            Si un outil de mesure d’audience, de réservation en ligne ou un
+            autre service tiers est ajouté ultérieurement, cette politique devra
+            être mise à jour et un mécanisme de consentement devra être ajouté
+            lorsque nécessaire.
           </p>
         </article>
       </section>

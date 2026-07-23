@@ -474,8 +474,8 @@ export default function Home() {
           <h2>Choisir entre cabinet et visioconférence.</h2>
           <p>
             Pour une consultation au cabinet, contactez le secrétariat par appel
-            ou WhatsApp. Pour une consultation vidéo, réservez un créneau en
-            ligne via Calendly.
+            ou WhatsApp. La consultation vidéo est en cours de préparation et
+            sera proposée dès que le parcours de réservation sera finalisé.
           </p>
         </div>
         <Link className="primary-button" href="/rendez-vous">
