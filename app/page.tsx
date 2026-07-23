@@ -186,7 +186,15 @@ export default function Home() {
 
       <header className="site-header">
         <a className="brand-mark" href="#accueil" aria-label="Accueil">
-          <span>SA</span>
+          <span className="brand-logo-mark">
+            <Image
+              src="/dr-sonia-monogram.png"
+              alt=""
+              width={58}
+              height={58}
+              priority
+            />
+          </span>
           <strong>Dr Sonia Abahou</strong>
         </a>
         <nav aria-label="Navigation principale">
@@ -212,6 +220,19 @@ export default function Home() {
             diabète, des troubles thyroïdiens, de la nutrition médicale, des
             troubles hormonaux et des maladies métaboliques.
           </p>
+          <div className="brand-signature-card" aria-label="Signature du cabinet">
+            <Image
+              src="/dr-sonia-logo-cropped.png"
+              alt="Logo Dr Abahou Sonia"
+              width={244}
+              height={210}
+              priority
+            />
+            <div>
+              <span>Cabinet Dr Abahou Sonia</span>
+              <strong>Endocrinologie, diabétologie & nutrition médicale.</strong>
+            </div>
+          </div>
           <div className="hero-actions" aria-label="Actions rapides">
             <a className="primary-button" href={phoneHref}>
               Appeler le cabinet
@@ -244,6 +265,14 @@ export default function Home() {
         </div>
 
         <div className="hero-visual" aria-label="Portrait du Dr Sonia Abahou">
+          <Image
+            className="hero-monogram-watermark"
+            src="/dr-sonia-monogram.png"
+            alt=""
+            width={420}
+            height={260}
+            aria-hidden="true"
+          />
           <div className="halo-disc" />
           <div className="pulse-orbit orbit-a" />
           <div className="pulse-orbit orbit-b" />
@@ -541,6 +570,13 @@ export default function Home() {
 
       <footer className="site-footer section-shell">
         <div>
+          <Image
+            className="footer-logo"
+            src="/dr-sonia-logo-cropped.png"
+            alt="Logo Dr Abahou Sonia"
+            width={132}
+            height={114}
+          />
           <strong>Dr Sonia Abahou</strong>
           <p>
             Site d’information du cabinet. Les contenus ne remplacent pas une
