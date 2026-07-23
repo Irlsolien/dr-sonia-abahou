@@ -1395,7 +1395,7 @@ h3 {
 .appointment-card-video h2,
 .appointment-card-video p,
 .appointment-card-video small {
-  color: inherit;
+  color: #ffe4e6;
 }
 
 .appointment-card > span {
@@ -1453,6 +1453,10 @@ h3 {
 
 .appointment-card-video .appointment-meta strong {
   color: white;
+}
+
+.appointment-card-video .appointment-meta small {
+  color: #fecdd3;
 }
 
 .appointment-meta small {
