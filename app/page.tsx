@@ -177,8 +177,8 @@ export default function Home() {
           <a href="#cabinet">Cabinet</a>
           <a href="#contact">Contact</a>
         </nav>
-        <Link className="header-cta" href="/teleconsultation">
-          Téléconsultation
+        <Link className="header-cta" href="/rendez-vous">
+          Rendez-vous
         </Link>
       </header>
 
@@ -201,8 +201,8 @@ export default function Home() {
             <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
               Voir l’itinéraire
             </a>
-            <Link className="video-button" href="/teleconsultation">
-              Réserver une téléconsultation vidéo
+            <Link className="video-button" href="/rendez-vous">
+              Rendez-vous
             </Link>
           </div>
           <div className="trust-strip" aria-label="Informations principales">
@@ -459,9 +459,9 @@ export default function Home() {
           </p>
         </div>
         <div className="cta-stack">
-          <a className="primary-button" href={phoneHref}>
-            Appeler le cabinet
-          </a>
+          <Link className="primary-button" href="/rendez-vous">
+            Rendez-vous
+          </Link>
           <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
             Voir l’itinéraire
           </a>
@@ -470,16 +470,16 @@ export default function Home() {
 
       <section className="section-shell teleconsultation-teaser reveal-section">
         <div>
-          <p className="eyebrow">Téléconsultation vidéo</p>
-          <h2>Un parcours simple pour réserver à distance.</h2>
+          <p className="eyebrow">Rendez-vous</p>
+          <h2>Choisir entre cabinet et visioconférence.</h2>
           <p>
-            Choisissez votre créneau, effectuez le virement, envoyez votre
-            justificatif, puis recevez la confirmation définitive de votre
-            téléconsultation.
+            Pour une consultation au cabinet, contactez le secrétariat par appel
+            ou WhatsApp. Pour une consultation vidéo, réservez un créneau en
+            ligne via Calendly.
           </p>
         </div>
-        <Link className="primary-button" href="/teleconsultation">
-          Réserver une téléconsultation vidéo
+        <Link className="primary-button" href="/rendez-vous">
+          Rendez-vous
         </Link>
       </section>
 

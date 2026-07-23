@@ -65,8 +65,8 @@ export default function TeleconsultationPage() {
       />
 
       <section className="teleconsultation-hero section-shell">
-        <Link className="legal-back" href="/">
-          ← Retour au site
+        <Link className="legal-back" href="/rendez-vous">
+          ← Retour aux rendez-vous
         </Link>
         <p className="eyebrow">Téléconsultation vidéo</p>
         <h1>Réserver une téléconsultation vidéo.</h1>

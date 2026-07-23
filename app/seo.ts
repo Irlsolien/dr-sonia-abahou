@@ -16,6 +16,12 @@ export const lastModified = "2026-07-21";
 export const mapsQuery =
   "13 avenue Moulay Ali Cherif appartement 2 Cite Massira I Temara";
 
+export const appointment = {
+  whatsappPhone: "212537606364",
+  whatsappMessage:
+    "Bonjour, je souhaite prendre rendez-vous au cabinet du Dr Sonia Abahou.",
+} as const;
+
 export const teleconsultation = {
   calendlyUrl: "https://calendly.com/dr-sonia-abahou/teleconsultation-video",
   amount: "À compléter",

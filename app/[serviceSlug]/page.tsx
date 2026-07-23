@@ -153,9 +153,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <h1>{service.title} à Témara</h1>
         <p>{service.intro}</p>
         <div className="hero-actions">
-          <a className="primary-button" href={phoneHref}>
-            Appeler le cabinet
-          </a>
+          <Link className="primary-button" href="/rendez-vous">
+            Rendez-vous
+          </Link>
           <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
             Voir l’itinéraire
           </a>
@@ -216,9 +216,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </p>
         </div>
         <div className="cta-stack">
-          <a className="primary-button" href={phoneHref}>
-            Appeler le cabinet
-          </a>
+          <Link className="primary-button" href="/rendez-vous">
+            Rendez-vous
+          </Link>
           <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
             Voir l’itinéraire
           </a>

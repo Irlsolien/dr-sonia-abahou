@@ -1326,26 +1326,156 @@ h3 {
   color: #fecdd3;
 }
 
+.appointment-page,
 .teleconsultation-page {
   min-height: 100vh;
   padding: 32px 0 70px;
 }
 
+.appointment-hero,
 .teleconsultation-hero {
   padding: 34px 0 30px;
 }
 
+.appointment-hero h1,
 .teleconsultation-hero h1 {
   max-width: 920px;
   margin-bottom: 18px;
   font-size: clamp(3.2rem, 7.4vw, 7rem);
 }
 
+.appointment-hero > p,
 .teleconsultation-hero > p {
   max-width: 780px;
   color: var(--color-muted);
   font-size: clamp(1.08rem, 1.8vw, 1.28rem);
   line-height: 1.7;
+}
+
+.appointment-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 34px;
+}
+
+.appointment-card {
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+  padding: clamp(28px, 4vw, 46px);
+  border: 1px solid rgba(180, 35, 42, 0.16);
+  border-radius: 38px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(255, 241, 242, 0.72)),
+    radial-gradient(circle at 92% 8%, rgba(251, 113, 133, 0.24), transparent 18rem);
+  box-shadow: 0 28px 90px rgba(180, 35, 42, 0.1);
+  isolation: isolate;
+}
+
+.appointment-card::after {
+  position: absolute;
+  right: -90px;
+  bottom: -90px;
+  z-index: -1;
+  width: 260px;
+  height: 260px;
+  border: 42px solid rgba(251, 113, 133, 0.14);
+  border-radius: 999px;
+  content: "";
+}
+
+.appointment-card-video {
+  background:
+    linear-gradient(145deg, rgba(42, 11, 13, 0.94), rgba(127, 29, 29, 0.9)),
+    radial-gradient(circle at 90% 8%, rgba(200, 155, 60, 0.2), transparent 18rem);
+  color: white;
+}
+
+.appointment-card-video h2,
+.appointment-card-video p,
+.appointment-card-video small {
+  color: inherit;
+}
+
+.appointment-card > span {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  margin-bottom: 42px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: rgba(180, 35, 42, 0.1);
+  color: var(--color-primary-deep);
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.appointment-card-video > span {
+  background: rgba(254, 205, 211, 0.14);
+  color: #fecdd3;
+}
+
+.appointment-card h2 {
+  max-width: 620px;
+  margin-bottom: 18px;
+  font-size: clamp(2.2rem, 4.6vw, 4.7rem);
+}
+
+.appointment-card p {
+  max-width: 620px;
+  color: var(--color-muted);
+  font-size: clamp(1rem, 1.4vw, 1.12rem);
+  line-height: 1.7;
+}
+
+.appointment-meta {
+  display: grid;
+  gap: 6px;
+  margin: 32px 0;
+  padding: 18px;
+  border: 1px solid rgba(180, 35, 42, 0.14);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.appointment-card-video .appointment-meta {
+  border-color: rgba(254, 205, 211, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.appointment-meta strong {
+  color: var(--color-ink);
+  font-size: 1.1rem;
+}
+
+.appointment-card-video .appointment-meta strong {
+  color: white;
+}
+
+.appointment-meta small {
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+.appointment-privacy {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 60px;
+  padding: 22px 26px;
+  border: 1px solid rgba(200, 155, 60, 0.28);
+  border-radius: 28px;
+  background: rgba(255, 248, 231, 0.78);
+}
+
+.appointment-privacy strong {
+  color: var(--color-ink);
+}
+
+.appointment-privacy p {
+  margin: 0;
 }
 
 .teleconsultation-steps {
@@ -2025,6 +2155,14 @@ h3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .appointment-options {
+    grid-template-columns: 1fr;
+  }
+
+  .appointment-card {
+    min-height: auto;
+  }
+
   .booking-copy {
     position: static;
   }
@@ -2354,12 +2492,31 @@ h3 {
     border-radius: 24px;
   }
 
+  .appointment-page,
   .teleconsultation-page {
     padding-top: 18px;
   }
 
+  .appointment-hero h1,
   .teleconsultation-hero h1 {
     font-size: clamp(2.35rem, 13vw, 4rem);
+  }
+
+  .appointment-card {
+    padding: 26px 22px;
+    border-radius: 28px;
+  }
+
+  .appointment-card > span {
+    margin-bottom: 26px;
+  }
+
+  .appointment-card h2 {
+    font-size: clamp(2rem, 11vw, 3.2rem);
+  }
+
+  .appointment-meta {
+    margin: 24px 0;
   }
 
   .teleconsultation-steps {
