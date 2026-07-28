@@ -41,6 +41,8 @@ export const metadata: Metadata = {
     "échographie thyroïdienne Témara",
     "impédancemétrie médicale Témara",
     "éducation thérapeutique diabète Témara",
+    "surveillance glycémique continue Témara",
+    "suivi capteur glycémie Témara",
   ],
   authors: [{ name: doctorName, url: absoluteUrl(doctorProfilePath) }],
   creator: doctorName,

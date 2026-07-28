@@ -136,7 +136,101 @@ const clinicalActivities = [
     highlights: ["Comprendre la maladie", "Partager les expériences", "Gagner en autonomie"],
     note: "Les prochaines séances et les modalités de participation sont communiquées directement par le cabinet.",
   },
+  {
+    id: "surveillance-glycemique-continue",
+    eyebrow: "Suivi connecté",
+    title: "Surveillance glycémique continue avec suivi rapproché",
+    description:
+      "Pour les patients concernés, les données du capteur peuvent être consultées dans le cadre d’un suivi médical rapproché. Cette lecture régulière aide à repérer les tendances, à préparer les échanges avec le cabinet et à mieux comprendre l’évolution de la glycémie au quotidien.",
+    image: null,
+    alt: "Interface de démonstration fictive d’un suivi glycémique continu",
+    highlights: ["Lecture des tendances", "Suivi rapproché quotidien", "Échanges mieux préparés"],
+    note: "L’interface présentée est une démonstration : tous les profils, valeurs et graphiques sont entièrement fictifs.",
+  },
 ] as const;
+
+function CgmDemoDashboard() {
+  const demoPatients = [
+    { name: "Patient fictif 01", value: "112", status: "Courbe reçue" },
+    { name: "Patient fictif 02", value: "138", status: "Lecture récente" },
+    { name: "Patient fictif 03", value: "101", status: "Capteur actif" },
+  ];
+
+  return (
+    <div
+      className="cgm-demo"
+      role="img"
+      aria-label="Tableau de bord fictif illustrant un suivi glycémique continu sans aucune donnée réelle"
+    >
+      <div className="cgm-demo-topbar">
+        <div>
+          <span className="cgm-demo-live">
+            <i />
+            Démonstration
+          </span>
+          <strong>Suivi glycémique rapproché</strong>
+        </div>
+        <span className="cgm-demo-privacy">100 % fictif</span>
+      </div>
+
+      <div className="cgm-demo-chart">
+        <div className="cgm-demo-chart-heading">
+          <div>
+            <span>Profil de démonstration</span>
+            <strong>Tendance sur 24 heures</strong>
+          </div>
+          <span className="cgm-demo-value">112 <small>mg/dL</small></span>
+        </div>
+        <svg viewBox="0 0 720 230" aria-hidden="true">
+          <defs>
+            <linearGradient id="cgmArea" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0.38" />
+              <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <path
+            className="cgm-demo-area"
+            d="M0 166 C70 136 108 151 158 130 C215 106 252 155 306 140 C355 126 390 74 444 90 C498 106 530 151 580 126 C628 101 666 86 720 104 L720 230 L0 230 Z"
+          />
+          <path
+            className="cgm-demo-line"
+            d="M0 166 C70 136 108 151 158 130 C215 106 252 155 306 140 C355 126 390 74 444 90 C498 106 530 151 580 126 C628 101 666 86 720 104"
+          />
+          <circle className="cgm-demo-point" cx="720" cy="104" r="8" />
+        </svg>
+        <div className="cgm-demo-axis">
+          <span>00h</span>
+          <span>06h</span>
+          <span>12h</span>
+          <span>18h</span>
+          <span>Maintenant</span>
+        </div>
+      </div>
+
+      <div className="cgm-demo-patients">
+        {demoPatients.map((patient) => (
+          <div key={patient.name} className="cgm-demo-patient">
+            <span className="cgm-demo-avatar" aria-hidden="true">
+              {patient.name.slice(-2)}
+            </span>
+            <div>
+              <strong>{patient.name}</strong>
+              <span>{patient.status}</span>
+            </div>
+            <b>
+              {patient.value}
+              <small>mg/dL</small>
+            </b>
+          </div>
+        ))}
+      </div>
+
+      <p className="cgm-demo-disclaimer">
+        Aucun nom, identifiant ou résultat de patient réel.
+      </p>
+    </div>
+  );
+}
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -597,15 +691,25 @@ export default function Home() {
               key={activity.id}
               className="practice-feature reveal-section"
             >
-              <figure className="practice-media">
-                <Image
-                  src={activity.image}
-                  alt={activity.alt}
-                  width={1600}
-                  height={1067}
-                  loading="lazy"
-                  sizes="(max-width: 820px) 94vw, 50vw"
-                />
+              <figure
+                className={`practice-media ${
+                  activity.id === "impedancemetrie-medicale"
+                    ? "practice-media-biody"
+                    : ""
+                } ${activity.image ? "" : "practice-media-dashboard"}`}
+              >
+                {activity.image ? (
+                  <Image
+                    src={activity.image}
+                    alt={activity.alt}
+                    width={1600}
+                    height={1067}
+                    loading="lazy"
+                    sizes="(max-width: 820px) 94vw, 50vw"
+                  />
+                ) : (
+                  <CgmDemoDashboard />
+                )}
                 <figcaption>Visuel illustratif</figcaption>
                 <span className="practice-number" aria-hidden="true">
                   {String(index + 1).padStart(2, "0")}
