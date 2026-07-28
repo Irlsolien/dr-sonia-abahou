@@ -649,19 +649,24 @@ export default function Home() {
         </div>
         <div className="care-grid">
           {services.map((service, index) => (
-            <article
+            <Link
               key={service.title}
-              className={`care-card ${service.visualClass} ${
-                index === 0 ? "care-card-featured" : ""
-              }`}
+              className={`care-card ${service.visualClass}`}
+              href={`/${service.slug}`}
             >
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{service.title}</h3>
-              <p>{service.text}</p>
-              <Link className="text-link" href={`/${service.slug}`}>
-                En savoir plus
-              </Link>
-            </article>
+              <span className="care-number">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div className="care-copy">
+                <span className="care-label">Parcours de soin</span>
+                <h3 className="care-title">{service.title}</h3>
+                <p className="care-description">{service.text}</p>
+              </div>
+              <span className="care-art" aria-hidden="true" />
+              <span className="care-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </Link>
           ))}
         </div>
       </section>
