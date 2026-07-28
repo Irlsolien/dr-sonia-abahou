@@ -20,6 +20,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         absoluteUrl("/echographie-thyroidienne.webp"),
         absoluteUrl("/impedancemetrie-biody-xpert-zm3.webp"),
         absoluteUrl("/atelier-education-therapeutique.webp"),
+        absoluteUrl("/cabinet-accueil-reel.webp"),
+        absoluteUrl("/cabinet-consultation-reel.webp"),
+        absoluteUrl("/cabinet-attente-reel.webp"),
       ],
     },
     {

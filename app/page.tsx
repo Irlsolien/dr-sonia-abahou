@@ -68,22 +68,22 @@ const hours = [
 
 const gallery = [
   {
-    src: "/cabinet-accueil.webp",
-    alt: "Illustration photoréaliste d’un accueil de cabinet médical moderne",
+    src: "/cabinet-accueil-reel.webp",
+    alt: "Accueil réel du cabinet du Dr Sonia Abahou à Témara",
     label: "Accueil",
-    title: "Une première impression calme, claire, rassurante.",
+    title: "Un accueil lumineux, calme et soigné.",
   },
   {
-    src: "/cabinet-consultation.webp",
-    alt: "Illustration photoréaliste d’un bureau de consultation endocrinologique",
+    src: "/cabinet-consultation-reel.webp",
+    alt: "Salle de consultation du cabinet du Dr Sonia Abahou à Témara",
     label: "Consultation",
-    title: "Un espace pensé pour écouter, examiner et expliquer.",
+    title: "Un espace professionnel consacré à l’écoute et au suivi.",
   },
   {
-    src: "/cabinet-nutrition.webp",
-    alt: "Illustration photoréaliste d’un suivi nutritionnel et métabolique",
-    label: "Nutrition",
-    title: "Prévention, équilibre et accompagnement métabolique.",
+    src: "/cabinet-attente-reel.webp",
+    alt: "Salle d’attente du cabinet du Dr Sonia Abahou à Témara",
+    label: "Salle d’attente",
+    title: "Un cadre sobre et confortable avant la consultation.",
   },
 ];
 
@@ -759,10 +759,10 @@ export default function Home() {
       <section className="section-shell gallery-section reveal-section">
         <div className="section-heading">
           <p className="eyebrow">Le cabinet en images</p>
-          <h2>Un aperçu visuel du cadre de consultation.</h2>
+          <h2>Découvrez les espaces du cabinet.</h2>
           <p>
-            Ces visuels sont illustratifs et pourront être remplacés par les
-            photos réelles du cabinet dès qu’elles seront disponibles.
+            Accueil, salle de consultation et salle d’attente&nbsp;: découvrez
+            le cadre réel dans lequel les patients sont reçus à Massira I.
           </p>
         </div>
         <div className="gallery-grid">
