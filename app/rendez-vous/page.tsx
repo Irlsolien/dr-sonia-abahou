@@ -7,6 +7,8 @@ import {
   clinicName,
   clinicPhoneDisplay,
   clinicPhoneInternational,
+  clinicSecondaryPhoneDisplay,
+  clinicSecondaryPhoneInternational,
   lastModified,
   siteName,
   siteUrl,
@@ -58,14 +60,22 @@ const appointmentStructuredData = {
       "@type": "MedicalClinic",
       "@id": `${siteUrl}/#clinic`,
       name: clinicName,
-      telephone: clinicPhoneInternational,
+      telephone: [clinicPhoneInternational, clinicSecondaryPhoneInternational],
       address: clinicAddress,
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: clinicPhoneInternational,
-        contactType: "Prise de rendez-vous",
-        availableLanguage: "fr",
-      },
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: clinicPhoneInternational,
+          contactType: "Prise de rendez-vous",
+          availableLanguage: "fr",
+        },
+        {
+          "@type": "ContactPoint",
+          telephone: clinicSecondaryPhoneInternational,
+          contactType: "Téléphone portable et WhatsApp du cabinet",
+          availableLanguage: "fr",
+        },
+      ],
     },
   ],
 };
@@ -102,7 +112,8 @@ export default function AppointmentPage() {
             ou WhatsApp afin de confirmer les disponibilités.
           </p>
           <div className="appointment-meta">
-            <strong>{clinicPhoneDisplay}</strong>
+            <strong>Fixe : {clinicPhoneDisplay}</strong>
+            <strong>Portable / WhatsApp : {clinicSecondaryPhoneDisplay}</strong>
             <small>{clinicAddress}</small>
           </div>
           <div className="hero-actions">

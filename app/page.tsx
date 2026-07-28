@@ -11,6 +11,8 @@ import {
   clinicPhoneDisplay,
   clinicPhoneInternational,
   clinicPostalCode,
+  clinicSecondaryPhoneDisplay,
+  clinicSecondaryPhoneInternational,
   clinicStreetAddress,
   doctorAlternateName,
   doctorCredentials,
@@ -31,6 +33,7 @@ import {
 } from "./seo";
 
 const phoneHref = `tel:${clinicPhoneInternational}`;
+const secondaryPhoneHref = `tel:${clinicSecondaryPhoneInternational}`;
 const mapsHref = googleMapsPlaceUrl;
 const mapsEmbedHref = `https://www.google.com/maps?q=${encodeURIComponent(
   mapsQuery,
@@ -99,6 +102,42 @@ const patientJourney = [
   },
 ];
 
+const clinicalActivities = [
+  {
+    id: "echographie-thyroidienne",
+    eyebrow: "Exploration cervicale",
+    title: "Échographie thyroïdienne et cervicale",
+    description:
+      "Réalisée dans le cadre de l’évaluation endocrinologique, l’échographie permet d’examiner la thyroïde et les aires ganglionnaires cervicales. Ses résultats sont interprétés avec les données cliniques et biologiques du patient.",
+    image: "/echographie-thyroidienne.webp",
+    alt: "Illustration d’une échographie thyroïdienne réalisée dans un cabinet médical",
+    highlights: ["Thyroïde et nodules", "Aires cervicales", "Lecture clinique globale"],
+    note: "Un examen intégré au parcours endocrinologique, avec des explications claires à chaque étape.",
+  },
+  {
+    id: "impedancemetrie-medicale",
+    eyebrow: "Composition corporelle",
+    title: "Impédancemétrie médicale avec BIODY XPERT ZM3",
+    description:
+      "Au-delà du poids seul, ce dispositif médical multifréquence contribue au suivi de la composition corporelle : masse grasse, masse non grasse, masse musculaire et hydratation. Les mesures complètent l’évaluation médicale et nutritionnelle.",
+    image: "/impedancemetrie-biody-xpert-zm3.webp",
+    alt: "Illustration d’une mesure de composition corporelle avec un impédancemètre médical",
+    highlights: ["Mesure multifréquence", "Évolution dans le temps", "Interprétation médicale"],
+    note: "Des indicateurs utiles pour personnaliser le suivi et observer les évolutions au fil des consultations.",
+  },
+  {
+    id: "education-therapeutique",
+    eyebrow: "Chaque vendredi",
+    title: "Atelier collectif d’éducation thérapeutique",
+    description:
+      "Le vendredi, le cabinet réunit des patients autour d’un temps d’échange et d’apprentissage pour mieux comprendre le diabète, les traitements, l’auto-surveillance et les situations concrètes du quotidien.",
+    image: "/atelier-education-therapeutique.webp",
+    alt: "Illustration d’un atelier collectif d’éducation thérapeutique autour du diabète",
+    highlights: ["Comprendre la maladie", "Partager les expériences", "Gagner en autonomie"],
+    note: "Les prochaines séances et les modalités de participation sont communiquées directement par le cabinet.",
+  },
+] as const;
+
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -119,7 +158,7 @@ const structuredData = {
         url: absoluteUrl("/dr-sonia-logo-cropped.png"),
       },
       url: `${siteUrl}/`,
-      telephone: clinicPhoneInternational,
+      telephone: [clinicPhoneInternational, clinicSecondaryPhoneInternational],
       email: clinicEmail,
       hasMap: mapsHref,
       sameAs: [mapsHref, ...doctorProfessionalProfiles],
@@ -130,13 +169,22 @@ const structuredData = {
         addressLocality: clinicCity,
         addressCountry: clinicCountry,
       },
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: clinicPhoneInternational,
-        contactType: "Prise de rendez-vous",
-        areaServed: clinicCountry,
-        availableLanguage: "fr",
-      },
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: clinicPhoneInternational,
+          contactType: "Prise de rendez-vous",
+          areaServed: clinicCountry,
+          availableLanguage: "fr",
+        },
+        {
+          "@type": "ContactPoint",
+          telephone: clinicSecondaryPhoneInternational,
+          contactType: "Téléphone portable et WhatsApp du cabinet",
+          areaServed: clinicCountry,
+          availableLanguage: "fr",
+        },
+      ],
       employee: {
         "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
       },
@@ -145,12 +193,20 @@ const structuredData = {
         "https://schema.org/Endocrine",
         "https://schema.org/DietNutrition",
       ],
-      availableService: services.map((service) => ({
-        "@type": "MedicalProcedure",
-        name: service.title,
-        description: service.text,
-        url: absoluteUrl(`/${service.slug}`),
-      })),
+      availableService: [
+        ...services.map((service) => ({
+          "@type": "MedicalProcedure",
+          name: service.title,
+          description: service.text,
+          url: absoluteUrl(`/${service.slug}`),
+        })),
+        ...clinicalActivities.map((activity) => ({
+          "@type": "MedicalProcedure",
+          name: activity.title,
+          description: activity.description,
+          url: absoluteUrl(`/#${activity.id}`),
+        })),
+      ],
       openingHoursSpecification: [
         {
           "@type": "OpeningHoursSpecification",
@@ -292,6 +348,7 @@ export default function Home() {
               width={58}
               height={58}
               sizes="58px"
+              priority
             />
           </span>
           <strong>Dr Sonia Abahou</strong>
@@ -299,6 +356,7 @@ export default function Home() {
         <nav aria-label="Navigation principale">
           <a href="#expertise">Expertise</a>
           <a href="#soins">Soins</a>
+          <a href="#pratiques">Pratiques</a>
           <a href="#cabinet">Cabinet</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -519,6 +577,60 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="pratiques" className="section-shell practice-section">
+        <div className="practice-heading reveal-section">
+          <div>
+            <p className="eyebrow">Pratique au cabinet</p>
+            <h2>Des actes et des temps de soin qui prolongent la consultation.</h2>
+          </div>
+          <p>
+            Le cabinet associe expertise endocrinologique, outils de suivi et
+            éducation thérapeutique pour rendre chaque étape plus concrète et plus
+            compréhensible.
+          </p>
+        </div>
+
+        <div className="practice-stack">
+          {clinicalActivities.map((activity, index) => (
+            <article
+              id={activity.id}
+              key={activity.id}
+              className="practice-feature reveal-section"
+            >
+              <figure className="practice-media">
+                <Image
+                  src={activity.image}
+                  alt={activity.alt}
+                  width={1600}
+                  height={1067}
+                  loading="lazy"
+                  sizes="(max-width: 820px) 94vw, 50vw"
+                />
+                <figcaption>Visuel illustratif</figcaption>
+                <span className="practice-number" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </figure>
+
+              <div className="practice-content">
+                <p className="practice-eyebrow">{activity.eyebrow}</p>
+                <h3>{activity.title}</h3>
+                <p className="practice-description">{activity.description}</p>
+                <ul className="practice-highlights">
+                  {activity.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+                <p className="practice-note">{activity.note}</p>
+                <Link className="text-link" href="/rendez-vous">
+                  Contacter le cabinet
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="section-shell faq-section reveal-section">
         <div className="section-heading">
           <p className="eyebrow">Questions fréquentes</p>
@@ -602,7 +714,10 @@ export default function Home() {
               Ouvrir l’itinéraire GPS
             </a>
             <a className="secondary-button" href={phoneHref}>
-              {clinicPhoneDisplay}
+              Fixe · {clinicPhoneDisplay}
+            </a>
+            <a className="secondary-button" href={secondaryPhoneHref}>
+              Portable · {clinicSecondaryPhoneDisplay}
             </a>
           </div>
         </div>

@@ -6,6 +6,7 @@ import {
   clinicAddress,
   clinicName,
   clinicPhoneDisplay,
+  clinicSecondaryPhoneDisplay,
   doctorName,
   doctorProfilePath,
   googleMapsPlaceUrl,
@@ -270,7 +271,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <p className="eyebrow">Rendez-vous</p>
           <h2>Contacter le cabinet du Dr Sonia Abahou.</h2>
           <p>
-            Adresse : {clinicAddress}. Téléphone : {clinicPhoneDisplay}.
+            Adresse : {clinicAddress}. Téléphone fixe : {clinicPhoneDisplay}.
+            Portable / WhatsApp : {clinicSecondaryPhoneDisplay}.
           </p>
         </div>
         <div className="cta-stack">

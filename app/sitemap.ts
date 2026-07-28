@@ -15,7 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: absoluteUrl("/"),
       lastModified: modifiedAt,
-      images: [absoluteUrl("/dr-sonia-abahou.jpg")],
+      images: [
+        absoluteUrl("/dr-sonia-abahou.jpg"),
+        absoluteUrl("/echographie-thyroidienne.webp"),
+        absoluteUrl("/impedancemetrie-biody-xpert-zm3.webp"),
+        absoluteUrl("/atelier-education-therapeutique.webp"),
+      ],
     },
     {
       url: absoluteUrl(doctorProfilePath),
