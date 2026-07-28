@@ -32,7 +32,7 @@ export const doctorCredentials = [
   "Diplôme universitaire d’échographie cervicale Paris V",
   "Ancien médecin au centre hospitalier universitaire de Rabat",
   "Ancien médecin attaché à l’hôpital militaire de Rabat",
-  "Ancienne secrétaire générale de la SMEDIAN",
+  "Fondatrice et présidente de l’Institut marocain de diabétologie",
 ] as const;
 
 export const doctorSocialProfiles = [
