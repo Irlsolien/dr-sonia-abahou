@@ -1,37 +1,43 @@
 export const siteUrl = "https://dr-sonia-abahou.vercel.app";
 export const siteName = "Dr Sonia Abahou";
-export const clinicName = "Cabinet Dr Sonia Abahou";
+export const clinicName = "Cabinet Dr Abahou Sonia";
 export const clinicPhoneDisplay = "05 37 60 63 64";
 export const clinicPhoneInternational = "+212537606364";
+export const clinicSecondaryPhoneDisplay = "06 41 30 34 82";
+export const clinicSecondaryPhoneInternational = "+212641303482";
+export const clinicEmail = "drsoniabahou@gmail.com";
 export const clinicAddress =
-  "13, avenue Moulay Ali Chérif, appartement n°2, Cité Massira I, 12020 Témara";
+  "209, avenue Moulay Ali Chérif, appartement 3, Massira 1, 12020 Témara";
 export const clinicStreetAddress =
-  "13, avenue Moulay Ali Chérif, appartement n°2, Cité Massira I";
+  "209, avenue Moulay Ali Chérif, appartement 3, Massira 1";
 export const clinicPostalCode = "12020";
 export const clinicCity = "Témara";
 export const clinicCountry = "MA";
+export const doctorOrderNumber = "10563";
+export const doctorRegionalCouncil = "Conseil régional de l’Ordre des médecins de Rabat";
+export const doctorInpe = "101193191";
 export const defaultOgImage = "/dr-sonia-abahou.jpg";
-export const lastModified = "2026-07-21";
+export const lastModified = "2026-07-28";
 
 export const mapsQuery =
-  "13 avenue Moulay Ali Cherif appartement 2 Cite Massira I Temara";
+  "209 Avenue Moulay Ali Cherif App 3 Massira 1 Temara 12020";
 
 export const appointment = {
-  whatsappPhone: "212537606364",
+  whatsappPhone: "212641303482",
   whatsappMessage:
-    "Bonjour, je souhaite prendre rendez-vous au cabinet du Dr Sonia Abahou.",
+    "Bonjour, je souhaite prendre rendez-vous au cabinet du Dr Abahou Sonia.",
 } as const;
 
 export const teleconsultation = {
   calendlyUrl: "https://calendly.com/dr-sonia-abahou/teleconsultation-video",
   amount: "À compléter",
-  beneficiaryName: "Dr Sonia Abahou",
+  beneficiaryName: "Dr Abahou Sonia",
   bankName: "À compléter",
   ribOrIban: "À compléter",
-  proofWhatsapp: "212537606364",
-  proofEmail: "cabinet@example.com",
+  proofWhatsapp: "212641303482",
+  proofEmail: clinicEmail,
   proofMessage:
-    "Bonjour, je vous envoie le justificatif de paiement pour ma téléconsultation vidéo avec le Dr Sonia Abahou.",
+    "Bonjour, je vous envoie le justificatif de paiement pour ma téléconsultation vidéo avec le Dr Abahou Sonia.",
   emailInstructions:
     "Votre rendez-vous sera définitivement confirmé après réception du paiement par virement bancaire. Merci d’envoyer le justificatif au cabinet.",
 } as const;
@@ -40,7 +46,7 @@ export const services = [
   {
     slug: "diabete-temara",
     title: "Diabète et équilibre glycémique",
-    seoTitle: "Diabétologue à Témara | Suivi du diabète | Dr Sonia Abahou",
+    seoTitle: "Diabétologue à Témara | Suivi du diabète | Dr Abahou Sonia",
     description:
       "Suivi du diabète à Témara : diabète de type 1, type 2, diabète gestationnel, équilibre glycémique et accompagnement médical.",
     text: "Suivi du diabète de type 1, type 2, diabète gestationnel et situations de déséquilibre glycémique.",
@@ -63,9 +69,9 @@ export const services = [
   {
     slug: "thyroide-temara",
     title: "Thyroïde, goitre et nodules",
-    seoTitle: "Endocrinologue thyroïde à Témara | Dr Sonia Abahou",
+    seoTitle: "Endocrinologue thyroïde à Témara | Dr Abahou Sonia",
     description:
-      "Consultation endocrinologique à Témara pour troubles thyroïdiens, goitre, nodules, hypothyroïdie, hyperthyroïdie et suivi médical.",
+      "Consultation endocrinologique à Témara pour troubles thyroïdiens, goitre, nodules, cancers thyroïdiens et suivi médical.",
     text: "Bilan, surveillance et orientation dans les troubles thyroïdiens, nodules, goitre et cancers thyroïdiens.",
     intro:
       "Les troubles de la thyroïde peuvent influencer l’énergie, le poids, le rythme cardiaque, l’humeur et le métabolisme.",
@@ -84,20 +90,20 @@ export const services = [
     ],
   },
   {
-    slug: "nutrition-medicale-temara",
-    title: "Nutrition et maladies métaboliques",
-    seoTitle: "Nutrition médicale à Témara | Métabolisme | Dr Sonia Abahou",
+    slug: "nutrition-maladies-metaboliques-temara",
+    title: "Nutrition, obésité et maladies métaboliques",
+    seoTitle: "Nutrition médicale à Témara | Obésité et métabolisme | Dr Abahou Sonia",
     description:
-      "Accompagnement en nutrition médicale à Témara : poids, insulinorésistance, métabolisme, prévention et maladies métaboliques.",
-    text: "Accompagnement médical autour du poids, du métabolisme, de l’insulinorésistance et de la prévention.",
+      "Accompagnement en nutrition médicale à Témara : obésité, poids, insulinorésistance, métabolisme, prévention et maladies métaboliques.",
+    text: "Accompagnement médical autour de la nutrition, de l’obésité, du métabolisme et de la prévention.",
     intro:
       "La nutrition médicale s’inscrit dans une démarche de santé globale, en lien avec le métabolisme et les facteurs de risque.",
     visualClass: "care-nutrition",
     keywords: [
       "nutrition médicale Témara",
+      "obésité Témara",
       "maladies métaboliques",
       "insulinorésistance",
-      "suivi poids Témara",
     ],
     points: [
       "Évaluation du contexte médical, métabolique et nutritionnel.",
@@ -107,49 +113,72 @@ export const services = [
     ],
   },
   {
-    slug: "troubles-hormonaux-temara",
-    title: "Troubles hormonaux féminins",
-    seoTitle: "Troubles hormonaux à Témara | SOPK, hirsutisme | Dr Sonia Abahou",
+    slug: "surrenales-hypophyse-parathyroides-temara",
+    title: "Surrénales, hypophyse et parathyroïdes",
+    seoTitle: "Pathologies endocriniennes à Témara | Dr Abahou Sonia",
     description:
-      "Consultation à Témara pour troubles hormonaux féminins : SOPK, hyperandrogénie, hirsutisme, puberté et déséquilibres hormonaux.",
-    text: "Prise en charge du SOPK, de l’hyperandrogénie, de l’hirsutisme et des troubles de la puberté.",
+      "Consultation d’endocrinologie à Témara pour pathologies surrénaliennes, hypophysaires et parathyroïdiennes.",
+    text: "Exploration et suivi des pathologies surrénaliennes, hypophysaires et parathyroïdiennes.",
     intro:
-      "Les troubles hormonaux nécessitent une écoute attentive, un bilan adapté et une explication claire des résultats.",
+      "Certaines pathologies endocriniennes nécessitent une lecture méthodique des symptômes, des bilans et de l’évolution clinique.",
     visualClass: "care-hormones",
     keywords: [
-      "troubles hormonaux Témara",
-      "SOPK Témara",
-      "hirsutisme",
-      "hyperandrogénie",
+      "surrénales Témara",
+      "hypophyse Témara",
+      "parathyroïdes Témara",
+      "endocrinologie Témara",
     ],
     points: [
-      "Évaluation des symptômes et de leur évolution dans le temps.",
-      "Orientation du bilan hormonal selon le contexte clinique.",
-      "Suivi du SOPK, de l’hyperandrogénie ou de l’hirsutisme.",
-      "Explications pédagogiques sur les hormones et les options de suivi.",
+      "Orientation du bilan endocrinien selon le contexte clinique.",
+      "Suivi des pathologies surrénaliennes, hypophysaires ou parathyroïdiennes.",
+      "Interprétation des examens et explication des résultats.",
+      "Coordination du suivi médical lorsque des avis complémentaires sont nécessaires.",
     ],
   },
   {
-    slug: "endocrinologie-temara",
-    title: "Endocrinologie générale",
-    seoTitle: "Endocrinologue à Témara | Cabinet Dr Sonia Abahou",
+    slug: "hyperprolactinemie-hypoglycemies-temara",
+    title: "Hyperprolactinémie et hypoglycémies",
+    seoTitle: "Hyperprolactinémie et hypoglycémies à Témara | Dr Abahou Sonia",
     description:
-      "Cabinet d’endocrinologie à Témara pour diabète, thyroïde, nutrition, métabolisme, surrénales, hypophyse et parathyroïdes.",
-    text: "Exploration et suivi des pathologies endocriniennes complexes avec pédagogie et méthode.",
+      "Consultation endocrinologique à Témara pour hyperprolactinémie, hypoglycémies et déséquilibres hormonaux validés par le cabinet.",
+    text: "Évaluation et suivi de l’hyperprolactinémie, des hypoglycémies et des situations hormonales nécessitant une expertise endocrinologique.",
     intro:
-      "L’endocrinologie prend en charge les déséquilibres hormonaux et métaboliques avec une vision globale du patient.",
+      "Ces motifs demandent une démarche progressive, fondée sur l’histoire clinique, les bilans et l’explication du suivi.",
     visualClass: "care-endocrine",
     keywords: [
+      "hyperprolactinémie Témara",
+      "hypoglycémies Témara",
       "endocrinologue Témara",
-      "cabinet endocrinologie",
-      "hormones",
-      "maladies métaboliques",
+      "déséquilibre hormonal",
     ],
     points: [
-      "Consultation spécialisée autour des hormones et du métabolisme.",
-      "Suivi des pathologies endocriniennes fréquentes ou complexes.",
-      "Coordination avec les examens et avis médicaux nécessaires.",
-      "Approche progressive, expliquée et centrée sur le patient.",
+      "Analyse des symptômes, du contexte et des examens déjà réalisés.",
+      "Orientation du bilan complémentaire lorsque nécessaire.",
+      "Explications claires sur les résultats et les objectifs du suivi.",
+      "Suivi adapté à l’évolution clinique du patient.",
+    ],
+  },
+  {
+    slug: "education-therapeutique-temara",
+    title: "Éducation thérapeutique",
+    seoTitle: "Éducation thérapeutique à Témara | Dr Abahou Sonia",
+    description:
+      "Éducation thérapeutique à Témara pour aider les patients à mieux comprendre leur maladie, leur suivi et les objectifs médicaux.",
+    text: "Accompagnement pédagogique pour mieux comprendre la maladie, les traitements et les objectifs du suivi.",
+    intro:
+      "Comprendre sa maladie aide le patient à mieux participer à son suivi et à avancer plus sereinement.",
+    visualClass: "care-endocrine",
+    keywords: [
+      "éducation thérapeutique Témara",
+      "suivi patient Témara",
+      "diabète éducation thérapeutique",
+      "endocrinologie pédagogie",
+    ],
+    points: [
+      "Explication des résultats, des traitements et des objectifs de suivi.",
+      "Aide à la compréhension du diabète, du métabolisme et des troubles hormonaux.",
+      "Conseils généraux pour préparer la consultation et poser les bonnes questions.",
+      "Approche pédagogique centrée sur le patient.",
     ],
   },
 ] as const;
@@ -158,7 +187,7 @@ export const faqItems = [
   {
     question: "Comment prendre rendez-vous au cabinet ?",
     answer:
-      "Le cabinet peut être contacté par téléphone afin de confirmer les disponibilités et les modalités pratiques du rendez-vous.",
+      "Le cabinet peut être contacté par téléphone ou WhatsApp afin de confirmer les disponibilités et les modalités pratiques du rendez-vous.",
   },
   {
     question: "Quels documents apporter pour une première consultation ?",
@@ -173,7 +202,7 @@ export const faqItems = [
   {
     question: "Quels motifs de consultation sont présentés ?",
     answer:
-      "Le site présente notamment le diabète, les troubles thyroïdiens, la nutrition médicale, les maladies métaboliques et certains troubles hormonaux.",
+      "Le site présente notamment le diabète, les troubles thyroïdiens, la nutrition médicale, l’obésité, les maladies métaboliques, l’hyperprolactinémie, les hypoglycémies et certaines pathologies endocriniennes.",
   },
 ] as const;
 

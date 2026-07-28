@@ -7,22 +7,24 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: siteName,
   title: {
-    default: "Dr Sonia Abahou | Endocrinologue Diabétologue à Témara",
+    default: "Dr Sonia Abahou | Endocrinologie et maladies métaboliques à Témara",
     template: "%s",
   },
   description:
-    "Cabinet du Dr Sonia Abahou à Témara : endocrinologie, diabétologie, nutrition, thyroïde, troubles hormonaux et maladies métaboliques.",
+    "Cabinet du Dr Abahou Sonia à Témara : endocrinologie, diabète, thyroïde, nutrition, obésité, hypoglycémies et maladies métaboliques.",
   keywords: [
     "Dr Sonia Abahou",
     "endocrinologue Témara",
-    "diabétologue Témara",
+    "diabète Témara",
     "thyroïde Témara",
     "nutrition médicale Témara",
+    "obésité Témara",
+    "hypoglycémies Témara",
     "maladies métaboliques",
   ],
-  authors: [{ name: "Dr Sonia Abahou" }],
-  creator: "Dr Sonia Abahou",
-  publisher: "Dr Sonia Abahou",
+  authors: [{ name: "Dr Abahou Sonia" }],
+  creator: "Dr Abahou Sonia",
+  publisher: "Dr Abahou Sonia",
   category: "Santé",
   alternates: {
     canonical: "/",
@@ -50,7 +52,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Dr Sonia Abahou | Cabinet d’endocrinologie à Témara",
     description:
-      "Informations pratiques du cabinet : diabète, thyroïde, nutrition et troubles hormonaux à Témara.",
+      "Informations pratiques du cabinet : diabète, thyroïde, nutrition, obésité, hypoglycémies et maladies métaboliques à Témara.",
     siteName,
     type: "website",
     locale: "fr_MA",
@@ -68,7 +70,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Dr Sonia Abahou | Cabinet d’endocrinologie à Témara",
     description:
-      "Informations pratiques du cabinet : diabète, thyroïde, nutrition et troubles hormonaux à Témara.",
+      "Informations pratiques du cabinet : diabète, thyroïde, nutrition, obésité, hypoglycémies et maladies métaboliques à Témara.",
     images: [absoluteUrl(defaultOgImage)],
   },
   formatDetection: {

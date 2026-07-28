@@ -1,18 +1,25 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { absoluteUrl, siteName } from "../seo";
+import {
+  absoluteUrl,
+  clinicAddress,
+  clinicEmail,
+  clinicName,
+  clinicPhoneDisplay,
+  siteName,
+} from "../seo";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité | Dr Sonia Abahou",
   description:
-    "Politique de confidentialité du site du cabinet Dr Sonia Abahou à Témara.",
+    "Politique de confidentialité du site du cabinet Dr Abahou Sonia à Témara.",
   alternates: {
     canonical: "/confidentialite",
   },
   openGraph: {
     title: "Politique de confidentialité | Dr Sonia Abahou",
     description:
-      "Politique de confidentialité du site du cabinet Dr Sonia Abahou à Témara.",
+      "Politique de confidentialité du site du cabinet Dr Abahou Sonia à Témara.",
     url: "/confidentialite",
     siteName,
     type: "website",
@@ -22,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Politique de confidentialité | Dr Sonia Abahou",
     description:
-      "Politique de confidentialité du site du cabinet Dr Sonia Abahou à Témara.",
+      "Politique de confidentialité du site du cabinet Dr Abahou Sonia à Témara.",
     images: [absoluteUrl("/dr-sonia-abahou.jpg")],
   },
 };
@@ -37,9 +44,9 @@ export default function PrivacyPage() {
         <p className="eyebrow">Données personnelles</p>
         <h1>Politique de confidentialité</h1>
         <p>
-          Cette politique explique quelles données peuvent être traitées, pour
-          quelles finalités, et comment les personnes concernées peuvent exercer
-          leurs droits.
+          Cette politique explique les traitements de données possibles dans le
+          cadre du site vitrine, conformément aux informations communiquées par le
+          cabinet et à la loi marocaine n° 09-08.
         </p>
       </section>
 
@@ -47,13 +54,13 @@ export default function PrivacyPage() {
         <article>
           <h2>Responsable du traitement</h2>
           <p>
-            Le responsable du traitement est le cabinet du <strong>Dr Sonia Abahou</strong>,
-            situé au 13, avenue Moulay Ali Chérif, appartement n°2, Cité Massira I,
-            12020 Témara, Maroc.
+            Le responsable du traitement est <strong>{clinicName}</strong>, situé
+            au {clinicAddress}, Maroc.
           </p>
           <p>
             Pour toute demande relative aux données personnelles, le cabinet peut
-            être contacté par téléphone au 05 37 60 63 64.
+            être contacté par email à <strong>{clinicEmail}</strong> ou par
+            téléphone au <strong>{clinicPhoneDisplay}</strong>.
           </p>
         </article>
 
@@ -63,7 +70,7 @@ export default function PrivacyPage() {
             Le site vitrine ne comporte pas de formulaire médical et ne collecte
             pas directement de dossier patient. Certaines données peuvent toutefois
             être traitées lorsque l’utilisateur choisit volontairement de contacter
-            le cabinet par téléphone, WhatsApp ou via un lien externe.
+            le cabinet.
           </p>
           <ul>
             <li>Données d’identification et de contact communiquées volontairement.</li>
@@ -74,7 +81,7 @@ export default function PrivacyPage() {
 
         <article>
           <h2>Finalités</h2>
-          <p>Les données sont utilisées uniquement pour :</p>
+          <p>Les données peuvent être utilisées uniquement pour :</p>
           <ul>
             <li>répondre aux demandes de contact ;</li>
             <li>faciliter la prise ou la confirmation de rendez-vous ;</li>
@@ -86,31 +93,31 @@ export default function PrivacyPage() {
         <article>
           <h2>Données de santé</h2>
           <p>
-            Les données relatives à la santé sont des données sensibles. Elles ne
-            doivent pas être transmises via un simple site vitrine, un message non
-            sécurisé ou un canal public. Les informations médicales doivent être
-            communiquées dans un cadre approprié avec le cabinet.
+            Les données relatives à la santé sont des données sensibles. Le site
+            vitrine ne doit pas être utilisé pour transmettre des documents
+            médicaux sensibles, des résultats d’examens ou des informations
+            confidentielles via un canal non sécurisé.
           </p>
           <p>
             Si le cabinet met ultérieurement en place un formulaire médical, un
-            espace patient, une téléconsultation ou une application de suivi, un cadre spécifique sera
-            nécessaire : information claire, consentement, sécurité renforcée,
-            durée de conservation adaptée et formalités CNDP lorsque requises.
+            espace patient, une téléconsultation ou une application de suivi, un
+            cadre spécifique devra être défini avant publication : information
+            claire, sécurité renforcée, durée de conservation adaptée et
+            formalités CNDP lorsque requises.
           </p>
         </article>
 
         <article>
-          <h2>Base légale et loi 09-08</h2>
+          <h2>Loi 09-08 et CNDP</h2>
           <p>
             Conformément à la loi marocaine n° 09-08, les données personnelles
             doivent être traitées de manière loyale, transparente, proportionnée
-            et pour une finalité déterminée. Les traitements soumis à déclaration,
-            autorisation ou transfert auprès de la CNDP doivent être accomplis par
-            le responsable du traitement lorsque la situation l’exige.
+            et pour une finalité déterminée. Les formalités auprès de la CNDP
+            relèvent du responsable du traitement lorsque la situation l’exige.
           </p>
           <p>
-            Récépissé ou autorisation CNDP : à compléter par le cabinet si un
-            traitement entrant dans le champ des formalités CNDP est mis en œuvre.
+            Numéro CNDP ou récépissé de déclaration : <strong>non communiqué</strong>.
+            Aucune référence CNDP n’est donc inventée sur le site.
           </p>
         </article>
 
@@ -124,23 +131,21 @@ export default function PrivacyPage() {
         </article>
 
         <article>
-          <h2>Destinataires et sous-traitants</h2>
+          <h2>Destinataires et services tiers</h2>
           <p>
             Les données peuvent être accessibles au cabinet, à ses prestataires
             techniques strictement nécessaires au fonctionnement du site, et aux
-            services tiers utilisés volontairement par l’utilisateur, comme
-            Google Maps ou WhatsApp lorsqu’il clique sur ces services.
+            services tiers utilisés volontairement par l’utilisateur, comme Google
+            Maps, WhatsApp, LinkedIn ou Instagram lorsqu’il choisit de les ouvrir.
           </p>
         </article>
 
         <article>
           <h2>Droits des personnes</h2>
           <p>
-            Conformément à la loi 09-08, toute personne concernée peut demander
-            l’accès, la rectification et, pour motifs légitimes, l’opposition au
-            traitement de ses données personnelles. Lorsque le RGPD s’applique,
-            des droits complémentaires peuvent exister, notamment l’effacement, la
-            limitation et la portabilité.
+            Conformément à la loi marocaine n° 09-08, toute personne concernée
+            peut demander l’accès, la rectification et, pour motifs légitimes,
+            l’opposition au traitement de ses données personnelles.
           </p>
         </article>
 

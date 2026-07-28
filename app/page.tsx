@@ -38,18 +38,21 @@ const socialLinks: SocialItem[] = [
 ];
 
 const credentials = [
-  "Spécialiste en Diabétologie, Endocrinologie, Nutrition et Maladies Métaboliques",
-  "Ancien médecin à l’hôpital Ibn Sina de Rabat",
+  "Spécialiste en endocrinologie et maladies métaboliques",
+  "Diplôme universitaire d’échographie cervicale Paris V",
+  "Ancien médecin au centre hospitalier universitaire de Rabat",
   "Ancien médecin attaché à l’hôpital militaire de Rabat",
   "Ancienne secrétaire générale de la SMEDIAN",
 ];
 
 const hours = [
-  ["Lundi", "10:00 — 17:00"],
-  ["Mardi", "10:00 — 15:00"],
-  ["Mercredi", "10:00 — 17:00"],
-  ["Jeudi", "10:00 — 15:00"],
-  ["Vendredi", "10:00 — 17:00"],
+  ["Lundi", "9h30 — 16h"],
+  ["Mardi", "9h30 — 16h"],
+  ["Mercredi", "9h30 — 16h"],
+  ["Jeudi", "9h30 — 16h"],
+  ["Vendredi", "9h30 — 12h30"],
+  ["Samedi", "Fermé"],
+  ["Dimanche", "Fermé"],
 ];
 
 const gallery = [
@@ -95,7 +98,7 @@ const structuredData = {
   name: "Dr Sonia Abahou",
   alternateName: siteName,
   description:
-    "Cabinet d’endocrinologie, diabétologie, nutrition et maladies métaboliques à Témara.",
+    "Cabinet d’endocrinologie et maladies métaboliques à Témara.",
   image: absoluteUrl("/dr-sonia-abahou.jpg"),
   logo: absoluteUrl("/favicon.svg"),
   url: `${siteUrl}/`,
@@ -113,6 +116,7 @@ const structuredData = {
     "Endocrinology",
     "Nutrition",
     "Diabetes",
+    "MetabolicDisease",
   ],
   availableService: services.map((service) => ({
     "@type": "MedicalProcedure",
@@ -123,15 +127,15 @@ const structuredData = {
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Wednesday", "Friday"],
-      opens: "10:00",
-      closes: "17:00",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+      opens: "09:30",
+      closes: "16:00",
     },
     {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Tuesday", "Thursday"],
-      opens: "10:00",
-      closes: "15:00",
+      dayOfWeek: ["Friday"],
+      opens: "09:30",
+      closes: "12:30",
     },
   ],
 };
@@ -230,7 +234,7 @@ export default function Home() {
             />
             <div>
               <span>Cabinet Dr Abahou Sonia</span>
-              <strong>Endocrinologie, diabétologie & nutrition médicale.</strong>
+            <strong>Endocrinologie & maladies métaboliques.</strong>
             </div>
           </div>
           <div className="hero-actions" aria-label="Actions rapides">
@@ -315,15 +319,15 @@ export default function Home() {
           <span>Diabète</span>
           <span>Thyroïde</span>
           <span>Nutrition</span>
-          <span>SOPK</span>
-          <span>Métabolisme</span>
-          <span>Hormones</span>
-          <span>Diabète</span>
-          <span>Thyroïde</span>
-          <span>Nutrition</span>
-          <span>SOPK</span>
-          <span>Métabolisme</span>
-          <span>Hormones</span>
+            <span>Obésité</span>
+            <span>Métabolisme</span>
+            <span>Éducation thérapeutique</span>
+            <span>Diabète</span>
+            <span>Thyroïde</span>
+            <span>Nutrition</span>
+            <span>Hypoglycémies</span>
+            <span>Métabolisme</span>
+            <span>Éducation thérapeutique</span>
         </div>
       </section>
 

@@ -1,18 +1,29 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { absoluteUrl, siteName } from "../seo";
+import {
+  absoluteUrl,
+  clinicAddress,
+  clinicEmail,
+  clinicName,
+  clinicPhoneDisplay,
+  clinicSecondaryPhoneDisplay,
+  doctorInpe,
+  doctorOrderNumber,
+  doctorRegionalCouncil,
+  siteName,
+} from "../seo";
 
 export const metadata: Metadata = {
   title: "Mentions légales | Dr Sonia Abahou",
   description:
-    "Mentions légales du site du cabinet Dr Sonia Abahou, endocrinologue diabétologue à Témara.",
+    "Mentions légales du site du cabinet Dr Abahou Sonia, endocrinologie et maladies métaboliques à Témara.",
   alternates: {
     canonical: "/mentions-legales",
   },
   openGraph: {
     title: "Mentions légales | Dr Sonia Abahou",
     description:
-      "Mentions légales du site du cabinet Dr Sonia Abahou, endocrinologue diabétologue à Témara.",
+      "Mentions légales du site du cabinet Dr Abahou Sonia, endocrinologie et maladies métaboliques à Témara.",
     url: "/mentions-legales",
     siteName,
     type: "website",
@@ -22,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Mentions légales | Dr Sonia Abahou",
     description:
-      "Mentions légales du site du cabinet Dr Sonia Abahou, endocrinologue diabétologue à Témara.",
+      "Mentions légales du site du cabinet Dr Abahou Sonia, endocrinologie et maladies métaboliques à Témara.",
     images: [absoluteUrl("/dr-sonia-abahou.jpg")],
   },
 };
@@ -37,8 +48,9 @@ export default function LegalNoticePage() {
         <p className="eyebrow">Cadre légal</p>
         <h1>Mentions légales</h1>
         <p>
-          Cette page identifie l’éditeur du site, l’hébergeur et les règles
-          générales d’utilisation des contenus publiés.
+          Cette page présente les informations communiquées par le cabinet pour
+          identifier l’éditeur du site, l’hébergeur et le cadre d’utilisation des
+          contenus publiés.
         </p>
       </section>
 
@@ -46,15 +58,34 @@ export default function LegalNoticePage() {
         <article>
           <h2>Éditeur du site</h2>
           <p>
-            Le présent site est édité par le cabinet du <strong>Dr Sonia Abahou</strong>,
-            médecin spécialiste en endocrinologie, diabétologie, nutrition et
-            maladies métaboliques.
+            Le présent site est édité par <strong>{clinicName}</strong>, cabinet
+            médical d’endocrinologie et maladies métaboliques situé à Témara,
+            Maroc.
           </p>
           <ul>
-            <li>Adresse : 13, avenue Moulay Ali Chérif, appartement n°2, Cité Massira I, 12020 Témara, Maroc.</li>
-            <li>Téléphone : 05 37 60 63 64.</li>
-            <li>Directrice de publication : Dr Sonia Abahou.</li>
-            <li>Informations administratives professionnelles : à compléter par le cabinet si nécessaire.</li>
+            <li>Adresse : {clinicAddress}, Maroc.</li>
+            <li>Téléphone principal : {clinicPhoneDisplay}.</li>
+            <li>Téléphone secondaire / WhatsApp : {clinicSecondaryPhoneDisplay}.</li>
+            <li>Email professionnel : {clinicEmail}.</li>
+            <li>Directrice de publication : Dr Abahou Sonia.</li>
+            <li>Numéro d’inscription à l’Ordre des médecins : {doctorOrderNumber}.</li>
+            <li>{doctorRegionalCouncil}.</li>
+            <li>INPE : {doctorInpe}.</li>
+          </ul>
+        </article>
+
+        <article>
+          <h2>Informations administratives non communiquées</h2>
+          <p>
+            Les informations suivantes n’ont pas été fournies dans le formulaire
+            de validation. Elles ne sont donc pas inventées ni affichées comme
+            informations officielles.
+          </p>
+          <ul>
+            <li>ICE du cabinet : non communiqué.</li>
+            <li>Numéro de patente / taxe professionnelle : non communiqué.</li>
+            <li>Forme juridique du cabinet : non communiquée.</li>
+            <li>Numéro CNDP ou récépissé de déclaration : non communiqué.</li>
           </ul>
         </article>
 
@@ -63,14 +94,18 @@ export default function LegalNoticePage() {
           <p>
             Le site est hébergé par <strong>Vercel Inc.</strong>, 340 S Lemon Ave
             #4133, Walnut, CA 91789, États-Unis. Le service d’hébergement est
-            accessible depuis <a href="https://vercel.com" target="_blank" rel="noreferrer">vercel.com</a>.
+            accessible depuis{" "}
+            <a href="https://vercel.com" target="_blank" rel="noreferrer">
+              vercel.com
+            </a>
+            .
           </p>
         </article>
 
         <article>
           <h2>Objet du site</h2>
           <p>
-            Le site présente le cabinet, les domaines de consultation, les
+            Le site présente le cabinet, les domaines de consultation validés, les
             horaires, les coordonnées et les informations pratiques permettant de
             contacter le cabinet. Il ne permet pas d’établir un diagnostic en
             ligne et ne remplace pas une consultation médicale.
@@ -98,23 +133,11 @@ export default function LegalNoticePage() {
         </article>
 
         <article>
-          <h2>Déontologie médicale</h2>
-          <p>
-            Le site a une finalité informative : présentation du cabinet, des
-            domaines de consultation, des horaires et des coordonnées. Les textes
-            médicaux doivent être validés par le médecin responsable avant
-            publication et rester conformes aux règles déontologiques applicables
-            à l’exercice de la médecine au Maroc.
-          </p>
-        </article>
-
-        <article>
           <h2>Droit applicable</h2>
           <p>
-            Le site est édité au Maroc. Les règles relatives à la protection des
-            données personnelles incluent notamment la loi marocaine n° 09-08 et,
-            lorsque cela est applicable, les principes du RGPD pour les personnes
-            concernées situées dans l’Union européenne.
+            Le site est édité pour un cabinet situé au Maroc. Les règles
+            applicables incluent notamment le droit marocain et, pour la
+            protection des données personnelles, la loi marocaine n° 09-08.
           </p>
         </article>
       </section>

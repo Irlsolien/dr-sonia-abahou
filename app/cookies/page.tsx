@@ -50,15 +50,21 @@ export default function CookiesPage() {
             publicitaires, de pixels marketing ou d’outil d’analyse d’audience
             nécessitant un suivi individuel.
           </p>
+          <p>
+            La mise en place d’un suivi d’audience simple a été indiquée comme
+            “à discuter” dans le formulaire de validation. Aucun outil de mesure
+            d’audience n’est donc déclaré comme actif tant qu’il n’a pas été
+            confirmé par le cabinet.
+          </p>
         </article>
 
         <article>
           <h2>Services externes</h2>
           <p>
             Certains liens ou modules ouvrent des services tiers, notamment
-            Google Maps ou WhatsApp. Ces services peuvent appliquer leurs
-            propres règles de confidentialité et déposer leurs propres cookies
-            lorsque l’utilisateur choisit de les ouvrir.
+            Google Maps, WhatsApp, LinkedIn ou Instagram. Ces services peuvent
+            appliquer leurs propres règles de confidentialité et déposer leurs
+            propres cookies lorsque l’utilisateur choisit de les ouvrir.
           </p>
         </article>
 
