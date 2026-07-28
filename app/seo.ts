@@ -30,16 +30,8 @@ export const appointment = {
 
 export const teleconsultation = {
   calendlyUrl: "https://calendly.com/dr-sonia-abahou/teleconsultation-video",
-  amount: "À compléter",
-  beneficiaryName: "Dr Abahou Sonia",
-  bankName: "À compléter",
-  ribOrIban: "À compléter",
-  proofWhatsapp: "212641303482",
-  proofEmail: clinicEmail,
-  proofMessage:
-    "Bonjour, je vous envoie le justificatif de paiement pour ma téléconsultation vidéo avec le Dr Abahou Sonia.",
-  emailInstructions:
-    "Votre rendez-vous sera définitivement confirmé après réception du paiement par virement bancaire. Merci d’envoyer le justificatif au cabinet.",
+  confirmationMessage:
+    "Votre demande de téléconsultation a bien été enregistrée. Le cabinet reviendra vers vous avec les prochaines étapes dès que le service sera ouvert.",
 } as const;
 
 export const services = [

@@ -36,19 +36,6 @@ export default function CalendlyBooking() {
     return url.toString();
   }, []);
 
-  const proofWhatsappHref = useMemo(() => {
-    const message = [
-      teleconsultation.proofMessage,
-      "",
-      `Bénéficiaire : ${teleconsultation.beneficiaryName}`,
-      `Montant : ${teleconsultation.amount}`,
-    ].join("\n");
-
-    return `https://wa.me/${teleconsultation.proofWhatsapp}?text=${encodeURIComponent(
-      message,
-    )}`;
-  }, []);
-
   return (
     <section className="section-shell booking-section" id="reservation-video">
       <Script
@@ -113,42 +100,10 @@ export default function CalendlyBooking() {
 
       <div className={isScheduled ? "payment-panel is-visible" : "payment-panel"}>
         <div>
-          <p className="eyebrow">Paiement par virement</p>
-          <h2>Rendez-vous en attente de confirmation définitive.</h2>
-          <p>
-            {teleconsultation.emailInstructions}
-          </p>
+          <p className="eyebrow">Demande enregistrée</p>
+          <h2>Le cabinet prendra le relais.</h2>
+          <p>{teleconsultation.confirmationMessage}</p>
         </div>
-        <dl className="payment-details">
-          <div>
-            <dt>Bénéficiaire</dt>
-            <dd>{teleconsultation.beneficiaryName}</dd>
-          </div>
-          <div>
-            <dt>Banque</dt>
-            <dd>{teleconsultation.bankName}</dd>
-          </div>
-          <div>
-            <dt>RIB / IBAN</dt>
-            <dd>{teleconsultation.ribOrIban}</dd>
-          </div>
-          <div>
-            <dt>Montant</dt>
-            <dd>{teleconsultation.amount}</dd>
-          </div>
-          <div>
-            <dt>Justificatif</dt>
-            <dd>{teleconsultation.proofEmail}</dd>
-          </div>
-        </dl>
-        <a
-          className="primary-button"
-          href={proofWhatsappHref}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Envoyer le justificatif de paiement
-        </a>
       </div>
     </section>
   );
