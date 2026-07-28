@@ -645,12 +645,7 @@ export default function Home() {
 
       <section id="soins" className="section-shell care-section reveal-section">
         <div className="section-heading">
-          <p className="eyebrow">Consultations & suivis</p>
           <h2>Les motifs pris en charge au cabinet.</h2>
-          <p>
-            Les principaux domaines de consultation sont présentés de façon
-            simple afin d’orienter le patient vers le bon suivi médical.
-          </p>
         </div>
         <div className="care-grid">
           {services.map((service, index) => (
@@ -673,15 +668,7 @@ export default function Home() {
 
       <section id="pratiques" className="section-shell practice-section">
         <div className="practice-heading reveal-section">
-          <div>
-            <p className="eyebrow">Pratique au cabinet</p>
-            <h2>Des actes et des temps de soin qui prolongent la consultation.</h2>
-          </div>
-          <p>
-            Le cabinet associe expertise endocrinologique, outils de suivi et
-            éducation thérapeutique pour rendre chaque étape plus concrète et plus
-            compréhensible.
-          </p>
+          <h2>Des actes et des temps de soin qui prolongent la consultation.</h2>
         </div>
 
         <div className="practice-stack">
@@ -758,12 +745,7 @@ export default function Home() {
 
       <section className="section-shell gallery-section reveal-section">
         <div className="section-heading">
-          <p className="eyebrow">Le cabinet en images</p>
           <h2>Découvrez les espaces du cabinet.</h2>
-          <p>
-            Accueil, salle de consultation et salle d’attente&nbsp;: découvrez
-            le cadre réel dans lequel les patients sont reçus à Massira I.
-          </p>
         </div>
         <div className="gallery-grid">
           {gallery.map((image, index) => (
