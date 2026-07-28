@@ -4306,6 +4306,74 @@ h3 {
   }
 }
 
+@media (max-width: 760px) {
+  .split-section,
+  .promise-section,
+  .signature-section,
+  .care-section,
+  .practice-section,
+  .faq-section,
+  .gallery-section,
+  .cabinet-section,
+  .final-cta,
+  .teleconsultation-teaser {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+
+  .reveal-section {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .ambient,
+  .site-header::before,
+  .brand-logo-mark::after,
+  .hero::before,
+  .hero-monogram-watermark,
+  .halo-disc,
+  .pulse-orbit,
+  .metabolic-sphere,
+  .floating-card,
+  .doctor-status-card,
+  .marquee div,
+  .signature-ring,
+  .practice-media-biody::before,
+  .practice-media-biody img,
+  .cgm-demo-live i,
+  .cgm-demo-line,
+  .cgm-demo-point,
+  .signal-line::after,
+  .route-highlight,
+  .map-pin {
+    animation: none !important;
+  }
+
+  .grain-overlay {
+    display: none;
+  }
+
+  .site-header,
+  .floating-card,
+  .doctor-status-card,
+  .brand-signature-card,
+  .cgm-demo,
+  .gallery-card figcaption,
+  .map-overlay {
+    backdrop-filter: none !important;
+  }
+}
+
+@media (hover: none) {
+  .practice-feature:hover .practice-media img,
+  .care-card:hover::before,
+  .gallery-card:hover img {
+    filter: none !important;
+    transform: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
