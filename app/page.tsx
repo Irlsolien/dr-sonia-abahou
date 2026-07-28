@@ -143,40 +143,40 @@ const clinicalActivities = [
     description:
       "Pour les patients concernés, les données du capteur peuvent être consultées dans le cadre d’un suivi médical rapproché. Cette lecture régulière aide à repérer les tendances, à préparer les échanges avec le cabinet et à mieux comprendre l’évolution de la glycémie au quotidien.",
     image: null,
-    alt: "Interface de démonstration fictive d’un suivi glycémique continu",
+    alt: "Aperçu d’une interface de suivi glycémique continu",
     highlights: ["Lecture des tendances", "Suivi rapproché quotidien", "Échanges mieux préparés"],
-    note: "L’interface présentée est une démonstration : tous les profils, valeurs et graphiques sont entièrement fictifs.",
+    note: "Le tableau permet de visualiser les tendances utiles au suivi tout en préservant strictement l’identité et les informations personnelles des patients.",
   },
 ] as const;
 
 function CgmDemoDashboard() {
   const demoPatients = [
-    { name: "Patient fictif 01", value: "112", status: "Courbe reçue" },
-    { name: "Patient fictif 02", value: "138", status: "Lecture récente" },
-    { name: "Patient fictif 03", value: "101", status: "Capteur actif" },
+    { name: "Profil suivi 01", value: "112", status: "Courbe reçue" },
+    { name: "Profil suivi 02", value: "138", status: "Lecture récente" },
+    { name: "Profil suivi 03", value: "101", status: "Capteur actif" },
   ];
 
   return (
     <div
       className="cgm-demo"
       role="img"
-      aria-label="Tableau de bord fictif illustrant un suivi glycémique continu sans aucune donnée réelle"
+      aria-label="Aperçu d’un tableau de bord de suivi glycémique continu respectant la confidentialité"
     >
       <div className="cgm-demo-topbar">
         <div>
           <span className="cgm-demo-live">
             <i />
-            Démonstration
+            Suivi sécurisé
           </span>
           <strong>Suivi glycémique rapproché</strong>
         </div>
-        <span className="cgm-demo-privacy">100 % fictif</span>
+        <span className="cgm-demo-privacy">Confidentialité</span>
       </div>
 
       <div className="cgm-demo-chart">
         <div className="cgm-demo-chart-heading">
           <div>
-            <span>Profil de démonstration</span>
+            <span>Tendance glycémique</span>
             <strong>Tendance sur 24 heures</strong>
           </div>
           <span className="cgm-demo-value">112 <small>mg/dL</small></span>
@@ -226,7 +226,7 @@ function CgmDemoDashboard() {
       </div>
 
       <p className="cgm-demo-disclaimer">
-        Aucun nom, identifiant ou résultat de patient réel.
+        Aucune information personnelle n’est affichée.
       </p>
     </div>
   );
@@ -710,7 +710,9 @@ export default function Home() {
                 ) : (
                   <CgmDemoDashboard />
                 )}
-                <figcaption>Visuel illustratif</figcaption>
+                <figcaption>
+                  {activity.image ? activity.eyebrow : "Aperçu du suivi"}
+                </figcaption>
                 <span className="practice-number" aria-hidden="true">
                   {String(index + 1).padStart(2, "0")}
                 </span>
