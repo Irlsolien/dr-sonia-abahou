@@ -12,10 +12,18 @@ import {
   clinicPhoneInternational,
   clinicPostalCode,
   clinicStreetAddress,
+  doctorAlternateName,
+  doctorCredentials,
   doctorInpe,
+  doctorName,
   doctorOrderNumber,
+  doctorProfilePath,
+  doctorProfessionalProfiles,
   doctorRegionalCouncil,
+  doctorSameAsProfiles,
   faqItems,
+  googleMapsPlaceUrl,
+  lastModified,
   mapsQuery,
   services,
   siteName,
@@ -23,16 +31,10 @@ import {
 } from "./seo";
 
 const phoneHref = `tel:${clinicPhoneInternational}`;
-const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  mapsQuery,
-)}`;
+const mapsHref = googleMapsPlaceUrl;
 const mapsEmbedHref = `https://www.google.com/maps?q=${encodeURIComponent(
   mapsQuery,
 )}&output=embed`;
-const sameAsProfiles = [
-  "https://www.linkedin.com/in/sonia-abahou-38896237/",
-  "https://www.instagram.com/sonia_abahou/",
-];
 
 const socialLinks: SocialItem[] = [
   {
@@ -49,14 +51,6 @@ const socialLinks: SocialItem[] = [
     color: "#E1306C",
     icon: "instagram",
   },
-];
-
-const credentials = [
-  "Spécialiste en endocrinologie et maladies métaboliques",
-  "Diplôme universitaire d’échographie cervicale Paris V",
-  "Ancien médecin au centre hospitalier universitaire de Rabat",
-  "Ancien médecin attaché à l’hôpital militaire de Rabat",
-  "Ancienne secrétaire générale de la SMEDIAN",
 ];
 
 const hours = [
@@ -107,118 +101,175 @@ const patientJourney = [
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": ["Physician", "MedicalClinic", "MedicalBusiness"],
-  "@id": `${siteUrl}/#clinic`,
-  name: "Dr Sonia Abahou",
-  legalName: clinicName,
-  alternateName: siteName,
-  description:
-    "Cabinet d’endocrinologie et maladies métaboliques à Témara.",
-  image: absoluteUrl("/dr-sonia-abahou.jpg"),
-  logo: absoluteUrl("/favicon.svg"),
-  url: `${siteUrl}/`,
-  telephone: clinicPhoneInternational,
-  email: clinicEmail,
-  sameAs: sameAsProfiles,
-  hasMap: mapsHref,
-  mainEntityOfPage: `${siteUrl}/`,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: clinicStreetAddress,
-    postalCode: clinicPostalCode,
-    addressLocality: clinicCity,
-    addressCountry: clinicCountry,
-  },
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: clinicPhoneInternational,
-    contactType: "Prise de rendez-vous",
-    areaServed: clinicCountry,
-    availableLanguage: ["French", "Arabic"],
-  },
-  identifier: [
+  "@graph": [
     {
-      "@type": "PropertyValue",
-      name: "INPE",
-      value: doctorInpe,
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Numéro ordinal",
-      value: doctorOrderNumber,
-    },
-  ],
-  memberOf: {
-    "@type": "MedicalOrganization",
-    name: doctorRegionalCouncil,
-  },
-  areaServed: ["Témara", "Rabat", "Skhirat", "Harhoura"],
-  availableLanguage: ["fr", "ar"],
-  knowsAbout: [
-    "Endocrinologie",
-    "Diabète",
-    "Thyroïde",
-    "Nutrition médicale",
-    "Obésité",
-    "Hypoglycémies",
-    "Maladies métaboliques",
-  ],
-  medicalSpecialty: [
-    "Endocrinology",
-    "Nutrition",
-    "Diabetes",
-    "MetabolicDisease",
-  ],
-  availableService: services.map((service) => ({
-    "@type": "MedicalProcedure",
-    name: service.title,
-    description: service.text,
-    url: absoluteUrl(`/${service.slug}`),
-  })),
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
-      opens: "09:30",
-      closes: "16:00",
+      "@type": "MedicalClinic",
+      "@id": `${siteUrl}/#clinic`,
+      name: clinicName,
+      alternateName: siteName,
+      description:
+        "Cabinet d’endocrinologie, diabétologie, nutrition et maladies métaboliques à Témara.",
+      image: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/dr-sonia-abahou.jpg"),
+        caption: `${doctorName}, endocrinologue à Témara`,
+      },
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/dr-sonia-logo-cropped.png"),
+      },
+      url: `${siteUrl}/`,
+      telephone: clinicPhoneInternational,
+      email: clinicEmail,
+      hasMap: mapsHref,
+      sameAs: [mapsHref, ...doctorProfessionalProfiles],
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: clinicStreetAddress,
+        postalCode: clinicPostalCode,
+        addressLocality: clinicCity,
+        addressCountry: clinicCountry,
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: clinicPhoneInternational,
+        contactType: "Prise de rendez-vous",
+        areaServed: clinicCountry,
+        availableLanguage: "fr",
+      },
+      employee: {
+        "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
+      },
+      areaServed: "Témara",
+      medicalSpecialty: [
+        "https://schema.org/Endocrine",
+        "https://schema.org/DietNutrition",
+      ],
+      availableService: services.map((service) => ({
+        "@type": "MedicalProcedure",
+        name: service.title,
+        description: service.text,
+        url: absoluteUrl(`/${service.slug}`),
+      })),
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+          opens: "09:30",
+          closes: "16:00",
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: "Friday",
+          opens: "09:30",
+          closes: "12:30",
+        },
+      ],
     },
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Friday"],
-      opens: "09:30",
-      closes: "12:30",
+      "@type": "Person",
+      "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
+      name: doctorName,
+      alternateName: doctorAlternateName,
+      honorificPrefix: "Dr",
+      jobTitle:
+        "Médecin spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques",
+      description:
+        "Médecin spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques exerçant à Témara.",
+      image: absoluteUrl("/dr-sonia-abahou.jpg"),
+      url: absoluteUrl(doctorProfilePath),
+      sameAs: [...doctorSameAsProfiles],
+      identifier: [
+        {
+          "@type": "PropertyValue",
+          name: "INPE",
+          value: doctorInpe,
+        },
+        {
+          "@type": "PropertyValue",
+          name: "Numéro ordinal",
+          value: doctorOrderNumber,
+        },
+      ],
+      hasCredential: [
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "Spécialité médicale",
+          name: "Endocrinologie, diabétologie, nutrition et maladies métaboliques",
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "Diplôme universitaire",
+          name: "Échographie cervicale - Paris V",
+        },
+      ],
+      worksFor: {
+        "@id": `${siteUrl}/#clinic`,
+      },
+      affiliation: {
+        "@type": "MedicalOrganization",
+        name: doctorRegionalCouncil,
+      },
+      knowsAbout: [
+        "Endocrinologie",
+        "Diabétologie",
+        "Thyroïde",
+        "Nutrition médicale",
+        "Obésité",
+        "Hypoglycémies",
+        "Maladies métaboliques",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: siteName,
+      alternateName: clinicName,
+      url: `${siteUrl}/`,
+      inLanguage: "fr-MA",
+      publisher: {
+        "@id": `${siteUrl}/#clinic`,
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/#webpage`,
+      url: `${siteUrl}/`,
+      name: `${doctorName} | Endocrinologue à Témara`,
+      description:
+        "Site officiel du cabinet du Dr Sonia Abahou à Témara : endocrinologie, diabétologie, nutrition et maladies métaboliques.",
+      inLanguage: "fr-MA",
+      dateModified: lastModified,
+      isPartOf: {
+        "@id": `${siteUrl}/#website`,
+      },
+      mainEntity: {
+        "@id": `${siteUrl}/#clinic`,
+      },
+      about: {
+        "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
+      },
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/dr-sonia-abahou.jpg"),
+      },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${siteUrl}/#faq`,
+      isPartOf: {
+        "@id": `${siteUrl}/#webpage`,
+      },
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
     },
   ],
-  potentialAction: {
-    "@type": "ReserveAction",
-    target: absoluteUrl("/rendez-vous"),
-    name: "Prendre rendez-vous au cabinet",
-  },
-};
-
-const faqStructuredData = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqItems.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.answer,
-    },
-  })),
-};
-
-const websiteStructuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "@id": `${siteUrl}/#website`,
-  name: siteName,
-  url: `${siteUrl}/`,
-  inLanguage: "fr-MA",
-  publisher: {
-    "@id": `${siteUrl}/#clinic`,
-  },
 };
 
 export default function Home() {
@@ -227,18 +278,6 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(websiteStructuredData),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqStructuredData),
-        }}
       />
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
@@ -252,7 +291,7 @@ export default function Home() {
               alt=""
               width={58}
               height={58}
-              priority
+              sizes="58px"
             />
           </span>
           <strong>Dr Sonia Abahou</strong>
@@ -286,7 +325,7 @@ export default function Home() {
               alt="Logo Dr Abahou Sonia"
               width={244}
               height={210}
-              priority
+              sizes="244px"
             />
             <div>
               <span>Cabinet Dr Abahou Sonia</span>
@@ -328,9 +367,10 @@ export default function Home() {
           <Image
             className="hero-monogram-watermark"
             src="/dr-sonia-monogram.png"
-            alt=""
-            width={420}
-            height={260}
+              alt=""
+              width={420}
+              height={260}
+              sizes="(max-width: 760px) 80vw, 420px"
             aria-hidden="true"
           />
           <div className="halo-disc" />
@@ -348,6 +388,7 @@ export default function Home() {
               width={420}
               height={470}
               priority
+              sizes="(max-width: 760px) 88vw, 420px"
             />
             <div className="portrait-caption">
               <span>Dr Sonia Abahou</span>
@@ -396,9 +437,12 @@ export default function Home() {
             au patient d’identifier rapidement les domaines de consultation et
             les modalités de prise de contact.
           </p>
+          <Link className="text-link" href={doctorProfilePath}>
+            Découvrir le parcours du Dr Sonia Abahou
+          </Link>
         </div>
         <div className="credential-grid">
-          {credentials.map((item) => (
+          {doctorCredentials.map((item) => (
             <article key={item} className="credential-card">
               <span />
               <p>{item}</p>
@@ -515,6 +559,11 @@ export default function Home() {
                 width={900}
                 height={720}
                 loading="lazy"
+                sizes={
+                  index === 0
+                    ? "(max-width: 760px) 92vw, 58vw"
+                    : "(max-width: 760px) 92vw, 29vw"
+                }
               />
               <figcaption>
                 <span>{image.label}</span>
@@ -630,6 +679,7 @@ export default function Home() {
             alt="Logo Dr Abahou Sonia"
             width={132}
             height={114}
+            sizes="132px"
           />
           <strong>Dr Sonia Abahou</strong>
           <p>

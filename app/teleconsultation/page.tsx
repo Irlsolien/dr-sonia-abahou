@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/teleconsultation",
   },
+  robots: {
+    index: false,
+    follow: true,
+  },
   openGraph: {
     title: "Téléconsultation en maintenance | Dr Sonia Abahou",
     description:

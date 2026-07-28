@@ -4,9 +4,12 @@ import {
   absoluteUrl,
   appointment,
   clinicAddress,
+  clinicName,
   clinicPhoneDisplay,
   clinicPhoneInternational,
+  lastModified,
   siteName,
+  siteUrl,
 } from "../seo";
 
 export const metadata: Metadata = {
@@ -34,12 +37,37 @@ const whatsappHref = `https://wa.me/${appointment.whatsappPhone}?text=${encodeUR
 
 const appointmentStructuredData = {
   "@context": "https://schema.org",
-  "@type": "MedicalWebPage",
-  name: "Prendre rendez-vous - Dr Sonia Abahou",
-  description:
-    "Page de contact pour prendre rendez-vous avec le cabinet du Dr Sonia Abahou.",
-  url: absoluteUrl("/rendez-vous"),
-  inLanguage: "fr-MA",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "@id": `${absoluteUrl("/rendez-vous")}#webpage`,
+      name: "Prendre rendez-vous avec le Dr Sonia Abahou",
+      description:
+        "Coordonnées pour prendre rendez-vous avec le cabinet du Dr Sonia Abahou à Témara.",
+      url: absoluteUrl("/rendez-vous"),
+      inLanguage: "fr-MA",
+      dateModified: lastModified,
+      isPartOf: {
+        "@id": `${siteUrl}/#website`,
+      },
+      mainEntity: {
+        "@id": `${siteUrl}/#clinic`,
+      },
+    },
+    {
+      "@type": "MedicalClinic",
+      "@id": `${siteUrl}/#clinic`,
+      name: clinicName,
+      telephone: clinicPhoneInternational,
+      address: clinicAddress,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: clinicPhoneInternational,
+        contactType: "Prise de rendez-vous",
+        availableLanguage: "fr",
+      },
+    },
+  ],
 };
 
 export default function AppointmentPage() {

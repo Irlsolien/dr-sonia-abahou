@@ -1,0 +1,34 @@
+import type { MetadataRoute } from "next";
+import {
+  absoluteUrl,
+  doctorProfilePath,
+  lastModified,
+  services,
+} from "./seo";
+
+export const dynamic = "force-static";
+
+const modifiedAt = new Date(`${lastModified}T00:00:00+01:00`);
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return [
+    {
+      url: absoluteUrl("/"),
+      lastModified: modifiedAt,
+      images: [absoluteUrl("/dr-sonia-abahou.jpg")],
+    },
+    {
+      url: absoluteUrl(doctorProfilePath),
+      lastModified: modifiedAt,
+      images: [absoluteUrl("/dr-sonia-abahou.jpg")],
+    },
+    ...services.map((service) => ({
+      url: absoluteUrl(`/${service.slug}`),
+      lastModified: modifiedAt,
+    })),
+    {
+      url: absoluteUrl("/rendez-vous"),
+      lastModified: modifiedAt,
+    },
+  ];
+}

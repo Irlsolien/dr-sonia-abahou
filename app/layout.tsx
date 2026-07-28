@@ -1,7 +1,24 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SiteInteractionFeedback } from "@/components/site-interaction-feedback";
-import { absoluteUrl, defaultOgImage, siteName, siteUrl } from "./seo";
+import {
+  absoluteUrl,
+  defaultOgImage,
+  doctorName,
+  doctorProfilePath,
+  siteName,
+  siteUrl,
+} from "./seo";
+
+const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION;
+const bingSiteVerification = process.env.BING_SITE_VERIFICATION;
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0796ad",
+  colorScheme: "light",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -22,16 +39,12 @@ export const metadata: Metadata = {
     "hypoglycémies Témara",
     "maladies métaboliques",
   ],
-  authors: [{ name: "Dr Abahou Sonia" }],
-  creator: "Dr Abahou Sonia",
-  publisher: "Dr Abahou Sonia",
+  authors: [{ name: doctorName, url: absoluteUrl(doctorProfilePath) }],
+  creator: doctorName,
+  publisher: doctorName,
   category: "Santé",
   alternates: {
     canonical: "/",
-    languages: {
-      "fr-MA": "/",
-      fr: "/",
-    },
   },
   robots: {
     index: true,
@@ -78,6 +91,18 @@ export const metadata: Metadata = {
     address: true,
     email: false,
   },
+  ...(googleSiteVerification || bingSiteVerification
+    ? {
+        verification: {
+          ...(googleSiteVerification
+            ? { google: googleSiteVerification }
+            : {}),
+          ...(bingSiteVerification
+            ? { other: { "msvalidate.01": bingSiteVerification } }
+            : {}),
+        },
+      }
+    : {}),
 };
 
 export default function RootLayout({

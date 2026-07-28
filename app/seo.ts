@@ -1,6 +1,12 @@
-export const siteUrl = "https://dr-sonia-abahou.vercel.app";
+const configuredSiteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://dr-sonia-abahou.vercel.app";
+
+export const siteUrl = configuredSiteUrl.replace(/\/+$/, "");
 export const siteName = "Dr Sonia Abahou";
 export const clinicName = "Cabinet Dr Abahou Sonia";
+export const doctorName = "Dr Sonia Abahou";
+export const doctorAlternateName = "Dr Abahou Sonia";
+export const doctorProfilePath = "/dr-sonia-abahou";
 export const clinicPhoneDisplay = "05 37 60 63 64";
 export const clinicPhoneInternational = "+212537606364";
 export const clinicSecondaryPhoneDisplay = "06 41 30 34 82";
@@ -18,6 +24,32 @@ export const doctorRegionalCouncil = "Conseil régional de l’Ordre des médeci
 export const doctorInpe = "101193191";
 export const defaultOgImage = "/dr-sonia-abahou.jpg";
 export const lastModified = "2026-07-28";
+export const googleMapsPlaceUrl =
+  "https://maps.app.goo.gl/iQDGmhWtGaSKDLJt7";
+
+export const doctorCredentials = [
+  "Spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques",
+  "Diplôme universitaire d’échographie cervicale Paris V",
+  "Ancien médecin au centre hospitalier universitaire de Rabat",
+  "Ancien médecin attaché à l’hôpital militaire de Rabat",
+  "Ancienne secrétaire générale de la SMEDIAN",
+] as const;
+
+export const doctorSocialProfiles = [
+  "https://www.linkedin.com/in/sonia-abahou-38896237/",
+  "https://www.instagram.com/sonia_abahou/",
+] as const;
+
+export const doctorProfessionalProfiles = [
+  "https://www.med.ma/medecin/endocrinologue/temara/dr-sonia-abahou-173348",
+  "https://www.dabadoc.com/ma/endocrinologue/temara/sonia-abahou",
+  "https://www.annuaire-gratuit.ma/medecins/endocrinologue/sonia-abahou-s215142.html",
+] as const;
+
+export const doctorSameAsProfiles = [
+  ...doctorSocialProfiles,
+  ...doctorProfessionalProfiles,
+] as const;
 
 export const mapsQuery =
   "209 Avenue Moulay Ali Cherif App 3 Massira 1 Temara 12020";

@@ -135,8 +135,10 @@ export default function PrivacyPage() {
           <p>
             Les données peuvent être accessibles au cabinet, à ses prestataires
             techniques strictement nécessaires au fonctionnement du site, et aux
-            services tiers utilisés volontairement par l’utilisateur, comme Google
-            Maps, WhatsApp, LinkedIn ou Instagram lorsqu’il choisit de les ouvrir.
+            services tiers intégrés ou ouverts depuis le site, comme Google Maps,
+            WhatsApp, LinkedIn ou Instagram. La carte Google Maps est chargée sur
+            la page d’accueil ; les autres services sont ouverts sur action de
+            l’utilisateur.
           </p>
         </article>
 

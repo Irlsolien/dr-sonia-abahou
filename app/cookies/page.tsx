@@ -71,10 +71,11 @@ export default function CookiesPage() {
         <article>
           <h2>Carte GPS</h2>
           <p>
-            Pour limiter les traceurs, la carte n’est pas chargée automatiquement
-            dans la page. Le site affiche un aperçu visuel et propose un bouton
-            permettant d’ouvrir Google Maps uniquement sur action volontaire de
-            l’utilisateur.
+            La page d’accueil intègre une carte Google Maps afin de localiser le
+            cabinet. Le chargement de cette carte peut transmettre à Google des
+            données techniques, notamment l’adresse IP et des informations sur le
+            navigateur. Google applique alors ses propres règles de
+            confidentialité et de cookies.
           </p>
         </article>
 
