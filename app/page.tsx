@@ -748,10 +748,15 @@ export default function Home() {
         </div>
         <div className="faq-grid">
           {faqItems.map((item) => (
-            <article key={item.question} className="faq-card">
-              <h3>{item.question}</h3>
-              <p>{item.answer}</p>
-            </article>
+            <details key={item.question} className="faq-card">
+              <summary>
+                <span>{item.question}</span>
+                <i aria-hidden="true" />
+              </summary>
+              <div className="faq-answer">
+                <p>{item.answer}</p>
+              </div>
+            </details>
           ))}
         </div>
       </section>

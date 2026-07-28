@@ -2826,8 +2826,10 @@ h3 {
 
 .faq-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: minmax(0, 1fr);
+  width: min(100%, 980px);
+  gap: 12px;
+  margin-inline: auto;
 }
 
 .faq-card,
@@ -2843,7 +2845,111 @@ h3 {
 }
 
 .faq-card {
-  padding: 26px;
+  overflow: hidden;
+  padding: 0;
+  transition:
+    border-color 260ms ease,
+    box-shadow 260ms ease,
+    transform 260ms ease,
+    background 260ms ease;
+}
+
+.faq-card:hover {
+  border-color: rgba(7, 150, 173, 0.3);
+  transform: translateY(-2px);
+}
+
+.faq-card[open] {
+  border-color: rgba(7, 150, 173, 0.34);
+  background:
+    radial-gradient(circle at 92% 8%, rgba(45, 212, 191, 0.16), transparent 34%),
+    linear-gradient(145deg, white, rgba(238, 253, 250, 0.96));
+  box-shadow: 0 30px 80px rgba(7, 89, 133, 0.13);
+}
+
+.faq-card summary {
+  display: flex;
+  min-height: 86px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 26px;
+  color: var(--color-ink);
+  cursor: pointer;
+  font-size: clamp(1.02rem, 1.7vw, 1.28rem);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  list-style: none;
+}
+
+.faq-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-card summary:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: -5px;
+  border-radius: 28px;
+}
+
+.faq-card summary i {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(7, 150, 173, 0.2);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 10px 24px rgba(7, 89, 133, 0.08);
+  transition:
+    background 240ms ease,
+    transform 380ms cubic-bezier(0.2, 0.85, 0.2, 1);
+}
+
+.faq-card summary i::before,
+.faq-card summary i::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 15px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--color-primary-deep);
+  content: "";
+  transform: translate(-50%, -50%);
+  transition: transform 300ms ease;
+}
+
+.faq-card summary i::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.faq-card[open] summary i {
+  background: var(--color-primary-deep);
+  transform: rotate(180deg);
+}
+
+.faq-card[open] summary i::before,
+.faq-card[open] summary i::after {
+  background: white;
+}
+
+.faq-card[open] summary i::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.faq-answer {
+  padding: 0 26px 26px;
+  animation: faqReveal 320ms cubic-bezier(0.2, 0.85, 0.2, 1);
+}
+
+.faq-answer p {
+  max-width: 820px;
+  margin: 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(7, 150, 173, 0.14);
+  font-size: 1rem;
+  line-height: 1.72;
 }
 
 .faq-card h3,
@@ -3442,6 +3548,18 @@ h3 {
   50% {
     opacity: 1;
     transform: scale(1.22);
+  }
+}
+
+@keyframes faqReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
