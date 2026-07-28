@@ -43,6 +43,7 @@ export const metadata: Metadata = {
     "éducation thérapeutique diabète Témara",
     "surveillance glycémique continue Témara",
     "suivi capteur glycémie Témara",
+    "holter glycémique Témara",
   ],
   authors: [{ name: doctorName, url: absoluteUrl(doctorProfilePath) }],
   creator: doctorName,

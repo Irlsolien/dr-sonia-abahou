@@ -138,13 +138,13 @@ const clinicalActivities = [
   },
   {
     id: "surveillance-glycemique-continue",
-    eyebrow: "Suivi connecté",
-    title: "Surveillance glycémique continue avec suivi rapproché",
+    eyebrow: "Holter glycémique",
+    title: "Holter glycémique et surveillance continue",
     description:
-      "Pour les patients concernés, les données du capteur peuvent être consultées dans le cadre d’un suivi médical rapproché. Cette lecture régulière aide à repérer les tendances, à préparer les échanges avec le cabinet et à mieux comprendre l’évolution de la glycémie au quotidien.",
+      "Pour les patients concernés, le Holter glycémique enregistre l’évolution du glucose en continu. Les données du capteur peuvent être consultées dans le cadre d’un suivi médical rapproché quotidien afin de repérer les tendances, de préparer les échanges avec le cabinet et de mieux comprendre l’évolution de la glycémie.",
     image: null,
     alt: "Aperçu d’une interface de suivi glycémique continu",
-    highlights: ["Lecture des tendances", "Suivi rapproché quotidien", "Échanges mieux préparés"],
+    highlights: ["Mesure en continu", "Suivi rapproché quotidien", "Lecture des tendances"],
     note: "Le tableau permet de visualiser les tendances utiles au suivi tout en préservant strictement l’identité et les informations personnelles des patients.",
   },
 ] as const;
