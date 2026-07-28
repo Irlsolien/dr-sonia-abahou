@@ -1,0 +1,31 @@
+# Dr Sonia Abahou
+
+Site officiel du cabinet du Dr Abahou Sonia à Témara, Maroc.
+
+## Activité
+
+Cabinet médical spécialisé en endocrinologie, diabétologie, nutrition médicale et maladies métaboliques.
+
+## Adresse
+
+209, avenue Moulay Ali Chérif, appartement 3, Massira 1, 12020 Témara, Maroc.
+
+## Contact
+
+Téléphone principal du cabinet : +212 5 37 60 63 64.
+Téléphone secondaire / WhatsApp : +212 6 41 30 34 82.
+Email : drsoniabahou@gmail.com.
+
+## Pages importantes
+
+- Accueil : https://dr-sonia-abahou.vercel.app/
+- Rendez-vous : https://dr-sonia-abahou.vercel.app/rendez-vous
+- Diabète : https://dr-sonia-abahou.vercel.app/diabete-temara
+- Thyroïde : https://dr-sonia-abahou.vercel.app/thyroide-temara
+- Nutrition et maladies métaboliques : https://dr-sonia-abahou.vercel.app/nutrition-maladies-metaboliques-temara
+- Mentions légales : https://dr-sonia-abahou.vercel.app/mentions-legales
+- Confidentialité : https://dr-sonia-abahou.vercel.app/confidentialite
+
+## Note médicale
+
+Le site présente des informations générales et pratiques. Il ne remplace pas une consultation médicale, un diagnostic ou un avis personnalisé du médecin.

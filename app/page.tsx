@@ -4,10 +4,17 @@ import { SocialTooltip, type SocialItem } from "@/components/ui/social-media";
 import {
   absoluteUrl,
   clinicAddress,
+  clinicCity,
+  clinicCountry,
+  clinicEmail,
+  clinicName,
   clinicPhoneDisplay,
   clinicPhoneInternational,
   clinicPostalCode,
   clinicStreetAddress,
+  doctorInpe,
+  doctorOrderNumber,
+  doctorRegionalCouncil,
   faqItems,
   mapsQuery,
   services,
@@ -22,6 +29,10 @@ const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
 const mapsEmbedHref = `https://www.google.com/maps?q=${encodeURIComponent(
   mapsQuery,
 )}&output=embed`;
+const sameAsProfiles = [
+  "https://www.linkedin.com/in/sonia-abahou-38896237/",
+  "https://www.instagram.com/sonia_abahou/",
+];
 
 const socialLinks: SocialItem[] = [
   {
@@ -96,9 +107,10 @@ const patientJourney = [
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": ["Physician", "MedicalClinic"],
+  "@type": ["Physician", "MedicalClinic", "MedicalBusiness"],
   "@id": `${siteUrl}/#clinic`,
   name: "Dr Sonia Abahou",
+  legalName: clinicName,
   alternateName: siteName,
   description:
     "Cabinet d’endocrinologie et maladies métaboliques à Témara.",
@@ -106,15 +118,51 @@ const structuredData = {
   logo: absoluteUrl("/favicon.svg"),
   url: `${siteUrl}/`,
   telephone: clinicPhoneInternational,
+  email: clinicEmail,
+  sameAs: sameAsProfiles,
+  hasMap: mapsHref,
+  mainEntityOfPage: `${siteUrl}/`,
   address: {
     "@type": "PostalAddress",
     streetAddress: clinicStreetAddress,
     postalCode: clinicPostalCode,
-    addressLocality: "Témara",
-    addressCountry: "MA",
+    addressLocality: clinicCity,
+    addressCountry: clinicCountry,
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: clinicPhoneInternational,
+    contactType: "Prise de rendez-vous",
+    areaServed: clinicCountry,
+    availableLanguage: ["French", "Arabic"],
+  },
+  identifier: [
+    {
+      "@type": "PropertyValue",
+      name: "INPE",
+      value: doctorInpe,
+    },
+    {
+      "@type": "PropertyValue",
+      name: "Numéro ordinal",
+      value: doctorOrderNumber,
+    },
+  ],
+  memberOf: {
+    "@type": "MedicalOrganization",
+    name: doctorRegionalCouncil,
   },
   areaServed: ["Témara", "Rabat", "Skhirat", "Harhoura"],
   availableLanguage: ["fr", "ar"],
+  knowsAbout: [
+    "Endocrinologie",
+    "Diabète",
+    "Thyroïde",
+    "Nutrition médicale",
+    "Obésité",
+    "Hypoglycémies",
+    "Maladies métaboliques",
+  ],
   medicalSpecialty: [
     "Endocrinology",
     "Nutrition",
@@ -141,6 +189,11 @@ const structuredData = {
       closes: "12:30",
     },
   ],
+  potentialAction: {
+    "@type": "ReserveAction",
+    target: absoluteUrl("/rendez-vous"),
+    name: "Prendre rendez-vous au cabinet",
+  },
 };
 
 const faqStructuredData = {
