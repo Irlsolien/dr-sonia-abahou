@@ -738,13 +738,8 @@ export default function Home() {
       </section>
 
       <section className="section-shell faq-section reveal-section">
-        <div className="section-heading">
-          <p className="eyebrow">Questions fréquentes</p>
+        <div className="section-heading faq-heading">
           <h2>Informations pratiques avant la consultation.</h2>
-          <p>
-            Ces réponses restent générales et seront ajustées avec les consignes
-            précises du cabinet dès qu’elles seront disponibles.
-          </p>
         </div>
         <div className="faq-grid">
           {faqItems.map((item) => (

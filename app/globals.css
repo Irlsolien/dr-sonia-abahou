@@ -2824,6 +2824,18 @@ h3 {
   gap: 28px;
 }
 
+.faq-heading {
+  display: block;
+  margin-bottom: 44px;
+  text-align: center;
+}
+
+.faq-heading h2 {
+  max-width: 920px;
+  margin-inline: auto;
+  text-wrap: balance;
+}
+
 .faq-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
