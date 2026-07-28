@@ -19,6 +19,9 @@ const phoneHref = `tel:${clinicPhoneInternational}`;
 const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   mapsQuery,
 )}`;
+const mapsEmbedHref = `https://www.google.com/maps?q=${encodeURIComponent(
+  mapsQuery,
+)}&output=embed`;
 
 const socialLinks: SocialItem[] = [
   {
@@ -501,21 +504,15 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <div className="map-card" aria-label="Accès GPS du cabinet">
-          <div className="map-illustration" aria-hidden="true">
-            <span className="map-neighborhood massira">Cité Massira I</span>
-            <span className="map-neighborhood temara">Témara</span>
-            <span className="map-road road-main" />
-            <span className="map-road road-secondary" />
-            <span className="map-road road-tertiary" />
-            <span className="map-route route-a" />
-            <span className="map-route route-b" />
-            <span className="map-route route-c" />
-            <span className="map-pin">
-              <span>SA</span>
-            </span>
-            <span className="map-distance">13 av. Moulay Ali Chérif</span>
-          </div>
+        <div className="map-card google-map-card" aria-label="Carte Google Maps du cabinet">
+          <iframe
+            className="google-map-frame"
+            src={mapsEmbedHref}
+            title="Carte Google Maps du cabinet Dr Abahou Sonia à Témara"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
           <div className="map-overlay">
             <span>GPS</span>
             <strong>Massira I · Témara</strong>
