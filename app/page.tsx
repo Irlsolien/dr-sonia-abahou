@@ -495,24 +495,6 @@ export default function Home() {
               Rendez-vous
             </Link>
           </div>
-          <div className="trust-strip" aria-label="Informations principales">
-            <span>Arabe & français</span>
-            <span>Diabétologie</span>
-            <span>Thyroïde</span>
-            <span>Nutrition médicale</span>
-          </div>
-          <div className="hero-proof" aria-label="Points de confiance">
-            <article>
-              <span>01</span>
-              <strong>Consultation spécialisée</strong>
-              <p>Un suivi centré sur l’endocrinologie, le diabète et le métabolisme.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <strong>Explications claires</strong>
-              <p>Des décisions médicales expliquées simplement, avec des mots accessibles.</p>
-            </article>
-          </div>
         </div>
 
         <div className="hero-visual" aria-label="Portrait du Dr Sonia Abahou">
