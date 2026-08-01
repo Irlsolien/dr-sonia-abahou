@@ -629,24 +629,24 @@ export default function Home() {
         <div className="section-heading">
           <h2>Les motifs pris en charge au cabinet.</h2>
         </div>
-        <div className="care-grid">
+        <div className="care-index">
           {services.map((service, index) => (
             <Link
               key={service.title}
-              className={`care-card ${service.visualClass}`}
+              className="care-row"
               href={`/${service.slug}`}
             >
-              <span className="care-number">
+              <span className="care-row-number">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <div className="care-copy">
-                <span className="care-label">Parcours de soin</span>
-                <h3 className="care-title">{service.title}</h3>
-                <p className="care-description">{service.text}</p>
-              </div>
-              <span className="care-art" aria-hidden="true" />
-              <span className="care-arrow" aria-hidden="true">
-                ↗
+              <span className="care-row-copy">
+                <span className="care-row-title-wrap">
+                  <h3 className="care-row-title">{service.title}</h3>
+                </span>
+                <p className="care-row-description">{service.text}</p>
+              </span>
+              <span className="care-row-arrow" aria-hidden="true">
+                →
               </span>
             </Link>
           ))}

@@ -970,196 +970,113 @@ h3 {
   text-wrap: balance;
 }
 
-.care-grid {
-  position: relative;
-  isolation: isolate;
-  display: grid;
-  gap: 9px;
-  padding: 11px;
-  overflow: hidden;
-  border: 1px solid rgba(110, 231, 214, 0.32);
-  border-radius: 46px;
-  background:
-    radial-gradient(circle at 12% 0%, rgba(45, 212, 191, 0.3), transparent 30rem),
-    radial-gradient(circle at 100% 100%, rgba(7, 150, 173, 0.3), transparent 34rem),
-    linear-gradient(145deg, #032f32 0%, #063f42 52%, #052c36 100%);
-  box-shadow:
-    0 38px 110px rgba(6, 43, 44, 0.25),
-    inset 0 1px rgba(255, 255, 255, 0.1);
+.care-index {
+  max-width: 960px;
+  margin-inline: auto;
 }
 
-.care-card {
-  position: relative;
-  isolation: isolate;
+.care-row {
   display: grid;
-  grid-template-columns: 62px minmax(0, 1fr) clamp(170px, 22vw, 290px) 58px;
-  min-height: 162px;
-  gap: clamp(18px, 3vw, 42px);
+  grid-template-columns: 56px minmax(0, 1fr) 52px;
   align-items: center;
-  overflow: hidden;
-  padding: 20px 24px;
-  border: 1px solid rgba(6, 43, 44, 0.08);
-  border-radius: 35px;
-  background:
-    linear-gradient(112deg, rgba(255, 255, 255, 0.99), rgba(238, 253, 250, 0.94));
-  color: var(--color-ink);
-  box-shadow: 0 10px 36px rgba(3, 35, 39, 0.08);
-  transition:
-    min-height 460ms cubic-bezier(0.2, 0.85, 0.2, 1),
-    border-color 260ms ease,
-    box-shadow 360ms ease,
-    transform 360ms cubic-bezier(0.2, 0.85, 0.2, 1);
+  gap: clamp(14px, 2.5vw, 24px);
+  padding: 34px 14px;
+  border-top: 1px solid rgba(7, 150, 173, 0.14);
+  border-radius: 18px;
+  color: inherit;
+  transition: background 250ms ease;
 }
 
-.care-card:nth-child(even) {
-  background:
-    linear-gradient(112deg, rgba(230, 246, 246, 0.99), rgba(255, 255, 255, 0.96));
+.care-index .care-row:last-child {
+  border-bottom: 1px solid rgba(7, 150, 173, 0.14);
 }
 
-.care-card::before,
-.care-card::after {
-  position: absolute;
-  content: "";
-  pointer-events: none;
+.care-row:hover,
+.care-row:focus-visible {
+  background: var(--color-surface-soft);
 }
 
-.care-card::after {
-  right: clamp(120px, 20vw, 260px);
-  width: 118px;
-  height: 118px;
-  border: 1px solid rgba(7, 150, 173, 0.12);
-  border-radius: 999px;
-  background: radial-gradient(circle, rgba(45, 212, 191, 0.2), transparent 68%);
-  transform: scale(0.72);
-  transition:
-    opacity 320ms ease,
-    transform 560ms cubic-bezier(0.2, 0.85, 0.2, 1);
-}
-
-.care-card::before {
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  background: linear-gradient(100deg, transparent 0 60%, rgba(45, 212, 191, 0.08));
-  opacity: 0;
-  transition: opacity 320ms ease;
-}
-
-.care-card:hover,
-.care-card:focus-visible {
-  z-index: 2;
-  border-color: rgba(45, 212, 191, 0.72);
-  box-shadow:
-    0 24px 70px rgba(2, 36, 39, 0.26),
-    inset 0 1px rgba(255, 255, 255, 0.8);
-  transform: translateX(10px);
-}
-
-.care-card:hover::before,
-.care-card:focus-visible::before {
-  opacity: 1;
-}
-
-.care-card:hover::after,
-.care-card:focus-visible::after {
-  opacity: 0.9;
-  transform: scale(1.45);
-}
-
-.care-number {
-  display: inline-flex;
-  width: 50px;
-  height: 50px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(7, 150, 173, 0.18);
-  border-radius: 17px;
-  background: rgba(255, 255, 255, 0.76);
-  color: #087b8d;
-  font-size: 0.82rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.9);
-}
-
-.care-copy {
-  display: grid;
-  min-width: 0;
-  gap: 8px;
-}
-
-.care-label {
-  color: #0f8b83;
-  font-size: 0.68rem;
-  font-weight: 950;
+.care-row-number {
+  font-family: var(--font-sans, inherit);
+  font-size: 0.78rem;
+  font-weight: 700;
   letter-spacing: 0.16em;
-  text-transform: uppercase;
+  color: var(--color-primary);
 }
 
-.care-title {
-  max-width: 720px;
+.care-row-title-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.care-row-title-wrap::after {
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  left: 0;
+  height: 2px;
+  content: "";
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms ease;
+}
+
+.care-row-title {
+  display: inline-block;
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.48rem, 2.5vw, 2.65rem);
+  font-size: clamp(1.5rem, 2.6vw, 2.35rem);
   font-weight: 700;
-  line-height: 0.98;
-  letter-spacing: -0.045em;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
   text-wrap: balance;
+  transition: transform 300ms ease;
 }
 
-.care-description {
-  max-width: 760px;
-  margin: 0;
-  overflow: hidden;
+.care-row-description {
+  max-width: 640px;
+  margin: 10px 0 0;
   color: var(--color-muted);
-  font-size: clamp(0.94rem, 1.2vw, 1.06rem);
-  line-height: 1.5;
-  text-overflow: ellipsis;
-  transition: color 260ms ease;
+  font-size: clamp(0.94rem, 1.2vw, 1rem);
+  line-height: 1.55;
 }
 
-.care-art {
-  align-self: stretch;
-  min-height: 120px;
-  background: var(--care-visual) center / contain no-repeat;
-  filter: saturate(0.76) contrast(0.94);
-  opacity: 0.68;
-  transform: scale(0.92) translateX(8px);
-  transition:
-    filter 360ms ease,
-    opacity 360ms ease,
-    transform 560ms cubic-bezier(0.2, 0.85, 0.2, 1);
-}
-
-.care-arrow {
+.care-row-arrow {
   display: inline-flex;
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   align-items: center;
   justify-content: center;
+  justify-self: end;
+  border: 1px solid var(--color-border);
   border-radius: 999px;
-  background: var(--color-ink);
-  color: white;
-  font-size: 1.35rem;
-  box-shadow: 0 12px 28px rgba(6, 43, 44, 0.18);
+  color: var(--color-primary);
+  font-size: 1.15rem;
   transition:
-    background 260ms ease,
-    color 260ms ease,
-    transform 420ms cubic-bezier(0.2, 0.85, 0.2, 1);
+    background 300ms ease,
+    color 300ms ease,
+    border-color 300ms ease,
+    transform 300ms ease;
 }
 
-.care-card:hover .care-art,
-.care-card:focus-visible .care-art {
-  filter: saturate(1.05) contrast(1);
-  opacity: 1;
-  transform: scale(1.08) translateX(-4px);
+.care-row:hover .care-row-title,
+.care-row:focus-visible .care-row-title {
+  transform: translateX(6px);
 }
 
-.care-card:hover .care-arrow,
-.care-card:focus-visible .care-arrow {
-  background: var(--color-secondary);
-  color: var(--color-ink);
-  transform: rotate(45deg) scale(1.08);
+.care-row:hover .care-row-title-wrap::after,
+.care-row:focus-visible .care-row-title-wrap::after {
+  transform: scaleX(1);
+}
+
+.care-row:hover .care-row-arrow,
+.care-row:focus-visible .care-row-arrow {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+  transform: translateX(2px);
 }
 
 .care-diabetes {
@@ -3604,11 +3521,6 @@ h3 {
     max-width: 760px;
   }
 
-  .care-card {
-    grid-template-columns: 54px minmax(0, 1fr) minmax(150px, 22vw) 52px;
-    gap: 18px;
-  }
-
   .signature-visual {
     min-height: 300px;
   }
@@ -3862,19 +3774,9 @@ h3 {
     bottom: 7%;
   }
 
-  .care-grid {
-    gap: 8px;
-    padding: 8px;
-    border-radius: 32px;
-  }
-
-  .care-card {
-    grid-template-columns: 44px minmax(0, 1fr) 44px;
-    min-height: 222px;
-    gap: 12px;
-    align-content: start;
-    padding: 20px;
-    border-radius: 26px;
+  .care-row {
+    grid-template-columns: 34px minmax(0, 1fr) 38px;
+    padding: 26px 8px;
   }
 
   .signature-section {
@@ -3887,58 +3789,10 @@ h3 {
     border-radius: 26px;
   }
 
-  .care-card:hover,
-  .care-card:focus-visible {
-    transform: translateY(-4px);
-  }
-
-  .care-card::after {
-    right: 18px;
-    bottom: -22px;
-    width: 104px;
-    height: 104px;
-  }
-
-  .care-number {
-    width: 42px;
-    height: 42px;
-    border-radius: 15px;
-  }
-
-  .care-copy {
-    grid-column: 2 / 4;
-    padding-right: 32px;
-  }
-
-  .care-title {
-    max-width: 270px;
-    font-size: clamp(1.35rem, 7vw, 1.82rem);
-    line-height: 1;
-  }
-
-  .care-description {
-    max-width: 270px;
-    font-size: 0.91rem;
-    line-height: 1.45;
-  }
-
-  .care-art {
-    position: absolute;
-    right: -18px;
-    bottom: -20px;
-    width: 150px;
-    height: 136px;
-    min-height: 0;
-    opacity: 0.22;
-  }
-
-  .care-arrow {
-    grid-column: 3;
-    grid-row: 1;
-    width: 42px;
-    height: 42px;
-    justify-self: end;
-    font-size: 1.08rem;
+  .care-row-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
   }
 
   .practice-heading {
@@ -4347,7 +4201,6 @@ h3 {
 
 @media (hover: none) {
   .practice-feature:hover .practice-media img,
-  .care-card:hover::before,
   .gallery-card:hover img {
     filter: none !important;
     transform: none !important;
