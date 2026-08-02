@@ -128,6 +128,17 @@ const profileStructuredData = {
         "@type": "MedicalOrganization",
         name: doctorRegionalCouncil,
       },
+      memberOf: [
+        {
+          "@type": "Organization",
+          name: "Global Metabolic Health Alliance",
+          url: "https://gmha.global",
+        },
+        {
+          "@type": "Organization",
+          name: "Pan Arab Society for Interventional Endocrinology and Diabetes Technology",
+        },
+      ],
       knowsAbout: services.map((service) => service.title),
     },
     {

@@ -34,6 +34,8 @@ export const doctorCredentials = [
   "Ancien médecin au centre hospitalier universitaire de Rabat",
   "Ancien médecin attaché à l’hôpital militaire de Rabat",
   "Fondatrice et présidente de l’Institut marocain de diabétologie",
+  "Membre du think tank de la Global Metabolic Health Alliance (GMHA)",
+  "Membre du board scientifique de la Pan Arab Society for Interventional Endocrinology and Diabetes Technology (PASID)",
 ] as const;
 
 export const doctorSocialProfiles = [
