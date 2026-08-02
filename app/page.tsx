@@ -807,6 +807,13 @@ export default function Home() {
           </div>
 
           <div className="reviews-cta">
+            <p className="reviews-average">
+              <span className="reviews-average-star" aria-hidden="true">
+                ★
+              </span>
+              <strong>{googleReviews.averageRating}</strong> sur 5 ·{" "}
+              {googleReviews.reviewCount} avis publiés sur Google
+            </p>
             <a
               className="secondary-button"
               href={googleReviews.sourceUrl}

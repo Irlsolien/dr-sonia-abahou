@@ -3327,6 +3327,22 @@ h3 {
   margin-top: 44px;
 }
 
+.reviews-average {
+  margin: 0;
+  color: var(--color-foreground);
+  font-size: 0.95rem;
+}
+
+.reviews-average strong {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.reviews-average-star {
+  margin-inline-end: 6px;
+  color: var(--color-star);
+}
+
 .reviews-disclaimer {
   margin: 0;
   color: var(--color-muted);
