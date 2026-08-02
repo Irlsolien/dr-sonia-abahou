@@ -432,24 +432,29 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-shell promise-section reveal-section">
-        <div className="promise-card">
-          <p className="eyebrow">Approche du cabinet</p>
+      <section className="section-shell approach-flow-section reveal-section">
+        <div className="approach-flow-head">
+          <p className="eyebrow approach-flow-eyebrow">Approche du cabinet</p>
           <h2>Écoute, explications et suivi médical.</h2>
-          <p>
+          <p className="approach-flow-lede">
             Face au diabète, à un trouble thyroïdien ou à un déséquilibre
             hormonal, la consultation permet de faire le point sur les symptômes,
             les examens et les objectifs du suivi médical.
           </p>
         </div>
-        <div className="journey-grid">
-          {patientJourney.map((item, index) => (
-            <article key={item.title} className="journey-card">
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
+        <div className="approach-flow-track">
+          <div className="approach-flow-line" aria-hidden="true" />
+          <ol className="approach-flow-steps">
+            {patientJourney.map((item, index) => (
+              <li key={item.title} className="approach-flow-step">
+                <div className="approach-flow-node">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                </div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 

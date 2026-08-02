@@ -502,20 +502,25 @@ export default function ArabicHomePage() {
         </div>
       </section>
 
-      <section className="section-shell promise-section reveal-section">
-        <div className="promise-card">
-          <p className="eyebrow">{uiAr.approach.eyebrow}</p>
+      <section className="section-shell approach-flow-section reveal-section">
+        <div className="approach-flow-head">
+          <p className="eyebrow approach-flow-eyebrow">{uiAr.approach.eyebrow}</p>
           <h2>{uiAr.approach.title}</h2>
-          <p>{uiAr.approach.text}</p>
+          <p className="approach-flow-lede">{uiAr.approach.text}</p>
         </div>
-        <div className="journey-grid">
-          {patientJourney.map((item, index) => (
-            <article key={item.title} className="journey-card">
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{journeyAr[item.title].title}</h3>
-              <p>{journeyAr[item.title].text}</p>
-            </article>
-          ))}
+        <div className="approach-flow-track">
+          <div className="approach-flow-line" aria-hidden="true" />
+          <ol className="approach-flow-steps">
+            {patientJourney.map((item, index) => (
+              <li key={item.title} className="approach-flow-step">
+                <div className="approach-flow-node">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                </div>
+                <h3>{journeyAr[item.title].title}</h3>
+                <p>{journeyAr[item.title].text}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 

@@ -609,11 +609,10 @@ h3 {
 .hero-lead,
 .section-heading p,
 .section-text,
-.promise-card p,
+.approach-flow-lede,
 .glass-panel p,
 .final-cta p,
-.diagnostic-band > p,
-.journey-card p {
+.diagnostic-band > p {
   color: var(--color-muted);
   font-size: clamp(1.03rem, 1.55vw, 1.22rem);
   line-height: 1.72;
@@ -924,7 +923,7 @@ h3 {
 .gallery-section,
 .cabinet-section,
 .final-cta,
-.promise-section {
+.approach-flow-section {
   padding: clamp(74px, 10vw, 132px) 0;
 }
 
@@ -954,8 +953,6 @@ h3 {
 .glass-panel,
 .hours-panel,
 .final-cta,
-.promise-card,
-.journey-card,
 .contact-step-card,
 .map-card {
   border: 1px solid rgba(7, 150, 173, 0.16);
@@ -976,8 +973,7 @@ h3 {
     box-shadow 220ms ease;
 }
 
-.credential-card:hover,
-.journey-card:hover {
+.credential-card:hover {
   background: white;
   box-shadow: 0 30px 90px rgba(7, 150, 173, 0.16);
   transform: translateY(-7px);
@@ -1000,30 +996,117 @@ h3 {
   line-height: 1.45;
 }
 
-.promise-section {
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 20px;
-  align-items: stretch;
-  padding-top: 12px;
+/* Approche du cabinet — « le fil de consultation » : chapô centré, puis
+   trois jalons numérotés reliés par un fil dégradé (horizontal en bureau,
+   vertical côté début de ligne en mobile). Propriétés logiques partout pour
+   que le miroir RTL (page arabe) reste correct sans overrides physiques,
+   à l'exception du sens du dégradé (voir règle `.ar-page` dédiée). */
+.approach-flow-head {
+  max-width: 660px;
+  margin-inline: auto;
+  text-align: center;
 }
 
-.promise-card {
-  position: relative;
-  overflow: hidden;
-  padding: clamp(30px, 5vw, 58px);
-  border-radius: 40px;
+.approach-flow-eyebrow {
+  justify-content: center;
 }
 
-.promise-card::after {
-  position: absolute;
-  right: -90px;
-  bottom: -120px;
-  width: 300px;
-  height: 300px;
-  border: 42px solid rgba(45, 212, 191, 0.16);
-  border-radius: 999px;
+.approach-flow-eyebrow::after {
+  width: 38px;
+  height: 2px;
+  background: var(--color-accent);
   content: "";
+}
+
+.approach-flow-lede {
+  margin-top: 16px;
+}
+
+.approach-flow-track {
+  position: relative;
+  margin-top: clamp(44px, 6vw, 62px);
+}
+
+.approach-flow-line {
+  position: absolute;
+  inset-inline: calc(16.6667% + 4px);
+  top: 27px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+}
+
+.approach-flow-line::before,
+.approach-flow-line::after {
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  content: "";
+  transform: translateY(-50%);
+}
+
+.approach-flow-line::before {
+  inset-inline-start: -3px;
+  background: var(--color-primary);
+}
+
+.approach-flow-line::after {
+  inset-inline-end: -3px;
+  background: var(--color-secondary);
+}
+
+.approach-flow-steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.approach-flow-step {
+  padding-inline: 8px;
+  text-align: center;
+}
+
+.approach-flow-node {
+  position: relative;
+  display: grid;
+  width: 54px;
+  height: 54px;
+  margin-inline: auto;
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface);
+  box-shadow: 0 0 0 6px var(--color-background);
+  color: var(--color-primary);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.05rem;
+  place-items: center;
+}
+
+.approach-flow-step:nth-child(2) .approach-flow-node {
+  border-color: #a6ead9;
+}
+
+.approach-flow-step:nth-child(3) .approach-flow-node {
+  border-color: var(--color-secondary);
+}
+
+.approach-flow-step h3 {
+  margin-top: 22px;
+  font-size: 1.44rem;
+  letter-spacing: -0.01em;
+}
+
+.approach-flow-step p {
+  max-width: 31ch;
+  margin-inline: auto;
+  margin-top: 10px;
+  margin-bottom: 0;
+  color: var(--color-muted);
+  font-size: 0.97rem;
+  line-height: 1.6;
 }
 
 .signature-section {
@@ -1075,32 +1158,6 @@ h3 {
   height: 100%;
   object-fit: cover;
   object-position: center 15%;
-}
-
-.journey-grid {
-  display: grid;
-  gap: 16px;
-}
-
-.journey-card {
-  padding: 26px;
-  border-radius: 30px;
-}
-
-.journey-card span {
-  color: var(--color-primary-deep);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-}
-
-.journey-card h3 {
-  margin: 10px 0 8px;
-  font-size: 1.7rem;
-  letter-spacing: -0.045em;
-}
-
-.journey-card p {
-  margin-bottom: 0;
 }
 
 .section-heading {
@@ -4077,9 +4134,74 @@ h3 {
   .booking-grid,
   .payment-panel,
   .diagnostic-band,
-  .promise-section,
   .signature-section {
     grid-template-columns: 1fr;
+  }
+
+  /* Approche du cabinet : le fil bascule à la verticale, côté début de
+     ligne, et les jalons se calent sur le fil au lieu d'être centrés. */
+  .approach-flow-head {
+    text-align: start;
+  }
+
+  .approach-flow-eyebrow::after {
+    display: none;
+  }
+
+  .approach-flow-track {
+    margin-top: 40px;
+    padding-inline-start: 52px;
+  }
+
+  .approach-flow-line {
+    inset-inline: 26px auto;
+    top: 16px;
+    bottom: 26px;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
+  }
+
+  .approach-flow-line::before {
+    inset-inline-start: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  .approach-flow-line::after {
+    inset-inline: 50% auto;
+    top: 100%;
+    transform: translate(-50%, -50%);
+  }
+
+  .approach-flow-steps {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .approach-flow-step {
+    position: relative;
+    padding-inline: 0;
+    text-align: start;
+  }
+
+  .approach-flow-node {
+    position: absolute;
+    inset-inline-start: -52px;
+    top: -4px;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    font-size: 0.94rem;
+  }
+
+  .approach-flow-step h3 {
+    margin-top: 0;
+  }
+
+  .approach-flow-step p {
+    max-width: none;
+    margin-inline: 0;
   }
 
   .footer-grid {
@@ -4223,7 +4345,7 @@ h3 {
   .gallery-section,
   .cabinet-section,
   .final-cta,
-  .promise-section,
+  .approach-flow-section,
   .signature-section {
     padding: 58px 0;
   }
@@ -4260,13 +4382,16 @@ h3 {
   .hero-lead,
   .section-heading p,
   .section-text,
-  .promise-card p,
+  .approach-flow-lede,
   .glass-panel p,
   .final-cta p,
-  .diagnostic-band > p,
-  .journey-card p {
+  .diagnostic-band > p {
     font-size: 1rem;
     line-height: 1.62;
+  }
+
+  .approach-flow-step p {
+    font-size: 0.93rem;
   }
 
   .reviews-wrap {
@@ -4793,7 +4918,7 @@ h3 {
 
 @media (max-width: 760px) {
   .split-section,
-  .promise-section,
+  .approach-flow-section,
   .signature-section,
   .care-section,
   .practice-section,
@@ -5138,19 +5263,26 @@ h3 {
 
 /* --- Sections éditoriales ----------------------------------------------- */
 
-.ar-page .promise-card::after {
-  right: auto;
-  left: -90px;
-}
-
 .ar-page .credential-card p {
   font-size: 1.02rem;
   line-height: 1.8;
 }
 
-.ar-page .journey-card h3 {
-  font-size: 1.5rem;
+.ar-page .approach-flow-step h3 {
+  font-size: 1.28rem;
   line-height: 1.6;
+}
+
+/* Le dégradé du fil n'est pas une propriété logique : `linear-gradient`
+   ignore `direction`. En RTL, la grille des jalons s'inverse déjà
+   automatiquement (l'étape 1 se retrouve à droite), il faut donc inverser
+   manuellement le sens du dégradé horizontal pour que le primary reste
+   sous le premier jalon. Réservé au bureau : en mobile le fil devient
+   vertical (dégradé de haut en bas), un axe que le RTL ne modifie pas. */
+@media (min-width: 981px) {
+  .ar-page .approach-flow-line {
+    background: linear-gradient(270deg, var(--color-primary), var(--color-secondary));
+  }
 }
 
 /* Index des motifs : pas de page arabe par motif, les lignes ne sont donc
