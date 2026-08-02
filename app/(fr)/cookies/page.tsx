@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { SiteHeader } from "../components/SiteHeader";
-import { SiteFooter } from "../components/SiteFooter";
-import { absoluteUrl, ogCoverImage, siteName } from "../seo";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
+import { absoluteUrl, ogCoverImage, siteName } from "../../seo";
 
 export const metadata: Metadata = {
   title: "Politique cookies | Dr Sonia Abahou",

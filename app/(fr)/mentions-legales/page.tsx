@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { SiteHeader } from "../components/SiteHeader";
-import { SiteFooter } from "../components/SiteFooter";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 import {
   absoluteUrl,
   clinicAddress,
@@ -13,7 +13,7 @@ import {
   doctorRegionalCouncil,
   ogCoverImage,
   siteName,
-} from "../seo";
+} from "../../seo";
 
 export const metadata: Metadata = {
   title: "Mentions légales | Dr Sonia Abahou",

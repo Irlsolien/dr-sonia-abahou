@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { arabicFontVariables } from "../fonts";
-import { SiteHeader } from "../../components/SiteHeader";
-import { SiteFooter } from "../../components/SiteFooter";
+import { arabicFontVariables } from "../../fonts";
+import { SiteHeader } from "../../../components/SiteHeader";
+import { SiteFooter } from "../../../components/SiteFooter";
 import {
   absoluteUrl,
   clinicAddress,
@@ -15,7 +15,7 @@ import {
   lastModified,
   services,
   siteUrl,
-} from "../../seo";
+} from "../../../seo";
 import {
   arFooterLabels,
   arHeaderLabels,
@@ -27,12 +27,12 @@ import {
   serviceUiAr,
   servicesAr,
   uiAr,
-} from "../../seo-ar";
+} from "../../../seo-ar";
 
 /**
  * VERSION ARABE — pages motifs `/ar/<slug>`.
  *
- * Miroir strict de `app/[serviceSlug]/page.tsx` : mêmes sections, mêmes
+ * Miroir strict de `app/(fr)/[serviceSlug]/page.tsx` : mêmes sections, mêmes
  * composants et mêmes classes, rendus en RTL. Les slugs sont volontairement
  * identiques d'une langue à l'autre, ce qui permet un appariement `hreflang`
  * exact page à page (`/<slug>` ↔ `/ar/<slug>`).
@@ -265,7 +265,9 @@ export default async function ArabicServicePage({
         panelClassName={`ar-nav-panel ${arabicFontVariables}`}
       />
 
-      <section className="service-hero section-shell">
+      {/* Cible du lien d'évitement arabe posé par `app/(ar)/layout.tsx` :
+          l'ancre existe sur toutes les routes `/ar`. */}
+      <section id="ar-content" className="service-hero section-shell">
         <p className="eyebrow">{serviceUiAr.heroEyebrow}</p>
         <h1>
           {content.title} {serviceUiAr.titleSuffix}

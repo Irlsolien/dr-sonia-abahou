@@ -683,17 +683,30 @@ h3 {
   transform: translateY(clamp(-118px, -6vw, -70px));
 }
 
+/* Filigrane décoratif du héros.
+   Peint en `background-image` sur un conteneur vide, et non plus via
+   `next/image` : chargé en `lazy` (il ne porte aucune information — `alt`
+   vide et `aria-hidden`), il arrivait tard et devenait l'élément mesuré pour
+   le LCP mobile. Une image de fond est demandée dès l'application de la
+   feuille de style, déjà téléchargée. Géométrie strictement identique :
+   `aspect-ratio` reprend les dimensions intrinsèques du fichier
+   (420 × 377), `background-size: 100% 100%` ne déforme donc rien. */
 .hero-monogram-watermark {
   position: absolute;
   right: -4%;
   top: 2%;
   z-index: 0;
   width: min(420px, 84%);
-  height: auto;
+  aspect-ratio: 420 / 377;
+  background-image: url("/dr-sonia-monogram-watermark.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   opacity: 0.07;
   filter: drop-shadow(0 20px 34px rgba(7, 89, 133, 0.18));
   transform: rotate(-8deg);
   animation: levitate 7.6s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .halo-disc {
@@ -1079,7 +1092,11 @@ h3 {
   border-radius: 50%;
   background: var(--color-surface);
   box-shadow: 0 0 0 6px var(--color-background);
-  color: var(--color-primary);
+  /* Bleu profond et non `--color-primary` (#0796ad) : sur la pastille
+     blanche, le turquoise ne donnait que 3,51:1, sous le seuil WCAG AA de
+     4,5:1 pour ce texte. `--color-primary-deep` monte à 7,5:1. Les bordures
+     des pastilles gardent, elles, la palette claire d'origine. */
+  color: var(--color-primary-deep);
   font-family: var(--font-serif), Georgia, serif;
   font-size: 1.05rem;
   place-items: center;
@@ -3215,7 +3232,7 @@ h3 {
   line-height: 1.8;
 }
 
-/* app/[serviceSlug]/page.tsx renders <h3>/<p> directly inside .faq-card
+/* app/(fr)/[serviceSlug]/page.tsx renders <h3>/<p> directly inside .faq-card
    (no .faq-answer wrapper like the homepage accordion), so give those
    direct children their own padding instead of relying on .faq-card:
    padding: 0, which otherwise leaves the text touching the 30px
@@ -5084,10 +5101,11 @@ h3 {
 /* ==========================================================================
    VERSION ARABE (/ar)
    Bloc isolé : chaque règle est préfixée par `.ar-page` (ou `.ar-nav-panel`
-   pour le panneau de navigation mobile, projeté dans <body>). Aucune page
-   française n'est affectée. Les polices arabes ne sont chargées que sur
-   cette route (variables posées sur le conteneur racine de `/ar` et sur le
-   panneau projeté).
+   pour le panneau de navigation mobile, projeté dans <body>, et
+   `.ar-skip-link` pour le lien d'évitement, rendu par le layout racine
+   arabe). Aucune page française n'est affectée. Les polices arabes ne sont
+   chargées que sur ces routes : les variables sont posées sur le `<html>` du
+   layout racine `app/(ar)/layout.tsx`.
    ========================================================================== */
 
 .ar-page {
@@ -5193,11 +5211,15 @@ h3 {
   unicode-bidi: isolate;
 }
 
-/* Lien d'évitement arabe : ramené en haut à droite, côté début de ligne. */
-.ar-page .ar-skip-link {
+/* Lien d'évitement arabe : ramené en haut à droite, côté début de ligne.
+   Rendu par le layout racine arabe (`app/(ar)/layout.tsx`), donc hors du
+   conteneur `.ar-page` : il porte lui-même sa police et son crénage. */
+.ar-skip-link {
   right: 0;
   left: auto;
   border-radius: 0 0 0 16px;
+  font-family: var(--font-ar-ui), "Segoe UI", Tahoma, Arial, sans-serif;
+  letter-spacing: normal;
 }
 
 /* --- En-tête, navigation et pied de page -------------------------------- */
@@ -5311,7 +5333,7 @@ h3 {
 }
 
 /* --- Pages motifs (/ar/<slug>) ------------------------------------------
-   Le gabarit est celui de `app/[serviceSlug]/page.tsx` : seules les
+   Le gabarit est celui de `app/(fr)/[serviceSlug]/page.tsx` : seules les
    propriétés non logiques (dégradés, positions absolues, `translateX`,
    `text-align` explicite) et la typographie arabe demandent un ajustement. */
 

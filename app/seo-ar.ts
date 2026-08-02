@@ -2,7 +2,7 @@
  * VERSION ARABE — contenus de `/ar`.
  *
  * Règle absolue : **aucun fait nouveau**. Chaque chaîne de ce fichier est la
- * traduction d'un texte français déjà validé (`app/seo.ts`, `app/page.tsx`,
+ * traduction d'un texte français déjà validé (`app/seo.ts`, `app/(fr)/page.tsx`,
  * `docs-cliente/TRADUCTION-AR-A-VALIDER.md`). Aucun diplôme, horaire, tarif,
  * acte médical, chiffre ou coordonnée n'a été ajouté, retiré ou modifié.
  *
@@ -274,7 +274,7 @@ export const reviewDatesAr: Record<ReviewDate, string> = {
   "il y a 5 ans": "منذ 5 سنوات",
 };
 
-/* Horaires identiques à ceux de la page d'accueil française (`app/page.tsx`).
+/* Horaires identiques à ceux de la page d'accueil française (`app/(fr)/page.tsx`).
    Les plages sont écrites en chiffres et rendues en LTR. */
 export const hoursAr = [
   ["الاثنين", "9:30 — 16:00"],
@@ -509,9 +509,9 @@ export const arCgmDemoLabels: CgmDemoLabels = {
 
 /* ==========================================================================
    Pages motifs arabes — `/ar/<slug>`
-   Miroir strict de `app/[serviceSlug]/page.tsx`. Aucun fait nouveau : chaque
+   Miroir strict de `app/(fr)/[serviceSlug]/page.tsx`. Aucun fait nouveau : chaque
    chaîne traduit un texte français déjà validé (`app/seo.ts` pour les
-   données de service, `app/[serviceSlug]/page.tsx` pour les libellés de
+   données de service, `app/(fr)/[serviceSlug]/page.tsx` pour les libellés de
    page). Les slugs restent identiques d'une langue à l'autre : seule la
    langue du contenu change, ce qui permet un appariement `hreflang` exact
    page à page.
@@ -671,7 +671,7 @@ export const servicePagesAr: Record<
 
 /**
  * Libellés de la page motif arabe. Traduction stricte des libellés français
- * de `app/[serviceSlug]/page.tsx`. Les segments qui encadrent une donnée
+ * de `app/(fr)/[serviceSlug]/page.tsx`. Les segments qui encadrent une donnée
  * latine (numéros, adresse) sont fournis en préfixes afin d'être composés en
  * JSX avec un `<bdi dir="ltr">`.
  */

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteHeader } from "../components/SiteHeader";
-import { SiteFooter } from "../components/SiteFooter";
-import { PhoneIcon, WhatsAppIcon } from "../components/Icons";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
+import { PhoneIcon, WhatsAppIcon } from "../../components/Icons";
 import {
   appointment,
   clinicAddress,
@@ -10,7 +10,7 @@ import {
   clinicPhoneInternational,
   clinicSecondaryPhoneDisplay,
   siteName,
-} from "../seo";
+} from "../../seo";
 
 export const metadata: Metadata = {
   title: "Téléconsultation en maintenance | Dr Sonia Abahou",

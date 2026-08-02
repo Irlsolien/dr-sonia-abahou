@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { SiteHeader } from "../components/SiteHeader";
-import { SiteFooter } from "../components/SiteFooter";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 import {
   absoluteUrl,
   clinicCity,
@@ -20,7 +20,7 @@ import {
   services,
   siteName,
   siteUrl,
-} from "../seo";
+} from "../../seo";
 
 const lastModifiedLabel = new Intl.DateTimeFormat("fr-MA", {
   day: "numeric",

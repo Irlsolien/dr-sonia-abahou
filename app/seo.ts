@@ -237,7 +237,7 @@ export const faqItems = [
  * Contenus éditoriaux de la page d'accueil, centralisés ici afin que la
  * version arabe (`app/seo-ar.ts`) puisse s'indexer dessus : toute évolution
  * d'un libellé français casse la compilation tant que sa traduction n'a pas
- * été mise à jour. Le rendu français est inchangé (`app/page.tsx` importe
+ * été mise à jour. Le rendu français est inchangé (`app/(fr)/page.tsx` importe
  * ces tableaux tels quels).
  */
 export const patientJourney = [

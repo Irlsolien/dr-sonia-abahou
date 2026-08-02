@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SiteHeader } from "../components/SiteHeader";
-import { SiteFooter } from "../components/SiteFooter";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 import {
   absoluteUrl,
   clinicAddress,
@@ -16,7 +16,7 @@ import {
   services,
   siteName,
   siteUrl,
-} from "../seo";
+} from "../../seo";
 
 type ServicePageProps = {
   params: Promise<{

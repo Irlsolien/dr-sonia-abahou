@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteHeader } from "../components/SiteHeader";
-import { SiteFooter } from "../components/SiteFooter";
-import { PhoneIcon, WhatsAppIcon } from "../components/Icons";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
+import { PhoneIcon, WhatsAppIcon } from "../../components/Icons";
 import {
   absoluteUrl,
   appointment,
@@ -15,7 +15,7 @@ import {
   lastModified,
   siteName,
   siteUrl,
-} from "../seo";
+} from "../../seo";
 
 export const metadata: Metadata = {
   title: "Prendre rendez-vous | Dr Sonia Abahou",

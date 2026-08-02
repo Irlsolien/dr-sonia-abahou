@@ -2,7 +2,7 @@
 
 import Script from "next/script";
 import { useEffect, useMemo, useState } from "react";
-import { teleconsultation } from "../seo";
+import { teleconsultation } from "../../seo";
 
 declare global {
   interface Window {

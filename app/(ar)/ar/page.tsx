@@ -1,10 +1,12 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { SiteHeader } from "./components/SiteHeader";
-import { SiteFooter } from "./components/SiteFooter";
-import { MapEmbed } from "./components/MapEmbed";
-import { CgmDemoDashboard } from "./components/CgmDemoDashboard";
-import { MapPinIcon, PhoneIcon, WhatsAppIcon } from "./components/Icons";
+import { arabicFontVariables } from "../fonts";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
+import { MapEmbed } from "../../components/MapEmbed";
+import { CgmDemoDashboard } from "../../components/CgmDemoDashboard";
+import { MapPinIcon, PhoneIcon, WhatsAppIcon } from "../../components/Icons";
 import {
   absoluteUrl,
   appointment,
@@ -20,12 +22,8 @@ import {
   clinicSecondaryPhoneDisplay,
   clinicSecondaryPhoneInternational,
   clinicStreetAddress,
-  doctorAlternateName,
   doctorCredentials,
-  doctorInpe,
   doctorName,
-  doctorOrderNumber,
-  doctorProfilePath,
   doctorProfessionalProfiles,
   doctorRegionalCouncil,
   doctorSameAsProfiles,
@@ -37,9 +35,89 @@ import {
   mapsQuery,
   patientJourney,
   services,
-  siteName,
   siteUrl,
-} from "./seo";
+} from "../../seo";
+import {
+  activitiesAr,
+  activityHighlightsAr,
+  arCgmDemoLabels,
+  arFooterLabels,
+  arHeaderLabels,
+  arMapEmbedLabels,
+  arOgImage,
+  credentialsAr,
+  faqAr,
+  galleryAr,
+  hoursAr,
+  journeyAr,
+  metaAr,
+  reviewDatesAr,
+  servicesAr,
+  uiAr,
+} from "../../seo-ar";
+
+/**
+ * VERSION ARABE — miroir complet de la page d'accueil française.
+ *
+ * Page officielle et indexable (`robots: index, follow`), reliée au reste du
+ * site par les `alternates` (ici et dans `app/(ar)/layout.tsx`), le `sitemap.ts`
+ * et les liens de bascule « العربية » / « Français » (en-tête, menu mobile,
+ * pied de page) dans les deux sens.
+ *
+ * Tous les textes proviennent de traductions de contenus déjà validés
+ * (`app/seo.ts`, `app/(fr)/page.tsx`) centralisées dans `app/seo-ar.ts` : aucun
+ * fait, diplôme, horaire, chiffre ou coordonnée n'a été ajouté. Les avis
+ * Google sont cités **mot pour mot dans leur langue de publication** ; ils ne
+ * sont pas traduits.
+ */
+
+export const metadata: Metadata = {
+  title: metaAr.title,
+  description: metaAr.description,
+  keywords: [...metaAr.keywords],
+  alternates: {
+    canonical: "/ar",
+    languages: {
+      "fr-MA": "/",
+      ar: "/ar",
+      "x-default": "/",
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    title: metaAr.ogTitle,
+    description: metaAr.ogDescription,
+    siteName: metaAr.siteName,
+    type: "website",
+    locale: "ar_MA",
+    alternateLocale: "fr_MA",
+    url: "/ar",
+    images: [
+      {
+        url: arOgImage,
+        width: 1200,
+        height: 630,
+        alt: metaAr.ogImageAlt,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: metaAr.ogTitle,
+    description: metaAr.ogDescription,
+    images: [absoluteUrl(arOgImage)],
+  },
+};
 
 const phoneHref = `tel:${clinicPhoneInternational}`;
 const secondaryPhoneHref = `tel:${clinicSecondaryPhoneInternational}`;
@@ -47,40 +125,35 @@ const mapsHref = googleMapsPlaceUrl;
 const mapsEmbedHref = `https://www.google.com/maps?q=${encodeURIComponent(
   mapsQuery,
 )}&output=embed`;
+/* Message WhatsApp inchangé (texte validé de `app/seo.ts`) : sa version arabe
+   est proposée dans le document de validation, elle n'est pas publiée ici. */
 const whatsappHref = `https://wa.me/${appointment.whatsappPhone}?text=${encodeURIComponent(
   appointment.whatsappMessage,
 )}`;
 
-const hours = [
-  ["Lundi", "9h30 — 16h"],
-  ["Mardi", "9h30 — 16h"],
-  ["Mercredi", "9h30 — 16h"],
-  ["Jeudi", "9h30 — 16h"],
-  ["Vendredi", "9h30 — 12h30"],
-  ["Samedi", "Fermé"],
-  ["Dimanche", "Fermé"],
-];
+const arPageUrl = `${siteUrl}/ar`;
 
-const structuredData = {
+const structuredDataAr = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "MedicalClinic",
-      "@id": `${siteUrl}/#clinic`,
-      name: clinicName,
-      alternateName: siteName,
+      "@id": `${arPageUrl}#clinic`,
+      name: "عيادة الدكتورة سونيا أبحو",
+      alternateName: clinicName,
       description:
-        "Cabinet d’endocrinologie, diabétologie, nutrition et maladies métaboliques à Témara.",
+        "عيادة لأمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية بتمارة.",
+      inLanguage: "ar",
       image: {
         "@type": "ImageObject",
         url: absoluteUrl("/dr-sonia-abahou.jpg"),
-        caption: `${doctorName}, endocrinologue à Témara`,
+        caption: "الدكتورة سونيا أبحو، أخصائية أمراض الغدد الصماء بتمارة",
       },
       logo: {
         "@type": "ImageObject",
         url: absoluteUrl("/dr-sonia-logo-cropped.webp"),
       },
-      url: `${siteUrl}/`,
+      url: arPageUrl,
       telephone: [clinicPhoneInternational, clinicSecondaryPhoneInternational],
       email: clinicEmail,
       hasMap: mapsHref,
@@ -101,22 +174,22 @@ const structuredData = {
         {
           "@type": "ContactPoint",
           telephone: clinicPhoneInternational,
-          contactType: "Prise de rendez-vous",
+          contactType: "حجز موعد",
           areaServed: clinicCountry,
-          availableLanguage: "fr",
+          availableLanguage: ["ar", "fr"],
         },
         {
           "@type": "ContactPoint",
           telephone: clinicSecondaryPhoneInternational,
-          contactType: "Téléphone portable et WhatsApp du cabinet",
+          contactType: "الهاتف المحمول وواتساب الخاصان بالعيادة",
           areaServed: clinicCountry,
-          availableLanguage: "fr",
+          availableLanguage: ["ar", "fr"],
         },
       ],
       employee: {
-        "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
+        "@id": `${arPageUrl}#doctor`,
       },
-      areaServed: "Témara",
+      areaServed: "تمارة",
       medicalSpecialty: [
         "https://schema.org/Endocrine",
         "https://schema.org/DietNutrition",
@@ -124,15 +197,14 @@ const structuredData = {
       availableService: [
         ...services.map((service) => ({
           "@type": "MedicalProcedure",
-          name: service.title,
-          description: service.text,
-          url: absoluteUrl(`/${service.slug}`),
+          name: servicesAr[service.slug].title,
+          description: servicesAr[service.slug].text,
         })),
         ...clinicalActivities.map((activity) => ({
           "@type": "MedicalProcedure",
-          name: activity.title,
-          description: activity.description,
-          url: absoluteUrl(`/#${activity.id}`),
+          name: activitiesAr[activity.id].title,
+          description: activitiesAr[activity.id].description,
+          url: `${arPageUrl}#${activity.id}`,
         })),
       ],
       openingHoursSpecification: [
@@ -152,43 +224,20 @@ const structuredData = {
     },
     {
       "@type": "Person",
-      "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
-      name: doctorName,
-      alternateName: doctorAlternateName,
-      honorificPrefix: "Dr",
+      "@id": `${arPageUrl}#doctor`,
+      name: "الدكتورة سونيا أبحو",
+      alternateName: doctorName,
+      honorificPrefix: "د.",
       jobTitle:
-        "Médecin spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques",
+        "طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية",
       description:
-        "Médecin spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques exerçant à Témara.",
+        "طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية تمارس بتمارة.",
+      inLanguage: "ar",
       image: absoluteUrl("/dr-sonia-abahou.jpg"),
-      url: absoluteUrl(doctorProfilePath),
+      url: arPageUrl,
       sameAs: [...doctorSameAsProfiles],
-      identifier: [
-        {
-          "@type": "PropertyValue",
-          name: "INPE",
-          value: doctorInpe,
-        },
-        {
-          "@type": "PropertyValue",
-          name: "Numéro ordinal",
-          value: doctorOrderNumber,
-        },
-      ],
-      hasCredential: [
-        {
-          "@type": "EducationalOccupationalCredential",
-          credentialCategory: "Spécialité médicale",
-          name: "Endocrinologie, diabétologie, nutrition et maladies métaboliques",
-        },
-        {
-          "@type": "EducationalOccupationalCredential",
-          credentialCategory: "Diplôme universitaire",
-          name: "Échographie cervicale - Paris V",
-        },
-      ],
       worksFor: {
-        "@id": `${siteUrl}/#clinic`,
+        "@id": `${arPageUrl}#clinic`,
       },
       affiliation: {
         "@type": "MedicalOrganization",
@@ -206,43 +255,31 @@ const structuredData = {
         },
       ],
       knowsAbout: [
-        "Endocrinologie",
-        "Diabétologie",
-        "Thyroïde",
-        "Nutrition médicale",
-        "Obésité",
-        "Hypoglycémies",
-        "Maladies métaboliques",
+        "أمراض الغدد الصماء",
+        "داء السكري",
+        "الغدة الدرقية",
+        "التغذية الطبية",
+        "السمنة",
+        "نقص السكر في الدم",
+        "الأمراض الاستقلابية",
       ],
     },
     {
-      "@type": "WebSite",
-      "@id": `${siteUrl}/#website`,
-      name: siteName,
-      alternateName: clinicName,
-      url: `${siteUrl}/`,
-      inLanguage: "fr-MA",
-      publisher: {
-        "@id": `${siteUrl}/#clinic`,
-      },
-    },
-    {
       "@type": "WebPage",
-      "@id": `${siteUrl}/#webpage`,
-      url: `${siteUrl}/`,
-      name: `${doctorName} | Endocrinologue à Témara`,
-      description:
-        "Site officiel du cabinet du Dr Sonia Abahou à Témara : endocrinologie, diabétologie, nutrition et maladies métaboliques.",
-      inLanguage: "fr-MA",
+      "@id": `${arPageUrl}#webpage`,
+      url: arPageUrl,
+      name: metaAr.title,
+      description: metaAr.description,
+      inLanguage: "ar",
       dateModified: lastModified,
       isPartOf: {
         "@id": `${siteUrl}/#website`,
       },
       mainEntity: {
-        "@id": `${siteUrl}/#clinic`,
+        "@id": `${arPageUrl}#clinic`,
       },
       about: {
-        "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
+        "@id": `${arPageUrl}#doctor`,
       },
       primaryImageOfPage: {
         "@type": "ImageObject",
@@ -251,81 +288,86 @@ const structuredData = {
     },
     {
       "@type": "FAQPage",
-      "@id": `${siteUrl}/#faq`,
+      "@id": `${arPageUrl}#faq`,
+      inLanguage: "ar",
       isPartOf: {
-        "@id": `${siteUrl}/#webpage`,
+        "@id": `${arPageUrl}#webpage`,
       },
       mainEntity: faqItems.map((item) => ({
         "@type": "Question",
-        name: item.question,
+        name: faqAr[item.question].question,
         acceptedAnswer: {
           "@type": "Answer",
-          text: item.answer,
+          text: faqAr[item.question].answer,
         },
       })),
     },
   ],
 };
 
-export default function Home() {
+export default function ArabicHomePage() {
   return (
-    <main id="main-content">
+    <main
+      id="main-content"
+      lang="ar"
+      dir="rtl"
+      className={`ar-page ${arabicFontVariables}`}
+    >
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredDataAr) }}
       />
-      <SiteHeader />
+
+      <SiteHeader
+        labels={arHeaderLabels}
+        homeHref="#ar-content"
+        panelLang="ar"
+        panelDir="rtl"
+        panelClassName={`ar-nav-panel ${arabicFontVariables}`}
+      />
 
       {/* Barre d'actions fixe : placée tôt dans le DOM pour être atteinte
-          rapidement au clavier et par les lecteurs d'écran, son positionnement
-          en bas d'écran restant purement visuel (position: fixed). */}
-      <nav className="mobile-action-bar" aria-label="Actions rapides du cabinet">
+          rapidement au clavier et par les lecteurs d'écran. */}
+      <nav className="mobile-action-bar" aria-label={uiAr.quickActionsAriaLabel}>
         <a
           className="mobile-action-bar-item"
           href={phoneHref}
-          aria-label="Appeler le cabinet"
+          aria-label={uiAr.callAriaLabel}
         >
           <PhoneIcon />
-          <span>Appeler</span>
+          <span>{uiAr.callLabel}</span>
         </a>
         <a
           className="mobile-action-bar-item"
           href={whatsappHref}
           target="_blank"
           rel="noreferrer"
-          aria-label="Contacter le cabinet sur WhatsApp"
+          aria-label={uiAr.whatsappAriaLabel}
         >
           <WhatsAppIcon />
-          <span>WhatsApp</span>
+          <span>{uiAr.whatsappLabel}</span>
         </a>
         <a
           className="mobile-action-bar-item"
           href={mapsHref}
           target="_blank"
           rel="noreferrer"
-          aria-label="Itinéraire vers le cabinet"
+          aria-label={uiAr.directionsAriaLabel}
         >
           <MapPinIcon />
-          <span>Itinéraire</span>
+          <span>{uiAr.directionsLabel}</span>
         </a>
       </nav>
 
-      <section id="accueil" className="hero section-shell">
+      <section id="ar-content" className="hero section-shell">
         <div className="hero-copy">
-          <p className="eyebrow">Endocrinologue diabétologue à Témara</p>
-          <h1>
-            Une prise en charge claire du diabète, de la thyroïde et du
-            métabolisme à Témara.
-          </h1>
-          <p className="hero-lead">
-            Le cabinet du Dr Sonia Abahou reçoit les patients pour le suivi du
-            diabète, des troubles thyroïdiens, de la nutrition médicale, des
-            troubles hormonaux et des maladies métaboliques.
-          </p>
+          <p className="eyebrow">{uiAr.hero.eyebrow}</p>
+          <h1>{uiAr.hero.title}</h1>
+          <p className="hero-lead">{uiAr.hero.lead}</p>
           <div
             className="brand-signature-card"
             role="group"
-            aria-label="Signature du cabinet"
+            aria-label={uiAr.hero.signatureAriaLabel}
           >
             <Image
               src="/dr-sonia-monogram-clean.webp"
@@ -335,17 +377,21 @@ export default function Home() {
               sizes="112px"
             />
             <div>
-              <span>Cabinet Dr Abahou Sonia</span>
-              <strong>Endocrinologie et maladies métaboliques.</strong>
+              <span>{uiAr.hero.signatureName}</span>
+              <strong>{uiAr.hero.signatureTagline}</strong>
             </div>
           </div>
-          <div className="hero-actions" role="group" aria-label="Actions rapides">
-            <Link className="primary-button" href="/rendez-vous">
-              Prendre rendez-vous
-            </Link>
+          <div
+            className="hero-actions"
+            role="group"
+            aria-label={uiAr.quickActionsAriaLabel}
+          >
+            <a className="primary-button" href={phoneHref}>
+              {uiAr.bookLabel}
+            </a>
             <a className="secondary-button" href={phoneHref}>
               <PhoneIcon />
-              Appeler
+              {uiAr.callLabel}
             </a>
             <a
               className="secondary-button"
@@ -354,23 +400,16 @@ export default function Home() {
               rel="noreferrer"
             >
               <WhatsAppIcon />
-              WhatsApp
+              {uiAr.whatsappLabel}
             </a>
           </div>
         </div>
 
-        {/* Conteneur décoratif : le portrait porte déjà son texte alternatif,
-            un aria-label ici serait redondant et sans rôle porteur. */}
         <div className="hero-visual">
-          <Image
-            className="hero-monogram-watermark"
-            src="/dr-sonia-monogram-watermark.webp"
-            alt=""
-            width={420}
-            height={377}
-            sizes="(max-width: 760px) 80vw, 420px"
-            aria-hidden="true"
-          />
+          {/* Filigrane purement décoratif : peint en image de fond CSS
+              (cf. `.hero-monogram-watermark`) pour ne jamais concurrencer le
+              portrait sur le chemin de rendu du héros. */}
+          <div className="hero-monogram-watermark" aria-hidden="true" />
           <div className="halo-disc" />
           <div className="pulse-orbit orbit-a" />
           <div className="pulse-orbit orbit-b" />
@@ -382,51 +421,44 @@ export default function Home() {
           <div className="portrait-card">
             <Image
               src="/dr-sonia-abahou.webp"
-              alt="Portrait du Dr Sonia Abahou, endocrinologue à Témara"
+              alt={uiAr.hero.portraitAlt}
               width={420}
               height={470}
               priority
               sizes="(max-width: 760px) 88vw, 420px"
             />
             <div className="portrait-caption">
-              <span>Dr Sonia Abahou</span>
-              <strong>Endocrinologie · Diabétologie · Nutrition</strong>
+              <span>{uiAr.hero.portraitName}</span>
+              <strong>{uiAr.hero.portraitRole}</strong>
             </div>
           </div>
           <div className="doctor-status-card">
-            <span>Cabinet à Témara</span>
-            <strong>Massira I</strong>
-            <p>Accueil sur rendez-vous confirmé par le cabinet.</p>
+            <span>{uiAr.hero.statusEyebrow}</span>
+            <strong>{uiAr.hero.statusPlace}</strong>
+            <p>{uiAr.hero.statusText}</p>
           </div>
           <div className="floating-card card-glucose">
-            <span>Diabète</span>
-            <strong>Suivi structuré</strong>
+            <span>{uiAr.hero.cardDiabetesLabel}</span>
+            <strong>{uiAr.hero.cardDiabetesValue}</strong>
           </div>
           <div className="floating-card card-thyroid">
-            <span>Thyroïde</span>
-            <strong>Bilan et orientation</strong>
+            <span>{uiAr.hero.cardThyroidLabel}</span>
+            <strong>{uiAr.hero.cardThyroidValue}</strong>
           </div>
         </div>
       </section>
 
       <section id="expertise" className="section-shell split-section reveal-section">
         <div>
-          <p className="eyebrow">Parcours médical</p>
-          <h2>Un parcours médical présenté avec clarté.</h2>
-          <p className="section-text">
-            Les informations essentielles du cabinet sont réunies pour permettre
-            au patient d’identifier rapidement les domaines de consultation et
-            les modalités de prise de contact.
-          </p>
-          <Link className="text-link" href={doctorProfilePath}>
-            Découvrir le parcours du Dr Sonia Abahou
-          </Link>
+          <p className="eyebrow">{uiAr.expertise.eyebrow}</p>
+          <h2>{uiAr.expertise.title}</h2>
+          <p className="section-text">{uiAr.expertise.text}</p>
         </div>
         <div className="credential-grid">
           {doctorCredentials.map((item) => (
             <article key={item} className="credential-card">
               <span />
-              <p>{item}</p>
+              <p>{credentialsAr[item]}</p>
             </article>
           ))}
         </div>
@@ -434,13 +466,9 @@ export default function Home() {
 
       <section className="section-shell approach-flow-section reveal-section">
         <div className="approach-flow-head">
-          <p className="eyebrow approach-flow-eyebrow">Approche du cabinet</p>
-          <h2>Écoute, explications et suivi médical.</h2>
-          <p className="approach-flow-lede">
-            Face au diabète, à un trouble thyroïdien ou à un déséquilibre
-            hormonal, la consultation permet de faire le point sur les symptômes,
-            les examens et les objectifs du suivi médical.
-          </p>
+          <p className="eyebrow approach-flow-eyebrow">{uiAr.approach.eyebrow}</p>
+          <h2>{uiAr.approach.title}</h2>
+          <p className="approach-flow-lede">{uiAr.approach.text}</p>
         </div>
         <div className="approach-flow-track">
           <div className="approach-flow-line" aria-hidden="true" />
@@ -450,8 +478,8 @@ export default function Home() {
                 <div className="approach-flow-node">
                   <span>{String(index + 1).padStart(2, "0")}</span>
                 </div>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
+                <h3>{journeyAr[item.title].title}</h3>
+                <p>{journeyAr[item.title].text}</p>
               </li>
             ))}
           </ol>
@@ -462,7 +490,7 @@ export default function Home() {
         <div className="signature-visual">
           <Image
             src="/dr-abahou-trophee-diabete.webp"
-            alt='Le Dr Sonia Abahou recevant une distinction "Tous Unis Contre le Diabète" lors d’un congrès de diabétologie'
+            alt={uiAr.signature.imageAlt}
             width={800}
             height={1062}
             loading="lazy"
@@ -470,38 +498,40 @@ export default function Home() {
           />
         </div>
         <div className="signature-copy">
-          <p className="eyebrow">Signature médicale</p>
-          <h2>Une consultation qui transforme l’inquiétude en compréhension.</h2>
-          <p>
-            Le cabinet met l’accent sur une médecine lisible : comprendre les
-            symptômes, interpréter les bilans, expliquer les objectifs et avancer
-            avec un plan de suivi réaliste.
-          </p>
+          <p className="eyebrow">{uiAr.signature.eyebrow}</p>
+          <h2>{uiAr.signature.title}</h2>
+          <p>{uiAr.signature.text}</p>
         </div>
       </section>
 
+      {/* Index des motifs : chaque ligne mène à la page arabe du motif
+          (`/ar/<slug>`), miroir exact de l'accueil français. */}
       <section id="soins" className="section-shell care-section reveal-section">
         <div className="section-heading">
-          <h2>Les motifs pris en charge au cabinet.</h2>
+          <h2>{uiAr.care.title}</h2>
         </div>
         <div className="care-index">
           {services.map((service, index) => (
             <Link
-              key={service.title}
+              key={service.slug}
               className="care-row"
-              href={`/${service.slug}`}
+              href={`/ar/${service.slug}`}
             >
               <span className="care-row-number">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <span className="care-row-copy">
                 <span className="care-row-title-wrap">
-                  <h3 className="care-row-title">{service.title}</h3>
+                  <h3 className="care-row-title">
+                    {servicesAr[service.slug].title}
+                  </h3>
                 </span>
-                <p className="care-row-description">{service.text}</p>
+                <p className="care-row-description">
+                  {servicesAr[service.slug].text}
+                </p>
               </span>
               <span className="care-row-arrow" aria-hidden="true">
-                →
+                ←
               </span>
             </Link>
           ))}
@@ -510,7 +540,7 @@ export default function Home() {
 
       <section id="pratiques" className="section-shell practice-section">
         <div className="practice-heading reveal-section">
-          <h2>Des actes et des temps de soin qui prolongent la consultation.</h2>
+          <h2>{uiAr.practice.title}</h2>
         </div>
 
         <div className="practice-stack">
@@ -530,34 +560,40 @@ export default function Home() {
                 {activity.image ? (
                   <Image
                     src={activity.image}
-                    alt={activity.alt}
+                    alt={activitiesAr[activity.id].alt}
                     width={1600}
                     height={1067}
                     loading="lazy"
                     sizes="(max-width: 820px) 94vw, 50vw"
                   />
                 ) : (
-                  <CgmDemoDashboard />
+                  <CgmDemoDashboard labels={arCgmDemoLabels} />
                 )}
-                {!activity.image && <figcaption>Aperçu du suivi</figcaption>}
+                {!activity.image && (
+                  <figcaption>{uiAr.practice.dashboardCaption}</figcaption>
+                )}
                 <span className="practice-number" aria-hidden="true">
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </figure>
 
               <div className="practice-content">
-                <p className="practice-eyebrow">{activity.eyebrow}</p>
-                <h3>{activity.title}</h3>
-                <p className="practice-description">{activity.description}</p>
+                <p className="practice-eyebrow">
+                  {activitiesAr[activity.id].eyebrow}
+                </p>
+                <h3>{activitiesAr[activity.id].title}</h3>
+                <p className="practice-description">
+                  {activitiesAr[activity.id].description}
+                </p>
                 <ul className="practice-highlights">
                   {activity.highlights.map((highlight) => (
-                    <li key={highlight}>{highlight}</li>
+                    <li key={highlight}>{activityHighlightsAr[highlight]}</li>
                   ))}
                 </ul>
-                <p className="practice-note">{activity.note}</p>
-                <Link className="text-link" href="/rendez-vous">
-                  Contacter le cabinet
-                </Link>
+                <p className="practice-note">{activitiesAr[activity.id].note}</p>
+                <a className="text-link" href="#contact">
+                  {uiAr.contactClinic}
+                </a>
               </div>
             </article>
           ))}
@@ -566,32 +602,36 @@ export default function Home() {
 
       <section className="section-shell faq-section reveal-section">
         <div className="section-heading faq-heading">
-          <h2>Informations pratiques avant la consultation.</h2>
+          <h2>{uiAr.faq.title}</h2>
         </div>
         <div className="faq-grid">
           {faqItems.map((item) => (
             <details key={item.question} className="faq-card">
               <summary>
-                <span>{item.question}</span>
+                <span>{faqAr[item.question].question}</span>
                 <i aria-hidden="true" />
               </summary>
               <div className="faq-answer">
-                <p>{item.answer}</p>
+                <p>{faqAr[item.question].answer}</p>
               </div>
             </details>
           ))}
         </div>
       </section>
 
+      {/* Avis Google : le chrome de la section est en arabe, mais les avis
+          eux-mêmes sont cités mot pour mot dans leur langue de publication
+          (français). Aucun avis n'est traduit ni reformulé, et la note
+          affichée est celle relevée sur la fiche Google (`app/seo.ts`). */}
       <section id="avis" className="section-shell reviews-section reveal-section">
         <div className="reviews-wrap">
-          <p className="eyebrow reviews-eyebrow">Avis Google</p>
-          <h2 className="reviews-title">Ce que disent les patients.</h2>
-          <p className="reviews-stars" aria-label="5 étoiles sur 5">
+          <p className="eyebrow reviews-eyebrow">{uiAr.reviews.eyebrow}</p>
+          <h2 className="reviews-title">{uiAr.reviews.title}</h2>
+          <p className="reviews-stars" aria-label={uiAr.starsAriaLabel}>
             ★★★★★
           </p>
 
-          <blockquote className="reviews-quote">
+          <blockquote className="reviews-quote" lang="fr" dir="ltr">
             <span className="reviews-mark" aria-hidden="true">
               «
             </span>{" "}
@@ -604,27 +644,37 @@ export default function Home() {
           <p className="reviews-credit">
             {googleReviews.featured.author ? (
               <>
-                <span>{googleReviews.featured.author}</span>
+                <span lang="fr" dir="ltr">
+                  {googleReviews.featured.author}
+                </span>
                 <span aria-hidden="true">·</span>
               </>
             ) : null}
-            <span>Avis Google</span>
+            <span>{uiAr.reviews.source}</span>
             <span aria-hidden="true">·</span>
-            <span>{googleReviews.featured.date}</span>
+            <span>{reviewDatesAr[googleReviews.featured.date]}</span>
           </p>
 
           <div className="reviews-signature">
             {googleReviews.items.map((item) => (
               <div className="reviews-micro" key={item.author}>
-                <span className="reviews-micro-stars" aria-label="5 étoiles sur 5">
+                <span
+                  className="reviews-micro-stars"
+                  aria-label={uiAr.starsAriaLabel}
+                >
                   ★★★★★
                 </span>
-                {/* Espaces insécables autour des guillemets français : le
-                    chevron fermant ne doit jamais rester seul sur sa ligne. */}
-                <p className="reviews-micro-quote">{`« ${item.excerpt} »`}</p>
-                <p className="reviews-micro-name">{item.author}</p>
+                {/* Verbatim : cité sans modification, dans sa langue d'origine. */}
+                <p className="reviews-micro-quote" lang="fr" dir="ltr">
+                  {`« ${item.excerpt} »`}
+                </p>
+                <p className="reviews-micro-name" lang="fr" dir="ltr">
+                  {item.author}
+                </p>
                 {item.translated ? (
-                  <p className="reviews-translated">Traduit de l’arabe</p>
+                  <p className="reviews-translated">
+                    {uiAr.reviews.translatedFromArabic}
+                  </p>
                 ) : null}
               </div>
             ))}
@@ -635,8 +685,12 @@ export default function Home() {
               <span className="reviews-average-star" aria-hidden="true">
                 ★
               </span>
-              <strong>{googleReviews.averageRating}</strong> sur 5 ·{" "}
-              {googleReviews.reviewCount} avis publiés sur Google
+              <strong>
+                <bdi dir="ltr">{googleReviews.averageRating}</bdi>
+              </strong>{" "}
+              {uiAr.reviews.ratingSuffix} ·{" "}
+              <bdi dir="ltr">{googleReviews.reviewCount}</bdi>{" "}
+              {uiAr.reviews.ratingCountLabel}
             </p>
             <a
               className="secondary-button"
@@ -644,10 +698,11 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              Voir les avis sur Google
+              {uiAr.reviews.seeOnGoogle}
             </a>
+            <p className="reviews-disclaimer">{uiAr.reviews.disclaimer}</p>
             <p className="reviews-disclaimer">
-              Extraits d’avis Google publics, cités sans modification.
+              {uiAr.reviews.originalLanguageNote}
             </p>
           </div>
         </div>
@@ -655,22 +710,22 @@ export default function Home() {
 
       <section className="section-shell gallery-section reveal-section">
         <div className="section-heading">
-          <h2>Découvrez les espaces du cabinet.</h2>
+          <h2>{uiAr.gallery.title}</h2>
         </div>
         <div className="gallery-grid">
           {gallery.map((image) => (
             <figure key={image.src} className={`gallery-card ${image.variant}`}>
               <Image
                 src={image.src}
-                alt={image.alt}
+                alt={galleryAr[image.src].alt}
                 width={900}
                 height={720}
                 loading="lazy"
                 sizes={image.sizes}
               />
               <figcaption>
-                <span>{image.label}</span>
-                <strong>{image.title}</strong>
+                <span>{galleryAr[image.src].label}</span>
+                <strong>{galleryAr[image.src].title}</strong>
               </figcaption>
             </figure>
           ))}
@@ -679,21 +734,24 @@ export default function Home() {
 
       <section className="diagnostic-band">
         <div>
-          <p>Approche médicale</p>
-          <h2>Écouter, expliquer, suivre.</h2>
+          <p>{uiAr.band.eyebrow}</p>
+          <h2>{uiAr.band.title}</h2>
         </div>
-        <p>
-          Parce qu’un traitement fonctionne mieux quand le patient comprend ce
-          qui se passe dans son corps, le cabinet met la pédagogie au cœur de la
-          consultation.
-        </p>
+        <p>{uiAr.band.text}</p>
       </section>
 
       <section id="cabinet" className="section-shell cabinet-section reveal-section">
         <div className="glass-panel">
-          <p className="eyebrow">Accès au cabinet</p>
-          <h2>Cabinet situé à Massira I, Témara.</h2>
-          <p>{clinicAddress}</p>
+          <p className="eyebrow">{uiAr.cabinet.eyebrow}</p>
+          <h2>
+            {uiAr.cabinet.title}{" "}
+            <span lang="fr" dir="ltr">
+              {uiAr.cabinet.titleLatin}
+            </span>
+          </h2>
+          <p className="ar-latin" dir="ltr">
+            {clinicAddress}
+          </p>
           <div className="contact-actions">
             <a
               className="primary-button"
@@ -701,15 +759,17 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              Ouvrir l’itinéraire GPS
+              {uiAr.cabinet.openDirections}
             </a>
             <a className="secondary-button" href={phoneHref}>
               <PhoneIcon />
-              Fixe · {clinicPhoneDisplay}
+              {uiAr.cabinet.landlinePrefix}
+              <bdi dir="ltr">{clinicPhoneDisplay}</bdi>
             </a>
             <a className="secondary-button" href={secondaryPhoneHref}>
               <PhoneIcon />
-              Portable · {clinicSecondaryPhoneDisplay}
+              {uiAr.cabinet.mobilePrefix}
+              <bdi dir="ltr">{clinicSecondaryPhoneDisplay}</bdi>
             </a>
             <a
               className="secondary-button"
@@ -718,29 +778,34 @@ export default function Home() {
               rel="noreferrer"
             >
               <WhatsAppIcon />
-              WhatsApp
+              {uiAr.whatsappLabel}
             </a>
           </div>
         </div>
         <div
           className="map-card google-map-card"
           role="group"
-          aria-label="Carte Google Maps du cabinet"
+          aria-label={uiAr.cabinet.mapGroupAriaLabel}
         >
           <MapEmbed
             embedSrc={mapsEmbedHref}
             mapsHref={mapsHref}
-            title="Carte Google Maps du cabinet Dr Abahou Sonia à Témara"
+            title={uiAr.cabinet.mapTitle}
             address={clinicAddress}
+            labels={arMapEmbedLabels}
           />
         </div>
         <div className="hours-panel">
-          <h3>Horaires d’ouverture</h3>
+          <h3>{uiAr.cabinet.hoursTitle}</h3>
           <div className="hours-list">
-            {hours.map(([day, time]) => (
+            {hoursAr.map(([day, time]) => (
               <div key={day}>
                 <span>{day}</span>
-                <strong>{time}</strong>
+                <strong>
+                  {/* Seules les plages chiffrées sont isolées en LTR ;
+                      « مغلق » reste dans le sens de lecture arabe. */}
+                  {/\d/.test(time) ? <bdi dir="ltr">{time}</bdi> : time}
+                </strong>
               </div>
             ))}
           </div>
@@ -752,27 +817,35 @@ export default function Home() {
         className="final-cta final-cta-dark section-shell reveal-section"
       >
         <div>
-          <p className="eyebrow">Rendez-vous</p>
-          <h2>Contacter le cabinet simplement.</h2>
-          <p>
-            Pour une consultation au cabinet, contactez le secrétariat par appel
-            ou WhatsApp afin de confirmer les disponibilités. La consultation
-            vidéo est en cours de préparation et sera proposée dès que le
-            parcours de réservation sera finalisé. En cas d’urgence vitale,
-            contactez immédiatement les services d’urgence.
-          </p>
+          <p className="eyebrow">{uiAr.finalCta.eyebrow}</p>
+          <h2>{uiAr.finalCta.title}</h2>
+          <p>{uiAr.finalCta.text}</p>
+          <p className="ar-medical-note">{uiAr.footnote}</p>
         </div>
         <div className="cta-stack">
-          <Link className="primary-button" href="/rendez-vous">
-            Rendez-vous
-          </Link>
-          <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
-            Voir l’itinéraire
+          <a className="primary-button" href={phoneHref}>
+            {uiAr.bookLabel}
+          </a>
+          <a
+            className="secondary-button"
+            href={whatsappHref}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {uiAr.whatsappLabel}
+          </a>
+          <a
+            className="secondary-button"
+            href={mapsHref}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {uiAr.finalCta.seeDirections}
           </a>
         </div>
       </section>
 
-      <SiteFooter />
+      <SiteFooter labels={arFooterLabels} />
     </main>
   );
 }

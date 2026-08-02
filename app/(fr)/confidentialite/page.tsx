@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { SiteHeader } from "../components/SiteHeader";
-import { SiteFooter } from "../components/SiteFooter";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 import {
   absoluteUrl,
   clinicAddress,
@@ -9,7 +9,7 @@ import {
   clinicPhoneDisplay,
   ogCoverImage,
   siteName,
-} from "../seo";
+} from "../../seo";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité | Dr Sonia Abahou",
