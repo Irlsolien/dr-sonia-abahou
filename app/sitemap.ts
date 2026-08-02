@@ -28,6 +28,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ],
     },
     {
+      url: absoluteUrl("/ar"),
+      lastModified: modifiedAt,
+      priority: 0.9,
+    },
+    {
       url: absoluteUrl(doctorProfilePath),
       lastModified: modifiedAt,
       images: [absoluteUrl("/dr-sonia-abahou.jpg")],

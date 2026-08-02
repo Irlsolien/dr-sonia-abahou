@@ -16,15 +16,14 @@ import {
 } from "../seo";
 
 /**
- * PRÉVISUALISATION ARABE — page non reliée au site public.
- *
- * Aucune page française ne pointe vers cette route, elle est absente du
- * sitemap et porte `robots: noindex, nofollow`. Tous les textes sont des
+ * VERSION ARABE — validée par la Dr Abahou et officiellement indexable
+ * (`robots: index, follow`), reliée au reste du site via `alternates` (ici
+ * et sur `app/layout.tsx`), le `sitemap.ts` et le lien « العربية » du site
+ * français (header, menu mobile, pied de page). Tous les textes sont des
  * traductions de contenus déjà validés (`app/seo.ts`, `app/page.tsx`) :
  * aucun fait, diplôme, horaire ou coordonnée n'a été ajouté. Le tableau de
  * correspondance français → arabe se trouve dans
- * `docs-cliente/TRADUCTION-AR-A-VALIDER.md` et doit être validé par la
- * Dr Abahou avant toute publication.
+ * `docs-cliente/TRADUCTION-AR-A-VALIDER.md`.
  */
 
 /**
@@ -55,9 +54,16 @@ export const metadata: Metadata = {
   title: "الدكتورة سونيا أبحو | أمراض الغدد الصماء والسكري بتمارة",
   description:
     "عيادة الدكتورة سونيا أبحو بتمارة: داء السكري، الغدة الدرقية، التغذية الطبية، الاضطرابات الهرمونية والأمراض الاستقلابية.",
+  alternates: {
+    canonical: "/ar",
+    languages: {
+      "fr-MA": "/",
+      ar: "/ar",
+    },
+  },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
 };
 

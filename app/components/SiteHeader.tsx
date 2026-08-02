@@ -42,6 +42,15 @@ export function SiteHeader({ internal = false }: SiteHeaderProps) {
         <a href={`${anchor}contact`}>Contact</a>
       </nav>
       <div className="header-actions">
+        <Link
+          className="header-lang-link"
+          href="/ar"
+          lang="ar"
+          dir="rtl"
+          hrefLang="ar"
+        >
+          العربية
+        </Link>
         <Link className="header-cta" href="/rendez-vous">
           Rendez-vous
         </Link>

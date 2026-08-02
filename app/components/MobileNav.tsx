@@ -147,6 +147,16 @@ export function MobileNav({ anchor }: MobileNavProps) {
         <Link href="/teleconsultation" onClick={close}>
           Téléconsultation
         </Link>
+        <Link
+          href="/ar"
+          lang="ar"
+          dir="rtl"
+          hrefLang="ar"
+          className="mobile-nav-lang-link"
+          onClick={close}
+        >
+          العربية
+        </Link>
       </nav>
     </div>
   );

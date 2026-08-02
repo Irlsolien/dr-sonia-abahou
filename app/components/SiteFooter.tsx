@@ -108,6 +108,9 @@ export function SiteFooter({ internal = false }: SiteFooterProps) {
             <Link href="/mentions-legales">Mentions légales</Link>
             <Link href="/confidentialite">Confidentialité</Link>
             <Link href="/cookies">Cookies</Link>
+            <Link href="/ar" lang="ar" dir="rtl" hrefLang="ar">
+              العربية
+            </Link>
           </nav>
         </div>
       </div>

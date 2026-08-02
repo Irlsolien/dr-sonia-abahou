@@ -274,6 +274,35 @@ img {
   gap: 8px;
 }
 
+/* Lien de langue vers /ar : pastille sobre, alignée sur les tailles de
+   touche des autres actions du header (44px). Masquée sous 1200px : le
+   header est déjà dense (nav à 6 entrées + CTA) et la version arabe reste
+   accessible via le menu mobile et le pied de page. */
+.header-lang-link {
+  display: none;
+  min-height: 44px;
+  align-items: center;
+  padding: 0 16px;
+  border: 1px solid rgba(7, 150, 173, 0.2);
+  border-radius: 999px;
+  color: var(--color-primary-deep);
+  font-family: var(--font-ar-ui, inherit);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.header-lang-link:hover,
+.header-lang-link:focus-visible {
+  background: white;
+  border-color: rgba(7, 150, 173, 0.4);
+}
+
+@media (min-width: 1200px) {
+  .header-lang-link {
+    display: inline-flex;
+  }
+}
+
 /* Navigation mobile : le déclencheur et le panneau ne sont rendus visibles
    qu'en dessous de 980px, là où la navigation principale est masquée. */
 .mobile-nav-trigger {

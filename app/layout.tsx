@@ -73,6 +73,10 @@ export const metadata: Metadata = {
   category: "Santé",
   alternates: {
     canonical: "/",
+    languages: {
+      "fr-MA": "/",
+      ar: "/ar",
+    },
   },
   robots: {
     index: true,
