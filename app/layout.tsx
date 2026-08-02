@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Public_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { NavigationProgress } from "./components/NavigationProgress";
 import {
@@ -155,6 +156,8 @@ export default function RootLayout({
           Aller au contenu
         </a>
         {children}
+        {/* Mesure d'audience anonyme et sans cookies (Vercel Web Analytics). */}
+        <Analytics />
       </body>
     </html>
   );

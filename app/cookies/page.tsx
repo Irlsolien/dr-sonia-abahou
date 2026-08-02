@@ -54,15 +54,16 @@ export default function CookiesPage() {
         <article>
           <h2>Cookies utilisés par le site</h2>
           <p>
-            À ce stade, le site ne met pas volontairement en place de cookies
-            publicitaires, de pixels marketing ou d’outil d’analyse d’audience
-            nécessitant un suivi individuel.
+            Le site ne met pas en place de cookies publicitaires, de pixels
+            marketing ou d’outil de suivi individuel des visiteurs.
           </p>
           <p>
-            La mise en place d’un suivi d’audience simple a été indiquée comme
-            “à discuter” dans le formulaire de validation. Aucun outil de mesure
-            d’audience n’est donc déclaré comme actif tant qu’il n’a pas été
-            confirmé par le cabinet.
+            Une mesure d’audience anonyme est réalisée via Vercel Web
+            Analytics, l’outil de l’hébergeur du site. Cet outil ne dépose
+            aucun cookie, ne suit pas les visiteurs individuellement et ne
+            collecte que des statistiques agrégées (pages consultées, type
+            d’appareil, pays). Aucune donnée nominative n’est associée à ces
+            mesures.
           </p>
         </article>
 
