@@ -56,3 +56,6 @@ next-env.d.ts
 
 # local audit reports (not for the public repo)
 /AUDIT-COMPLET-*.md
+
+# client-facing documents (not for the public repo)
+/*.docx

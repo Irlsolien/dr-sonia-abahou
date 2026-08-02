@@ -75,6 +75,12 @@ const gallery = [
     label: "Salle d’attente",
     title: "Un cadre sobre et confortable avant la consultation.",
   },
+  {
+    src: "/cabinet-consultation-patiente.webp",
+    alt: "Consultation au cabinet du Dr Sonia Abahou à Témara, avec une patiente dont le visage est flouté par respect de la confidentialité",
+    label: "Consultation",
+    title: "Un temps d’échange individuel, au calme, avec chaque patient.",
+  },
 ];
 
 const patientJourney = [
@@ -564,12 +570,15 @@ export default function Home() {
       </section>
 
       <section className="section-shell signature-section reveal-section">
-        <div className="signature-visual" aria-hidden="true">
-          <span className="signature-ring" />
-          <span className="signature-line line-a" />
-          <span className="signature-line line-b" />
-          <span className="signature-dot dot-a" />
-          <span className="signature-dot dot-b" />
+        <div className="signature-visual">
+          <Image
+            src="/dr-abahou-trophee-diabete.webp"
+            alt='Le Dr Sonia Abahou recevant une distinction "Tous Unis Contre le Diabète" lors d’un congrès de diabétologie'
+            width={800}
+            height={1062}
+            loading="lazy"
+            sizes="(max-width: 980px) 92vw, 38vw"
+          />
         </div>
         <div className="signature-copy">
           <p className="eyebrow">Signature médicale</p>
@@ -703,8 +712,8 @@ export default function Home() {
                 loading="lazy"
                 sizes={
                   index === 0
-                    ? "(max-width: 760px) 92vw, 58vw"
-                    : "(max-width: 760px) 92vw, 29vw"
+                    ? "(max-width: 760px) 92vw, 94vw"
+                    : "(max-width: 760px) 92vw, 31vw"
                 }
               />
               <figcaption>

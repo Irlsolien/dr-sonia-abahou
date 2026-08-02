@@ -23,6 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         absoluteUrl("/cabinet-accueil-reel.webp"),
         absoluteUrl("/cabinet-consultation-reel.webp"),
         absoluteUrl("/cabinet-attente-reel.webp"),
+        absoluteUrl("/cabinet-consultation-patiente.webp"),
+        absoluteUrl("/dr-abahou-trophee-diabete.webp"),
       ],
     },
     {
