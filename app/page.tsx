@@ -29,6 +29,7 @@ import {
   doctorSameAsProfiles,
   faqItems,
   googleMapsPlaceUrl,
+  googleReviews,
   lastModified,
   mapsQuery,
   services,
@@ -744,6 +745,60 @@ export default function Home() {
               </div>
             </details>
           ))}
+        </div>
+      </section>
+
+      <section id="avis" className="section-shell reviews-section reveal-section">
+        <div className="reviews-wrap">
+          <p className="eyebrow reviews-eyebrow">Avis Google</p>
+          <p className="reviews-stars" aria-label="5 étoiles sur 5">
+            ★★★★★
+          </p>
+
+          <blockquote className="reviews-quote">
+            <span className="reviews-mark" aria-hidden="true">
+              «
+            </span>{" "}
+            {googleReviews.featured.text}{" "}
+            <span className="reviews-mark" aria-hidden="true">
+              »
+            </span>
+          </blockquote>
+
+          <p className="reviews-credit">
+            <span>Avis Google</span>
+            <span aria-hidden="true">·</span>
+            <span>{googleReviews.featured.date}</span>
+          </p>
+
+          <div className="reviews-signature">
+            {googleReviews.items.map((item) => (
+              <div className="reviews-micro" key={item.author}>
+                <span className="reviews-micro-stars" aria-label="5 étoiles sur 5">
+                  ★★★★★
+                </span>
+                <p className="reviews-micro-quote">« {item.excerpt} »</p>
+                <p className="reviews-micro-name">{item.author}</p>
+                {item.translated ? (
+                  <p className="reviews-translated">Traduit de l’arabe</p>
+                ) : null}
+              </div>
+            ))}
+          </div>
+
+          <div className="reviews-cta">
+            <a
+              className="secondary-button"
+              href={googleReviews.sourceUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Voir les avis sur Google
+            </a>
+            <p className="reviews-disclaimer">
+              Extraits d’avis Google publics, cités sans modification.
+            </p>
+          </div>
         </div>
       </section>
 

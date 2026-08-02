@@ -231,6 +231,47 @@ export const faqItems = [
   },
 ] as const;
 
+export const googleReviews = {
+  sourceUrl: "https://share.google/clV4DBeIQmWRtQVPR",
+  featured: {
+    text: "On sent sa compréhension avant même qu'elle ne commence à expliquer.",
+    author: null as string | null, // prénom à confirmer par le client
+    date: "il y a 1 mois",
+  },
+  items: [
+    {
+      author: "Abdellatif Benchakroun",
+      excerpt: "… surtout très à l'écoute…",
+      date: "il y a 2 ans",
+      translated: false,
+    },
+    {
+      author: "maha chafachaf",
+      excerpt: "… tres competente et surtout modeste…",
+      date: "il y a 3 ans",
+      translated: false,
+    },
+    {
+      author: "Ghizlaine El Boukili",
+      excerpt: "… dévoué à ses patients…",
+      date: "il y a 5 ans",
+      translated: false,
+    },
+    {
+      author: "Sanae Msabni",
+      excerpt: "… surtout trés humaine.",
+      date: "il y a 3 mois",
+      translated: false,
+    },
+    {
+      author: "ibtissam Naim",
+      excerpt: "… explique très bien les choses…",
+      date: "il y a 2 mois",
+      translated: true,
+    },
+  ],
+} as const;
+
 export function absoluteUrl(path = "/") {
   return new URL(path, siteUrl).toString();
 }
