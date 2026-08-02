@@ -709,6 +709,14 @@ h3 {
   pointer-events: none;
 }
 
+/* Sur mobile, le filigrane (opacité 7 %) est imperceptible mais devient
+   l'élément LCP mesuré : on le retire sous 769px, dans les deux langues. */
+@media (max-width: 768px) {
+  .hero-monogram-watermark {
+    display: none;
+  }
+}
+
 .halo-disc {
   position: absolute;
   width: min(620px, 95vw);
