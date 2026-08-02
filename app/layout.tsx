@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Public_Sans } from "next/font/google";
 import "./globals.css";
-import { SiteInteractionFeedback } from "@/components/site-interaction-feedback";
 import {
   absoluteUrl,
   doctorName,
@@ -38,7 +37,7 @@ const bingSiteVerification = process.env.BING_SITE_VERIFICATION;
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0796ad",
+  themeColor: "#062b2c",
   colorScheme: "light",
 };
 
@@ -141,8 +140,11 @@ export default function RootLayout({
   return (
     <html lang="fr-MA" className={`${fraunces.variable} ${publicSans.variable}`}>
       <body>
+        {/* Lien d'évitement : premier élément focalisable du document. */}
+        <a className="skip-link" href="#main-content">
+          Aller au contenu
+        </a>
         {children}
-        <SiteInteractionFeedback />
       </body>
     </html>
   );

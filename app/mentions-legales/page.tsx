@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { SiteHeader } from "../components/SiteHeader";
+import { SiteFooter } from "../components/SiteFooter";
 import {
   absoluteUrl,
   clinicAddress,
@@ -49,11 +50,10 @@ export const metadata: Metadata = {
 
 export default function LegalNoticePage() {
   return (
-    <main className="legal-page">
+    <main id="main-content" className="legal-page">
+      <SiteHeader internal />
+
       <section className="legal-hero section-shell">
-        <Link className="legal-back" href="/">
-          ← Retour au site
-        </Link>
         <p className="eyebrow">Cadre légal</p>
         <h1>Mentions légales</h1>
         <p>
@@ -150,6 +150,8 @@ export default function LegalNoticePage() {
           </p>
         </article>
       </section>
+
+      <SiteFooter internal />
     </main>
   );
 }

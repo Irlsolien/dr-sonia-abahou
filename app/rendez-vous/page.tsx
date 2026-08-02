@@ -85,7 +85,7 @@ const appointmentStructuredData = {
 
 export default function AppointmentPage() {
   return (
-    <main className="appointment-page">
+    <main id="main-content" className="appointment-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

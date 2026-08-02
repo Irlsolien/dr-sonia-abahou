@@ -52,7 +52,7 @@ export function SiteFooter({ internal = false }: SiteFooterProps) {
           <span className="footer-logo-mark">
             <Image
               src="/dr-sonia-logo-cropped.webp"
-              alt="Logo Dr Abahou Sonia"
+              alt=""
               width={92}
               height={80}
               sizes="64px"

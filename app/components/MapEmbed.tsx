@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MapPinIcon } from "./Icons";
 
 type MapEmbedProps = {
@@ -23,6 +23,16 @@ type MapEmbedProps = {
  */
 export function MapEmbed({ embedSrc, mapsHref, title, address }: MapEmbedProps) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const mapsLinkRef = useRef<HTMLAnchorElement>(null);
+
+  // Le bouton « Afficher la carte » disparaît du DOM après le clic : sans
+  // reprise explicite, le focus retomberait sur <body>. On le replace donc
+  // sur le premier élément interactif de la carte affichée.
+  useEffect(() => {
+    if (isLoaded) {
+      mapsLinkRef.current?.focus();
+    }
+  }, [isLoaded]);
 
   if (!isLoaded) {
     return (
@@ -59,7 +69,7 @@ export function MapEmbed({ embedSrc, mapsHref, title, address }: MapEmbedProps) 
       <div className="map-overlay">
         <span>GPS</span>
         <strong>Massira I · Témara</strong>
-        <a href={mapsHref} target="_blank" rel="noreferrer">
+        <a ref={mapsLinkRef} href={mapsHref} target="_blank" rel="noreferrer">
           Voir sur Google Maps
         </a>
       </div>

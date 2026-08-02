@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { SiteHeader } from "../components/SiteHeader";
+import { SiteFooter } from "../components/SiteFooter";
 import { absoluteUrl, ogCoverImage, siteName } from "../seo";
 
 export const metadata: Metadata = {
@@ -37,11 +38,10 @@ export const metadata: Metadata = {
 
 export default function CookiesPage() {
   return (
-    <main className="legal-page">
+    <main id="main-content" className="legal-page">
+      <SiteHeader internal />
+
       <section className="legal-hero section-shell">
-        <Link className="legal-back" href="/">
-          ← Retour au site
-        </Link>
         <p className="eyebrow">Cookies</p>
         <h1>Politique cookies</h1>
         <p>
@@ -109,6 +109,8 @@ export default function CookiesPage() {
           </p>
         </article>
       </section>
+
+      <SiteFooter internal />
     </main>
   );
 }

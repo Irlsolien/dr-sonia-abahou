@@ -74,7 +74,7 @@ const teleconsultationFaq = [
 
 export default function TeleconsultationMaintenancePage() {
   return (
-    <main className="appointment-page teleconsultation-page">
+    <main id="main-content" className="appointment-page teleconsultation-page">
       <SiteHeader internal />
 
       <section className="appointment-hero teleconsultation-hero section-shell">
@@ -112,7 +112,7 @@ export default function TeleconsultationMaintenancePage() {
           {steps.map((step, index) => (
             <article key={step.title} className="teleconsultation-step">
               <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-              <h2>{step.title}</h2>
+              <h3>{step.title}</h3>
               <p>{step.text}</p>
             </article>
           ))}

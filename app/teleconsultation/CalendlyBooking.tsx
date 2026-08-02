@@ -98,7 +98,11 @@ export default function CalendlyBooking() {
 
       <CalendlyEventBridge onScheduled={() => setIsScheduled(true)} />
 
-      <div className={isScheduled ? "payment-panel is-visible" : "payment-panel"}>
+      <div
+        className={isScheduled ? "payment-panel is-visible" : "payment-panel"}
+        role="status"
+        aria-live="polite"
+      >
         <div>
           <p className="eyebrow">Demande enregistrée</p>
           <h2>Le cabinet prendra le relais.</h2>

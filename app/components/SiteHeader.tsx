@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { MobileNav } from "./MobileNav";
 
 type SiteHeaderProps = {
   /**
@@ -39,9 +40,12 @@ export function SiteHeader({ internal = false }: SiteHeaderProps) {
         <a href={`${anchor}cabinet`}>Cabinet</a>
         <a href={`${anchor}contact`}>Contact</a>
       </nav>
-      <Link className="header-cta" href="/rendez-vous">
-        Rendez-vous
-      </Link>
+      <div className="header-actions">
+        <Link className="header-cta" href="/rendez-vous">
+          Rendez-vous
+        </Link>
+        <MobileNav anchor={anchor} />
+      </div>
     </header>
   );
 }

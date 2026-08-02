@@ -184,7 +184,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   };
 
   return (
-    <main className="service-page">
+    <main id="main-content" className="service-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

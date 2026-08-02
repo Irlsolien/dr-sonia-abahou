@@ -56,30 +56,43 @@ const hours = [
   ["Dimanche", "Fermé"],
 ];
 
+/**
+ * Galerie asymétrique : les trois photos haute définition (1448×1086) occupent
+ * les grandes cartes ; la vue de consultation, de définition plus modeste
+ * (515×388), est présentée en carte compacte afin qu'elle reste nette.
+ */
 const gallery = [
   {
     src: "/cabinet-accueil-reel.webp",
     alt: "Accueil réel du cabinet du Dr Sonia Abahou à Témara",
     label: "Accueil",
     title: "Un accueil lumineux, calme et soigné.",
+    variant: "gallery-large",
+    sizes: "(max-width: 980px) 92vw, 1180px",
   },
   {
     src: "/cabinet-consultation-reel.webp",
     alt: "Salle de consultation du cabinet du Dr Sonia Abahou à Témara",
     label: "Consultation",
     title: "Un espace professionnel consacré à l’écoute et au suivi.",
+    variant: "gallery-wide",
+    sizes: "(max-width: 980px) 92vw, 580px",
   },
   {
     src: "/cabinet-attente-reel.webp",
     alt: "Salle d’attente du cabinet du Dr Sonia Abahou à Témara",
     label: "Salle d’attente",
     title: "Un cadre sobre et confortable avant la consultation.",
+    variant: "gallery-wide",
+    sizes: "(max-width: 980px) 92vw, 580px",
   },
   {
     src: "/cabinet-consultation-patiente.webp",
     alt: "Consultation au cabinet du Dr Sonia Abahou à Témara, avec une patiente dont le visage est flouté par respect de la confidentialité",
     label: "Consultation",
     title: "Un temps d’échange individuel, au calme, avec chaque patient.",
+    variant: "gallery-compact",
+    sizes: "(max-width: 980px) 92vw, 380px",
   },
 ];
 
@@ -425,12 +438,46 @@ const structuredData = {
 
 export default function Home() {
   return (
-    <main>
+    <main id="main-content">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <SiteHeader />
+
+      {/* Barre d'actions fixe : placée tôt dans le DOM pour être atteinte
+          rapidement au clavier et par les lecteurs d'écran, son positionnement
+          en bas d'écran restant purement visuel (position: fixed). */}
+      <nav className="mobile-action-bar" aria-label="Actions rapides du cabinet">
+        <a
+          className="mobile-action-bar-item"
+          href={phoneHref}
+          aria-label="Appeler le cabinet"
+        >
+          <PhoneIcon />
+          <span>Appeler</span>
+        </a>
+        <a
+          className="mobile-action-bar-item"
+          href={whatsappHref}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Contacter le cabinet sur WhatsApp"
+        >
+          <WhatsAppIcon />
+          <span>WhatsApp</span>
+        </a>
+        <a
+          className="mobile-action-bar-item"
+          href={mapsHref}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Itinéraire vers le cabinet"
+        >
+          <MapPinIcon />
+          <span>Itinéraire</span>
+        </a>
+      </nav>
 
       <section id="accueil" className="hero section-shell">
         <div className="hero-copy">
@@ -444,20 +491,24 @@ export default function Home() {
             diabète, des troubles thyroïdiens, de la nutrition médicale, des
             troubles hormonaux et des maladies métaboliques.
           </p>
-          <div className="brand-signature-card" aria-label="Signature du cabinet">
+          <div
+            className="brand-signature-card"
+            role="group"
+            aria-label="Signature du cabinet"
+          >
             <Image
-              src="/dr-sonia-logo-cropped.webp"
-              alt="Logo Dr Abahou Sonia"
-              width={244}
-              height={210}
-              sizes="244px"
+              src="/dr-sonia-monogram-clean.webp"
+              alt=""
+              width={200}
+              height={180}
+              sizes="112px"
             />
             <div>
               <span>Cabinet Dr Abahou Sonia</span>
-            <strong>Endocrinologie & maladies métaboliques.</strong>
+              <strong>Endocrinologie et maladies métaboliques.</strong>
             </div>
           </div>
-          <div className="hero-actions" aria-label="Actions rapides">
+          <div className="hero-actions" role="group" aria-label="Actions rapides">
             <Link className="primary-button" href="/rendez-vous">
               Prendre rendez-vous
             </Link>
@@ -477,7 +528,9 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hero-visual" aria-label="Portrait du Dr Sonia Abahou">
+        {/* Conteneur décoratif : le portrait porte déjà son texte alternatif,
+            un aria-label ici serait redondant et sans rôle porteur. */}
+        <div className="hero-visual">
           <Image
             className="hero-monogram-watermark"
             src="/dr-sonia-monogram.webp"
@@ -699,22 +752,15 @@ export default function Home() {
           <h2>Découvrez les espaces du cabinet.</h2>
         </div>
         <div className="gallery-grid">
-          {gallery.map((image, index) => (
-            <figure
-              key={image.src}
-              className={index === 0 ? "gallery-card gallery-large" : "gallery-card"}
-            >
+          {gallery.map((image) => (
+            <figure key={image.src} className={`gallery-card ${image.variant}`}>
               <Image
                 src={image.src}
                 alt={image.alt}
                 width={900}
                 height={720}
                 loading="lazy"
-                sizes={
-                  index === 0
-                    ? "(max-width: 760px) 92vw, 94vw"
-                    : "(max-width: 760px) 92vw, 31vw"
-                }
+                sizes={image.sizes}
               />
               <figcaption>
                 <span>{image.label}</span>
@@ -726,7 +772,6 @@ export default function Home() {
       </section>
 
       <section className="diagnostic-band">
-        <div className="signal-line" />
         <div>
           <p>Approche médicale</p>
           <h2>Écouter, expliquer, suivre.</h2>
@@ -771,7 +816,11 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <div className="map-card google-map-card" aria-label="Carte Google Maps du cabinet">
+        <div
+          className="map-card google-map-card"
+          role="group"
+          aria-label="Carte Google Maps du cabinet"
+        >
           <MapEmbed
             embedSrc={mapsEmbedHref}
             mapsHref={mapsHref}
@@ -792,14 +841,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="final-cta section-shell reveal-section">
+      <section
+        id="contact"
+        className="final-cta final-cta-dark section-shell reveal-section"
+      >
         <div>
           <p className="eyebrow">Rendez-vous</p>
           <h2>Contacter le cabinet simplement.</h2>
           <p>
-            Pour confirmer les disponibilités, contactez le cabinet par
-            téléphone. En cas d’urgence vitale, contactez immédiatement les
-            services d’urgence.
+            Pour une consultation au cabinet, contactez le secrétariat par appel
+            ou WhatsApp afin de confirmer les disponibilités. La consultation
+            vidéo est en cours de préparation et sera proposée dès que le
+            parcours de réservation sera finalisé. En cas d’urgence vitale,
+            contactez immédiatement les services d’urgence.
           </p>
         </div>
         <div className="cta-stack">
@@ -812,53 +866,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-shell teleconsultation-teaser reveal-section">
-        <div>
-          <p className="eyebrow">Rendez-vous</p>
-          <h2>Choisir entre cabinet et visioconférence.</h2>
-          <p>
-            Pour une consultation au cabinet, contactez le secrétariat par appel
-            ou WhatsApp. La consultation vidéo est en cours de préparation et
-            sera proposée dès que le parcours de réservation sera finalisé.
-          </p>
-        </div>
-        <Link className="primary-button" href="/rendez-vous">
-          Rendez-vous
-        </Link>
-      </section>
-
       <SiteFooter />
-
-      <div className="mobile-action-bar" aria-label="Actions rapides du cabinet">
-        <a
-          className="mobile-action-bar-item"
-          href={phoneHref}
-          aria-label="Appeler le cabinet"
-        >
-          <PhoneIcon />
-          <span>Appeler</span>
-        </a>
-        <a
-          className="mobile-action-bar-item"
-          href={whatsappHref}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Contacter le cabinet sur WhatsApp"
-        >
-          <WhatsAppIcon />
-          <span>WhatsApp</span>
-        </a>
-        <a
-          className="mobile-action-bar-item"
-          href={mapsHref}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Itinéraire vers le cabinet"
-        >
-          <MapPinIcon />
-          <span>Itinéraire</span>
-        </a>
-      </div>
     </main>
   );
 }

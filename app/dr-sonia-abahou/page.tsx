@@ -153,7 +153,7 @@ const profileStructuredData = {
 
 export default function DoctorProfilePage() {
   return (
-    <main className="service-page profile-page">
+    <main id="main-content" className="service-page profile-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
