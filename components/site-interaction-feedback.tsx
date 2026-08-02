@@ -159,9 +159,20 @@ export function SiteInteractionFeedback() {
   const dismissTimer = useRef<number | null>(null);
 
   useEffect(() => {
-    const storedFeedback = sessionStorage.getItem(nextSuccessKey);
+    // La lecture de sessionStorage doit rester dans un effet (donnée
+    // uniquement disponible côté client, une fois la page montée), mais
+    // l'appel à setFeedback est déplacé dans un callback nommé afin de ne
+    // pas déclencher un rendu en cascade synchrone depuis le corps de
+    // l'effet — même schéma que les callbacks handleClick/handleOffline/
+    // handleOnline ci-dessous, qui appellent aussi setFeedback depuis un
+    // callback plutôt que depuis le corps direct de l'effet.
+    const applyStoredFeedback = () => {
+      const storedFeedback = sessionStorage.getItem(nextSuccessKey);
 
-    if (storedFeedback) {
+      if (!storedFeedback) {
+        return;
+      }
+
       sessionStorage.removeItem(nextSuccessKey);
 
       try {
@@ -183,7 +194,9 @@ export function SiteInteractionFeedback() {
           description: "La navigation est prête.",
         });
       }
-    }
+    };
+
+    applyStoredFeedback();
   }, []);
 
   useEffect(() => {
