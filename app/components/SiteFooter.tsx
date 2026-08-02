@@ -67,6 +67,7 @@ export const frFooterLabels: FooterLabels = {
       lang: "ar",
       dir: "rtl",
       hrefLang: "ar",
+      isLangSwitch: true,
     },
   ],
 };
@@ -75,6 +76,16 @@ type SiteFooterProps = {
   /** `true` sur les pages internes : les ancres pointent vers `/#ancre`. */
   internal?: boolean;
   labels?: FooterLabels;
+  /**
+   * Préfixe d'ancre explicite (`/ar#` sur les pages internes arabes, dont
+   * les ancres de section vivent sur `/ar`).
+   */
+  anchorPrefix?: string;
+  /**
+   * Destination contextuelle du lien marqué `isLangSwitch` : sur une page
+   * motif, la bascule mène à la page jumelle (`/ar/<slug>` ↔ `/<slug>`).
+   */
+  langSwitchHref?: string;
 };
 
 const phoneHref = `tel:${clinicPhoneInternational}`;
@@ -87,8 +98,15 @@ const whatsappHref = `https://wa.me/${appointment.whatsappPhone}?text=${encodeUR
 export function SiteFooter({
   internal = false,
   labels = frFooterLabels,
+  anchorPrefix,
+  langSwitchHref,
 }: SiteFooterProps) {
-  const anchor = internal ? "/#" : "#";
+  const anchor = anchorPrefix ?? (internal ? "/#" : "#");
+  const pages = langSwitchHref
+    ? labels.pages.map((page) =>
+        page.isLangSwitch ? { ...page, href: langSwitchHref } : page,
+      )
+    : labels.pages;
 
   const socialLinks: SocialItem[] = [
     {
@@ -189,7 +207,7 @@ export function SiteFooter({
                 {section.label}
               </a>
             ))}
-            {labels.pages.map((page) => (
+            {pages.map((page) => (
               <Link
                 key={page.href}
                 href={page.href}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { IBM_Plex_Sans_Arabic, Noto_Naskh_Arabic } from "next/font/google";
+import Link from "next/link";
+import { arabicFontVariables } from "./fonts";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { MapEmbed } from "../components/MapEmbed";
@@ -69,33 +70,6 @@ import {
  * Google sont cités **mot pour mot dans leur langue de publication** ; ils ne
  * sont pas traduits.
  */
-
-/**
- * Typographie arabe, chargée uniquement sur cette page (les variables CSS
- * sont posées sur le conteneur racine de `/ar` et sur le panneau de
- * navigation mobile, projeté hors de ce conteneur).
- * IBM Plex Sans Arabic : interface, très lisible aux petites tailles et
- * disponible aussi en latin (adresse, sigles, numéros).
- * Noto Naskh Arabic : naskh sobre et contrasté, équivalent arabe du serif
- * éditorial utilisé côté français, réservé aux titres.
- */
-const arabicUi = IBM_Plex_Sans_Arabic({
-  subsets: ["arabic", "latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-ar-ui",
-  fallback: ["Segoe UI", "Tahoma", "Arial", "sans-serif"],
-});
-
-const arabicSerif = Noto_Naskh_Arabic({
-  subsets: ["arabic"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-ar-serif",
-  fallback: ["Times New Roman", "serif"],
-});
-
-const arabicFontVariables = `${arabicUi.variable} ${arabicSerif.variable}`;
 
 export const metadata: Metadata = {
   title: metaAr.title,
@@ -542,43 +516,37 @@ export default function ArabicHomePage() {
         </div>
       </section>
 
-      {/* Index des motifs : il n'existe pas de page arabe par motif, les
-          lignes ne sont donc pas cliquables et renvoient vers le téléphone
-          et WhatsApp en bas de section. */}
+      {/* Index des motifs : chaque ligne mène à la page arabe du motif
+          (`/ar/<slug>`), miroir exact de l'accueil français. */}
       <section id="soins" className="section-shell care-section reveal-section">
         <div className="section-heading">
           <h2>{uiAr.care.title}</h2>
         </div>
         <div className="care-index">
           {services.map((service, index) => (
-            <div key={service.slug} className="care-row">
+            <Link
+              key={service.slug}
+              className="care-row"
+              href={`/ar/${service.slug}`}
+            >
               <span className="care-row-number">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <span className="care-row-copy">
-                <h3 className="care-row-title">{servicesAr[service.slug].title}</h3>
+                <span className="care-row-title-wrap">
+                  <h3 className="care-row-title">
+                    {servicesAr[service.slug].title}
+                  </h3>
+                </span>
                 <p className="care-row-description">
                   {servicesAr[service.slug].text}
                 </p>
               </span>
-            </div>
+              <span className="care-row-arrow" aria-hidden="true">
+                ←
+              </span>
+            </Link>
           ))}
-        </div>
-        <p className="ar-care-note">{uiAr.care.note}</p>
-        <div className="contact-actions ar-care-actions">
-          <a className="secondary-button" href={phoneHref}>
-            <PhoneIcon />
-            {uiAr.callLabel}
-          </a>
-          <a
-            className="secondary-button"
-            href={whatsappHref}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <WhatsAppIcon />
-            {uiAr.whatsappLabel}
-          </a>
         </div>
       </section>
 

@@ -22,6 +22,12 @@ export type NavLink = {
   hrefLang?: string;
   lang?: string;
   dir?: "ltr" | "rtl";
+  /**
+   * `true` sur le lien de bascule de langue : sa destination peut alors être
+   * rendue contextuelle (page jumelle du motif affiché) via la prop
+   * `langSwitchHref` de `SiteFooter`.
+   */
+  isLangSwitch?: boolean;
 };
 
 export type LangSwitch = {
@@ -75,6 +81,13 @@ type MobileNavProps = {
   anchor: string;
   labels?: MobileNavLabels;
   /**
+   * Destination contextuelle du lien de langue (page jumelle du motif
+   * affiché). La surcharge est appliquée ici, et non dans `SiteHeader` :
+   * `frMobileNavLabels` est exporté par ce module `"use client"`, donc vu du
+   * serveur comme une référence de module qu'on ne peut pas décomposer.
+   */
+  langSwitchHref?: string;
+  /**
    * Le panneau est projeté dans `<body>`, hors du conteneur de la page : ses
    * attributs de langue et ses variables de police doivent donc être portés
    * par le panneau lui-même (utilisé par la version arabe).
@@ -93,10 +106,14 @@ type MobileNavProps = {
 export function MobileNav({
   anchor,
   labels = frMobileNavLabels,
+  langSwitchHref,
   panelLang,
   panelDir,
   panelClassName,
 }: MobileNavProps) {
+  const langSwitch = langSwitchHref
+    ? { ...labels.langSwitch, href: langSwitchHref }
+    : labels.langSwitch;
   const [isOpen, setIsOpen] = useState(false);
   // Le panneau est projeté dans <body> : `.site-header` porte un
   // `backdrop-filter`, qui fait de lui le bloc conteneur de ses descendants
@@ -229,14 +246,14 @@ export function MobileNav({
           ),
         )}
         <Link
-          href={labels.langSwitch.href}
-          lang={labels.langSwitch.lang}
-          dir={labels.langSwitch.dir}
-          hrefLang={labels.langSwitch.hrefLang}
+          href={langSwitch.href}
+          lang={langSwitch.lang}
+          dir={langSwitch.dir}
+          hrefLang={langSwitch.hrefLang}
           className="mobile-nav-lang-link"
           onClick={close}
         >
-          {labels.langSwitch.label}
+          {langSwitch.label}
         </Link>
       </nav>
     </div>

@@ -31,6 +31,7 @@ import type { MapEmbedLabels } from "./components/MapEmbed";
 import type { MobileNavLabels } from "./components/MobileNav";
 
 type ServiceSlug = (typeof services)[number]["slug"];
+type ServicePoint = (typeof services)[number]["points"][number];
 type ActivityId = (typeof clinicalActivities)[number]["id"];
 type ActivityHighlight = (typeof clinicalActivities)[number]["highlights"][number];
 type GallerySrc = (typeof gallery)[number]["src"];
@@ -45,6 +46,11 @@ type ReviewDate =
    ========================================================================== */
 
 export const arOgImage = "/og-cover-ar.jpg";
+
+/** Image de partage arabe d'une page motif (`/og-<slug>-ar.jpg`). */
+export function arServiceOgImage(slug: ServiceSlug) {
+  return `/og-${slug}-ar.jpg`;
+}
 
 export const metaAr = {
   title: "الدكتورة سونيا أبحو | طبيبة الغدد الصماء والسكري بتمارة",
@@ -338,7 +344,6 @@ export const uiAr = {
 
   care: {
     title: "الحالات التي تُتابَع في العيادة.",
-    note: "لأي سؤال حول أحد أسباب الاستشارة، يمكن التواصل مع العيادة هاتفيًا أو عبر واتساب.",
   },
 
   practice: {
@@ -459,7 +464,14 @@ export const arFooterLabels: FooterLabels = {
     { href: "/mentions-legales", label: "المعلومات القانونية", hrefLang: "fr" },
     { href: "/confidentialite", label: "الخصوصية", hrefLang: "fr" },
     { href: "/cookies", label: "ملفات تعريف الارتباط", hrefLang: "fr" },
-    { href: "/", label: "Français", lang: "fr", dir: "ltr", hrefLang: "fr" },
+    {
+      href: "/",
+      label: "Français",
+      lang: "fr",
+      dir: "ltr",
+      hrefLang: "fr",
+      isLangSwitch: true,
+    },
   ],
 };
 
@@ -494,3 +506,259 @@ export const arCgmDemoLabels: CgmDemoLabels = {
   ],
   disclaimer: "لا تُعرض أي معلومة شخصية.",
 };
+
+/* ==========================================================================
+   Pages motifs arabes — `/ar/<slug>`
+   Miroir strict de `app/[serviceSlug]/page.tsx`. Aucun fait nouveau : chaque
+   chaîne traduit un texte français déjà validé (`app/seo.ts` pour les
+   données de service, `app/[serviceSlug]/page.tsx` pour les libellés de
+   page). Les slugs restent identiques d'une langue à l'autre : seule la
+   langue du contenu change, ce qui permet un appariement `hreflang` exact
+   page à page.
+   ========================================================================== */
+
+/**
+ * Traduction des quatre points de chaque motif. Le `Record` est indexé sur
+ * l'union des points français : ajouter, retirer ou reformuler un point dans
+ * `app/seo.ts` casse la compilation tant que l'arabe n'a pas suivi.
+ */
+export const servicePointsAr: Record<ServicePoint, string> = {
+  /* Diabète et équilibre glycémique */
+  "Point sur les glycémies, les symptômes et les habitudes de vie.":
+    "وقفة على قياسات السكر في الدم والأعراض وأنماط الحياة.",
+  "Lecture des bilans biologiques et adaptation du suivi médical.":
+    "قراءة التحاليل البيولوجية وملاءمة التتبّع الطبي.",
+  "Prévention des complications et explication des objectifs glycémiques.":
+    "الوقاية من المضاعفات وشرح أهداف توازن السكر في الدم.",
+  "Accompagnement du diabète gestationnel selon le contexte de grossesse.":
+    "مواكبة سكري الحمل حسب سياق الحمل.",
+
+  /* Thyroïde, goitre et nodules */
+  "Bilan d’hypothyroïdie, d’hyperthyroïdie, de goitre ou de nodules.":
+    "تقييم قصور الغدة الدرقية أو فرط نشاطها أو تضخّم الغدة أو العُقيدات.",
+  "Interprétation des analyses hormonales et des examens disponibles.":
+    "قراءة التحاليل الهرمونية والفحوصات المتاحة.",
+  "Surveillance médicale et orientation selon l’évolution clinique.":
+    "مراقبة طبية وتوجيه حسب التطوّر السريري.",
+  "Explications simples pour comprendre le rôle de la thyroïde.":
+    "شروحات بسيطة لفهم دور الغدة الدرقية.",
+
+  /* Nutrition, obésité et maladies métaboliques */
+  "Évaluation du contexte médical, métabolique et nutritionnel.":
+    "تقييم السياق الطبي والاستقلابي والتغذوي.",
+  "Accompagnement autour du poids sans discours culpabilisant.":
+    "مواكبة في موضوع الوزن دون خطاب يُشعر بالذنب.",
+  "Prévention des risques métaboliques et cardiovasculaires.":
+    "الوقاية من المخاطر الاستقلابية والقلبية الوعائية.",
+  "Objectifs réalistes, progressifs et compatibles avec la vie quotidienne.":
+    "أهداف واقعية وتدريجية وملائمة للحياة اليومية.",
+
+  /* Surrénales, hypophyse et parathyroïdes */
+  "Orientation du bilan endocrinien selon le contexte clinique.":
+    "توجيه تقييم الغدد الصماء حسب السياق السريري.",
+  "Suivi des pathologies surrénaliennes, hypophysaires ou parathyroïdiennes.":
+    "تتبّع أمراض الغدد الكظرية أو الغدة النخامية أو الغدد جارات الدرقية.",
+  "Interprétation des examens et explication des résultats.":
+    "قراءة الفحوصات وشرح النتائج.",
+  "Coordination du suivi médical lorsque des avis complémentaires sont nécessaires.":
+    "تنسيق التتبّع الطبي عند الحاجة إلى آراء تكميلية.",
+
+  /* Hyperprolactinémie et hypoglycémies */
+  "Analyse des symptômes, du contexte et des examens déjà réalisés.":
+    "تحليل الأعراض والسياق والفحوصات المُنجَزة سابقًا.",
+  "Orientation du bilan complémentaire lorsque nécessaire.":
+    "توجيه التقييم التكميلي عند الاقتضاء.",
+  "Explications claires sur les résultats et les objectifs du suivi.":
+    "شروحات واضحة حول النتائج وأهداف التتبّع.",
+  "Suivi adapté à l’évolution clinique du patient.":
+    "تتبّع ملائم للتطوّر السريري للمريض.",
+
+  /* Éducation thérapeutique */
+  "Explication des résultats, des traitements et des objectifs de suivi.":
+    "شرح النتائج والعلاجات وأهداف التتبّع.",
+  "Aide à la compréhension du diabète, du métabolisme et des troubles hormonaux.":
+    "المساعدة على فهم داء السكري والاستقلاب والاضطرابات الهرمونية.",
+  "Conseils généraux pour préparer la consultation et poser les bonnes questions.":
+    "نصائح عامة لتهيئة الاستشارة وطرح الأسئلة المناسبة.",
+  "Approche pédagogique centrée sur le patient.":
+    "مقاربة بيداغوجية محورها المريض.",
+};
+
+/**
+ * Métadonnées arabes par motif : traduction du `seoTitle` et de la
+ * `description` français, plus des mots-clés locaux en arabe. Le titre et le
+ * `title`/`text`/`intro` du motif restent centralisés dans `servicesAr`.
+ */
+export const servicePagesAr: Record<
+  ServiceSlug,
+  { seoTitle: string; description: string; keywords: readonly string[] }
+> = {
+  "diabete-temara": {
+    seoTitle: "طبيبة السكري بتمارة | تتبّع داء السكري | الدكتورة سونيا أبحو",
+    description:
+      "تتبّع داء السكري بتمارة: السكري من النوع الأول والنوع الثاني وسكري الحمل وتوازن السكر في الدم والمواكبة الطبية.",
+    keywords: [
+      "طبيبة السكري تمارة",
+      "تتبّع داء السكري تمارة",
+      "السكري من النوع الثاني",
+      "سكري الحمل",
+      "طبيبة الغدد الصماء تمارة",
+    ],
+  },
+  "thyroide-temara": {
+    seoTitle: "طبيبة الغدة الدرقية بتمارة | أمراض الغدد الصماء | الدكتورة سونيا أبحو",
+    description:
+      "استشارة في أمراض الغدد الصماء بتمارة لاضطرابات الغدة الدرقية وتضخّم الغدة والعُقيدات وسرطانات الغدة الدرقية والتتبّع الطبي.",
+    keywords: [
+      "الغدة الدرقية تمارة",
+      "طبيبة الغدة الدرقية تمارة",
+      "عُقيدة درقية",
+      "تضخّم الغدة الدرقية",
+      "طبيبة الغدد الصماء تمارة",
+    ],
+  },
+  "nutrition-maladies-metaboliques-temara": {
+    seoTitle: "التغذية الطبية بتمارة | السمنة والاستقلاب | الدكتورة سونيا أبحو",
+    description:
+      "مواكبة في التغذية الطبية بتمارة: السمنة والوزن ومقاومة الأنسولين والاستقلاب والوقاية والأمراض الاستقلابية.",
+    keywords: [
+      "التغذية الطبية تمارة",
+      "السمنة تمارة",
+      "الأمراض الاستقلابية",
+      "مقاومة الأنسولين",
+      "طبيبة الغدد الصماء تمارة",
+    ],
+  },
+  "surrenales-hypophyse-parathyroides-temara": {
+    seoTitle:
+      "الغدد الكظرية والغدة النخامية والغدد جارات الدرقية بتمارة | الدكتورة سونيا أبحو",
+    description:
+      "استشارة في أمراض الغدد الصماء بتمارة لأمراض الغدد الكظرية والغدة النخامية والغدد جارات الدرقية.",
+    keywords: [
+      "الغدد الكظرية تمارة",
+      "الغدة النخامية تمارة",
+      "الغدد جارات الدرقية تمارة",
+      "أمراض الغدد الصماء تمارة",
+      "طبيبة الغدد الصماء تمارة",
+    ],
+  },
+  "hyperprolactinemie-hypoglycemies-temara": {
+    seoTitle:
+      "فرط برولاكتين الدم ونقص السكر في الدم بتمارة | الدكتورة سونيا أبحو",
+    description:
+      "استشارة في أمراض الغدد الصماء بتمارة لفرط برولاكتين الدم ونقص السكر في الدم والاختلالات الهرمونية التي تتكفّل بها العيادة.",
+    keywords: [
+      "فرط برولاكتين الدم تمارة",
+      "نقص السكر في الدم تمارة",
+      "اختلال هرموني",
+      "أمراض الغدد الصماء تمارة",
+      "طبيبة الغدد الصماء تمارة",
+    ],
+  },
+  "education-therapeutique-temara": {
+    seoTitle: "التربية العلاجية بتمارة | داء السكري والتتبّع | الدكتورة سونيا أبحو",
+    description:
+      "التربية العلاجية بتمارة لمساعدة المرضى على فهم مرضهم وتتبّعهم وأهدافهم الطبية بشكل أفضل.",
+    keywords: [
+      "التربية العلاجية تمارة",
+      "تتبّع المرضى تمارة",
+      "التربية العلاجية لداء السكري",
+      "بيداغوجيا أمراض الغدد الصماء",
+      "طبيبة الغدد الصماء تمارة",
+    ],
+  },
+};
+
+/**
+ * Libellés de la page motif arabe. Traduction stricte des libellés français
+ * de `app/[serviceSlug]/page.tsx`. Les segments qui encadrent une donnée
+ * latine (numéros, adresse) sont fournis en préfixes afin d'être composés en
+ * JSX avec un `<bdi dir="ltr">`.
+ */
+export const serviceUiAr = {
+  heroEyebrow: "عيادة أمراض الغدد الصماء بتمارة",
+  /** Suffixe du titre : « <motif> بتمارة ». */
+  titleSuffix: "بتمارة",
+  directionsLabel: "الاطّلاع على الاتجاهات",
+
+  specialtyLabel: "التخصّص",
+  pointsTitle: "ما الذي تتيح الاستشارة تناوله",
+
+  copy: {
+    title: "معلومات واضحة، دون أن تُغني عن الرأي الطبي",
+    text: "تعرض هذه الصفحة معطيات عامة مفيدة لفهم أسباب الاستشارة بشكل أفضل. ويتوقّف التكفّل دائمًا على التاريخ الطبي والأعراض والفحوصات المتاحة والتقييم المُنجَز أثناء الاستشارة.",
+  },
+
+  /* Reprise à l'identique dans le bloc éditorial et dans la troisième étape
+     de prise de contact, comme côté français. */
+  preparationNote:
+    "لتهيئة الموعد، يُنصح بإحضار آخر التحاليل والوصفات والتقارير وفحوصات التصوير والعلاجات الجارية.",
+
+  contact: {
+    eyebrow: "التواصل",
+    title: "كيف يتم التواصل مع العيادة.",
+    callTitle: "الاتصال أو المراسلة عبر واتساب",
+    landlinePrefix: "الهاتف الثابت: ",
+    /* « وواتساب » plutôt que « / واتساب » : la barre oblique est un caractère
+       neutre, elle se détache en fin de ligne dans un paragraphe RTL. */
+    mobilePrefix: "الهاتف المحمول وواتساب: ",
+    slotTitle: "الاتفاق على موعد مع السكرتارية",
+    slotText: "تؤكّد السكرتارية الأوقات المتاحة والترتيبات العملية للموعد.",
+    documentsTitle: "إحضار تحاليلكم وعلاجاتكم الجارية",
+  },
+
+  editorial: {
+    eyebrow: "معلومات وثقة",
+    title: "محتوى إعلامي من عيادة الدكتورة سونيا أبحو.",
+    textBefore:
+      "تعرض هذه الصفحة أسباب الاستشارة بالعيادة دون إجراء تشخيص عن بُعد. حُدِّثت المعلومات في ",
+    textAfter: ".",
+    profileLink: "الاطّلاع على مسار الدكتورة سونيا أبحو",
+  },
+
+  faq: {
+    eyebrow: "أسئلة متكرّرة",
+    title: "قبل التواصل مع العيادة.",
+  },
+
+  related: {
+    eyebrow: "أسباب استشارة أخرى تُتابَع بالعيادة",
+    title: "استكشاف أسباب الاستشارة الأخرى بالعيادة.",
+    homeLink: "الاطّلاع على جميع الحالات في الصفحة الرئيسية",
+  },
+
+  finalCta: {
+    eyebrow: "الموعد",
+    title: "التواصل مع عيادة الدكتورة سونيا أبحو.",
+    addressPrefix: "العنوان: ",
+    landlinePrefix: "الهاتف الثابت: ",
+    mobilePrefix: "الهاتف المحمول وواتساب: ",
+  },
+
+  breadcrumbHome: "الصفحة الرئيسية",
+} as const;
+
+/**
+ * FAQ arabe d'une page motif : même composition que la version française
+ * (une question construite à partir du motif, puis deux questions communes).
+ */
+export function serviceFaqItemsAr(slug: ServiceSlug) {
+  const service = servicesAr[slug];
+
+  return [
+    {
+      question: `ما الذي يمكن تناوله في استشارة حول ${service.title}؟`,
+      answer: `${service.text} ويتوقّف التكفّل الدقيق على التاريخ الطبي والأعراض والفحوصات المتاحة.`,
+    },
+    {
+      question: "كيف يمكن تهيئة الاستشارة؟",
+      answer:
+        "يُنصح بإحضار التحاليل الحديثة والوصفات والتقارير وفحوصات التصوير المفيدة ولائحة العلاجات الجارية، دون تغيير أي علاج بدون رأي طبي.",
+    },
+    {
+      question: "كيف يمكن حجز موعد مع العيادة؟",
+      answer:
+        "يُؤكَّد الموعد حاليًا هاتفيًا أو عبر واتساب لدى عيادة الدكتورة سونيا أبحو بتمارة.",
+    },
+  ] as const;
+}

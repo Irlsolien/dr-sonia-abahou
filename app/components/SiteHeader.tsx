@@ -54,6 +54,18 @@ type SiteHeaderProps = {
   labels?: HeaderLabels;
   /** Cible du logo ; par défaut `/` (pages internes) ou `#accueil`. */
   homeHref?: string;
+  /**
+   * Préfixe d'ancre explicite (`/ar#` sur les pages internes arabes, dont
+   * les ancres de section vivent sur `/ar` et non sur l'accueil français).
+   * Par défaut : `#` sur une page d'accueil, `/#` sur une page interne.
+   */
+  anchorPrefix?: string;
+  /**
+   * Destination contextuelle du lien de langue : sur une page motif, la
+   * bascule mène à la page jumelle (`/ar/<slug>` ↔ `/<slug>`) plutôt qu'à la
+   * racine de l'autre version.
+   */
+  langSwitchHref?: string;
   /** Attributs du panneau mobile projeté dans `<body>` (version arabe). */
   panelLang?: string;
   panelDir?: "ltr" | "rtl";
@@ -64,12 +76,17 @@ export function SiteHeader({
   internal = false,
   labels = frHeaderLabels,
   homeHref,
+  anchorPrefix,
+  langSwitchHref,
   panelLang,
   panelDir,
   panelClassName,
 }: SiteHeaderProps) {
-  const anchor = internal ? "/#" : "#";
+  const anchor = anchorPrefix ?? (internal ? "/#" : "#");
   const brandHref = homeHref ?? (internal ? "/" : "#accueil");
+  const langSwitch = langSwitchHref
+    ? { ...labels.langSwitch, href: langSwitchHref }
+    : labels.langSwitch;
 
   return (
     <header className="site-header">
@@ -95,12 +112,12 @@ export function SiteHeader({
       <div className="header-actions">
         <Link
           className="header-lang-link"
-          href={labels.langSwitch.href}
-          lang={labels.langSwitch.lang}
-          dir={labels.langSwitch.dir}
-          hrefLang={labels.langSwitch.hrefLang}
+          href={langSwitch.href}
+          lang={langSwitch.lang}
+          dir={langSwitch.dir}
+          hrefLang={langSwitch.hrefLang}
         >
-          {labels.langSwitch.label}
+          {langSwitch.label}
         </Link>
         {labels.cta.href.startsWith("/") ? (
           <Link className="header-cta" href={labels.cta.href}>
@@ -114,6 +131,7 @@ export function SiteHeader({
         <MobileNav
           anchor={anchor}
           labels={labels.mobile}
+          langSwitchHref={langSwitchHref}
           panelLang={panelLang}
           panelDir={panelDir}
           panelClassName={panelClassName}

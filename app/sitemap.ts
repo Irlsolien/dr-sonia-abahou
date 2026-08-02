@@ -41,6 +41,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl(`/${service.slug}`),
       lastModified: modifiedAt,
     })),
+    /* Pages motifs arabes : mêmes slugs, priorité alignée sur `/ar`. */
+    ...services.map((service) => ({
+      url: absoluteUrl(`/ar/${service.slug}`),
+      lastModified: modifiedAt,
+      priority: 0.9,
+    })),
     {
       url: absoluteUrl("/rendez-vous"),
       lastModified: modifiedAt,

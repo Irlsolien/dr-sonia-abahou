@@ -80,6 +80,14 @@ export async function generateMetadata({
     keywords: [...service.keywords],
     alternates: {
       canonical,
+      /* Page jumelle arabe : même slug, seule la langue du contenu change. */
+      languages: {
+        "fr-MA": canonical,
+        ar: `/ar/${service.slug}`,
+        /* Version servie par défaut aux visiteurs dont la langue n'est ni le
+           français ni l'arabe. */
+        "x-default": canonical,
+      },
     },
     openGraph: {
       title: service.seoTitle,
@@ -213,7 +221,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
         }}
       />
 
-      <SiteHeader internal />
+      {/* La bascule de langue mène à la page arabe du même motif. */}
+      <SiteHeader internal langSwitchHref={`/ar/${service.slug}`} />
 
       <section className="service-hero section-shell">
         <p className="eyebrow">Cabinet d’endocrinologie à Témara</p>
@@ -355,7 +364,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </div>
       </section>
 
-      <SiteFooter internal />
+      <SiteFooter internal langSwitchHref={`/ar/${service.slug}`} />
     </main>
   );
 }
