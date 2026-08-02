@@ -778,6 +778,12 @@ export default function Home() {
           </blockquote>
 
           <p className="reviews-credit">
+            {googleReviews.featured.author ? (
+              <>
+                <span>{googleReviews.featured.author}</span>
+                <span aria-hidden="true">·</span>
+              </>
+            ) : null}
             <span>Avis Google</span>
             <span aria-hidden="true">·</span>
             <span>{googleReviews.featured.date}</span>

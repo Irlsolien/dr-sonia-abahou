@@ -240,7 +240,7 @@ export const googleReviews = {
     "https://www.google.com/maps/place/Cabinet+Endocrino+Dr.+Sonya+Abahou/@33.928046,-6.8987233,17z",
   featured: {
     text: "On sent sa compréhension avant même qu'elle ne commence à expliquer.",
-    author: null as string | null, // prénom à confirmer par le client
+    author: "Karima" as string | null,
     date: "il y a 1 mois",
   },
   items: [
