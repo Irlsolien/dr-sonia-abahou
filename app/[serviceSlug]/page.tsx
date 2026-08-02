@@ -288,7 +288,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </p>
         </div>
         <Link className="secondary-button" href={doctorProfilePath}>
-          Voir le parcours de {doctorName}
+          Voir le parcours du {doctorName}
         </Link>
       </section>
 

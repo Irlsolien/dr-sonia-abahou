@@ -37,6 +37,7 @@ export function SiteHeader({ internal = false }: SiteHeaderProps) {
         <a href={`${anchor}expertise`}>Expertise</a>
         <a href={`${anchor}soins`}>Soins</a>
         <a href={`${anchor}pratiques`}>Pratiques</a>
+        <a href={`${anchor}avis`}>Avis</a>
         <a href={`${anchor}cabinet`}>Cabinet</a>
         <a href={`${anchor}contact`}>Contact</a>
       </nav>

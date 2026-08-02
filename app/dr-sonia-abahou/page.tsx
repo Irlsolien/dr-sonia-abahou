@@ -191,10 +191,10 @@ export default function DoctorProfilePage() {
       <section className="section-shell profile-intro-grid">
         <figure className="profile-portrait">
           <Image
-            src="/dr-sonia-abahou.jpg"
+            src="/dr-sonia-abahou.webp"
             alt="Portrait du Dr Sonia Abahou, endocrinologue à Témara"
-            width={600}
-            height={600}
+            width={560}
+            height={560}
             priority
             sizes="(max-width: 760px) 88vw, 420px"
           />

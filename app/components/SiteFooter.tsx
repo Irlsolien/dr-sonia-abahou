@@ -5,6 +5,7 @@ import { MapPinIcon, PhoneIcon, WhatsAppIcon } from "./Icons";
 import {
   appointment,
   clinicAddress,
+  clinicName,
   clinicPhoneDisplay,
   clinicPhoneInternational,
   clinicSecondaryPhoneDisplay,
@@ -51,10 +52,10 @@ export function SiteFooter({ internal = false }: SiteFooterProps) {
         <div className="footer-col footer-brand">
           <span className="footer-logo-mark">
             <Image
-              src="/dr-sonia-logo-cropped.webp"
+              src="/dr-sonia-monogram-clean.webp"
               alt=""
-              width={92}
-              height={80}
+              width={200}
+              height={180}
               sizes="64px"
             />
           </span>
@@ -110,6 +111,10 @@ export function SiteFooter({ internal = false }: SiteFooterProps) {
           </nav>
         </div>
       </div>
+
+      <p className="footer-legal section-shell">
+        © {new Date().getFullYear()} {clinicName}
+      </p>
     </footer>
   );
 }

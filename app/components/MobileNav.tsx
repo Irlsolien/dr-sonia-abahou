@@ -23,6 +23,7 @@ const sections = [
   { href: "expertise", label: "Expertise" },
   { href: "soins", label: "Soins" },
   { href: "pratiques", label: "Pratiques" },
+  { href: "avis", label: "Avis" },
   { href: "cabinet", label: "Cabinet" },
   { href: "contact", label: "Contact" },
 ];

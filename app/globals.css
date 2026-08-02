@@ -40,7 +40,9 @@ html {
 }
 
 body {
+  display: flex;
   min-height: 100vh;
+  flex-direction: column;
   margin: 0;
   /* Pas d'overflow ici : `html` porte déjà `overflow-x: hidden`. Le cumuler
      sur `body` ferait de celui-ci un conteneur de défilement distinct, ce qui
@@ -53,6 +55,32 @@ body {
     Inter,
     Arial,
     sans-serif;
+}
+
+/* Pied de page collé au bas de la fenêtre. Sur les pages courtes
+   (téléconsultation, rendez-vous, pages légales) le contenu ne remplissait
+   pas la hauteur de l'écran : le dégradé clair du corps réapparaissait sous
+   le pied de page sombre. `<main>` contient l'ensemble de la page, en-tête
+   et pied de page compris ; il devient donc lui-même une colonne flexible.
+   Les éléments `position: fixed` du corps (barre de progression, lien
+   d'évitement, panneau de navigation mobile) sont hors flux : ils ne
+   deviennent pas des éléments flexibles. */
+body > main {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+/* Cale souple insérée juste avant le pied de page : elle n'occupe de la
+   place que si la page est plus courte que la fenêtre, ce qui préserve
+   intégralement les espacements existants sur les pages longues. */
+body > main::after {
+  flex: 1 0 0;
+  content: "";
+}
+
+body > main > .site-footer {
+  order: 1;
 }
 
 a {
@@ -281,6 +309,12 @@ img {
 }
 
 @media (max-width: 980px) {
+  /* Le halo conique du héros est calé sur la colonne de droite : une fois la
+     grille repliée en une colonne, il traversait le H1. */
+  .hero::before {
+    display: none;
+  }
+
   .mobile-nav-trigger {
     display: inline-flex;
   }
@@ -516,6 +550,9 @@ h1 {
 }
 
 h2 {
+  /* Le preflight Tailwind remet toutes les marges à zéro : sans cette
+     valeur, les chapôs se collent au titre. */
+  margin-bottom: 18px;
   color: var(--color-ink);
   font-family: var(--font-serif), Georgia, serif;
   /* Plafonné sous l'échelle du h1 pour préserver la hiérarchie. */
@@ -523,6 +560,15 @@ h2 {
   font-weight: 600;
   letter-spacing: -0.025em;
   line-height: 1.06;
+}
+
+/* En-têtes de section centrés et bandeaux : le conteneur porte déjà son
+   espacement, le titre n'a pas besoin de marge basse supplémentaire. */
+.section-heading h2:last-child,
+.practice-heading h2:last-child,
+.faq-heading h2:last-child,
+.diagnostic-band h2:last-child {
+  margin-bottom: 0;
 }
 
 h3 {
@@ -835,9 +881,11 @@ h3 {
   left: 0;
 }
 
+/* Remontée au-dessus de la légende du portrait (« Endocrinologie ·
+   Diabétologie · Nutrition »), qu'elle recouvrait partiellement. */
 .card-thyroid {
   right: 0;
-  bottom: 18%;
+  bottom: 26%;
   animation-delay: -1.8s;
 }
 
@@ -1563,7 +1611,9 @@ h3 {
   max-width: 640px;
   margin: 0 0 22px;
   font-family: var(--font-serif), Georgia, serif;
-  font-size: clamp(2.15rem, 4.2vw, 4.7rem);
+  /* Plafonné sous l'échelle du h2 de section pour préserver la hiérarchie :
+     un h3 ne doit pas dépasser le titre qui l'introduit. */
+  font-size: clamp(1.9rem, 3vw, 2.7rem);
   font-weight: 600;
   line-height: 1.06;
   letter-spacing: -0.025em;
@@ -1647,27 +1697,9 @@ h3 {
 
 .gallery-compact {
   grid-column: 3 / span 2;
-  min-height: 0;
-  height: 236px;
-}
-
-.gallery-compact figcaption {
-  right: 14px;
-  bottom: 14px;
-  left: 14px;
-  gap: 6px;
-  padding: 13px 14px;
-  border-radius: 18px;
-}
-
-.gallery-compact figcaption span {
-  padding: 5px 9px;
-  font-size: 0.66rem;
-}
-
-.gallery-compact figcaption strong {
-  font-size: 0.98rem;
-  line-height: 1.24;
+  /* `min-height` et non `height` : la légende compacte peut respirer sur
+     deux lignes sans être rognée. */
+  min-height: 236px;
 }
 
 .gallery-card img {
@@ -1722,6 +1754,28 @@ h3 {
   max-width: 520px;
   font-size: clamp(1.25rem, 2.4vw, 2.1rem);
   line-height: 1.02;
+}
+
+/* Variante compacte : déclarée après les règles génériques et qualifiée par
+   `.gallery-card` pour l'emporter à coup sûr (les deux blocs partagent la
+   même spécificité, l'ordre seul les départageait auparavant). */
+.gallery-card.gallery-compact figcaption {
+  right: 14px;
+  bottom: 14px;
+  left: 14px;
+  gap: 6px;
+  padding: 13px 14px;
+  border-radius: 18px;
+}
+
+.gallery-card.gallery-compact figcaption span {
+  padding: 5px 9px;
+  font-size: 0.66rem;
+}
+
+.gallery-card.gallery-compact figcaption strong {
+  font-size: 0.98rem;
+  line-height: 1.24;
 }
 
 .diagnostic-band {
@@ -2128,10 +2182,13 @@ h3 {
   color: var(--color-ink);
 }
 
+/* Pas de padding bas : `<main>` englobe aussi le pied de page, cette réserve
+   dessinait une bande de fond clair sous le bloc sombre. L'espace au-dessus
+   du pied de page est déjà assuré par sa marge et son propre padding. */
 .appointment-page,
 .teleconsultation-page {
   min-height: 100vh;
-  padding: 32px 0 70px;
+  padding: 32px 0 0;
 }
 
 .appointment-hero,
@@ -2642,6 +2699,17 @@ h3 {
   color: white;
 }
 
+/* Ligne légale discrète, sous les colonnes du pied de page. Sélecteur
+   qualifié pour l'emporter sur `.site-footer p` (max-width: 340px). */
+.site-footer .footer-legal {
+  max-width: none;
+  margin: 40px auto 0;
+  padding-top: 22px;
+  border-top: 1px solid rgba(167, 243, 208, 0.16);
+  color: rgba(230, 246, 246, 0.55);
+  font-size: 0.8rem;
+}
+
 .social-tooltip {
   display: inline-flex;
   align-items: center;
@@ -2757,9 +2825,10 @@ h3 {
   font-weight: 600;
 }
 
+/* Voir `.appointment-page` : aucun padding bas sous le pied de page. */
 .legal-page {
   min-height: 100vh;
-  padding: 32px 0 70px;
+  padding: 32px 0 0;
 }
 
 .legal-hero {
@@ -3064,6 +3133,16 @@ h3 {
   margin-bottom: 22px;
 }
 
+/* Titre de section sobre : volontairement en retrait de la citation
+   monumentale qui le suit, pour ne pas créer deux niveaux concurrents. */
+.reviews-title {
+  max-width: 620px;
+  margin: 0 auto 22px;
+  font-size: clamp(1.55rem, 2.4vw, 2.05rem);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
 .reviews-stars {
   margin: 0 0 24px;
   color: var(--color-star);
@@ -3137,15 +3216,21 @@ h3 {
   font-size: 0.96rem;
   font-style: italic;
   line-height: 1.45;
+  /* Évite les dernières lignes orphelines (le guillemet fermant se
+     retrouvait seul sur sa ligne). */
+  text-wrap: pretty;
 }
 
+/* Les avis Google sont saisis avec des casses hétérogènes (« maha
+   chafachaf », « ibtissam Naim »). Le rendu est homogénéisé à l'affichage,
+   sans toucher aux données citées dans `app/seo.ts`. */
 .reviews-micro-name {
   margin: 0;
   color: var(--color-muted);
   font-size: 0.86rem;
   font-weight: 600;
-  font-variant-caps: small-caps;
   letter-spacing: 0.03em;
+  text-transform: capitalize;
 }
 
 .reviews-translated {
@@ -3311,6 +3396,12 @@ h3 {
   margin-top: 28px;
 }
 
+/* Paragraphes successifs du bloc éditorial : sans marge, ils formaient un
+   pavé compact difficile à lire. */
+.service-copy p + p {
+  margin-top: 14px;
+}
+
 .service-editorial-note {
   display: flex;
   align-items: center;
@@ -3326,7 +3417,7 @@ h3 {
 
 .service-editorial-note h2 {
   margin: 6px 0 10px;
-  color: var(--color-primary-deep);
+  color: var(--color-ink);
   font-size: clamp(1.6rem, 3vw, 2.5rem);
   letter-spacing: -0.04em;
 }
@@ -3407,8 +3498,10 @@ h3 {
   margin-top: 0;
 }
 
+/* Aligné sur la largeur de la section (et donc sur son titre) : la limite à
+   900 px décalait la liste de 140 px par rapport au h2 qui l'introduit. */
 .care-index-compact {
-  max-width: 900px;
+  max-width: none;
   margin-inline: auto;
 }
 
@@ -4292,6 +4385,20 @@ h3 {
     border-radius: 17px;
   }
 
+  /* Holter glycémique sur mobile : le badge « 04 » masquait la mention
+     « Suivi sécurisé » du tableau et la pastille « Aperçu du suivi »
+     passait sur la ligne de confidentialité. Le badge est retiré (le
+     numéro reste porté par l'ordre de lecture) et la légende repasse dans
+     le flux, sous le tableau. */
+  .practice-media-dashboard .practice-number {
+    display: none;
+  }
+
+  .practice-media-dashboard figcaption {
+    position: static;
+    margin: 12px auto 0;
+  }
+
   .gallery-card,
   .gallery-large,
   .gallery-wide {
@@ -4300,8 +4407,7 @@ h3 {
   }
 
   .gallery-compact {
-    min-height: 0;
-    height: 196px;
+    min-height: 196px;
     border-radius: 24px;
   }
 
@@ -4660,6 +4766,7 @@ h3 {
 #expertise,
 #soins,
 #pratiques,
+#avis,
 #cabinet,
 #contact {
   scroll-margin-top: clamp(90px, 14vw, 120px);
@@ -4670,8 +4777,12 @@ h3 {
 }
 
 @media (max-width: 768px) {
-  body {
-    padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  /* Réserve pour la barre d'actions fixe. Portée par le pied de page et non
+     par `body` : sur `body`, cette bande restait peinte avec le fond clair
+     du corps, visible sous le pied de page sombre sur les pages dépourvues
+     de barre d'actions (téléconsultation, rendez-vous, pages légales). */
+  .site-footer {
+    padding-bottom: calc(88px + env(safe-area-inset-bottom));
   }
 
   .floating-card,

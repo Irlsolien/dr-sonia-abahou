@@ -187,7 +187,7 @@ function CgmDemoDashboard() {
         <div className="cgm-demo-chart-heading">
           <div>
             <span>Tendance glycémique</span>
-            <strong>Tendance sur 24 heures</strong>
+            <strong>Sur 24 heures</strong>
           </div>
           <span className="cgm-demo-value">112 <small>mg/dL</small></span>
         </div>
@@ -545,11 +545,11 @@ export default function Home() {
         <div className="hero-visual">
           <Image
             className="hero-monogram-watermark"
-            src="/dr-sonia-monogram.webp"
-              alt=""
-              width={420}
-              height={260}
-              sizes="(max-width: 760px) 80vw, 420px"
+            src="/dr-sonia-monogram-watermark.webp"
+            alt=""
+            width={420}
+            height={377}
+            sizes="(max-width: 760px) 80vw, 420px"
             aria-hidden="true"
           />
           <div className="halo-disc" />
@@ -562,7 +562,7 @@ export default function Home() {
           </div>
           <div className="portrait-card">
             <Image
-              src="/dr-sonia-abahou.jpg"
+              src="/dr-sonia-abahou.webp"
               alt="Portrait du Dr Sonia Abahou, endocrinologue à Témara"
               width={420}
               height={470}
@@ -585,7 +585,7 @@ export default function Home() {
           </div>
           <div className="floating-card card-thyroid">
             <span>Thyroïde</span>
-            <strong>Bilan & orientation</strong>
+            <strong>Bilan et orientation</strong>
           </div>
         </div>
       </section>
@@ -762,6 +762,7 @@ export default function Home() {
       <section id="avis" className="section-shell reviews-section reveal-section">
         <div className="reviews-wrap">
           <p className="eyebrow reviews-eyebrow">Avis Google</p>
+          <h2 className="reviews-title">Ce que disent les patients.</h2>
           <p className="reviews-stars" aria-label="5 étoiles sur 5">
             ★★★★★
           </p>
@@ -788,7 +789,9 @@ export default function Home() {
                 <span className="reviews-micro-stars" aria-label="5 étoiles sur 5">
                   ★★★★★
                 </span>
-                <p className="reviews-micro-quote">« {item.excerpt} »</p>
+                {/* Espaces insécables autour des guillemets français : le
+                    chevron fermant ne doit jamais rester seul sur sa ligne. */}
+                <p className="reviews-micro-quote">{`« ${item.excerpt} »`}</p>
                 <p className="reviews-micro-name">{item.author}</p>
                 {item.translated ? (
                   <p className="reviews-translated">Traduit de l’arabe</p>
