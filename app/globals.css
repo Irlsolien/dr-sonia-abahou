@@ -4910,3 +4910,293 @@ h3 {
     color: var(--color-primary-deep);
   }
 }
+
+/* ==========================================================================
+   PRÉVISUALISATION ARABE (/ar)
+   Bloc isolé : chaque règle est préfixée par `.ar-page`, aucune page
+   française n'est affectée. Les polices arabes ne sont chargées que sur
+   cette route (variables posées sur le conteneur racine de la page).
+   ========================================================================== */
+
+.ar-page {
+  direction: rtl;
+  text-align: right;
+  font-family: var(--font-ar-ui), "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+/* L'arabe est une écriture cursive : tout crénage (négatif comme positif)
+   disloque les ligatures. On neutralise les `letter-spacing` du thème
+   français et on ouvre l'interlignage, les hampes et jambages arabes
+   demandant plus de hauteur que le latin. */
+.ar-page h1,
+.ar-page h2,
+.ar-page h3,
+.ar-page p,
+.ar-page span,
+.ar-page strong,
+.ar-page small,
+.ar-page a {
+  letter-spacing: normal;
+}
+
+.ar-page h1,
+.ar-page h2,
+.ar-page h3,
+.ar-page .care-row-title,
+.ar-page .hours-panel h3 {
+  font-family: var(--font-ar-serif), "Times New Roman", serif;
+}
+
+.ar-page h1 {
+  margin-bottom: 24px;
+  font-size: clamp(2rem, 4.2vw, 3.15rem);
+  font-weight: 700;
+  line-height: 1.5;
+  text-wrap: balance;
+}
+
+.ar-page h2 {
+  margin-bottom: 18px;
+  font-size: clamp(1.55rem, 2.9vw, 2.3rem);
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.ar-page h3 {
+  font-size: 1.18rem;
+  line-height: 1.7;
+}
+
+.ar-page p {
+  line-height: 1.95;
+}
+
+/* Les capitales n'existent pas en arabe : `text-transform` est neutralisé. */
+.ar-page .eyebrow {
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-transform: none;
+}
+
+.ar-page .ar-lead,
+.ar-page .section-text {
+  max-width: 680px;
+  margin-bottom: 28px;
+  color: var(--color-muted);
+  font-size: clamp(1.02rem, 1.5vw, 1.15rem);
+}
+
+.ar-page .ar-note,
+.ar-page .ar-care-note {
+  max-width: 640px;
+  margin: 22px 0 0;
+  color: var(--color-muted);
+  font-size: 0.98rem;
+}
+
+/* Séquences latines conservées telles quelles (adresse postale, sigles,
+   numéros) : forcées en LTR mais alignées à droite pour rester dans la
+   colonne de lecture arabe. */
+.ar-page .ar-latin {
+  direction: ltr;
+  text-align: right;
+  unicode-bidi: isolate;
+}
+
+.ar-page .ar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 26px 0 4px;
+}
+
+.ar-page .ar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ar-page .ar-brand img {
+  width: 56px;
+  height: auto;
+}
+
+.ar-page .ar-brand span {
+  display: grid;
+  gap: 2px;
+}
+
+.ar-page .ar-brand strong {
+  color: var(--color-ink);
+  font-family: var(--font-ar-serif), "Times New Roman", serif;
+  font-size: 1.04rem;
+}
+
+.ar-page .ar-brand small {
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
+.ar-page .ar-header-cta {
+  padding: 0 20px;
+  font-size: 0.92rem;
+}
+
+.ar-page .ar-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+  padding: clamp(44px, 6vw, 78px) 0 clamp(40px, 5vw, 70px);
+}
+
+.ar-page .ar-portrait {
+  margin: 0;
+  padding: 14px;
+  border: 1px solid rgba(7, 150, 173, 0.16);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.ar-page .ar-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 26px;
+  object-fit: cover;
+}
+
+.ar-page .ar-portrait figcaption {
+  display: grid;
+  gap: 4px;
+  padding: 16px 6px 4px;
+}
+
+.ar-page .ar-portrait figcaption span {
+  color: var(--color-primary-deep);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.ar-page .ar-portrait figcaption strong {
+  color: var(--color-ink);
+  font-size: 0.98rem;
+}
+
+/* Index des motifs : pas de page arabe par motif dans cette prévisualisation,
+   les lignes ne sont donc pas cliquables et la colonne de la flèche est
+   supprimée. */
+.ar-page .care-row {
+  grid-template-columns: 46px minmax(0, 1fr);
+}
+
+.ar-page .care-row:hover {
+  background: transparent;
+}
+
+.ar-page .care-row-title {
+  font-size: clamp(1.28rem, 2.1vw, 1.85rem);
+  line-height: 1.5;
+}
+
+.ar-page .care-row-description {
+  max-width: 720px;
+  line-height: 1.85;
+}
+
+.ar-page .ar-care-note,
+.ar-page .ar-care-actions {
+  max-width: 960px;
+  margin-inline: auto;
+}
+
+.ar-page .ar-care-actions {
+  margin-top: 18px;
+  padding-inline: 14px;
+}
+
+.ar-page .credential-card p {
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+/* La prévisualisation n'embarque pas la carte Google (ses libellés sont en
+   français) : la section passe donc sur une seule colonne pour ne pas
+   laisser une moitié vide à côté du panneau d'accès. */
+.ar-page .cabinet-section {
+  grid-template-columns: 1fr;
+}
+
+.ar-page .hours-list strong {
+  font-variant-numeric: tabular-nums;
+}
+
+/* La flèche des liens textuels suit le sens de lecture. */
+.ar-page .text-link::after {
+  margin-right: 8px;
+  margin-left: 0;
+  content: "\2190";
+}
+
+.ar-page .text-link:hover::after {
+  transform: translateX(-4px);
+}
+
+.ar-page .ar-footnote {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 28px;
+  margin-top: clamp(38px, 6vw, 70px);
+  padding: 26px 0 44px;
+  border-top: 1px solid rgba(7, 150, 173, 0.16);
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
+.ar-page .ar-footnote p {
+  max-width: 720px;
+  margin: 0;
+  line-height: 1.8;
+}
+
+.ar-page .ar-footnote a {
+  color: var(--color-primary-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .ar-page .ar-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .ar-page .ar-portrait {
+    order: -1;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .ar-page .ar-header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .ar-page .care-row {
+    grid-template-columns: 34px minmax(0, 1fr);
+  }
+}
+
+/* Réserve pour la barre d'actions fixe, portée ici par la note de bas de
+   page puisque la prévisualisation n'utilise pas le pied de page français. */
+@media (max-width: 768px) {
+  .ar-page .ar-footnote {
+    padding-bottom: calc(88px + env(safe-area-inset-bottom));
+  }
+}
