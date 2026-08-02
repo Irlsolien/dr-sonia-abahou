@@ -4957,10 +4957,12 @@ h3 {
 }
 
 /* ==========================================================================
-   PRÉVISUALISATION ARABE (/ar)
-   Bloc isolé : chaque règle est préfixée par `.ar-page`, aucune page
+   VERSION ARABE (/ar)
+   Bloc isolé : chaque règle est préfixée par `.ar-page` (ou `.ar-nav-panel`
+   pour le panneau de navigation mobile, projeté dans <body>). Aucune page
    française n'est affectée. Les polices arabes ne sont chargées que sur
-   cette route (variables posées sur le conteneur racine de la page).
+   cette route (variables posées sur le conteneur racine de `/ar` et sur le
+   panneau projeté).
    ========================================================================== */
 
 .ar-page {
@@ -4980,6 +4982,9 @@ h3 {
 .ar-page span,
 .ar-page strong,
 .ar-page small,
+.ar-page b,
+.ar-page li,
+.ar-page summary,
 .ar-page a {
   letter-spacing: normal;
 }
@@ -4988,7 +4993,10 @@ h3 {
 .ar-page h2,
 .ar-page h3,
 .ar-page .care-row-title,
-.ar-page .hours-panel h3 {
+.ar-page .hours-panel h3,
+.ar-page .brand-mark strong,
+.ar-page .brand-signature-card strong,
+.ar-page .site-footer strong {
   font-family: var(--font-ar-serif), "Times New Roman", serif;
 }
 
@@ -5016,123 +5024,137 @@ h3 {
   line-height: 1.95;
 }
 
-/* Les capitales n'existent pas en arabe : `text-transform` est neutralisé. */
-.ar-page .eyebrow {
-  font-size: 0.86rem;
-  font-weight: 600;
+/* Les capitales n'existent pas en arabe : `text-transform` est neutralisé
+   partout où le thème français met un libellé en majuscules. */
+.ar-page .eyebrow,
+.ar-page .practice-eyebrow,
+.ar-page .cgm-demo-live,
+.ar-page .doctor-status-card span,
+.ar-page .brand-signature-card span,
+.ar-page .gallery-card figcaption span,
+.ar-page .practice-media figcaption,
+.ar-page .diagnostic-band p:first-child,
+.ar-page .footer-col h3,
+.ar-nav-panel .mobile-nav-panel-head span {
   text-transform: none;
 }
 
-.ar-page .ar-lead,
+.ar-page .eyebrow {
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.ar-page .hero-lead,
 .ar-page .section-text {
   max-width: 680px;
   margin-bottom: 28px;
-  color: var(--color-muted);
   font-size: clamp(1.02rem, 1.5vw, 1.15rem);
 }
 
-.ar-page .ar-note,
 .ar-page .ar-care-note {
-  max-width: 640px;
-  margin: 22px 0 0;
+  max-width: 960px;
+  margin: 22px auto 0;
   color: var(--color-muted);
-  font-size: 0.98rem;
+  font-size: 0.96rem;
+}
+
+.ar-page .ar-medical-note {
+  max-width: 660px;
+  margin: 18px 0 0;
+  color: #c8f7ef;
+  font-size: 0.9rem;
 }
 
 /* Séquences latines conservées telles quelles (adresse postale, sigles,
    numéros) : forcées en LTR mais alignées à droite pour rester dans la
    colonne de lecture arabe. */
-.ar-page .ar-latin {
+.ar-page .ar-latin,
+.ar-page .footer-latin {
   direction: ltr;
   text-align: right;
   unicode-bidi: isolate;
 }
 
-.ar-page .ar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 26px 0 4px;
+/* Lien d'évitement arabe : ramené en haut à droite, côté début de ligne. */
+.ar-page .ar-skip-link {
+  right: 0;
+  left: auto;
+  border-radius: 0 0 0 16px;
 }
 
-.ar-page .ar-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
+/* --- En-tête, navigation et pied de page -------------------------------- */
+
+.ar-page .site-header nav a::after {
+  transform-origin: right;
 }
 
-.ar-page .ar-brand img {
-  width: 56px;
-  height: auto;
+.ar-page .header-lang-link,
+.ar-nav-panel .mobile-nav-lang-link {
+  font-family: var(--font-medical-ui), "Segoe UI", Arial, sans-serif;
 }
 
-.ar-page .ar-brand span {
-  display: grid;
-  gap: 2px;
+/* Le panneau de navigation mobile est projeté dans <body>, hors du
+   conteneur `.ar-page` : il porte donc lui-même son sens de lecture et ses
+   variables de police. */
+.ar-nav-panel {
+  direction: rtl;
+  text-align: right;
+  font-family: var(--font-ar-ui), "Segoe UI", Tahoma, Arial, sans-serif;
 }
 
-.ar-page .ar-brand strong {
-  color: var(--color-ink);
+.ar-nav-panel .mobile-nav-links a {
   font-family: var(--font-ar-serif), "Times New Roman", serif;
-  font-size: 1.04rem;
+  font-size: clamp(1.28rem, 5.2vw, 1.62rem);
+  letter-spacing: normal;
 }
 
-.ar-page .ar-brand small {
-  color: var(--color-muted);
-  font-size: 0.82rem;
+/* --- Héros : éléments décoratifs positionnés en absolu ------------------ */
+
+.ar-page .hero-monogram-watermark {
+  right: auto;
+  left: -4%;
+  transform: rotate(8deg);
 }
 
-.ar-page .ar-header-cta {
-  padding: 0 20px;
-  font-size: 0.92rem;
+.ar-page .metabolic-sphere {
+  right: auto;
+  left: 8%;
 }
 
-.ar-page .ar-hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
-  gap: clamp(28px, 5vw, 64px);
-  align-items: center;
-  padding: clamp(44px, 6vw, 78px) 0 clamp(40px, 5vw, 70px);
+.ar-page .doctor-status-card {
+  right: auto;
+  left: 2%;
 }
 
-.ar-page .ar-portrait {
-  margin: 0;
-  padding: 14px;
-  border: 1px solid rgba(7, 150, 173, 0.16);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-soft);
+.ar-page .card-glucose {
+  right: 0;
+  left: auto;
 }
 
-.ar-page .ar-portrait img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 26px;
-  object-fit: cover;
+.ar-page .card-thyroid {
+  right: auto;
+  left: 0;
 }
 
-.ar-page .ar-portrait figcaption {
-  display: grid;
-  gap: 4px;
-  padding: 16px 6px 4px;
+/* --- Sections éditoriales ----------------------------------------------- */
+
+.ar-page .promise-card::after {
+  right: auto;
+  left: -90px;
 }
 
-.ar-page .ar-portrait figcaption span {
-  color: var(--color-primary-deep);
-  font-size: 0.86rem;
-  font-weight: 600;
+.ar-page .credential-card p {
+  font-size: 1.02rem;
+  line-height: 1.8;
 }
 
-.ar-page .ar-portrait figcaption strong {
-  color: var(--color-ink);
-  font-size: 0.98rem;
+.ar-page .journey-card h3 {
+  font-size: 1.5rem;
+  line-height: 1.6;
 }
 
-/* Index des motifs : pas de page arabe par motif dans cette prévisualisation,
-   les lignes ne sont donc pas cliquables et la colonne de la flèche est
-   supprimée. */
+/* Index des motifs : pas de page arabe par motif, les lignes ne sont donc
+   pas cliquables et la colonne de la flèche est supprimée. */
 .ar-page .care-row {
   grid-template-columns: 46px minmax(0, 1fr);
 }
@@ -5151,27 +5173,82 @@ h3 {
   line-height: 1.85;
 }
 
-.ar-page .ar-care-note,
 .ar-page .ar-care-actions {
   max-width: 960px;
-  margin-inline: auto;
-}
-
-.ar-page .ar-care-actions {
   margin-top: 18px;
+  margin-inline: auto;
   padding-inline: 14px;
 }
 
-.ar-page .credential-card p {
-  font-size: 1.02rem;
-  line-height: 1.8;
+/* --- Actes et temps de soin --------------------------------------------- */
+
+.ar-page .practice-media figcaption,
+.ar-page .practice-number {
+  right: 26px;
+  left: auto;
 }
 
-/* La prévisualisation n'embarque pas la carte Google (ses libellés sont en
-   français) : la section passe donc sur une seule colonne pour ne pas
-   laisser une moitié vide à côté du panneau d'accès. */
-.ar-page .cabinet-section {
-  grid-template-columns: 1fr;
+.ar-page .practice-content h3 {
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  line-height: 1.55;
+}
+
+.ar-page .practice-note {
+  border-left: 0;
+  border-right: 3px solid var(--color-mint);
+  border-radius: 18px 0 0 18px;
+}
+
+.ar-page .cgm-demo-value small,
+.ar-page .cgm-demo-patient b small {
+  margin-left: 0;
+  margin-right: 3px;
+}
+
+/* Valeurs chiffrées, unités et axe horaire : lus de gauche à droite. */
+.ar-page .cgm-demo-value,
+.ar-page .cgm-demo-patient b,
+.ar-page .cgm-demo-axis,
+.ar-page .cgm-demo-avatar {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* --- Avis ---------------------------------------------------------------
+   Le chrome de la section est en arabe ; les avis restent cités dans leur
+   langue de publication et sont rendus en LTR par leurs attributs `dir`. */
+
+.ar-page .reviews-quote {
+  max-width: 24ch;
+  font-size: clamp(1.7rem, 3.6vw, 2.9rem);
+  line-height: 1.25;
+}
+
+.ar-page .reviews-micro {
+  border-right: 0;
+  border-left: 1px solid rgba(7, 150, 173, 0.18);
+  text-align: right;
+}
+
+.ar-page .reviews-micro:last-child {
+  border-left: 0;
+}
+
+.ar-page .reviews-stars,
+.ar-page .reviews-micro-stars {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* --- Cabinet et carte ---------------------------------------------------- */
+
+.ar-page .map-overlay {
+  right: auto;
+  left: 20px;
+}
+
+.ar-page .map-facade-address {
+  text-align: center;
 }
 
 .ar-page .hours-list strong {
@@ -5189,59 +5266,42 @@ h3 {
   transform: translateX(-4px);
 }
 
-.ar-page .ar-footnote {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px 28px;
-  margin-top: clamp(38px, 6vw, 70px);
-  padding: 26px 0 44px;
-  border-top: 1px solid rgba(7, 150, 173, 0.16);
-  color: var(--color-muted);
-  font-size: 0.92rem;
-}
-
-.ar-page .ar-footnote p {
-  max-width: 720px;
-  margin: 0;
-  line-height: 1.8;
-}
-
-.ar-page .ar-footnote a {
-  color: var(--color-primary-deep);
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-@media (max-width: 900px) {
-  .ar-page .ar-hero {
-    grid-template-columns: 1fr;
+@media (max-width: 980px) {
+  .ar-page .reviews-micro:nth-child(odd) {
+    border-right: 0;
+    border-left: 1px solid rgba(7, 150, 173, 0.18);
   }
 
-  .ar-page .ar-portrait {
-    order: -1;
-    max-width: 420px;
-    margin-inline: auto;
+  .ar-page .reviews-micro:nth-child(even),
+  .ar-page .reviews-micro:last-child {
+    border-left: 0;
   }
 }
 
 @media (max-width: 640px) {
-  .ar-page .ar-header {
-    flex-wrap: wrap;
-    gap: 12px;
+  .ar-page .reviews-micro,
+  .ar-page .reviews-micro:nth-child(odd) {
+    border-left: 0;
   }
 
-  .ar-page .care-row {
-    grid-template-columns: 34px minmax(0, 1fr);
+  .ar-page .doctor-status-card {
+    left: -4px;
   }
-}
 
-/* Réserve pour la barre d'actions fixe, portée ici par la note de bas de
-   page puisque la prévisualisation n'utilise pas le pied de page français. */
-@media (max-width: 768px) {
-  .ar-page .ar-footnote {
-    padding-bottom: calc(88px + env(safe-area-inset-bottom));
+  .ar-page .metabolic-sphere {
+    left: -10px;
+  }
+
+  .ar-page .card-glucose {
+    right: -2px;
+  }
+
+  .ar-page .card-thyroid {
+    left: -2px;
+  }
+
+  .ar-page .practice-media figcaption,
+  .ar-page .practice-number {
+    right: 14px;
   }
 }

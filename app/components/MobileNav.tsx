@@ -14,19 +14,75 @@ import Link from "next/link";
 /** Abonnement inerte : la valeur ne change qu'entre serveur et client. */
 const subscribeToNothing = () => () => {};
 
+export type NavLink = {
+  /** Destination : ancre (`#soins`), route interne (`/rendez-vous`) ou `tel:`. */
+  href: string;
+  label: string;
+  /** Renseignés pour un lien pointant vers une page d'une autre langue. */
+  hrefLang?: string;
+  lang?: string;
+  dir?: "ltr" | "rtl";
+};
+
+export type LangSwitch = {
+  href: string;
+  label: string;
+  lang: string;
+  dir: "ltr" | "rtl";
+  hrefLang: string;
+};
+
+export type MobileNavLabels = {
+  trigger: string;
+  panelTitle: string;
+  close: string;
+  navAriaLabel: string;
+  /** Ancres de section, sans le préfixe (`expertise`, `soins`, …). */
+  sections: readonly NavLink[];
+  /** Liens complémentaires affichés sous les ancres de section. */
+  extraLinks: readonly NavLink[];
+  langSwitch: LangSwitch;
+};
+
+export const frMobileNavLabels: MobileNavLabels = {
+  trigger: "Menu",
+  panelTitle: "Navigation",
+  close: "Fermer le menu",
+  navAriaLabel: "Navigation principale",
+  sections: [
+    { href: "expertise", label: "Expertise" },
+    { href: "soins", label: "Soins" },
+    { href: "pratiques", label: "Pratiques" },
+    { href: "avis", label: "Avis" },
+    { href: "cabinet", label: "Cabinet" },
+    { href: "contact", label: "Contact" },
+  ],
+  extraLinks: [
+    { href: "/rendez-vous", label: "Rendez-vous" },
+    { href: "/teleconsultation", label: "Téléconsultation" },
+  ],
+  langSwitch: {
+    href: "/ar",
+    label: "العربية",
+    lang: "ar",
+    dir: "rtl",
+    hrefLang: "ar",
+  },
+};
+
 type MobileNavProps = {
   /** Préfixe d'ancre : `#` sur l'accueil, `/#` sur les pages internes. */
   anchor: string;
+  labels?: MobileNavLabels;
+  /**
+   * Le panneau est projeté dans `<body>`, hors du conteneur de la page : ses
+   * attributs de langue et ses variables de police doivent donc être portés
+   * par le panneau lui-même (utilisé par la version arabe).
+   */
+  panelLang?: string;
+  panelDir?: "ltr" | "rtl";
+  panelClassName?: string;
 };
-
-const sections = [
-  { href: "expertise", label: "Expertise" },
-  { href: "soins", label: "Soins" },
-  { href: "pratiques", label: "Pratiques" },
-  { href: "avis", label: "Avis" },
-  { href: "cabinet", label: "Cabinet" },
-  { href: "contact", label: "Contact" },
-];
 
 /**
  * Navigation mobile (< 980px) : bouton « Menu » accessible ouvrant un panneau
@@ -34,7 +90,13 @@ const sections = [
  * déplacé sur le premier lien à l'ouverture et rendu au bouton à la fermeture.
  * Le panneau est monté uniquement côté client : le header reste rendu au SSR.
  */
-export function MobileNav({ anchor }: MobileNavProps) {
+export function MobileNav({
+  anchor,
+  labels = frMobileNavLabels,
+  panelLang,
+  panelDir,
+  panelClassName,
+}: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false);
   // Le panneau est projeté dans <body> : `.site-header` porte un
   // `backdrop-filter`, qui fait de lui le bloc conteneur de ses descendants
@@ -115,23 +177,27 @@ export function MobileNav({ anchor }: MobileNavProps) {
     <div
       ref={panelRef}
       id={panelId}
-      className="mobile-nav-panel"
+      className={
+        panelClassName ? `mobile-nav-panel ${panelClassName}` : "mobile-nav-panel"
+      }
+      lang={panelLang}
+      dir={panelDir}
       hidden={!isOpen}
     >
       <div className="mobile-nav-panel-head">
-        <span>Navigation</span>
+        <span>{labels.panelTitle}</span>
         <button
           type="button"
           className="mobile-nav-close"
           onClick={close}
-          aria-label="Fermer le menu"
+          aria-label={labels.close}
         >
           <span aria-hidden="true">✕</span>
         </button>
       </div>
 
-      <nav className="mobile-nav-links" aria-label="Navigation principale">
-        {sections.map((section, index) => (
+      <nav className="mobile-nav-links" aria-label={labels.navAriaLabel}>
+        {labels.sections.map((section, index) => (
           <a
             key={section.href}
             ref={index === 0 ? firstLinkRef : undefined}
@@ -141,21 +207,36 @@ export function MobileNav({ anchor }: MobileNavProps) {
             {section.label}
           </a>
         ))}
-        <Link href="/rendez-vous" onClick={close}>
-          Rendez-vous
-        </Link>
-        <Link href="/teleconsultation" onClick={close}>
-          Téléconsultation
-        </Link>
+        {labels.extraLinks.map((link) =>
+          link.href.startsWith("/") ? (
+            <Link
+              key={link.href}
+              href={link.href}
+              hrefLang={link.hrefLang}
+              onClick={close}
+            >
+              {link.label}
+            </Link>
+          ) : (
+            <a
+              key={link.href}
+              href={link.href}
+              hrefLang={link.hrefLang}
+              onClick={close}
+            >
+              {link.label}
+            </a>
+          ),
+        )}
         <Link
-          href="/ar"
-          lang="ar"
-          dir="rtl"
-          hrefLang="ar"
+          href={labels.langSwitch.href}
+          lang={labels.langSwitch.lang}
+          dir={labels.langSwitch.dir}
+          hrefLang={labels.langSwitch.hrefLang}
           className="mobile-nav-lang-link"
           onClick={close}
         >
-          العربية
+          {labels.langSwitch.label}
         </Link>
       </nav>
     </div>
@@ -176,7 +257,7 @@ export function MobileNav({ anchor }: MobileNavProps) {
           <i />
           <i />
         </span>
-        Menu
+        {labels.trigger}
       </button>
 
       {isMounted ? createPortal(panel, document.body) : null}

@@ -1,34 +1,79 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { IBM_Plex_Sans_Arabic, Noto_Naskh_Arabic } from "next/font/google";
+import { SiteHeader } from "../components/SiteHeader";
+import { SiteFooter } from "../components/SiteFooter";
+import { MapEmbed } from "../components/MapEmbed";
+import { CgmDemoDashboard } from "../components/CgmDemoDashboard";
 import { MapPinIcon, PhoneIcon, WhatsAppIcon } from "../components/Icons";
 import {
+  absoluteUrl,
   appointment,
   clinicAddress,
+  clinicalActivities,
+  clinicCity,
+  clinicCountry,
+  clinicEmail,
+  clinicName,
   clinicPhoneDisplay,
   clinicPhoneInternational,
+  clinicPostalCode,
   clinicSecondaryPhoneDisplay,
   clinicSecondaryPhoneInternational,
+  clinicStreetAddress,
   doctorCredentials,
+  doctorName,
+  doctorProfessionalProfiles,
+  doctorRegionalCouncil,
+  doctorSameAsProfiles,
+  faqItems,
+  gallery,
   googleMapsPlaceUrl,
+  googleReviews,
+  lastModified,
+  mapsQuery,
+  patientJourney,
   services,
+  siteUrl,
 } from "../seo";
+import {
+  activitiesAr,
+  activityHighlightsAr,
+  arCgmDemoLabels,
+  arFooterLabels,
+  arHeaderLabels,
+  arMapEmbedLabels,
+  arOgImage,
+  credentialsAr,
+  faqAr,
+  galleryAr,
+  hoursAr,
+  journeyAr,
+  metaAr,
+  reviewDatesAr,
+  servicesAr,
+  uiAr,
+} from "../seo-ar";
 
 /**
- * VERSION ARABE — validée par la Dr Abahou et officiellement indexable
- * (`robots: index, follow`), reliée au reste du site via `alternates` (ici
- * et sur `app/layout.tsx`), le `sitemap.ts` et le lien « العربية » du site
- * français (header, menu mobile, pied de page). Tous les textes sont des
- * traductions de contenus déjà validés (`app/seo.ts`, `app/page.tsx`) :
- * aucun fait, diplôme, horaire ou coordonnée n'a été ajouté. Le tableau de
- * correspondance français → arabe se trouve dans
- * `docs-cliente/TRADUCTION-AR-A-VALIDER.md`.
+ * VERSION ARABE — miroir complet de la page d'accueil française.
+ *
+ * Page officielle et indexable (`robots: index, follow`), reliée au reste du
+ * site par les `alternates` (ici et dans `app/layout.tsx`), le `sitemap.ts`
+ * et les liens de bascule « العربية » / « Français » (en-tête, menu mobile,
+ * pied de page) dans les deux sens.
+ *
+ * Tous les textes proviennent de traductions de contenus déjà validés
+ * (`app/seo.ts`, `app/page.tsx`) centralisées dans `app/seo-ar.ts` : aucun
+ * fait, diplôme, horaire, chiffre ou coordonnée n'a été ajouté. Les avis
+ * Google sont cités **mot pour mot dans leur langue de publication** ; ils ne
+ * sont pas traduits.
  */
 
 /**
  * Typographie arabe, chargée uniquement sur cette page (les variables CSS
- * sont posées sur le conteneur racine de `/ar`).
+ * sont posées sur le conteneur racine de `/ar` et sur le panneau de
+ * navigation mobile, projeté hors de ce conteneur).
  * IBM Plex Sans Arabic : interface, très lisible aux petites tailles et
  * disponible aussi en latin (adresse, sigles, numéros).
  * Noto Naskh Arabic : naskh sobre et contrasté, équivalent arabe du serif
@@ -50,167 +95,336 @@ const arabicSerif = Noto_Naskh_Arabic({
   fallback: ["Times New Roman", "serif"],
 });
 
+const arabicFontVariables = `${arabicUi.variable} ${arabicSerif.variable}`;
+
 export const metadata: Metadata = {
-  title: "الدكتورة سونيا أبحو | أمراض الغدد الصماء والسكري بتمارة",
-  description:
-    "عيادة الدكتورة سونيا أبحو بتمارة: داء السكري، الغدة الدرقية، التغذية الطبية، الاضطرابات الهرمونية والأمراض الاستقلابية.",
+  title: metaAr.title,
+  description: metaAr.description,
+  keywords: [...metaAr.keywords],
   alternates: {
     canonical: "/ar",
     languages: {
       "fr-MA": "/",
       ar: "/ar",
+      "x-default": "/",
     },
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    title: metaAr.ogTitle,
+    description: metaAr.ogDescription,
+    siteName: metaAr.siteName,
+    type: "website",
+    locale: "ar_MA",
+    alternateLocale: "fr_MA",
+    url: "/ar",
+    images: [
+      {
+        url: arOgImage,
+        width: 1200,
+        height: 630,
+        alt: metaAr.ogImageAlt,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: metaAr.ogTitle,
+    description: metaAr.ogDescription,
+    images: [absoluteUrl(arOgImage)],
   },
 };
 
 const phoneHref = `tel:${clinicPhoneInternational}`;
 const secondaryPhoneHref = `tel:${clinicSecondaryPhoneInternational}`;
 const mapsHref = googleMapsPlaceUrl;
+const mapsEmbedHref = `https://www.google.com/maps?q=${encodeURIComponent(
+  mapsQuery,
+)}&output=embed`;
 /* Message WhatsApp inchangé (texte validé de `app/seo.ts`) : sa version arabe
    est proposée dans le document de validation, elle n'est pas publiée ici. */
 const whatsappHref = `https://wa.me/${appointment.whatsappPhone}?text=${encodeURIComponent(
   appointment.whatsappMessage,
 )}`;
 
-/**
- * Traductions indexées sur les libellés français d'origine : le type
- * `Record<(typeof doctorCredentials)[number], string>` empêche toute
- * désynchronisation si `app/seo.ts` évolue (erreur de compilation).
- */
-const credentialsAr: Record<(typeof doctorCredentials)[number], string> = {
-  "Spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques":
-    "أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية",
-  "Diplôme universitaire d’échographie cervicale Paris V":
-    "دبلوم جامعي في الفحص بالموجات فوق الصوتية للعنق — Paris V",
-  "Ancien médecin au centre hospitalier universitaire de Rabat":
-    "طبيبة سابقة بالمركز الاستشفائي الجامعي بالرباط",
-  "Ancien médecin attaché à l’hôpital militaire de Rabat":
-    "طبيبة سابقة ملحقة بالمستشفى العسكري بالرباط",
-  "Fondatrice et présidente de l’Institut marocain de diabétologie":
-    "مؤسِّسة ورئيسة المعهد المغربي للسكري",
-  "Membre du think tank de la Global Metabolic Health Alliance (GMHA)":
-    "عضوة في خلية التفكير التابعة لـ Global Metabolic Health Alliance (GMHA)",
-  "Membre du board scientifique de la Pan Arab Society for Interventional Endocrinology and Diabetes Technology (PASID)":
-    "عضوة في المجلس العلمي لـ Pan Arab Society for Interventional Endocrinology and Diabetes Technology (PASID)",
+const arPageUrl = `${siteUrl}/ar`;
+
+const structuredDataAr = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "@id": `${arPageUrl}#clinic`,
+      name: "عيادة الدكتورة سونيا أبحو",
+      alternateName: clinicName,
+      description:
+        "عيادة لأمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية بتمارة.",
+      inLanguage: "ar",
+      image: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/dr-sonia-abahou.jpg"),
+        caption: "الدكتورة سونيا أبحو، أخصائية أمراض الغدد الصماء بتمارة",
+      },
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/dr-sonia-logo-cropped.webp"),
+      },
+      url: arPageUrl,
+      telephone: [clinicPhoneInternational, clinicSecondaryPhoneInternational],
+      email: clinicEmail,
+      hasMap: mapsHref,
+      sameAs: [mapsHref, ...doctorProfessionalProfiles],
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: clinicStreetAddress,
+        postalCode: clinicPostalCode,
+        addressLocality: clinicCity,
+        addressCountry: clinicCountry,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 33.928046,
+        longitude: -6.8987233,
+      },
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: clinicPhoneInternational,
+          contactType: "حجز موعد",
+          areaServed: clinicCountry,
+          availableLanguage: ["ar", "fr"],
+        },
+        {
+          "@type": "ContactPoint",
+          telephone: clinicSecondaryPhoneInternational,
+          contactType: "الهاتف المحمول وواتساب الخاصان بالعيادة",
+          areaServed: clinicCountry,
+          availableLanguage: ["ar", "fr"],
+        },
+      ],
+      employee: {
+        "@id": `${arPageUrl}#doctor`,
+      },
+      areaServed: "تمارة",
+      medicalSpecialty: [
+        "https://schema.org/Endocrine",
+        "https://schema.org/DietNutrition",
+      ],
+      availableService: [
+        ...services.map((service) => ({
+          "@type": "MedicalProcedure",
+          name: servicesAr[service.slug].title,
+          description: servicesAr[service.slug].text,
+        })),
+        ...clinicalActivities.map((activity) => ({
+          "@type": "MedicalProcedure",
+          name: activitiesAr[activity.id].title,
+          description: activitiesAr[activity.id].description,
+          url: `${arPageUrl}#${activity.id}`,
+        })),
+      ],
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+          opens: "09:30",
+          closes: "16:00",
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: "Friday",
+          opens: "09:30",
+          closes: "12:30",
+        },
+      ],
+    },
+    {
+      "@type": "Person",
+      "@id": `${arPageUrl}#doctor`,
+      name: "الدكتورة سونيا أبحو",
+      alternateName: doctorName,
+      honorificPrefix: "د.",
+      jobTitle:
+        "طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية",
+      description:
+        "طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية تمارس بتمارة.",
+      inLanguage: "ar",
+      image: absoluteUrl("/dr-sonia-abahou.jpg"),
+      url: arPageUrl,
+      sameAs: [...doctorSameAsProfiles],
+      worksFor: {
+        "@id": `${arPageUrl}#clinic`,
+      },
+      affiliation: {
+        "@type": "MedicalOrganization",
+        name: doctorRegionalCouncil,
+      },
+      memberOf: [
+        {
+          "@type": "Organization",
+          name: "Global Metabolic Health Alliance",
+          url: "https://gmha.global",
+        },
+        {
+          "@type": "Organization",
+          name: "Pan Arab Society for Interventional Endocrinology and Diabetes Technology",
+        },
+      ],
+      knowsAbout: [
+        "أمراض الغدد الصماء",
+        "داء السكري",
+        "الغدة الدرقية",
+        "التغذية الطبية",
+        "السمنة",
+        "نقص السكر في الدم",
+        "الأمراض الاستقلابية",
+      ],
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${arPageUrl}#webpage`,
+      url: arPageUrl,
+      name: metaAr.title,
+      description: metaAr.description,
+      inLanguage: "ar",
+      dateModified: lastModified,
+      isPartOf: {
+        "@id": `${siteUrl}/#website`,
+      },
+      mainEntity: {
+        "@id": `${arPageUrl}#clinic`,
+      },
+      about: {
+        "@id": `${arPageUrl}#doctor`,
+      },
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/dr-sonia-abahou.jpg"),
+      },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${arPageUrl}#faq`,
+      inLanguage: "ar",
+      isPartOf: {
+        "@id": `${arPageUrl}#webpage`,
+      },
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: faqAr[item.question].question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faqAr[item.question].answer,
+        },
+      })),
+    },
+  ],
 };
 
-const servicesAr: Record<
-  (typeof services)[number]["slug"],
-  { title: string; text: string }
-> = {
-  "diabete-temara": {
-    title: "داء السكري وتوازن السكر في الدم",
-    text: "تتبّع داء السكري من النوع الأول والنوع الثاني وسكري الحمل وحالات اختلال توازن السكر في الدم.",
-  },
-  "thyroide-temara": {
-    title: "الغدة الدرقية، تضخّم الغدة والعُقيدات",
-    text: "التقييم والمراقبة والتوجيه في اضطرابات الغدة الدرقية والعُقيدات وتضخّم الغدة وسرطانات الغدة الدرقية.",
-  },
-  "nutrition-maladies-metaboliques-temara": {
-    title: "التغذية والسمنة والأمراض الاستقلابية",
-    text: "مواكبة طبية في مجال التغذية والسمنة والاستقلاب والوقاية.",
-  },
-  "surrenales-hypophyse-parathyroides-temara": {
-    title: "الغدد الكظرية والغدة النخامية والغدد جارات الدرقية",
-    text: "استكشاف وتتبّع أمراض الغدد الكظرية والغدة النخامية والغدد جارات الدرقية.",
-  },
-  "hyperprolactinemie-hypoglycemies-temara": {
-    title: "فرط برولاكتين الدم ونقص السكر في الدم",
-    text: "تقييم وتتبّع فرط برولاكتين الدم ونقص السكر في الدم والحالات الهرمونية التي تتطلّب خبرة في أمراض الغدد الصماء.",
-  },
-  "education-therapeutique-temara": {
-    title: "التربية العلاجية",
-    text: "مواكبة تربوية لفهم المرض والعلاجات وأهداف التتبّع بشكل أفضل.",
-  },
-};
-
-/* Horaires identiques à ceux de la page d'accueil française (`app/page.tsx`).
-   Les plages sont écrites en chiffres et rendues en LTR. */
-const hoursAr = [
-  ["الاثنين", "9:30 — 16:00"],
-  ["الثلاثاء", "9:30 — 16:00"],
-  ["الأربعاء", "9:30 — 16:00"],
-  ["الخميس", "9:30 — 16:00"],
-  ["الجمعة", "9:30 — 12:30"],
-  ["السبت", "مغلق"],
-  ["الأحد", "مغلق"],
-] as const;
-
-export default function ArabicPreviewPage() {
+export default function ArabicHomePage() {
   return (
     <main
       id="main-content"
       lang="ar"
       dir="rtl"
-      className={`ar-page ${arabicUi.variable} ${arabicSerif.variable}`}
+      className={`ar-page ${arabicFontVariables}`}
     >
-      {/* Barre d'actions fixe (mobile) : même motif que la page française. */}
-      <nav className="mobile-action-bar" aria-label="إجراءات سريعة">
-        <a className="mobile-action-bar-item" href={phoneHref} aria-label="الاتصال بالعيادة">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredDataAr) }}
+      />
+
+      {/* Lien d'évitement arabe, local à la page : le lien racine (français,
+          posé par `app/layout.tsx`) reste le premier du document et vise
+          `#main-content`. Celui-ci mène directement au contenu éditorial. */}
+      <a className="skip-link ar-skip-link" href="#ar-content">
+        {uiAr.skipLink}
+      </a>
+
+      <SiteHeader
+        labels={arHeaderLabels}
+        homeHref="#ar-content"
+        panelLang="ar"
+        panelDir="rtl"
+        panelClassName={`ar-nav-panel ${arabicFontVariables}`}
+      />
+
+      {/* Barre d'actions fixe : placée tôt dans le DOM pour être atteinte
+          rapidement au clavier et par les lecteurs d'écran. */}
+      <nav className="mobile-action-bar" aria-label={uiAr.quickActionsAriaLabel}>
+        <a
+          className="mobile-action-bar-item"
+          href={phoneHref}
+          aria-label={uiAr.callAriaLabel}
+        >
           <PhoneIcon />
-          <span>اتصال</span>
+          <span>{uiAr.callLabel}</span>
         </a>
         <a
           className="mobile-action-bar-item"
           href={whatsappHref}
           target="_blank"
           rel="noreferrer"
-          aria-label="التواصل مع العيادة عبر واتساب"
+          aria-label={uiAr.whatsappAriaLabel}
         >
           <WhatsAppIcon />
-          <span>واتساب</span>
+          <span>{uiAr.whatsappLabel}</span>
         </a>
         <a
           className="mobile-action-bar-item"
           href={mapsHref}
           target="_blank"
           rel="noreferrer"
-          aria-label="الاتجاهات نحو العيادة"
+          aria-label={uiAr.directionsAriaLabel}
         >
           <MapPinIcon />
-          <span>الاتجاهات</span>
+          <span>{uiAr.directionsLabel}</span>
         </a>
       </nav>
 
-      <header className="ar-header section-shell">
-        <span className="ar-brand">
-          <Image
-            src="/dr-sonia-monogram-clean.webp"
-            alt=""
-            width={200}
-            height={180}
-            sizes="56px"
-          />
-          <span>
-            <strong>الدكتورة سونيا أبحو</strong>
-            <small>أمراض الغدد الصماء والسكري والتغذية</small>
-          </span>
-        </span>
-        <a className="primary-button ar-header-cta" href={phoneHref}>
-          حجز موعد
-        </a>
-      </header>
-
-      <section className="ar-hero section-shell">
-        <div>
-          <p className="eyebrow">طبيبة أخصائية في الغدد الصماء والسكري بتمارة</p>
-          <h1>رعاية واضحة لداء السكري والغدة الدرقية والاستقلاب بتمارة.</h1>
-          <p className="ar-lead">
-            تستقبل عيادة الدكتورة سونيا أبحو المرضى لتتبّع داء السكري واضطرابات
-            الغدة الدرقية والتغذية الطبية والاضطرابات الهرمونية والأمراض
-            الاستقلابية.
-          </p>
-          <div className="hero-actions" role="group" aria-label="إجراءات سريعة">
+      <section id="ar-content" className="hero section-shell">
+        <div className="hero-copy">
+          <p className="eyebrow">{uiAr.hero.eyebrow}</p>
+          <h1>{uiAr.hero.title}</h1>
+          <p className="hero-lead">{uiAr.hero.lead}</p>
+          <div
+            className="brand-signature-card"
+            role="group"
+            aria-label={uiAr.hero.signatureAriaLabel}
+          >
+            <Image
+              src="/dr-sonia-monogram-clean.webp"
+              alt=""
+              width={200}
+              height={180}
+              sizes="112px"
+            />
+            <div>
+              <span>{uiAr.hero.signatureName}</span>
+              <strong>{uiAr.hero.signatureTagline}</strong>
+            </div>
+          </div>
+          <div
+            className="hero-actions"
+            role="group"
+            aria-label={uiAr.quickActionsAriaLabel}
+          >
             <a className="primary-button" href={phoneHref}>
-              حجز موعد
+              {uiAr.bookLabel}
             </a>
             <a className="secondary-button" href={phoneHref}>
               <PhoneIcon />
-              اتصال
+              {uiAr.callLabel}
             </a>
             <a
               className="secondary-button"
@@ -219,39 +433,64 @@ export default function ArabicPreviewPage() {
               rel="noreferrer"
             >
               <WhatsAppIcon />
-              واتساب
+              {uiAr.whatsappLabel}
             </a>
           </div>
-          <p className="ar-note">
-            للاستشارة في العيادة، يُرجى الاتصال بالسكرتارية هاتفيًا أو عبر واتساب
-            لتأكيد الأوقات المتاحة. الاستقبال يتم بموعد تؤكّده العيادة.
-          </p>
         </div>
 
-        <figure className="ar-portrait">
+        <div className="hero-visual">
           <Image
-            src="/dr-sonia-abahou.webp"
-            alt="صورة الدكتورة سونيا أبحو، أخصائية أمراض الغدد الصماء بتمارة"
+            className="hero-monogram-watermark"
+            src="/dr-sonia-monogram-watermark.webp"
+            alt=""
             width={420}
-            height={470}
-            priority
-            sizes="(max-width: 900px) 88vw, 420px"
+            height={377}
+            sizes="(max-width: 760px) 80vw, 420px"
+            aria-hidden="true"
           />
-          <figcaption>
-            <span>الدكتورة سونيا أبحو</span>
-            <strong>الغدد الصماء · السكري · التغذية</strong>
-          </figcaption>
-        </figure>
+          <div className="halo-disc" />
+          <div className="pulse-orbit orbit-a" />
+          <div className="pulse-orbit orbit-b" />
+          <div className="metabolic-sphere">
+            <span />
+            <span />
+            <span />
+          </div>
+          <div className="portrait-card">
+            <Image
+              src="/dr-sonia-abahou.webp"
+              alt={uiAr.hero.portraitAlt}
+              width={420}
+              height={470}
+              priority
+              sizes="(max-width: 760px) 88vw, 420px"
+            />
+            <div className="portrait-caption">
+              <span>{uiAr.hero.portraitName}</span>
+              <strong>{uiAr.hero.portraitRole}</strong>
+            </div>
+          </div>
+          <div className="doctor-status-card">
+            <span>{uiAr.hero.statusEyebrow}</span>
+            <strong>{uiAr.hero.statusPlace}</strong>
+            <p>{uiAr.hero.statusText}</p>
+          </div>
+          <div className="floating-card card-glucose">
+            <span>{uiAr.hero.cardDiabetesLabel}</span>
+            <strong>{uiAr.hero.cardDiabetesValue}</strong>
+          </div>
+          <div className="floating-card card-thyroid">
+            <span>{uiAr.hero.cardThyroidLabel}</span>
+            <strong>{uiAr.hero.cardThyroidValue}</strong>
+          </div>
+        </div>
       </section>
 
-      <section className="section-shell split-section reveal-section">
+      <section id="expertise" className="section-shell split-section reveal-section">
         <div>
-          <p className="eyebrow">المسار الطبي</p>
-          <h2>مسار طبي معروض بوضوح.</h2>
-          <p className="section-text">
-            جُمعت المعلومات الأساسية للعيادة حتى يتعرّف المريض بسرعة على مجالات
-            الاستشارة وطرق التواصل.
-          </p>
+          <p className="eyebrow">{uiAr.expertise.eyebrow}</p>
+          <h2>{uiAr.expertise.title}</h2>
+          <p className="section-text">{uiAr.expertise.text}</p>
         </div>
         <div className="credential-grid">
           {doctorCredentials.map((item) => (
@@ -263,9 +502,47 @@ export default function ArabicPreviewPage() {
         </div>
       </section>
 
-      <section className="section-shell care-section reveal-section">
+      <section className="section-shell promise-section reveal-section">
+        <div className="promise-card">
+          <p className="eyebrow">{uiAr.approach.eyebrow}</p>
+          <h2>{uiAr.approach.title}</h2>
+          <p>{uiAr.approach.text}</p>
+        </div>
+        <div className="journey-grid">
+          {patientJourney.map((item, index) => (
+            <article key={item.title} className="journey-card">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{journeyAr[item.title].title}</h3>
+              <p>{journeyAr[item.title].text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-shell signature-section reveal-section">
+        <div className="signature-visual">
+          <Image
+            src="/dr-abahou-trophee-diabete.webp"
+            alt={uiAr.signature.imageAlt}
+            width={800}
+            height={1062}
+            loading="lazy"
+            sizes="(max-width: 980px) 92vw, 38vw"
+          />
+        </div>
+        <div className="signature-copy">
+          <p className="eyebrow">{uiAr.signature.eyebrow}</p>
+          <h2>{uiAr.signature.title}</h2>
+          <p>{uiAr.signature.text}</p>
+        </div>
+      </section>
+
+      {/* Index des motifs : il n'existe pas de page arabe par motif, les
+          lignes ne sont donc pas cliquables et renvoient vers le téléphone
+          et WhatsApp en bas de section. */}
+      <section id="soins" className="section-shell care-section reveal-section">
         <div className="section-heading">
-          <h2>الحالات التي تُتابَع في العيادة.</h2>
+          <h2>{uiAr.care.title}</h2>
         </div>
         <div className="care-index">
           {services.map((service, index) => (
@@ -282,14 +559,11 @@ export default function ArabicPreviewPage() {
             </div>
           ))}
         </div>
-        <p className="ar-care-note">
-          لأي سؤال حول أحد أسباب الاستشارة، يمكن التواصل مع العيادة هاتفيًا أو
-          عبر واتساب.
-        </p>
+        <p className="ar-care-note">{uiAr.care.note}</p>
         <div className="contact-actions ar-care-actions">
           <a className="secondary-button" href={phoneHref}>
             <PhoneIcon />
-            اتصال
+            {uiAr.callLabel}
           </a>
           <a
             className="secondary-button"
@@ -298,16 +572,221 @@ export default function ArabicPreviewPage() {
             rel="noreferrer"
           >
             <WhatsAppIcon />
-            واتساب
+            {uiAr.whatsappLabel}
           </a>
         </div>
       </section>
 
-      <section className="section-shell cabinet-section reveal-section">
+      <section id="pratiques" className="section-shell practice-section">
+        <div className="practice-heading reveal-section">
+          <h2>{uiAr.practice.title}</h2>
+        </div>
+
+        <div className="practice-stack">
+          {clinicalActivities.map((activity, index) => (
+            <article
+              id={activity.id}
+              key={activity.id}
+              className="practice-feature reveal-section"
+            >
+              <figure
+                className={`practice-media ${
+                  activity.id === "impedancemetrie-medicale"
+                    ? "practice-media-biody"
+                    : ""
+                } ${activity.image ? "" : "practice-media-dashboard"}`}
+              >
+                {activity.image ? (
+                  <Image
+                    src={activity.image}
+                    alt={activitiesAr[activity.id].alt}
+                    width={1600}
+                    height={1067}
+                    loading="lazy"
+                    sizes="(max-width: 820px) 94vw, 50vw"
+                  />
+                ) : (
+                  <CgmDemoDashboard labels={arCgmDemoLabels} />
+                )}
+                {!activity.image && (
+                  <figcaption>{uiAr.practice.dashboardCaption}</figcaption>
+                )}
+                <span className="practice-number" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </figure>
+
+              <div className="practice-content">
+                <p className="practice-eyebrow">
+                  {activitiesAr[activity.id].eyebrow}
+                </p>
+                <h3>{activitiesAr[activity.id].title}</h3>
+                <p className="practice-description">
+                  {activitiesAr[activity.id].description}
+                </p>
+                <ul className="practice-highlights">
+                  {activity.highlights.map((highlight) => (
+                    <li key={highlight}>{activityHighlightsAr[highlight]}</li>
+                  ))}
+                </ul>
+                <p className="practice-note">{activitiesAr[activity.id].note}</p>
+                <a className="text-link" href="#contact">
+                  {uiAr.contactClinic}
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-shell faq-section reveal-section">
+        <div className="section-heading faq-heading">
+          <h2>{uiAr.faq.title}</h2>
+        </div>
+        <div className="faq-grid">
+          {faqItems.map((item) => (
+            <details key={item.question} className="faq-card">
+              <summary>
+                <span>{faqAr[item.question].question}</span>
+                <i aria-hidden="true" />
+              </summary>
+              <div className="faq-answer">
+                <p>{faqAr[item.question].answer}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      {/* Avis Google : le chrome de la section est en arabe, mais les avis
+          eux-mêmes sont cités mot pour mot dans leur langue de publication
+          (français). Aucun avis n'est traduit ni reformulé, et la note
+          affichée est celle relevée sur la fiche Google (`app/seo.ts`). */}
+      <section id="avis" className="section-shell reviews-section reveal-section">
+        <div className="reviews-wrap">
+          <p className="eyebrow reviews-eyebrow">{uiAr.reviews.eyebrow}</p>
+          <h2 className="reviews-title">{uiAr.reviews.title}</h2>
+          <p className="reviews-stars" aria-label={uiAr.starsAriaLabel}>
+            ★★★★★
+          </p>
+
+          <blockquote className="reviews-quote" lang="fr" dir="ltr">
+            <span className="reviews-mark" aria-hidden="true">
+              «
+            </span>{" "}
+            {googleReviews.featured.text}{" "}
+            <span className="reviews-mark" aria-hidden="true">
+              »
+            </span>
+          </blockquote>
+
+          <p className="reviews-credit">
+            {googleReviews.featured.author ? (
+              <>
+                <span lang="fr" dir="ltr">
+                  {googleReviews.featured.author}
+                </span>
+                <span aria-hidden="true">·</span>
+              </>
+            ) : null}
+            <span>{uiAr.reviews.source}</span>
+            <span aria-hidden="true">·</span>
+            <span>{reviewDatesAr[googleReviews.featured.date]}</span>
+          </p>
+
+          <div className="reviews-signature">
+            {googleReviews.items.map((item) => (
+              <div className="reviews-micro" key={item.author}>
+                <span
+                  className="reviews-micro-stars"
+                  aria-label={uiAr.starsAriaLabel}
+                >
+                  ★★★★★
+                </span>
+                {/* Verbatim : cité sans modification, dans sa langue d'origine. */}
+                <p className="reviews-micro-quote" lang="fr" dir="ltr">
+                  {`« ${item.excerpt} »`}
+                </p>
+                <p className="reviews-micro-name" lang="fr" dir="ltr">
+                  {item.author}
+                </p>
+                {item.translated ? (
+                  <p className="reviews-translated">
+                    {uiAr.reviews.translatedFromArabic}
+                  </p>
+                ) : null}
+              </div>
+            ))}
+          </div>
+
+          <div className="reviews-cta">
+            <p className="reviews-average">
+              <span className="reviews-average-star" aria-hidden="true">
+                ★
+              </span>
+              <strong>
+                <bdi dir="ltr">{googleReviews.averageRating}</bdi>
+              </strong>{" "}
+              {uiAr.reviews.ratingSuffix} ·{" "}
+              <bdi dir="ltr">{googleReviews.reviewCount}</bdi>{" "}
+              {uiAr.reviews.ratingCountLabel}
+            </p>
+            <a
+              className="secondary-button"
+              href={googleReviews.sourceUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {uiAr.reviews.seeOnGoogle}
+            </a>
+            <p className="reviews-disclaimer">{uiAr.reviews.disclaimer}</p>
+            <p className="reviews-disclaimer">
+              {uiAr.reviews.originalLanguageNote}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell gallery-section reveal-section">
+        <div className="section-heading">
+          <h2>{uiAr.gallery.title}</h2>
+        </div>
+        <div className="gallery-grid">
+          {gallery.map((image) => (
+            <figure key={image.src} className={`gallery-card ${image.variant}`}>
+              <Image
+                src={image.src}
+                alt={galleryAr[image.src].alt}
+                width={900}
+                height={720}
+                loading="lazy"
+                sizes={image.sizes}
+              />
+              <figcaption>
+                <span>{galleryAr[image.src].label}</span>
+                <strong>{galleryAr[image.src].title}</strong>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <section className="diagnostic-band">
+        <div>
+          <p>{uiAr.band.eyebrow}</p>
+          <h2>{uiAr.band.title}</h2>
+        </div>
+        <p>{uiAr.band.text}</p>
+      </section>
+
+      <section id="cabinet" className="section-shell cabinet-section reveal-section">
         <div className="glass-panel">
-          <p className="eyebrow">الوصول إلى العيادة</p>
+          <p className="eyebrow">{uiAr.cabinet.eyebrow}</p>
           <h2>
-            العيادة توجد بالمسيرة 1، تمارة <span lang="fr">(Massira I, Témara)</span>.
+            {uiAr.cabinet.title}{" "}
+            <span lang="fr" dir="ltr">
+              {uiAr.cabinet.titleLatin}
+            </span>
           </h2>
           <p className="ar-latin" dir="ltr">
             {clinicAddress}
@@ -319,16 +798,16 @@ export default function ArabicPreviewPage() {
               target="_blank"
               rel="noreferrer"
             >
-              فتح الاتجاهات على الخريطة
+              {uiAr.cabinet.openDirections}
             </a>
             <a className="secondary-button" href={phoneHref}>
               <PhoneIcon />
-              الهاتف الثابت ·{" "}
+              {uiAr.cabinet.landlinePrefix}
               <bdi dir="ltr">{clinicPhoneDisplay}</bdi>
             </a>
             <a className="secondary-button" href={secondaryPhoneHref}>
               <PhoneIcon />
-              الهاتف المحمول ·{" "}
+              {uiAr.cabinet.mobilePrefix}
               <bdi dir="ltr">{clinicSecondaryPhoneDisplay}</bdi>
             </a>
             <a
@@ -338,12 +817,25 @@ export default function ArabicPreviewPage() {
               rel="noreferrer"
             >
               <WhatsAppIcon />
-              واتساب
+              {uiAr.whatsappLabel}
             </a>
           </div>
         </div>
+        <div
+          className="map-card google-map-card"
+          role="group"
+          aria-label={uiAr.cabinet.mapGroupAriaLabel}
+        >
+          <MapEmbed
+            embedSrc={mapsEmbedHref}
+            mapsHref={mapsHref}
+            title={uiAr.cabinet.mapTitle}
+            address={clinicAddress}
+            labels={arMapEmbedLabels}
+          />
+        </div>
         <div className="hours-panel">
-          <h3>أوقات العمل</h3>
+          <h3>{uiAr.cabinet.hoursTitle}</h3>
           <div className="hours-list">
             {hoursAr.map(([day, time]) => (
               <div key={day}>
@@ -359,15 +851,40 @@ export default function ArabicPreviewPage() {
         </div>
       </section>
 
-      <footer className="ar-footnote section-shell">
-        <p>
-          في حالة الطوارئ الحيوية، يُرجى الاتصال فورًا بمصالح المستعجلات. لا
-          تُغني معلومات هذا الموقع عن التشخيص أو الوصفة أو الاستشارة الطبية.
-        </p>
-        <Link href="/" lang="fr" hrefLang="fr">
-          النسخة الفرنسية
-        </Link>
-      </footer>
+      <section
+        id="contact"
+        className="final-cta final-cta-dark section-shell reveal-section"
+      >
+        <div>
+          <p className="eyebrow">{uiAr.finalCta.eyebrow}</p>
+          <h2>{uiAr.finalCta.title}</h2>
+          <p>{uiAr.finalCta.text}</p>
+          <p className="ar-medical-note">{uiAr.footnote}</p>
+        </div>
+        <div className="cta-stack">
+          <a className="primary-button" href={phoneHref}>
+            {uiAr.bookLabel}
+          </a>
+          <a
+            className="secondary-button"
+            href={whatsappHref}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {uiAr.whatsappLabel}
+          </a>
+          <a
+            className="secondary-button"
+            href={mapsHref}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {uiAr.finalCta.seeDirections}
+          </a>
+        </div>
+      </section>
+
+      <SiteFooter labels={arFooterLabels} />
     </main>
   );
 }

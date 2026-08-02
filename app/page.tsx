@@ -3,11 +3,13 @@ import Link from "next/link";
 import { SiteHeader } from "./components/SiteHeader";
 import { SiteFooter } from "./components/SiteFooter";
 import { MapEmbed } from "./components/MapEmbed";
+import { CgmDemoDashboard } from "./components/CgmDemoDashboard";
 import { MapPinIcon, PhoneIcon, WhatsAppIcon } from "./components/Icons";
 import {
   absoluteUrl,
   appointment,
   clinicAddress,
+  clinicalActivities,
   clinicCity,
   clinicCountry,
   clinicEmail,
@@ -28,10 +30,12 @@ import {
   doctorRegionalCouncil,
   doctorSameAsProfiles,
   faqItems,
+  gallery,
   googleMapsPlaceUrl,
   googleReviews,
   lastModified,
   mapsQuery,
+  patientJourney,
   services,
   siteName,
   siteUrl,
@@ -56,191 +60,6 @@ const hours = [
   ["Samedi", "Fermé"],
   ["Dimanche", "Fermé"],
 ];
-
-/**
- * Galerie asymétrique : les trois photos haute définition (1448×1086) occupent
- * les grandes cartes ; la vue de consultation, de définition plus modeste
- * (515×388), est présentée en carte compacte afin qu'elle reste nette.
- */
-const gallery = [
-  {
-    src: "/cabinet-accueil-reel.webp",
-    alt: "Accueil réel du cabinet du Dr Sonia Abahou à Témara",
-    label: "Accueil",
-    title: "Un accueil lumineux, calme et soigné.",
-    variant: "gallery-large",
-    sizes: "(max-width: 980px) 92vw, 1180px",
-  },
-  {
-    src: "/cabinet-consultation-reel.webp",
-    alt: "Salle de consultation du cabinet du Dr Sonia Abahou à Témara",
-    label: "Consultation",
-    title: "Un espace professionnel consacré à l’écoute et au suivi.",
-    variant: "gallery-wide",
-    sizes: "(max-width: 980px) 92vw, 580px",
-  },
-  {
-    src: "/cabinet-attente-reel.webp",
-    alt: "Salle d’attente du cabinet du Dr Sonia Abahou à Témara",
-    label: "Salle d’attente",
-    title: "Un cadre sobre et confortable avant la consultation.",
-    variant: "gallery-wide",
-    sizes: "(max-width: 980px) 92vw, 580px",
-  },
-  {
-    src: "/cabinet-consultation-patiente.webp",
-    alt: "Consultation au cabinet du Dr Sonia Abahou à Témara, avec une patiente dont le visage est flouté par respect de la confidentialité",
-    label: "Consultation",
-    title: "Un temps d’échange individuel, au calme, avec chaque patient.",
-    variant: "gallery-compact",
-    sizes: "(max-width: 980px) 92vw, 380px",
-  },
-];
-
-const patientJourney = [
-  {
-    title: "Comprendre",
-    text: "Le temps d’écouter les symptômes, l’histoire médicale et les inquiétudes du patient.",
-  },
-  {
-    title: "Expliquer",
-    text: "Des mots simples pour rendre les bilans, les hormones et les traitements plus lisibles.",
-  },
-  {
-    title: "Suivre",
-    text: "Un plan de suivi clair, adapté au quotidien du patient et à son rythme de vie.",
-  },
-];
-
-const clinicalActivities = [
-  {
-    id: "echographie-thyroidienne",
-    eyebrow: "Exploration cervicale",
-    title: "Échographie thyroïdienne et cervicale",
-    description:
-      "Réalisée dans le cadre de l’évaluation endocrinologique, l’échographie permet d’examiner la thyroïde et les aires ganglionnaires cervicales. Ses résultats sont interprétés avec les données cliniques et biologiques du patient.",
-    image: "/echographie-thyroidienne.webp",
-    alt: "Illustration d’une échographie thyroïdienne réalisée dans un cabinet médical",
-    highlights: ["Thyroïde et nodules", "Aires cervicales", "Lecture clinique globale"],
-    note: "Un examen intégré au parcours endocrinologique, avec des explications claires à chaque étape.",
-  },
-  {
-    id: "impedancemetrie-medicale",
-    eyebrow: "Composition corporelle",
-    title: "Impédancemétrie médicale avec BIODY XPERT ZM3",
-    description:
-      "Au-delà du poids seul, ce dispositif médical multifréquence contribue au suivi de la composition corporelle : masse grasse, masse non grasse, masse musculaire et hydratation. Les mesures complètent l’évaluation médicale et nutritionnelle.",
-    image: "/impedancemetrie-mesure.webp",
-    alt: "Illustration d’une mesure de composition corporelle avec un impédancemètre médical",
-    highlights: ["Mesure multifréquence", "Évolution dans le temps", "Interprétation médicale"],
-    note: "Des indicateurs utiles pour personnaliser le suivi et observer les évolutions au fil des consultations.",
-  },
-  {
-    id: "education-therapeutique",
-    eyebrow: "Chaque vendredi",
-    title: "Atelier collectif d’éducation thérapeutique",
-    description:
-      "Le vendredi, le cabinet réunit des patients autour d’un temps d’échange et d’apprentissage pour mieux comprendre le diabète, les traitements, l’auto-surveillance et les situations concrètes du quotidien.",
-    image: "/atelier-education-therapeutique.webp",
-    alt: "Illustration d’un atelier collectif d’éducation thérapeutique autour du diabète",
-    highlights: ["Comprendre la maladie", "Partager les expériences", "Gagner en autonomie"],
-    note: "Les prochaines séances et les modalités de participation sont communiquées directement par le cabinet.",
-  },
-  {
-    id: "surveillance-glycemique-continue",
-    eyebrow: "Holter glycémique",
-    title: "Holter glycémique et surveillance continue",
-    description:
-      "Pour les patients concernés, le Holter glycémique enregistre l’évolution du glucose en continu. Les données du capteur peuvent être consultées dans le cadre d’un suivi médical rapproché quotidien afin de repérer les tendances, de préparer les échanges avec le cabinet et de mieux comprendre l’évolution de la glycémie.",
-    image: null,
-    alt: "Aperçu d’une interface de suivi glycémique continu",
-    highlights: ["Mesure en continu", "Suivi rapproché quotidien", "Lecture des tendances"],
-    note: "Le tableau permet de visualiser les tendances utiles au suivi tout en préservant strictement l’identité et les informations personnelles des patients.",
-  },
-] as const;
-
-function CgmDemoDashboard() {
-  const demoPatients = [
-    { name: "Profil suivi 01", value: "112", status: "Courbe reçue" },
-    { name: "Profil suivi 02", value: "138", status: "Lecture récente" },
-    { name: "Profil suivi 03", value: "101", status: "Capteur actif" },
-  ];
-
-  return (
-    <div
-      className="cgm-demo"
-      role="img"
-      aria-label="Aperçu d’un tableau de bord de suivi glycémique continu respectant la confidentialité"
-    >
-      <div className="cgm-demo-topbar">
-        <div>
-          <span className="cgm-demo-live">
-            <i />
-            Suivi sécurisé
-          </span>
-          <strong>Suivi glycémique rapproché</strong>
-        </div>
-        <span className="cgm-demo-privacy">Confidentialité</span>
-      </div>
-
-      <div className="cgm-demo-chart">
-        <div className="cgm-demo-chart-heading">
-          <div>
-            <span>Tendance glycémique</span>
-            <strong>Sur 24 heures</strong>
-          </div>
-          <span className="cgm-demo-value">112 <small>mg/dL</small></span>
-        </div>
-        <svg viewBox="0 0 720 230" aria-hidden="true">
-          <defs>
-            <linearGradient id="cgmArea" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0.38" />
-              <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <path
-            className="cgm-demo-area"
-            d="M0 166 C70 136 108 151 158 130 C215 106 252 155 306 140 C355 126 390 74 444 90 C498 106 530 151 580 126 C628 101 666 86 720 104 L720 230 L0 230 Z"
-          />
-          <path
-            className="cgm-demo-line"
-            d="M0 166 C70 136 108 151 158 130 C215 106 252 155 306 140 C355 126 390 74 444 90 C498 106 530 151 580 126 C628 101 666 86 720 104"
-          />
-          <circle className="cgm-demo-point" cx="720" cy="104" r="8" />
-        </svg>
-        <div className="cgm-demo-axis">
-          <span>00h</span>
-          <span>06h</span>
-          <span>12h</span>
-          <span>18h</span>
-          <span>Maintenant</span>
-        </div>
-      </div>
-
-      <div className="cgm-demo-patients">
-        {demoPatients.map((patient) => (
-          <div key={patient.name} className="cgm-demo-patient">
-            <span className="cgm-demo-avatar" aria-hidden="true">
-              {patient.name.slice(-2)}
-            </span>
-            <div>
-              <strong>{patient.name}</strong>
-              <span>{patient.status}</span>
-            </div>
-            <b>
-              {patient.value}
-              <small>mg/dL</small>
-            </b>
-          </div>
-        ))}
-      </div>
-
-      <p className="cgm-demo-disclaimer">
-        Aucune information personnelle n’est affichée.
-      </p>
-    </div>
-  );
-}
 
 const structuredData = {
   "@context": "https://schema.org",

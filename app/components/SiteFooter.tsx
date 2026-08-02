@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SocialTooltip, type SocialItem } from "@/components/ui/social-media";
 import { MapPinIcon, PhoneIcon, WhatsAppIcon } from "./Icons";
+import type { NavLink } from "./MobileNav";
 import {
   appointment,
   clinicAddress,
@@ -14,9 +15,66 @@ import {
   googleMapsPlaceUrl,
 } from "@/app/seo";
 
+export type FooterLabels = {
+  brand: string;
+  tagline: string;
+  contactTitle: string;
+  infoTitle: string;
+  infoNavAriaLabel: string;
+  landlinePrefix: string;
+  mobilePrefix: string;
+  whatsapp: string;
+  linkedinAriaLabel: string;
+  instagramAriaLabel: string;
+  /** Ancres de section, sans le préfixe (`expertise`, `soins`, …). */
+  sections: readonly NavLink[];
+  /** Liens de page complets (`/rendez-vous`, `/ar`, …). */
+  pages: readonly NavLink[];
+  /**
+   * `true` lorsque les séquences latines (adresse postale, numéros) doivent
+   * être isolées en sens de lecture gauche→droite (page arabe). Le rendu
+   * français, déjà en LTR, reste strictement inchangé sans cette option.
+   */
+  isolateLatin?: boolean;
+};
+
+export const frFooterLabels: FooterLabels = {
+  brand: "Dr Sonia Abahou",
+  tagline:
+    "Cabinet d’endocrinologie, diabétologie et nutrition — Massira I, Témara.",
+  contactTitle: "Contact",
+  infoTitle: "Informations",
+  infoNavAriaLabel: "Liens du site",
+  landlinePrefix: "Fixe · ",
+  mobilePrefix: "Portable · ",
+  whatsapp: "WhatsApp",
+  linkedinAriaLabel: "LinkedIn du cabinet Dr Sonia Abahou",
+  instagramAriaLabel: "Instagram du cabinet Dr Sonia Abahou",
+  sections: [
+    { href: "expertise", label: "Expertise" },
+    { href: "soins", label: "Soins" },
+    { href: "pratiques", label: "Pratiques" },
+    { href: "cabinet", label: "Cabinet" },
+  ],
+  pages: [
+    { href: "/rendez-vous", label: "Rendez-vous" },
+    { href: "/mentions-legales", label: "Mentions légales" },
+    { href: "/confidentialite", label: "Confidentialité" },
+    { href: "/cookies", label: "Cookies" },
+    {
+      href: "/ar",
+      label: "العربية",
+      lang: "ar",
+      dir: "rtl",
+      hrefLang: "ar",
+    },
+  ],
+};
+
 type SiteFooterProps = {
   /** `true` sur les pages internes : les ancres pointent vers `/#ancre`. */
   internal?: boolean;
+  labels?: FooterLabels;
 };
 
 const phoneHref = `tel:${clinicPhoneInternational}`;
@@ -26,25 +84,28 @@ const whatsappHref = `https://wa.me/${appointment.whatsappPhone}?text=${encodeUR
   appointment.whatsappMessage,
 )}`;
 
-const socialLinks: SocialItem[] = [
-  {
-    href: doctorSocialProfiles[0],
-    ariaLabel: "LinkedIn du cabinet Dr Sonia Abahou",
-    tooltip: "LinkedIn",
-    color: "#0A66C2",
-    icon: "linkedin",
-  },
-  {
-    href: doctorSocialProfiles[1],
-    ariaLabel: "Instagram du cabinet Dr Sonia Abahou",
-    tooltip: "Instagram",
-    color: "#E1306C",
-    icon: "instagram",
-  },
-];
-
-export function SiteFooter({ internal = false }: SiteFooterProps) {
+export function SiteFooter({
+  internal = false,
+  labels = frFooterLabels,
+}: SiteFooterProps) {
   const anchor = internal ? "/#" : "#";
+
+  const socialLinks: SocialItem[] = [
+    {
+      href: doctorSocialProfiles[0],
+      ariaLabel: labels.linkedinAriaLabel,
+      tooltip: "LinkedIn",
+      color: "#0A66C2",
+      icon: "linkedin",
+    },
+    {
+      href: doctorSocialProfiles[1],
+      ariaLabel: labels.instagramAriaLabel,
+      tooltip: "Instagram",
+      color: "#E1306C",
+      icon: "instagram",
+    },
+  ];
 
   return (
     <footer className="site-footer">
@@ -59,58 +120,86 @@ export function SiteFooter({ internal = false }: SiteFooterProps) {
               sizes="64px"
             />
           </span>
-          <strong>Dr Sonia Abahou</strong>
-          <p>
-            Cabinet d’endocrinologie, diabétologie et nutrition — Massira I,
-            Témara.
-          </p>
+          <strong>{labels.brand}</strong>
+          <p>{labels.tagline}</p>
           <SocialTooltip items={socialLinks} />
         </div>
 
         <div className="footer-col">
-          <h3>Contact</h3>
+          <h3>{labels.contactTitle}</h3>
           <ul className="footer-contact-list">
             <li>
               <a href={mapsHref} target="_blank" rel="noreferrer">
                 <MapPinIcon />
-                <span>{clinicAddress}</span>
+                {labels.isolateLatin ? (
+                  <span dir="ltr" className="footer-latin">
+                    {clinicAddress}
+                  </span>
+                ) : (
+                  <span>{clinicAddress}</span>
+                )}
               </a>
             </li>
             <li>
               <a href={phoneHref}>
                 <PhoneIcon />
-                <span>Fixe · {clinicPhoneDisplay}</span>
+                {labels.isolateLatin ? (
+                  <span>
+                    {labels.landlinePrefix}
+                    <bdi dir="ltr">{clinicPhoneDisplay}</bdi>
+                  </span>
+                ) : (
+                  <span>
+                    {labels.landlinePrefix}
+                    {clinicPhoneDisplay}
+                  </span>
+                )}
               </a>
             </li>
             <li>
               <a href={secondaryPhoneHref}>
                 <PhoneIcon />
-                <span>Portable · {clinicSecondaryPhoneDisplay}</span>
+                {labels.isolateLatin ? (
+                  <span>
+                    {labels.mobilePrefix}
+                    <bdi dir="ltr">{clinicSecondaryPhoneDisplay}</bdi>
+                  </span>
+                ) : (
+                  <span>
+                    {labels.mobilePrefix}
+                    {clinicSecondaryPhoneDisplay}
+                  </span>
+                )}
               </a>
             </li>
             <li>
               <a href={whatsappHref} target="_blank" rel="noreferrer">
                 <WhatsAppIcon />
-                <span>WhatsApp</span>
+                <span>{labels.whatsapp}</span>
               </a>
             </li>
           </ul>
         </div>
 
         <div className="footer-col">
-          <h3>Informations</h3>
-          <nav className="footer-info-nav" aria-label="Liens du site">
-            <a href={`${anchor}expertise`}>Expertise</a>
-            <a href={`${anchor}soins`}>Soins</a>
-            <a href={`${anchor}pratiques`}>Pratiques</a>
-            <a href={`${anchor}cabinet`}>Cabinet</a>
-            <Link href="/rendez-vous">Rendez-vous</Link>
-            <Link href="/mentions-legales">Mentions légales</Link>
-            <Link href="/confidentialite">Confidentialité</Link>
-            <Link href="/cookies">Cookies</Link>
-            <Link href="/ar" lang="ar" dir="rtl" hrefLang="ar">
-              العربية
-            </Link>
+          <h3>{labels.infoTitle}</h3>
+          <nav className="footer-info-nav" aria-label={labels.infoNavAriaLabel}>
+            {labels.sections.map((section) => (
+              <a key={section.href} href={`${anchor}${section.href}`}>
+                {section.label}
+              </a>
+            ))}
+            {labels.pages.map((page) => (
+              <Link
+                key={page.href}
+                href={page.href}
+                lang={page.lang}
+                dir={page.dir}
+                hrefLang={page.hrefLang}
+              >
+                {page.label}
+              </Link>
+            ))}
           </nav>
         </div>
       </div>

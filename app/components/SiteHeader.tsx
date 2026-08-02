@@ -1,6 +1,46 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MobileNav } from "./MobileNav";
+import {
+  MobileNav,
+  frMobileNavLabels,
+  type LangSwitch,
+  type MobileNavLabels,
+  type NavLink,
+} from "./MobileNav";
+
+export type HeaderLabels = {
+  brand: string;
+  homeAriaLabel: string;
+  navAriaLabel: string;
+  /** Ancres de section, sans le préfixe (`expertise`, `soins`, …). */
+  sections: readonly NavLink[];
+  cta: NavLink;
+  langSwitch: LangSwitch;
+  mobile: MobileNavLabels;
+};
+
+export const frHeaderLabels: HeaderLabels = {
+  brand: "Dr Sonia Abahou",
+  homeAriaLabel: "Accueil",
+  navAriaLabel: "Navigation principale",
+  sections: [
+    { href: "expertise", label: "Expertise" },
+    { href: "soins", label: "Soins" },
+    { href: "pratiques", label: "Pratiques" },
+    { href: "avis", label: "Avis" },
+    { href: "cabinet", label: "Cabinet" },
+    { href: "contact", label: "Contact" },
+  ],
+  cta: { href: "/rendez-vous", label: "Rendez-vous" },
+  langSwitch: {
+    href: "/ar",
+    label: "العربية",
+    lang: "ar",
+    dir: "rtl",
+    hrefLang: "ar",
+  },
+  mobile: frMobileNavLabels,
+};
 
 type SiteHeaderProps = {
   /**
@@ -10,18 +50,30 @@ type SiteHeaderProps = {
    * ancres locales inexistantes sur ces pages.
    */
   internal?: boolean;
+  /** Libellés et destinations ; français par défaut. */
+  labels?: HeaderLabels;
+  /** Cible du logo ; par défaut `/` (pages internes) ou `#accueil`. */
+  homeHref?: string;
+  /** Attributs du panneau mobile projeté dans `<body>` (version arabe). */
+  panelLang?: string;
+  panelDir?: "ltr" | "rtl";
+  panelClassName?: string;
 };
 
-export function SiteHeader({ internal = false }: SiteHeaderProps) {
+export function SiteHeader({
+  internal = false,
+  labels = frHeaderLabels,
+  homeHref,
+  panelLang,
+  panelDir,
+  panelClassName,
+}: SiteHeaderProps) {
   const anchor = internal ? "/#" : "#";
+  const brandHref = homeHref ?? (internal ? "/" : "#accueil");
 
   return (
     <header className="site-header">
-      <a
-        className="brand-mark"
-        href={internal ? "/" : "#accueil"}
-        aria-label="Accueil"
-      >
+      <a className="brand-mark" href={brandHref} aria-label={labels.homeAriaLabel}>
         <span className="brand-logo-mark">
           <Image
             src="/dr-sonia-monogram-clean.webp"
@@ -31,30 +83,41 @@ export function SiteHeader({ internal = false }: SiteHeaderProps) {
             sizes="58px"
           />
         </span>
-        <strong>Dr Sonia Abahou</strong>
+        <strong>{labels.brand}</strong>
       </a>
-      <nav aria-label="Navigation principale">
-        <a href={`${anchor}expertise`}>Expertise</a>
-        <a href={`${anchor}soins`}>Soins</a>
-        <a href={`${anchor}pratiques`}>Pratiques</a>
-        <a href={`${anchor}avis`}>Avis</a>
-        <a href={`${anchor}cabinet`}>Cabinet</a>
-        <a href={`${anchor}contact`}>Contact</a>
+      <nav aria-label={labels.navAriaLabel}>
+        {labels.sections.map((section) => (
+          <a key={section.href} href={`${anchor}${section.href}`}>
+            {section.label}
+          </a>
+        ))}
       </nav>
       <div className="header-actions">
         <Link
           className="header-lang-link"
-          href="/ar"
-          lang="ar"
-          dir="rtl"
-          hrefLang="ar"
+          href={labels.langSwitch.href}
+          lang={labels.langSwitch.lang}
+          dir={labels.langSwitch.dir}
+          hrefLang={labels.langSwitch.hrefLang}
         >
-          العربية
+          {labels.langSwitch.label}
         </Link>
-        <Link className="header-cta" href="/rendez-vous">
-          Rendez-vous
-        </Link>
-        <MobileNav anchor={anchor} />
+        {labels.cta.href.startsWith("/") ? (
+          <Link className="header-cta" href={labels.cta.href}>
+            {labels.cta.label}
+          </Link>
+        ) : (
+          <a className="header-cta" href={labels.cta.href}>
+            {labels.cta.label}
+          </a>
+        )}
+        <MobileNav
+          anchor={anchor}
+          labels={labels.mobile}
+          panelLang={panelLang}
+          panelDir={panelDir}
+          panelClassName={panelClassName}
+        />
       </div>
     </header>
   );

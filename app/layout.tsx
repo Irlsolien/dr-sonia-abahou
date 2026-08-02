@@ -76,6 +76,9 @@ export const metadata: Metadata = {
     languages: {
       "fr-MA": "/",
       ar: "/ar",
+      /* Version servie par défaut aux visiteurs dont la langue n'est ni le
+         français ni l'arabe. */
+      "x-default": "/",
     },
   },
   robots: {

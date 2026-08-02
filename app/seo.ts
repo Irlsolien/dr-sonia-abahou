@@ -233,6 +233,115 @@ export const faqItems = [
   },
 ] as const;
 
+/**
+ * Contenus éditoriaux de la page d'accueil, centralisés ici afin que la
+ * version arabe (`app/seo-ar.ts`) puisse s'indexer dessus : toute évolution
+ * d'un libellé français casse la compilation tant que sa traduction n'a pas
+ * été mise à jour. Le rendu français est inchangé (`app/page.tsx` importe
+ * ces tableaux tels quels).
+ */
+export const patientJourney = [
+  {
+    title: "Comprendre",
+    text: "Le temps d’écouter les symptômes, l’histoire médicale et les inquiétudes du patient.",
+  },
+  {
+    title: "Expliquer",
+    text: "Des mots simples pour rendre les bilans, les hormones et les traitements plus lisibles.",
+  },
+  {
+    title: "Suivre",
+    text: "Un plan de suivi clair, adapté au quotidien du patient et à son rythme de vie.",
+  },
+] as const;
+
+export const clinicalActivities = [
+  {
+    id: "echographie-thyroidienne",
+    eyebrow: "Exploration cervicale",
+    title: "Échographie thyroïdienne et cervicale",
+    description:
+      "Réalisée dans le cadre de l’évaluation endocrinologique, l’échographie permet d’examiner la thyroïde et les aires ganglionnaires cervicales. Ses résultats sont interprétés avec les données cliniques et biologiques du patient.",
+    image: "/echographie-thyroidienne.webp",
+    alt: "Illustration d’une échographie thyroïdienne réalisée dans un cabinet médical",
+    highlights: ["Thyroïde et nodules", "Aires cervicales", "Lecture clinique globale"],
+    note: "Un examen intégré au parcours endocrinologique, avec des explications claires à chaque étape.",
+  },
+  {
+    id: "impedancemetrie-medicale",
+    eyebrow: "Composition corporelle",
+    title: "Impédancemétrie médicale avec BIODY XPERT ZM3",
+    description:
+      "Au-delà du poids seul, ce dispositif médical multifréquence contribue au suivi de la composition corporelle : masse grasse, masse non grasse, masse musculaire et hydratation. Les mesures complètent l’évaluation médicale et nutritionnelle.",
+    image: "/impedancemetrie-mesure.webp",
+    alt: "Illustration d’une mesure de composition corporelle avec un impédancemètre médical",
+    highlights: ["Mesure multifréquence", "Évolution dans le temps", "Interprétation médicale"],
+    note: "Des indicateurs utiles pour personnaliser le suivi et observer les évolutions au fil des consultations.",
+  },
+  {
+    id: "education-therapeutique",
+    eyebrow: "Chaque vendredi",
+    title: "Atelier collectif d’éducation thérapeutique",
+    description:
+      "Le vendredi, le cabinet réunit des patients autour d’un temps d’échange et d’apprentissage pour mieux comprendre le diabète, les traitements, l’auto-surveillance et les situations concrètes du quotidien.",
+    image: "/atelier-education-therapeutique.webp",
+    alt: "Illustration d’un atelier collectif d’éducation thérapeutique autour du diabète",
+    highlights: ["Comprendre la maladie", "Partager les expériences", "Gagner en autonomie"],
+    note: "Les prochaines séances et les modalités de participation sont communiquées directement par le cabinet.",
+  },
+  {
+    id: "surveillance-glycemique-continue",
+    eyebrow: "Holter glycémique",
+    title: "Holter glycémique et surveillance continue",
+    description:
+      "Pour les patients concernés, le Holter glycémique enregistre l’évolution du glucose en continu. Les données du capteur peuvent être consultées dans le cadre d’un suivi médical rapproché quotidien afin de repérer les tendances, de préparer les échanges avec le cabinet et de mieux comprendre l’évolution de la glycémie.",
+    image: null,
+    alt: "Aperçu d’une interface de suivi glycémique continu",
+    highlights: ["Mesure en continu", "Suivi rapproché quotidien", "Lecture des tendances"],
+    note: "Le tableau permet de visualiser les tendances utiles au suivi tout en préservant strictement l’identité et les informations personnelles des patients.",
+  },
+] as const;
+
+/**
+ * Galerie asymétrique : les trois photos haute définition (1448×1086) occupent
+ * les grandes cartes ; la vue de consultation, de définition plus modeste
+ * (515×388), est présentée en carte compacte afin qu'elle reste nette.
+ */
+export const gallery = [
+  {
+    src: "/cabinet-accueil-reel.webp",
+    alt: "Accueil réel du cabinet du Dr Sonia Abahou à Témara",
+    label: "Accueil",
+    title: "Un accueil lumineux, calme et soigné.",
+    variant: "gallery-large",
+    sizes: "(max-width: 980px) 92vw, 1180px",
+  },
+  {
+    src: "/cabinet-consultation-reel.webp",
+    alt: "Salle de consultation du cabinet du Dr Sonia Abahou à Témara",
+    label: "Consultation",
+    title: "Un espace professionnel consacré à l’écoute et au suivi.",
+    variant: "gallery-wide",
+    sizes: "(max-width: 980px) 92vw, 580px",
+  },
+  {
+    src: "/cabinet-attente-reel.webp",
+    alt: "Salle d’attente du cabinet du Dr Sonia Abahou à Témara",
+    label: "Salle d’attente",
+    title: "Un cadre sobre et confortable avant la consultation.",
+    variant: "gallery-wide",
+    sizes: "(max-width: 980px) 92vw, 580px",
+  },
+  {
+    src: "/cabinet-consultation-patiente.webp",
+    alt: "Consultation au cabinet du Dr Sonia Abahou à Témara, avec une patiente dont le visage est flouté par respect de la confidentialité",
+    label: "Consultation",
+    title: "Un temps d’échange individuel, au calme, avec chaque patient.",
+    variant: "gallery-compact",
+    sizes: "(max-width: 980px) 92vw, 380px",
+  },
+] as const;
+
 export const googleReviews = {
   /* URL directe et pérenne de la fiche Google du cabinet (le lien court
      `share.google` est opaque et non garanti dans la durée). */
