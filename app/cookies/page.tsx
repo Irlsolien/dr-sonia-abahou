@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { absoluteUrl, siteName } from "../seo";
+import { absoluteUrl, ogCoverImage, siteName } from "../seo";
 
 export const metadata: Metadata = {
   title: "Politique cookies | Dr Sonia Abahou",
@@ -17,13 +17,21 @@ export const metadata: Metadata = {
     siteName,
     type: "website",
     locale: "fr_MA",
+    images: [
+      {
+        url: ogCoverImage,
+        width: 1200,
+        height: 630,
+        alt: "Dr Sonia Abahou — Endocrinologie, diabétologie, nutrition à Témara",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Politique cookies | Dr Sonia Abahou",
     description:
       "Politique cookies du site du cabinet Dr Sonia Abahou à Témara.",
-    images: [absoluteUrl("/dr-sonia-abahou.jpg")],
+    images: [absoluteUrl(ogCoverImage)],
   },
 };
 

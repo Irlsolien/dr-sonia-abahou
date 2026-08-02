@@ -44,8 +44,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/dr-sonia-abahou.jpg",
-        width: 600,
-        height: 600,
+        width: 560,
+        height: 560,
         alt: "Portrait du Dr Sonia Abahou",
       },
     ],

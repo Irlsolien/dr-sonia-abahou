@@ -253,7 +253,7 @@ const structuredData = {
       },
       logo: {
         "@type": "ImageObject",
-        url: absoluteUrl("/dr-sonia-logo-cropped.png"),
+        url: absoluteUrl("/dr-sonia-logo-cropped.webp"),
       },
       url: `${siteUrl}/`,
       telephone: [clinicPhoneInternational, clinicSecondaryPhoneInternational],
@@ -266,6 +266,11 @@ const structuredData = {
         postalCode: clinicPostalCode,
         addressLocality: clinicCity,
         addressCountry: clinicCountry,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 33.928046,
+        longitude: -6.8987233,
       },
       contactPoint: [
         {
@@ -441,12 +446,11 @@ export default function Home() {
         <a className="brand-mark" href="#accueil" aria-label="Accueil">
           <span className="brand-logo-mark">
             <Image
-              src="/dr-sonia-monogram.png"
+              src="/dr-sonia-monogram.webp"
               alt=""
               width={58}
               height={58}
               sizes="58px"
-              priority
             />
           </span>
           <strong>Dr Sonia Abahou</strong>
@@ -468,7 +472,7 @@ export default function Home() {
           <p className="eyebrow">Endocrinologue diabétologue à Témara</p>
           <h1>
             Une prise en charge claire du diabète, de la thyroïde et du
-            métabolisme.
+            métabolisme à Témara.
           </h1>
           <p className="hero-lead">
             Le cabinet du Dr Sonia Abahou reçoit les patients pour le suivi du
@@ -477,7 +481,7 @@ export default function Home() {
           </p>
           <div className="brand-signature-card" aria-label="Signature du cabinet">
             <Image
-              src="/dr-sonia-logo-cropped.png"
+              src="/dr-sonia-logo-cropped.webp"
               alt="Logo Dr Abahou Sonia"
               width={244}
               height={210}
@@ -504,7 +508,7 @@ export default function Home() {
         <div className="hero-visual" aria-label="Portrait du Dr Sonia Abahou">
           <Image
             className="hero-monogram-watermark"
-            src="/dr-sonia-monogram.png"
+            src="/dr-sonia-monogram.webp"
               alt=""
               width={420}
               height={260}
@@ -869,7 +873,7 @@ export default function Home() {
         <div>
           <Image
             className="footer-logo"
-            src="/dr-sonia-logo-cropped.png"
+            src="/dr-sonia-logo-cropped.webp"
             alt="Logo Dr Abahou Sonia"
             width={132}
             height={114}

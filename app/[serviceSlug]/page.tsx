@@ -11,6 +11,7 @@ import {
   doctorProfilePath,
   googleMapsPlaceUrl,
   lastModified,
+  ogCoverImage,
   services,
   siteName,
   siteUrl,
@@ -67,18 +68,18 @@ export async function generateMetadata({
       locale: "fr_MA",
       images: [
         {
-          url: "/dr-sonia-abahou.jpg",
-          width: 600,
-          height: 600,
+          url: ogCoverImage,
+          width: 1200,
+          height: 630,
           alt: `Dr Sonia Abahou - ${service.title}`,
         },
       ],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: service.seoTitle,
       description: service.description,
-      images: [absoluteUrl("/dr-sonia-abahou.jpg")],
+      images: [absoluteUrl(ogCoverImage)],
     },
   };
 }

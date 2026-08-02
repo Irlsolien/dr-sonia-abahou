@@ -51,5 +51,8 @@ next-env.d.ts
 # claude code local config
 /.claude/
 
+# source photos from the client (raw, never for the public repo)
+/photos-cliente/
+
 # local audit reports (not for the public repo)
 /AUDIT-COMPLET-*.md

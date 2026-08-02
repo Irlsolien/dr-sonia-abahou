@@ -23,7 +23,8 @@ export const doctorOrderNumber = "10563";
 export const doctorRegionalCouncil = "Conseil régional de l’Ordre des médecins de Rabat";
 export const doctorInpe = "101193191";
 export const defaultOgImage = "/dr-sonia-abahou.jpg";
-export const lastModified = "2026-07-28";
+export const ogCoverImage = "/og-cover.jpg";
+export const lastModified = "2026-08-02";
 export const googleMapsPlaceUrl =
   "https://maps.app.goo.gl/iQDGmhWtGaSKDLJt7";
 
@@ -139,7 +140,7 @@ export const services = [
   {
     slug: "surrenales-hypophyse-parathyroides-temara",
     title: "Surrénales, hypophyse et parathyroïdes",
-    seoTitle: "Pathologies endocriniennes à Témara | Dr Abahou Sonia",
+    seoTitle: "Surrénales, hypophyse et parathyroïdes à Témara | Dr Abahou Sonia",
     description:
       "Consultation d’endocrinologie à Témara pour pathologies surrénaliennes, hypophysaires et parathyroïdiennes.",
     text: "Exploration et suivi des pathologies surrénaliennes, hypophysaires et parathyroïdiennes.",

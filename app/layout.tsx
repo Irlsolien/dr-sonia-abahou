@@ -3,9 +3,9 @@ import "./globals.css";
 import { SiteInteractionFeedback } from "@/components/site-interaction-feedback";
 import {
   absoluteUrl,
-  defaultOgImage,
   doctorName,
   doctorProfilePath,
+  ogCoverImage,
   siteName,
   siteUrl,
 } from "./seo";
@@ -78,19 +78,19 @@ export const metadata: Metadata = {
     url: "/",
     images: [
       {
-        url: defaultOgImage,
-        width: 600,
-        height: 600,
-        alt: "Portrait du Dr Sonia Abahou",
+        url: ogCoverImage,
+        width: 1200,
+        height: 630,
+        alt: "Dr Sonia Abahou — Endocrinologie, diabétologie, nutrition à Témara",
       },
     ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Dr Sonia Abahou | Cabinet d’endocrinologie à Témara",
     description:
       "Informations pratiques du cabinet : diabète, thyroïde, nutrition, obésité, hypoglycémies et maladies métaboliques à Témara.",
-    images: [absoluteUrl(defaultOgImage)],
+    images: [absoluteUrl(ogCoverImage)],
   },
   formatDetection: {
     telephone: true,

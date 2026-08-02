@@ -10,6 +10,7 @@ import {
   doctorInpe,
   doctorOrderNumber,
   doctorRegionalCouncil,
+  ogCoverImage,
   siteName,
 } from "../seo";
 
@@ -28,13 +29,21 @@ export const metadata: Metadata = {
     siteName,
     type: "website",
     locale: "fr_MA",
+    images: [
+      {
+        url: ogCoverImage,
+        width: 1200,
+        height: 630,
+        alt: "Dr Sonia Abahou — Endocrinologie, diabétologie, nutrition à Témara",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Mentions légales | Dr Sonia Abahou",
     description:
       "Mentions légales du site du cabinet Dr Abahou Sonia, endocrinologie et maladies métaboliques à Témara.",
-    images: [absoluteUrl("/dr-sonia-abahou.jpg")],
+    images: [absoluteUrl(ogCoverImage)],
   },
 };
 
