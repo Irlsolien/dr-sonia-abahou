@@ -13,7 +13,6 @@ import {
   doctorProfilePath,
   googleMapsPlaceUrl,
   lastModified,
-  ogCoverImage,
   services,
   siteName,
   siteUrl,
@@ -73,6 +72,7 @@ export async function generateMetadata({
   }
 
   const canonical = `/${service.slug}`;
+  const ogImage = `/og-${service.slug}.jpg`;
 
   return {
     title: service.seoTitle,
@@ -90,7 +90,7 @@ export async function generateMetadata({
       locale: "fr_MA",
       images: [
         {
-          url: ogCoverImage,
+          url: ogImage,
           width: 1200,
           height: 630,
           alt: `Dr Sonia Abahou - ${service.title}`,
@@ -101,7 +101,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: service.seoTitle,
       description: service.description,
-      images: [absoluteUrl(ogCoverImage)],
+      images: [absoluteUrl(ogImage)],
     },
   };
 }

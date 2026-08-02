@@ -2199,18 +2199,68 @@ h3 {
 /* Échelle commune des H1 de pages secondaires, tenue sous celle de
    l'accueil (clamp(3.15rem, 6vw, 4.6rem)). */
 .appointment-hero h1,
-.teleconsultation-hero h1 {
+.teleconsultation-hero h1,
+.not-found-hero h1 {
   max-width: 920px;
   margin-bottom: 18px;
   font-size: clamp(2.6rem, 5.5vw, 4.2rem);
 }
 
 .appointment-hero > p,
-.teleconsultation-hero > p {
+.teleconsultation-hero > p,
+.not-found-hero > p {
   max-width: 780px;
   color: var(--color-muted);
   font-size: clamp(1.08rem, 1.8vw, 1.28rem);
   line-height: 1.7;
+}
+
+/* Page 404 : centrée verticalement dans l'espace disponible entre l'en-tête
+   et le pied de page, sans dépendre de la cale `body > main::after`. */
+.not-found-hero {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 0 56px;
+  text-align: center;
+}
+
+.not-found-hero .eyebrow {
+  justify-content: center;
+}
+
+.not-found-hero .hero-actions {
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.not-found-contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 30px;
+}
+
+.not-found-contact a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-primary-deep);
+  font-size: 0.94rem;
+  font-weight: 600;
+  transition: color 180ms ease;
+}
+
+.not-found-contact a svg {
+  color: var(--color-accent);
+}
+
+.not-found-contact a:hover,
+.not-found-contact a:focus-visible {
+  color: var(--color-ink);
 }
 
 .appointment-options {
@@ -4521,8 +4571,13 @@ h3 {
   }
 
   .appointment-hero h1,
-  .teleconsultation-hero h1 {
+  .teleconsultation-hero h1,
+  .not-found-hero h1 {
     font-size: clamp(2.25rem, 11.5vw, 3.3rem);
+  }
+
+  .not-found-hero {
+    padding: 28px 0 36px;
   }
 
   .appointment-card {
