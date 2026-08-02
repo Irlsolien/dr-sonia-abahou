@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Public_Sans } from "next/font/google";
 import "./globals.css";
+import { NavigationProgress } from "./components/NavigationProgress";
 import {
   absoluteUrl,
   doctorName,
@@ -140,6 +141,7 @@ export default function RootLayout({
   return (
     <html lang="fr-MA" className={`${fraunces.variable} ${publicSans.variable}`}>
       <body>
+        <NavigationProgress />
         {/* Lien d'évitement : premier élément focalisable du document. */}
         <a className="skip-link" href="#main-content">
           Aller au contenu
