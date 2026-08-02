@@ -32,6 +32,26 @@ const lastModifiedLabel = new Intl.DateTimeFormat("fr-MA", {
   year: "numeric",
 }).format(new Date(`${lastModified}T12:00:00+01:00`));
 
+// Formulation reprise à l'identique du paragraphe "service-copy" ci-dessous,
+// afin de garder un seul texte source pour les deux emplacements.
+const preparationNote =
+  "Pour préparer le rendez-vous, il est conseillé d’apporter les derniers bilans, ordonnances, comptes rendus, imageries et traitements en cours.";
+
+const contactSteps = [
+  {
+    title: "Appeler ou écrire sur WhatsApp",
+    text: `Fixe : ${clinicPhoneDisplay}. Portable / WhatsApp : ${clinicSecondaryPhoneDisplay}.`,
+  },
+  {
+    title: "Convenir d’un créneau avec le secrétariat",
+    text: "Le secrétariat confirme la disponibilité et les modalités pratiques du rendez-vous.",
+  },
+  {
+    title: "Apporter vos bilans et traitements en cours",
+    text: preparationNote,
+  },
+] as const;
+
 function findService(slug: string) {
   return services.find((service) => service.slug === slug);
 }
@@ -95,6 +115,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   }
 
   const pageUrl = absoluteUrl(`/${service.slug}`);
+  const otherServices = services.filter((item) => item.slug !== service.slug);
   const serviceFaqItems = [
     {
       question: `Que peut aborder une consultation pour ${service.title.toLowerCase()} ?`,
@@ -216,11 +237,16 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </article>
         <article className="service-info-card">
           <h2>Ce que la consultation permet d’aborder</h2>
-          <ul>
-            {service.points.map((point) => (
-              <li key={point}>{point}</li>
+          <ol className="service-points-list">
+            {service.points.map((point, index) => (
+              <li key={point} className="service-point">
+                <span className="service-point-index">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <p>{point}</p>
+              </li>
             ))}
-          </ul>
+          </ol>
         </article>
       </section>
 
@@ -232,10 +258,23 @@ export default async function ServicePage({ params }: ServicePageProps) {
           l’histoire médicale, des symptômes, des examens disponibles et de
           l’évaluation réalisée en consultation.
         </p>
-        <p>
-          Pour préparer le rendez-vous, il est conseillé d’apporter les derniers
-          bilans, ordonnances, comptes rendus, imageries et traitements en cours.
-        </p>
+        <p>{preparationNote}</p>
+      </section>
+
+      <section className="section-shell contact-steps-section">
+        <div className="section-heading">
+          <p className="eyebrow">Prise de contact</p>
+          <h2>Comment se déroule la prise de contact.</h2>
+        </div>
+        <div className="contact-steps-grid">
+          {contactSteps.map((step, index) => (
+            <article key={step.title} className="contact-step-card">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="section-shell service-editorial-note">
@@ -264,6 +303,35 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <h3>{item.question}</h3>
               <p>{item.answer}</p>
             </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-shell related-services-section">
+        <div className="related-services-intro">
+          <div className="section-heading related-services-heading">
+            <p className="eyebrow">Autres motifs pris en charge</p>
+            <h2>Explorer les autres motifs du cabinet.</h2>
+          </div>
+          <Link className="text-link" href="/">
+            Voir tous les motifs à l’accueil
+          </Link>
+        </div>
+        <div className="care-index-compact">
+          {otherServices.map((item, index) => (
+            <Link
+              key={item.slug}
+              className="care-row-compact"
+              href={`/${item.slug}`}
+            >
+              <span className="care-row-compact-number">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span className="care-row-compact-title">{item.title}</span>
+              <span className="care-row-compact-arrow" aria-hidden="true">
+                →
+              </span>
+            </Link>
           ))}
         </div>
       </section>
