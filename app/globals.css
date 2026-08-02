@@ -5,11 +5,13 @@
   --color-primary-deep: #075985;
   --color-secondary: #2dd4bf;
   --color-accent: #16a34a;
-  --color-background: #eefdfa;
+  --color-background: #f7fcfb;
   --color-surface: #ffffff;
-  --color-surface-soft: #e6f6f6;
+  --color-surface-soft: #eff8f6;
   --color-foreground: #164e4a;
-  --color-muted: #5d746f;
+  --color-muted: #556b66;
+  --color-mint: #2dd4bf;
+  --color-ink-soft: #2f4f4c;
   --color-border: #c9f4ed;
   --color-ink: #062b2c;
   --color-burgundy: #043f42;
@@ -37,10 +39,7 @@ body {
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  background:
-    radial-gradient(circle at 14% 10%, rgba(45, 212, 191, 0.26), transparent 26rem),
-    radial-gradient(circle at 84% 2%, rgba(7, 89, 133, 0.16), transparent 28rem),
-    linear-gradient(135deg, #eefdfa 0%, #f8ffff 46%, #e6f6f6 100%);
+  background: linear-gradient(180deg, #f7fcfb 0%, #f2faf9 100%);
   color: var(--color-foreground);
   font-family:
     var(--font-medical-ui),
@@ -48,19 +47,6 @@ body {
     Inter,
     Arial,
     sans-serif;
-}
-
-body::before {
-  position: fixed;
-  inset: 0;
-  z-index: -4;
-  pointer-events: none;
-  content: "";
-  background-image:
-    linear-gradient(rgba(7, 150, 173, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(7, 150, 173, 0.045) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(circle at top, black, transparent 78%);
 }
 
 a {
@@ -79,44 +65,6 @@ img {
   max-width: 100%;
 }
 
-.grain-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.28;
-  background-image:
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.55) 0 1px, transparent 1px),
-    radial-gradient(circle at 80% 10%, rgba(6, 43, 44, 0.08) 0 1px, transparent 1px);
-  background-size: 24px 24px, 31px 31px;
-  mix-blend-mode: soft-light;
-}
-
-.ambient {
-  position: fixed;
-  z-index: -3;
-  width: 38rem;
-  height: 38rem;
-  border-radius: 999px;
-  filter: blur(28px);
-  opacity: 0.34;
-  pointer-events: none;
-  animation: floatAmbient 14s ease-in-out infinite alternate;
-}
-
-.ambient-one {
-  top: 12%;
-  left: -12rem;
-  background: conic-gradient(from 90deg, #2dd4bf, #16a34a, #075985, #2dd4bf);
-}
-
-.ambient-two {
-  right: -14rem;
-  bottom: 0;
-  background: conic-gradient(from 210deg, #a7f3d0, #0796ad, #dbeafe, #a7f3d0);
-  animation-delay: -6s;
-}
-
 .site-header {
   position: sticky;
   top: 18px;
@@ -129,23 +77,10 @@ img {
   padding: 10px;
   border: 1px solid rgba(7, 150, 173, 0.14);
   border-radius: 999px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(248, 255, 255, 0.72)),
-    radial-gradient(circle at 0% 50%, rgba(7, 150, 173, 0.08), transparent 14rem);
-  box-shadow: 0 20px 60px rgba(7, 89, 133, 0.12);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 16px 44px rgba(7, 89, 133, 0.1);
   backdrop-filter: blur(24px);
   animation: headerDrop 680ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
-}
-
-.site-header::before {
-  position: absolute;
-  inset: 6px;
-  z-index: -1;
-  border-radius: inherit;
-  background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.28), transparent);
-  content: "";
-  transform: translateX(-36%);
-  animation: headerGlow 5.4s ease-in-out infinite;
 }
 
 .brand-mark {
@@ -153,7 +88,7 @@ img {
   align-items: center;
   gap: 12px;
   min-height: 44px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .brand-logo-mark {
@@ -187,7 +122,7 @@ img {
 
 .brand-mark strong {
   color: var(--color-ink);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: 1.06rem;
   font-weight: 700;
   letter-spacing: -0.035em;
@@ -223,7 +158,7 @@ img {
   padding: 0 16px;
   color: var(--color-muted);
   font-size: 0.92rem;
-  font-weight: 850;
+  font-weight: 600;
 }
 
 .site-header nav a::after {
@@ -258,7 +193,7 @@ img {
   align-items: center;
   justify-content: center;
   padding: 0 22px;
-  font-weight: 900;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -273,7 +208,7 @@ img {
 
 .secondary-button {
   border: 1px solid rgba(7, 150, 173, 0.25);
-  background: rgba(255, 255, 255, 0.74);
+  background: var(--color-surface);
   color: var(--color-primary-deep);
 }
 
@@ -340,7 +275,7 @@ img {
   margin: 0 0 18px;
   color: var(--color-primary-deep);
   font-size: 0.78rem;
-  font-weight: 950;
+  font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -363,20 +298,20 @@ h1 {
   max-width: 900px;
   margin-bottom: 26px;
   color: var(--color-ink);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: clamp(3.15rem, 8vw, 7rem);
-  font-weight: 750;
-  letter-spacing: -0.07em;
-  line-height: 0.9;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
 }
 
 h2 {
   color: var(--color-ink);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: clamp(2.25rem, 5vw, 4.8rem);
-  font-weight: 760;
-  letter-spacing: -0.058em;
-  line-height: 0.95;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.06;
 }
 
 h3 {
@@ -413,11 +348,8 @@ h3 {
   padding: 14px 18px 14px 12px;
   border: 1px solid rgba(7, 150, 173, 0.12);
   border-radius: 28px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(248, 255, 255, 0.68)),
-    radial-gradient(circle at 8% 50%, rgba(7, 150, 173, 0.08), transparent 11rem);
-  box-shadow: 0 22px 64px rgba(7, 89, 133, 0.08);
-  backdrop-filter: blur(18px);
+  background: var(--color-surface);
+  box-shadow: 0 18px 48px rgba(7, 89, 133, 0.07);
 }
 
 .brand-signature-card img {
@@ -432,7 +364,7 @@ h3 {
   margin-bottom: 5px;
   color: var(--color-primary-deep);
   font-size: 0.74rem;
-  font-weight: 950;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -440,7 +372,7 @@ h3 {
 .brand-signature-card strong {
   display: block;
   color: var(--color-ink);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: clamp(1.06rem, 1.8vw, 1.38rem);
   font-weight: 700;
   letter-spacing: -0.035em;
@@ -544,14 +476,13 @@ h3 {
   padding: 18px;
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 24px;
-  background: rgba(6, 43, 44, 0.8);
+  background: rgba(6, 43, 44, 0.88);
   color: white;
-  backdrop-filter: blur(18px);
 }
 
 .portrait-caption span {
   display: block;
-  font-weight: 950;
+  font-weight: 700;
 }
 
 .portrait-caption strong {
@@ -630,9 +561,8 @@ h3 {
   padding: 16px 18px;
   border: 1px solid rgba(201, 244, 237, 0.9);
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow: 0 20px 60px rgba(7, 150, 173, 0.18);
-  backdrop-filter: blur(18px);
+  background: var(--color-surface);
+  box-shadow: 0 18px 46px rgba(7, 150, 173, 0.16);
   animation: levitate 4.6s ease-in-out infinite;
 }
 
@@ -640,7 +570,7 @@ h3 {
   display: block;
   color: var(--color-muted);
   font-size: 0.8rem;
-  font-weight: 780;
+  font-weight: 600;
 }
 
 .floating-card strong {
@@ -657,12 +587,9 @@ h3 {
   padding: 18px;
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 26px;
-  background:
-    linear-gradient(145deg, rgba(6, 43, 44, 0.86), rgba(7, 89, 133, 0.78)),
-    radial-gradient(circle at top right, rgba(22, 163, 74, 0.22), transparent 10rem);
+  background: linear-gradient(145deg, #063d3f, #075985);
   color: white;
-  box-shadow: 0 28px 80px rgba(6, 43, 44, 0.22);
-  backdrop-filter: blur(20px);
+  box-shadow: 0 24px 64px rgba(6, 43, 44, 0.2);
   animation: levitate 5.4s ease-in-out infinite;
 }
 
@@ -671,7 +598,7 @@ h3 {
   margin-bottom: 18px;
   color: #a7f3d0;
   font-size: 0.78rem;
-  font-weight: 950;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -680,7 +607,7 @@ h3 {
   display: block;
   margin-bottom: 8px;
   font-size: 1.35rem;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.03em;
 }
 
 .doctor-status-card p {
@@ -699,28 +626,6 @@ h3 {
   right: 0;
   bottom: 18%;
   animation-delay: -1.8s;
-}
-
-.marquee {
-  overflow: hidden;
-  border-block: 1px solid rgba(7, 150, 173, 0.2);
-  background: var(--color-ink);
-  color: white;
-}
-
-.marquee div {
-  display: flex;
-  width: max-content;
-  animation: marqueeMove 25s linear infinite;
-}
-
-.marquee span {
-  padding: 24px 34px;
-  color: #e6f6f6;
-  font-size: clamp(1.35rem, 4vw, 3rem);
-  font-weight: 950;
-  letter-spacing: -0.06em;
-  text-transform: uppercase;
 }
 
 .split-section,
@@ -763,9 +668,8 @@ h3 {
 .journey-card,
 .map-card {
   border: 1px solid rgba(7, 150, 173, 0.16);
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 24px 80px rgba(7, 150, 173, 0.11);
-  backdrop-filter: blur(20px);
+  background: var(--color-surface);
+  box-shadow: 0 20px 56px rgba(7, 150, 173, 0.09);
 }
 
 .credential-card {
@@ -801,7 +705,7 @@ h3 {
   margin-bottom: 0;
   color: var(--color-foreground);
   font-size: 1.08rem;
-  font-weight: 780;
+  font-weight: 600;
   line-height: 1.45;
 }
 
@@ -943,8 +847,8 @@ h3 {
 }
 
 .journey-card span {
-  color: var(--color-primary);
-  font-weight: 950;
+  color: var(--color-primary-deep);
+  font-weight: 700;
   letter-spacing: -0.04em;
 }
 
@@ -1001,7 +905,7 @@ h3 {
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.16em;
-  color: var(--color-primary);
+  color: var(--color-primary-deep);
 }
 
 .care-row-title-wrap {
@@ -1025,7 +929,7 @@ h3 {
 .care-row-title {
   display: inline-block;
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: clamp(1.5rem, 2.6vw, 2.35rem);
   font-weight: 700;
   line-height: 1.08;
@@ -1254,12 +1158,11 @@ h3 {
   padding: clamp(18px, 3vw, 30px);
   border: 1px solid rgba(222, 255, 250, 0.2);
   border-radius: 30px;
-  background: rgba(237, 252, 250, 0.94);
+  background: #edfcfa;
   color: var(--color-ink);
   box-shadow:
     0 34px 80px rgba(0, 27, 30, 0.38),
     inset 0 1px 0 white;
-  backdrop-filter: blur(18px);
 }
 
 .cgm-demo-topbar,
@@ -1290,7 +1193,7 @@ h3 {
   gap: 7px;
   color: var(--color-primary-deep);
   font-size: 0.68rem;
-  font-weight: 950;
+  font-weight: 700;
   letter-spacing: 0.11em;
   text-transform: uppercase;
 }
@@ -1311,7 +1214,7 @@ h3 {
   background: white;
   color: var(--color-primary-deep);
   font-size: 0.68rem;
-  font-weight: 900;
+  font-weight: 700;
   white-space: nowrap;
 }
 
@@ -1344,8 +1247,8 @@ h3 {
 .cgm-demo-value {
   color: var(--color-ink) !important;
   font-size: clamp(1.6rem, 3vw, 2.2rem) !important;
-  font-weight: 950;
-  letter-spacing: -0.06em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .cgm-demo-value small,
@@ -1353,7 +1256,7 @@ h3 {
   margin-left: 3px;
   color: var(--color-muted);
   font-size: 0.58rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0;
 }
 
@@ -1392,7 +1295,7 @@ h3 {
   justify-content: space-between;
   color: var(--color-muted);
   font-size: 0.62rem;
-  font-weight: 760;
+  font-weight: 600;
 }
 
 .cgm-demo-patients {
@@ -1405,7 +1308,7 @@ h3 {
   padding: 10px 12px;
   border: 1px solid rgba(7, 150, 173, 0.12);
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--color-surface);
 }
 
 .cgm-demo-avatar {
@@ -1415,10 +1318,10 @@ h3 {
   flex: 0 0 auto;
   place-items: center;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-mint));
+  background: linear-gradient(135deg, var(--color-primary-deep), #0a7f92);
   color: white;
   font-size: 0.68rem;
-  font-weight: 950;
+  font-weight: 700;
 }
 
 .cgm-demo-patient > div {
@@ -1445,7 +1348,7 @@ h3 {
   margin: 14px 0 0;
   color: var(--color-muted);
   font-size: 0.65rem;
-  font-weight: 800;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -1462,13 +1365,12 @@ h3 {
   padding: 8px 12px;
   border: 1px solid rgba(255, 255, 255, 0.38);
   border-radius: 999px;
-  background: rgba(0, 62, 68, 0.48);
+  background: rgba(0, 62, 68, 0.82);
   color: white;
   font-size: 0.72rem;
-  font-weight: 850;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  backdrop-filter: blur(12px);
 }
 
 .practice-number {
@@ -1482,11 +1384,10 @@ h3 {
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.58);
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.78);
+  background: var(--color-surface);
   color: var(--color-primary-deep);
-  font-weight: 950;
+  font-weight: 700;
   box-shadow: 0 14px 34px rgba(0, 48, 52, 0.14);
-  backdrop-filter: blur(14px);
 }
 
 .practice-content {
@@ -1505,7 +1406,7 @@ h3 {
   margin: 0 0 20px;
   color: var(--color-primary-deep);
   font-size: 0.76rem;
-  font-weight: 950;
+  font-weight: 700;
   letter-spacing: 0.13em;
   text-transform: uppercase;
 }
@@ -1522,9 +1423,9 @@ h3 {
   margin: 0 0 22px;
   font-family: var(--font-serif), Georgia, serif;
   font-size: clamp(2.15rem, 4.2vw, 4.7rem);
-  font-weight: 760;
-  line-height: 0.96;
-  letter-spacing: -0.065em;
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
@@ -1548,10 +1449,10 @@ h3 {
   padding: 9px 13px;
   border: 1px solid rgba(7, 150, 173, 0.2);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--color-surface);
   color: var(--color-ink);
   font-size: 0.82rem;
-  font-weight: 820;
+  font-weight: 600;
   box-shadow: inset 0 1px 0 white;
 }
 
@@ -1629,9 +1530,8 @@ h3 {
   padding: 18px;
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 24px;
-  background: rgba(6, 43, 44, 0.64);
+  background: rgba(6, 43, 44, 0.82);
   color: white;
-  backdrop-filter: blur(16px);
 }
 
 .gallery-card figcaption span {
@@ -1641,7 +1541,7 @@ h3 {
   background: rgba(167, 243, 208, 0.16);
   color: #a7f3d0;
   font-size: 0.78rem;
-  font-weight: 950;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -1673,7 +1573,7 @@ h3 {
 .diagnostic-band p:first-child {
   margin-bottom: 10px;
   color: #2dd4bf;
-  font-weight: 950;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -1797,11 +1697,10 @@ h3 {
   padding: 8px 12px;
   border: 1px solid rgba(7, 150, 173, 0.16);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.68);
-  color: rgba(6, 43, 44, 0.72);
+  background: var(--color-surface);
+  color: rgba(6, 43, 44, 0.82);
   font-size: 0.82rem;
-  font-weight: 900;
-  backdrop-filter: blur(14px);
+  font-weight: 600;
 }
 
 .massira {
@@ -1909,7 +1808,7 @@ h3 {
     radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.22), transparent 30%),
     var(--color-ink);
   color: white;
-  font-weight: 950;
+  font-weight: 700;
   box-shadow:
     0 24px 60px rgba(6, 43, 44, 0.24),
     0 0 0 14px rgba(22, 163, 74, 0.14);
@@ -1931,17 +1830,14 @@ h3 {
   padding: 16px 18px;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 22px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent),
-    rgba(6, 43, 44, 0.78);
+  background: #063d3f;
   color: white;
-  backdrop-filter: blur(18px);
 }
 
 .map-overlay span {
   color: #a7f3d0;
   font-size: 0.78rem;
-  font-weight: 950;
+  font-weight: 700;
   letter-spacing: 0.14em;
 }
 
@@ -1950,19 +1846,19 @@ h3 {
   margin-top: 4px;
   color: #2dd4bf;
   font-size: 0.86rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .hours-panel {
-  background:
-    linear-gradient(135deg, rgba(7, 150, 173, 0.12), rgba(22, 163, 74, 0.1)),
-    rgba(255, 255, 255, 0.74);
+  background: linear-gradient(135deg, #e7f5f4 0%, #eef8f0 100%);
 }
 
 .hours-panel h3 {
   margin-bottom: 26px;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: clamp(1.8rem, 3vw, 2.7rem);
-  letter-spacing: -0.05em;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
 }
 
 .hours-list {
@@ -1981,7 +1877,7 @@ h3 {
 
 .hours-list span {
   color: var(--color-muted);
-  font-weight: 780;
+  font-weight: 600;
 }
 
 .hours-list strong {
@@ -1996,9 +1892,7 @@ h3 {
   margin-bottom: 48px;
   padding: clamp(32px, 5vw, 58px);
   border-radius: 42px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(238, 253, 250, 0.7)),
-    radial-gradient(circle at right, rgba(45, 212, 191, 0.2), transparent 32rem);
+  background: linear-gradient(135deg, #ffffff 0%, #e9f7f4 100%);
 }
 
 .final-cta h2 {
@@ -2131,7 +2025,7 @@ h3 {
   background: rgba(7, 150, 173, 0.1);
   color: var(--color-primary-deep);
   font-size: 0.78rem;
-  font-weight: 950;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -2161,7 +2055,7 @@ h3 {
   padding: 18px;
   border: 1px solid rgba(7, 150, 173, 0.14);
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--color-surface);
 }
 
 .appointment-card-video .appointment-meta {
@@ -2231,7 +2125,7 @@ h3 {
   border-radius: 18px;
   background: var(--color-ink);
   color: white;
-  font-weight: 950;
+  font-weight: 700;
 }
 
 .teleconsultation-step h2 {
@@ -2263,9 +2157,8 @@ h3 {
 .payment-panel {
   border: 1px solid rgba(7, 150, 173, 0.15);
   border-radius: 34px;
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow: 0 24px 80px rgba(7, 150, 173, 0.1);
-  backdrop-filter: blur(18px);
+  background: var(--color-surface);
+  box-shadow: 0 20px 56px rgba(7, 150, 173, 0.09);
 }
 
 .booking-copy {
@@ -2337,13 +2230,13 @@ h3 {
 
 .payment-details dt {
   color: var(--color-muted);
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .payment-details dd {
   margin: 0;
   color: var(--color-ink);
-  font-weight: 900;
+  font-weight: 600;
   overflow-wrap: anywhere;
 }
 
@@ -2369,7 +2262,7 @@ h3 {
   display: block;
   margin-bottom: 6px;
   color: var(--color-ink);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: 1.14rem;
   font-weight: 700;
   letter-spacing: -0.035em;
@@ -2394,11 +2287,8 @@ h3 {
   padding: 8px;
   border: 1px solid rgba(7, 150, 173, 0.14);
   border-radius: 999px;
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(238, 253, 250, 0.72)),
-    radial-gradient(circle at 100% 0%, rgba(22, 163, 74, 0.14), transparent 6rem);
-  box-shadow: 0 18px 50px rgba(6, 43, 44, 0.08);
-  backdrop-filter: blur(18px);
+  background: var(--color-surface);
+  box-shadow: 0 16px 40px rgba(6, 43, 44, 0.07);
 }
 
 .social-tooltip-item {
@@ -2410,7 +2300,7 @@ h3 {
   justify-content: center;
   border: 1px solid rgba(7, 150, 173, 0.14);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.78);
+  background: var(--color-surface);
   color: var(--color-primary-deep);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
   transition:
@@ -2466,7 +2356,7 @@ h3 {
   background: rgba(6, 43, 44, 0.92);
   color: white;
   font-size: 0.74rem;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.02em;
   opacity: 0;
   pointer-events: none;
@@ -2506,11 +2396,8 @@ h3 {
   padding: 14px 14px 14px 13px;
   border: 1px solid rgba(7, 150, 173, 0.14);
   border-radius: 24px;
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 255, 255, 0.78)),
-    radial-gradient(circle at 8% 12%, rgba(7, 150, 173, 0.09), transparent 11rem);
+  background: var(--color-surface);
   box-shadow: 0 24px 74px rgba(6, 43, 44, 0.16);
-  backdrop-filter: blur(22px);
   animation: toastIn 360ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
 }
 
@@ -2550,7 +2437,7 @@ h3 {
   background: color-mix(in srgb, var(--feedback-tone) 13%, white);
   color: var(--feedback-tone);
   font-size: 1rem;
-  font-weight: 950;
+  font-weight: 700;
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--feedback-tone) 28%, transparent);
 }
 
@@ -2563,7 +2450,7 @@ h3 {
   margin-bottom: 3px;
   color: var(--feedback-tone);
   font-size: 0.68rem;
-  font-weight: 950;
+  font-weight: 700;
   letter-spacing: 0.13em;
   text-transform: uppercase;
 }
@@ -2621,9 +2508,9 @@ h3 {
   align-items: center;
   border: 1px solid rgba(7, 150, 173, 0.18);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--color-surface);
   color: var(--color-primary-deep);
-  font-weight: 850;
+  font-weight: 600;
 }
 
 .site-footer nav a {
@@ -2667,15 +2554,14 @@ h3 {
   padding: clamp(24px, 4vw, 42px);
   border: 1px solid rgba(7, 150, 173, 0.16);
   border-radius: 30px;
-  background: rgba(255, 255, 255, 0.74);
-  box-shadow: 0 18px 60px rgba(7, 150, 173, 0.09);
-  backdrop-filter: blur(18px);
+  background: var(--color-surface);
+  box-shadow: 0 16px 44px rgba(7, 150, 173, 0.08);
 }
 
 .legal-content h2 {
   margin-bottom: 14px;
   font-size: clamp(1.55rem, 3vw, 2.6rem);
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
 }
 
 .legal-content p,
@@ -2698,7 +2584,7 @@ h3 {
 
 .legal-content a {
   color: var(--color-primary-deep);
-  font-weight: 850;
+  font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -2710,7 +2596,7 @@ h3 {
   margin-top: 18px;
   color: var(--color-primary-deep);
   font-size: 0.92rem;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .text-link::after {
@@ -2793,7 +2679,7 @@ h3 {
   color: var(--color-ink);
   cursor: pointer;
   font-size: clamp(1.02rem, 1.7vw, 1.28rem);
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: -0.025em;
   list-style: none;
 }
@@ -2815,7 +2701,7 @@ h3 {
   flex: 0 0 auto;
   border: 1px solid rgba(7, 150, 173, 0.2);
   border-radius: 15px;
-  background: rgba(255, 255, 255, 0.78);
+  background: var(--color-surface);
   box-shadow: 0 10px 24px rgba(7, 89, 133, 0.08);
   transition:
     background 240ms ease,
@@ -2921,8 +2807,8 @@ h3 {
   margin: 0;
   color: var(--color-primary-deep);
   font-size: clamp(3.1rem, 8vw, 6.8rem);
-  letter-spacing: -0.07em;
-  line-height: 0.92;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
 }
 
 .service-hero p {
@@ -2961,7 +2847,7 @@ h3 {
   background: rgba(7, 150, 173, 0.09);
   color: var(--color-primary-deep);
   font-size: 0.78rem;
-  font-weight: 900;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -3004,7 +2890,7 @@ h3 {
   padding: clamp(24px, 4vw, 38px);
   border: 1px solid rgba(7, 150, 173, 0.14);
   border-radius: 30px;
-  background: rgba(255, 255, 255, 0.76);
+  background: var(--color-surface);
   box-shadow: 0 18px 48px rgba(7, 89, 133, 0.07);
 }
 
@@ -3035,9 +2921,9 @@ h3 {
   padding: 9px 13px;
   border: 1px solid rgba(7, 150, 173, 0.14);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--color-surface);
   color: var(--color-muted);
-  font-weight: 750;
+  font-weight: 600;
 }
 
 .profile-intro-grid {
@@ -3053,7 +2939,7 @@ h3 {
   margin: 0;
   border: 1px solid rgba(7, 150, 173, 0.14);
   border-radius: 34px;
-  background: rgba(255, 255, 255, 0.86);
+  background: var(--color-surface);
   box-shadow: 0 24px 70px rgba(7, 89, 133, 0.1);
 }
 
@@ -3077,11 +2963,10 @@ h3 {
   padding: 15px 18px;
   border: 1px solid rgba(255, 255, 255, 0.52);
   border-radius: 18px;
-  background: rgba(4, 63, 66, 0.82);
+  background: rgba(4, 63, 66, 0.88);
   color: white;
   font-size: 0.9rem;
-  font-weight: 800;
-  backdrop-filter: blur(18px);
+  font-weight: 700;
 }
 
 .profile-summary-card {
@@ -3096,8 +2981,8 @@ h3 {
   margin: 10px 0 18px;
   color: var(--color-primary-deep);
   font-size: clamp(2.2rem, 4.8vw, 4.4rem);
-  letter-spacing: -0.055em;
-  line-height: 0.98;
+  letter-spacing: -0.025em;
+  line-height: 1.06;
 }
 
 .profile-summary-card > p:not(.eyebrow),
@@ -3123,7 +3008,7 @@ h3 {
 .profile-identifiers dt {
   color: var(--color-muted);
   font-size: 0.82rem;
-  font-weight: 850;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -3131,7 +3016,7 @@ h3 {
 .profile-identifiers dd {
   margin: 0;
   color: var(--color-primary-deep);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .profile-section {
@@ -3147,7 +3032,7 @@ h3 {
 
 .profile-source-note a {
   color: var(--color-primary-deep);
-  font-weight: 850;
+  font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -3167,7 +3052,7 @@ h3 {
   padding: 24px;
   border: 1px solid rgba(7, 150, 173, 0.14);
   border-radius: 26px;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(230, 246, 246, 0.78));
+  background: linear-gradient(145deg, #ffffff, #eef7f6);
   color: var(--color-primary-deep);
   box-shadow: 0 20px 50px rgba(7, 89, 133, 0.08);
   transition:
@@ -3190,7 +3075,7 @@ h3 {
 .profile-service-links span,
 .profile-reference-grid strong {
   font-size: 1.12rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .profile-service-links small,
@@ -3236,18 +3121,6 @@ h3 {
   }
 }
 
-@keyframes headerGlow {
-  0%,
-  100% {
-    transform: translateX(-36%);
-    opacity: 0.2;
-  }
-  50% {
-    transform: translateX(36%);
-    opacity: 0.7;
-  }
-}
-
 @keyframes softPulse {
   0%,
   100% {
@@ -3257,15 +3130,6 @@ h3 {
   50% {
     transform: scale(1.18);
     opacity: 0;
-  }
-}
-
-@keyframes floatAmbient {
-  from {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  to {
-    transform: translate3d(44px, -28px, 0) scale(1.08);
   }
 }
 
@@ -3337,15 +3201,6 @@ h3 {
   }
   50% {
     transform: translateY(-18px) rotate(1.4deg);
-  }
-}
-
-@keyframes marqueeMove {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
   }
 }
 
@@ -3665,13 +3520,13 @@ h3 {
   h1 {
     margin-bottom: 18px;
     font-size: clamp(2.45rem, 14.4vw, 3.85rem);
-    letter-spacing: -0.075em;
-    line-height: 0.9;
+    letter-spacing: -0.03em;
+    line-height: 1.06;
   }
 
   h2 {
     font-size: clamp(2rem, 11vw, 3.15rem);
-    letter-spacing: -0.06em;
+    letter-spacing: -0.025em;
   }
 
   .hero-lead,
@@ -4179,8 +4034,6 @@ h3 {
     animation: none !important;
   }
 
-  .ambient,
-  .site-header::before,
   .brand-logo-mark::after,
   .hero::before,
   .hero-monogram-watermark,
@@ -4189,7 +4042,6 @@ h3 {
   .metabolic-sphere,
   .floating-card,
   .doctor-status-card,
-  .marquee div,
   .signature-ring,
   .practice-media-biody::before,
   .practice-media-biody img,
@@ -4202,17 +4054,7 @@ h3 {
     animation: none !important;
   }
 
-  .grain-overlay {
-    display: none;
-  }
-
-  .site-header,
-  .floating-card,
-  .doctor-status-card,
-  .brand-signature-card,
-  .cgm-demo,
-  .gallery-card figcaption,
-  .map-overlay {
+  .site-header {
     backdrop-filter: none !important;
   }
 }
@@ -4310,7 +4152,7 @@ h3 {
     gap: 3px;
     color: var(--color-ink);
     font-size: 0.72rem;
-    font-weight: 800;
+    font-weight: 600;
     transition: color 180ms ease;
   }
 

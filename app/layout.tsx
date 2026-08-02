@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Fraunces, Public_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteInteractionFeedback } from "@/components/site-interaction-feedback";
 import {
@@ -9,6 +10,27 @@ import {
   siteName,
   siteUrl,
 } from "./seo";
+
+/**
+ * Typographie de marque.
+ * Fraunces : serif éditoriale (axe optique) pour les grands titres.
+ * Public Sans : sans-serif institutionnelle et sobre pour l'interface.
+ */
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  axes: ["opsz"],
+  display: "swap",
+  variable: "--font-serif",
+  fallback: ["Georgia", "Times New Roman", "serif"],
+});
+
+const publicSans = Public_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-medical-ui",
+  fallback: ["Segoe UI", "Helvetica Neue", "Arial", "sans-serif"],
+});
 
 const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION;
 const bingSiteVerification = process.env.BING_SITE_VERIFICATION;
@@ -117,7 +139,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr-MA">
+    <html lang="fr-MA" className={`${fraunces.variable} ${publicSans.variable}`}>
       <body>
         {children}
         <SiteInteractionFeedback />

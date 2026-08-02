@@ -438,10 +438,6 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <div className="ambient ambient-one" />
-      <div className="ambient ambient-two" />
-      <div className="grain-overlay" />
-
       <header className="site-header">
         <a className="brand-mark" href="#accueil" aria-label="Accueil">
           <span className="brand-logo-mark">
@@ -550,23 +546,6 @@ export default function Home() {
             <span>Thyroïde</span>
             <strong>Bilan & orientation</strong>
           </div>
-        </div>
-      </section>
-
-      <section className="marquee" aria-label="Spécialités du cabinet">
-        <div>
-          <span>Diabète</span>
-          <span>Thyroïde</span>
-          <span>Nutrition</span>
-            <span>Obésité</span>
-            <span>Métabolisme</span>
-            <span>Éducation thérapeutique</span>
-            <span>Diabète</span>
-            <span>Thyroïde</span>
-            <span>Nutrition</span>
-            <span>Hypoglycémies</span>
-            <span>Métabolisme</span>
-            <span>Éducation thérapeutique</span>
         </div>
       </section>
 
