@@ -108,7 +108,6 @@ img {
   width: 82%;
   height: 82%;
   object-fit: contain;
-  transform: scale(1.4);
 }
 
 .brand-logo-mark::after {
@@ -367,7 +366,6 @@ h3 {
   width: 112px;
   height: auto;
   border-radius: 18px;
-  mix-blend-mode: multiply;
 }
 
 .brand-signature-card span {
@@ -2009,6 +2007,60 @@ h3 {
   height: 100%;
   border: 0;
   filter: saturate(0.92) contrast(1.02);
+}
+
+.map-facade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  gap: 10px;
+  place-items: center;
+  padding: clamp(24px, 5vw, 40px);
+  text-align: center;
+  background: var(--color-surface-soft);
+}
+
+.map-facade-icon {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 4px;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-primary);
+}
+
+.map-facade-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.map-facade-label {
+  color: var(--color-ink);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.map-facade-address {
+  max-width: 320px;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.map-facade-button {
+  margin-top: 6px;
+}
+
+.map-facade-note {
+  max-width: 300px;
+  margin-top: 4px;
+  color: var(--color-muted);
+  font-size: 0.76rem;
+  line-height: 1.5;
 }
 
 .appointment-card-video {

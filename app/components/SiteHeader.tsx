@@ -23,10 +23,10 @@ export function SiteHeader({ internal = false }: SiteHeaderProps) {
       >
         <span className="brand-logo-mark">
           <Image
-            src="/dr-sonia-monogram.webp"
+            src="/dr-sonia-monogram-clean.webp"
             alt=""
             width={58}
-            height={58}
+            height={52}
             sizes="58px"
           />
         </span>

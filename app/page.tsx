@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "./components/SiteHeader";
 import { SiteFooter } from "./components/SiteFooter";
+import { MapEmbed } from "./components/MapEmbed";
 import { MapPinIcon, PhoneIcon, WhatsAppIcon } from "./components/Icons";
 import {
   absoluteUrl,
@@ -762,21 +763,12 @@ export default function Home() {
           </div>
         </div>
         <div className="map-card google-map-card" aria-label="Carte Google Maps du cabinet">
-          <iframe
-            className="google-map-frame"
-            src={mapsEmbedHref}
+          <MapEmbed
+            embedSrc={mapsEmbedHref}
+            mapsHref={mapsHref}
             title="Carte Google Maps du cabinet Dr Abahou Sonia à Témara"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
+            address={clinicAddress}
           />
-          <div className="map-overlay">
-            <span>GPS</span>
-            <strong>Massira I · Témara</strong>
-            <a href={mapsHref} target="_blank" rel="noreferrer">
-              Voir sur Google Maps
-            </a>
-          </div>
         </div>
         <div className="hours-panel">
           <h3>Horaires d’ouverture</h3>

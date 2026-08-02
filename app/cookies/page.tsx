@@ -79,11 +79,14 @@ export default function CookiesPage() {
         <article>
           <h2>Carte GPS</h2>
           <p>
-            La page d’accueil intègre une carte Google Maps afin de localiser le
-            cabinet. Le chargement de cette carte peut transmettre à Google des
-            données techniques, notamment l’adresse IP et des informations sur le
-            navigateur. Google applique alors ses propres règles de
-            confidentialité et de cookies.
+            La page d’accueil propose une carte Google Maps pour localiser le
+            cabinet. Par défaut, seule une façade statique s’affiche : la carte
+            interactive ne se charge qu’après un clic sur « Afficher la carte
+            interactive ». Aucune donnée n’est transmise à Google tant que
+            l’utilisateur n’a pas effectué ce clic. Une fois la carte affichée,
+            son chargement peut transmettre à Google des données techniques,
+            notamment l’adresse IP et des informations sur le navigateur. Google
+            applique alors ses propres règles de confidentialité et de cookies.
           </p>
         </article>
 
