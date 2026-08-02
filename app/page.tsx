@@ -130,7 +130,7 @@ const clinicalActivities = [
     title: "Impédancemétrie médicale avec BIODY XPERT ZM3",
     description:
       "Au-delà du poids seul, ce dispositif médical multifréquence contribue au suivi de la composition corporelle : masse grasse, masse non grasse, masse musculaire et hydratation. Les mesures complètent l’évaluation médicale et nutritionnelle.",
-    image: "/impedancemetrie-biody-xpert-zm3.webp",
+    image: "/impedancemetrie-mesure.webp",
     alt: "Illustration d’une mesure de composition corporelle avec un impédancemètre médical",
     highlights: ["Mesure multifréquence", "Évolution dans le temps", "Interprétation médicale"],
     note: "Des indicateurs utiles pour personnaliser le suivi et observer les évolutions au fil des consultations.",
