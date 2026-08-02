@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { SiteHeader } from "../components/SiteHeader";
+import { SiteFooter } from "../components/SiteFooter";
 import {
   absoluteUrl,
   clinicAddress,
@@ -190,10 +192,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
         }}
       />
 
+      <SiteHeader internal />
+
       <section className="service-hero section-shell">
-        <Link className="legal-back" href="/">
-          ← Retour au site
-        </Link>
         <p className="eyebrow">Cabinet d’endocrinologie à Témara</p>
         <h1>{service.title} à Témara</h1>
         <p>{service.intro}</p>
@@ -285,6 +286,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </a>
         </div>
       </section>
+
+      <SiteFooter internal />
     </main>
   );
 }

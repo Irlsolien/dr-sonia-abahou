@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { SocialTooltip, type SocialItem } from "@/components/ui/social-media";
+import { SiteHeader } from "./components/SiteHeader";
+import { SiteFooter } from "./components/SiteFooter";
+import { MapPinIcon, PhoneIcon, WhatsAppIcon } from "./components/Icons";
 import {
   absoluteUrl,
   appointment,
@@ -42,23 +44,6 @@ const mapsEmbedHref = `https://www.google.com/maps?q=${encodeURIComponent(
 const whatsappHref = `https://wa.me/${appointment.whatsappPhone}?text=${encodeURIComponent(
   appointment.whatsappMessage,
 )}`;
-
-const socialLinks: SocialItem[] = [
-  {
-    href: "https://www.linkedin.com/in/sonia-abahou-38896237/",
-    ariaLabel: "LinkedIn du cabinet Dr Sonia Abahou",
-    tooltip: "LinkedIn",
-    color: "#0A66C2",
-    icon: "linkedin",
-  },
-  {
-    href: "https://www.instagram.com/sonia_abahou/",
-    ariaLabel: "Instagram du cabinet Dr Sonia Abahou",
-    tooltip: "Instagram",
-    color: "#E1306C",
-    icon: "instagram",
-  },
-];
 
 const hours = [
   ["Lundi", "9h30 — 16h"],
@@ -438,30 +423,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <header className="site-header">
-        <a className="brand-mark" href="#accueil" aria-label="Accueil">
-          <span className="brand-logo-mark">
-            <Image
-              src="/dr-sonia-monogram.webp"
-              alt=""
-              width={58}
-              height={58}
-              sizes="58px"
-            />
-          </span>
-          <strong>Dr Sonia Abahou</strong>
-        </a>
-        <nav aria-label="Navigation principale">
-          <a href="#expertise">Expertise</a>
-          <a href="#soins">Soins</a>
-          <a href="#pratiques">Pratiques</a>
-          <a href="#cabinet">Cabinet</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <Link className="header-cta" href="/rendez-vous">
-          Rendez-vous
-        </Link>
-      </header>
+      <SiteHeader />
 
       <section id="accueil" className="hero section-shell">
         <div className="hero-copy">
@@ -489,15 +451,22 @@ export default function Home() {
             </div>
           </div>
           <div className="hero-actions" aria-label="Actions rapides">
-            <a className="primary-button" href={phoneHref}>
-              Appeler le cabinet
-            </a>
-            <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
-              Voir l’itinéraire
-            </a>
-            <Link className="video-button" href="/rendez-vous">
-              Rendez-vous
+            <Link className="primary-button" href="/rendez-vous">
+              Prendre rendez-vous
             </Link>
+            <a className="secondary-button" href={phoneHref}>
+              <PhoneIcon />
+              Appeler
+            </a>
+            <a
+              className="secondary-button"
+              href={whatsappHref}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <WhatsAppIcon />
+              WhatsApp
+            </a>
           </div>
         </div>
 
@@ -671,9 +640,7 @@ export default function Home() {
                 ) : (
                   <CgmDemoDashboard />
                 )}
-                <figcaption>
-                  {activity.image ? activity.eyebrow : "Aperçu du suivi"}
-                </figcaption>
+                {!activity.image && <figcaption>Aperçu du suivi</figcaption>}
                 <span className="practice-number" aria-hidden="true">
                   {String(index + 1).padStart(2, "0")}
                 </span>
@@ -776,10 +743,21 @@ export default function Home() {
               Ouvrir l’itinéraire GPS
             </a>
             <a className="secondary-button" href={phoneHref}>
+              <PhoneIcon />
               Fixe · {clinicPhoneDisplay}
             </a>
             <a className="secondary-button" href={secondaryPhoneHref}>
+              <PhoneIcon />
               Portable · {clinicSecondaryPhoneDisplay}
+            </a>
+            <a
+              className="secondary-button"
+              href={whatsappHref}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <WhatsAppIcon />
+              WhatsApp
             </a>
           </div>
         </div>
@@ -848,31 +826,7 @@ export default function Home() {
         </Link>
       </section>
 
-      <footer className="site-footer section-shell">
-        <div>
-          <Image
-            className="footer-logo"
-            src="/dr-sonia-logo-cropped.webp"
-            alt="Logo Dr Abahou Sonia"
-            width={132}
-            height={114}
-            sizes="132px"
-          />
-          <strong>Dr Sonia Abahou</strong>
-          <p>
-            Site d’information du cabinet. Les contenus ne remplacent pas une
-            consultation médicale.
-          </p>
-        </div>
-        <div className="footer-actions">
-          <SocialTooltip items={socialLinks} />
-          <nav aria-label="Liens du site">
-            <Link href="/mentions-legales">Mentions légales</Link>
-            <Link href="/confidentialite">Confidentialité</Link>
-            <Link href="/cookies">Cookies</Link>
-          </nav>
-        </div>
-      </footer>
+      <SiteFooter />
 
       <div className="mobile-action-bar" aria-label="Actions rapides du cabinet">
         <a
@@ -880,17 +834,7 @@ export default function Home() {
           href={phoneHref}
           aria-label="Appeler le cabinet"
         >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-          </svg>
+          <PhoneIcon />
           <span>Appeler</span>
         </a>
         <a
@@ -900,17 +844,7 @@ export default function Home() {
           rel="noreferrer"
           aria-label="Contacter le cabinet sur WhatsApp"
         >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-          </svg>
+          <WhatsAppIcon />
           <span>WhatsApp</span>
         </a>
         <a
@@ -920,18 +854,7 @@ export default function Home() {
           rel="noreferrer"
           aria-label="Itinéraire vers le cabinet"
         >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-            <circle cx="12" cy="10" r="3" />
-          </svg>
+          <MapPinIcon />
           <span>Itinéraire</span>
         </a>
       </div>

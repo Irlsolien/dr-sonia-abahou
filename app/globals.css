@@ -199,17 +199,28 @@ img {
 
 .header-cta,
 .primary-button {
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent),
-    linear-gradient(135deg, var(--color-burgundy), var(--color-primary-deep) 52%, #032b33);
+  background: var(--color-ink);
   color: white;
-  box-shadow: 0 12px 28px rgba(7, 89, 133, 0.22);
+  box-shadow: 0 12px 28px rgba(6, 43, 44, 0.22);
 }
 
 .secondary-button {
   border: 1px solid rgba(7, 150, 173, 0.25);
   background: var(--color-surface);
   color: var(--color-primary-deep);
+}
+
+.header-cta,
+.primary-button,
+.secondary-button,
+.video-button {
+  gap: 8px;
+}
+
+.button-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .video-button {
@@ -1509,9 +1520,7 @@ h3 {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background:
-    linear-gradient(180deg, transparent 34%, rgba(6, 43, 44, 0.84)),
-    radial-gradient(circle at 12% 10%, rgba(45, 212, 191, 0.22), transparent 20rem);
+  background: linear-gradient(180deg, transparent 62%, rgba(6, 43, 44, 0.42));
   content: "";
 }
 
@@ -1956,14 +1965,14 @@ h3 {
 
 .appointment-options {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 18px;
   margin-bottom: 34px;
 }
 
 .appointment-card {
   position: relative;
-  min-height: 520px;
+  min-height: 480px;
   overflow: hidden;
   padding: clamp(28px, 4vw, 46px);
   border: 1px solid rgba(7, 150, 173, 0.16);
@@ -2079,6 +2088,48 @@ h3 {
 .appointment-meta small {
   color: var(--color-muted);
   line-height: 1.5;
+}
+
+/* Carte secondaire et discrète : la téléconsultation n'est pas encore
+   ouverte, elle ne doit donc pas rivaliser visuellement avec la carte
+   « Rendez-vous au cabinet », qui reste l'option prioritaire. */
+.appointment-card-compact.appointment-card-video {
+  min-height: auto;
+  padding: clamp(24px, 4vw, 32px);
+  background: var(--color-surface-soft);
+  color: var(--color-foreground);
+  box-shadow: none;
+}
+
+.appointment-card-compact::after {
+  display: none;
+}
+
+.appointment-card-compact.appointment-card-video > span {
+  margin-bottom: 16px;
+  background: rgba(7, 150, 173, 0.1);
+  color: var(--color-primary-deep);
+}
+
+.appointment-card-compact.appointment-card-video h2 {
+  max-width: none;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.appointment-card-compact.appointment-card-video p {
+  max-width: 560px;
+  margin-bottom: 6px;
+  font-size: 0.92rem;
+}
+
+.appointment-card-compact.appointment-card-video h2,
+.appointment-card-compact.appointment-card-video p {
+  color: var(--color-foreground);
+}
+
+.appointment-card-compact .text-link {
+  margin-top: 10px;
 }
 
 .appointment-privacy {
@@ -2241,43 +2292,104 @@ h3 {
 }
 
 .site-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 28px 0 46px;
-  color: var(--color-muted);
+  margin-top: 40px;
+  padding: 64px 0 40px;
+  background: var(--color-ink);
+  color: rgba(230, 246, 246, 0.78);
 }
 
-.footer-logo {
-  width: 92px;
-  height: auto;
-  margin-bottom: 10px;
-  border-radius: 18px;
-  mix-blend-mode: multiply;
-  opacity: 0.92;
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+}
+
+.footer-col h3 {
+  margin: 0 0 18px;
+  color: white;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer-logo-mark {
+  display: inline-grid;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+.footer-logo-mark img {
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
 }
 
 .site-footer strong {
   display: block;
-  margin-bottom: 6px;
-  color: var(--color-ink);
+  margin-bottom: 10px;
+  color: white;
   font-family: var(--font-serif), Georgia, serif;
-  font-size: 1.14rem;
+  font-size: 1.18rem;
   font-weight: 700;
   letter-spacing: -0.035em;
 }
 
 .site-footer p {
-  max-width: 560px;
-  margin-bottom: 0;
-  line-height: 1.5;
+  max-width: 340px;
+  margin: 0 0 22px;
+  line-height: 1.55;
 }
 
-.footer-actions {
+.footer-contact-list {
   display: grid;
-  gap: 14px;
-  justify-items: end;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-contact-list a {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: inherit;
+  font-size: 0.94rem;
+  line-height: 1.4;
+  transition: color 180ms ease;
+}
+
+.footer-contact-list .button-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-mint);
+}
+
+.footer-contact-list a:hover,
+.footer-contact-list a:focus-visible {
+  color: white;
+}
+
+.footer-info-nav {
+  display: grid;
+  gap: 12px;
+}
+
+.footer-info-nav a {
+  color: inherit;
+  font-size: 0.94rem;
+  transition: color 180ms ease;
+}
+
+.footer-info-nav a:hover,
+.footer-info-nav a:focus-visible {
+  color: white;
 }
 
 .social-tooltip {
@@ -2494,27 +2606,16 @@ h3 {
   transform: scale(1.04);
 }
 
-.site-footer nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-end;
-}
-
-.site-footer nav a,
 .legal-back {
   display: inline-flex;
   min-height: 40px;
   align-items: center;
+  padding: 0 14px;
   border: 1px solid rgba(7, 150, 173, 0.18);
   border-radius: 999px;
   background: var(--color-surface);
   color: var(--color-primary-deep);
   font-weight: 600;
-}
-
-.site-footer nav a {
-  padding: 0 14px;
 }
 
 .legal-page {
@@ -3379,6 +3480,11 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
   .hero {
     min-height: auto;
     padding-top: 58px;
@@ -3423,19 +3529,6 @@ h3 {
 
   .road-main {
     width: 146%;
-  }
-
-  .site-footer {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .footer-actions {
-    justify-items: start;
-  }
-
-  .site-footer nav {
-    justify-content: flex-start;
   }
 
   .teleconsultation-steps {
@@ -3823,24 +3916,11 @@ h3 {
   }
 
   .site-footer {
-    padding: 8px 0 34px;
-  }
-
-  .site-footer nav {
-    width: 100%;
-  }
-
-  .footer-actions {
-    width: 100%;
+    padding: 40px 0 30px;
   }
 
   .social-tooltip {
     width: fit-content;
-  }
-
-  .site-footer nav a {
-    flex: 1 1 auto;
-    justify-content: center;
   }
 
   .legal-page {

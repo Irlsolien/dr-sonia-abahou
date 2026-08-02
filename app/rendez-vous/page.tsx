@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SiteHeader } from "../components/SiteHeader";
+import { SiteFooter } from "../components/SiteFooter";
+import { PhoneIcon, WhatsAppIcon } from "../components/Icons";
 import {
   absoluteUrl,
   appointment,
@@ -90,10 +93,9 @@ export default function AppointmentPage() {
         }}
       />
 
+      <SiteHeader internal />
+
       <section className="appointment-hero section-shell">
-        <Link className="legal-back" href="/">
-          ← Retour au site
-        </Link>
         <p className="eyebrow">Rendez-vous</p>
         <h1>Choisir le type de rendez-vous.</h1>
         <p>
@@ -118,6 +120,7 @@ export default function AppointmentPage() {
           </div>
           <div className="hero-actions">
             <a className="primary-button" href={phoneHref}>
+              <PhoneIcon />
               Appeler le cabinet
             </a>
             <a
@@ -126,40 +129,22 @@ export default function AppointmentPage() {
               target="_blank"
               rel="noreferrer"
             >
+              <WhatsAppIcon />
               Écrire sur WhatsApp
             </a>
           </div>
         </article>
 
-        <article className="appointment-card appointment-card-video appointment-card-maintenance">
+        <article className="appointment-card appointment-card-video appointment-card-compact">
           <span>En préparation</span>
-          <h2>Téléconsultation vidéo en maintenance</h2>
+          <h2>Téléconsultation vidéo</h2>
           <p>
-            La réservation vidéo sera bientôt disponible avec un parcours
-            sécurisé : choix du créneau, visioconférence et confirmation du
-            rendez-vous. Cette fonctionnalité n’est pas encore ouverte aux
-            patients.
+            La réservation vidéo n’est pas encore ouverte aux patients. En
+            attendant, le cabinet reste joignable par téléphone ou WhatsApp.
           </p>
-          <div className="appointment-meta">
-            <strong>Fonctionnalité en maintenance</strong>
-            <small>
-              En attendant, le cabinet reste joignable par téléphone ou WhatsApp
-              pour orienter la demande.
-            </small>
-          </div>
-          <div className="hero-actions">
-            <a className="primary-button" href={phoneHref}>
-              Appeler le cabinet
-            </a>
-            <a
-              className="secondary-button"
-              href={whatsappHref}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Écrire sur WhatsApp
-            </a>
-          </div>
+          <Link className="text-link" href="/teleconsultation">
+            En savoir plus sur la téléconsultation
+          </Link>
         </article>
       </section>
 
@@ -171,6 +156,8 @@ export default function AppointmentPage() {
           formulaire non validé par le cabinet.
         </p>
       </section>
+
+      <SiteFooter internal />
     </main>
   );
 }

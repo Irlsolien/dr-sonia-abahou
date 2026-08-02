@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { SiteHeader } from "../components/SiteHeader";
+import { SiteFooter } from "../components/SiteFooter";
 import {
   absoluteUrl,
   clinicCity,
@@ -159,10 +161,9 @@ export default function DoctorProfilePage() {
         }}
       />
 
+      <SiteHeader internal />
+
       <section className="service-hero section-shell profile-hero">
-        <Link className="legal-back" href="/">
-          ← Retour au site
-        </Link>
         <p className="eyebrow">Parcours médical</p>
         <h1>Dr Sonia Abahou, endocrinologue à Témara.</h1>
         <p>
@@ -292,6 +293,8 @@ export default function DoctorProfilePage() {
           Prendre rendez-vous
         </Link>
       </section>
+
+      <SiteFooter internal />
     </main>
   );
 }
