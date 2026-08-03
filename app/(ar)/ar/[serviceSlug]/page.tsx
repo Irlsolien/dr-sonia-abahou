@@ -5,6 +5,11 @@ import { arabicFontVariables } from "../../fonts";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { SiteFooter } from "../../../components/SiteFooter";
 import {
+  MobileActionBar,
+  clinicWhatsappHref,
+} from "../../../components/MobileActionBar";
+import { PhoneIcon, WhatsAppIcon } from "../../../components/Icons";
+import {
   absoluteUrl,
   clinicAddress,
   clinicPhoneDisplay,
@@ -19,6 +24,7 @@ import {
 import {
   arFooterLabels,
   arHeaderLabels,
+  arMobileActionBarLabels,
   arServiceOgImage,
   metaAr,
   serviceFaqItemsAr,
@@ -265,6 +271,8 @@ export default async function ArabicServicePage({
         panelClassName={`ar-nav-panel ${arabicFontVariables}`}
       />
 
+      <MobileActionBar labels={arMobileActionBarLabels} />
+
       {/* Cible du lien d'évitement arabe posé par `app/(ar)/layout.tsx` :
           l'ancre existe sur toutes les routes `/ar`. */}
       <section id="ar-content" className="service-hero section-shell">
@@ -273,9 +281,24 @@ export default async function ArabicServicePage({
           {content.title} {serviceUiAr.titleSuffix}
         </h1>
         <p>{content.intro}</p>
+        {/* Mêmes actions directes que le héros de l'accueil arabe : appel,
+            WhatsApp et itinéraire, sans retour à l'accueil. */}
         <div className="hero-actions">
           <a className="primary-button" href={phoneHref}>
             {uiAr.bookLabel}
+          </a>
+          <a className="secondary-button" href={phoneHref}>
+            <PhoneIcon />
+            {uiAr.callLabel}
+          </a>
+          <a
+            className="secondary-button whatsapp-button"
+            href={clinicWhatsappHref}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <WhatsAppIcon />
+            {uiAr.whatsappLabel}
           </a>
           <a
             className="secondary-button"

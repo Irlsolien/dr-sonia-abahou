@@ -391,6 +391,18 @@ export const googleReviews = {
   ],
 } as const;
 
+/**
+ * Largeur de remplissage de la rangée d'étoiles de la section « Avis » :
+ * la note réelle de la fiche Google (4,2 / 5) et non cinq étoiles pleines.
+ * Calculée depuis `googleReviews.averageRating` pour rester exacte si la note
+ * de la fiche évolue.
+ */
+export const googleRatingFillWidth = `${
+  Math.round(
+    (Number(googleReviews.averageRating.replace(",", ".")) / 5) * 1000,
+  ) / 10
+}%`;
+
 export function absoluteUrl(path = "/") {
   return new URL(path, siteUrl).toString();
 }

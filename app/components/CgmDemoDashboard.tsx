@@ -71,8 +71,10 @@ export function CgmDemoDashboard({
             <span>{labels.chartLabel}</span>
             <strong>{labels.chartRange}</strong>
           </div>
+          {/* Valeur mise en avant : celle du premier profil de démonstration,
+              pour qu'elle reste cohérente si les libellés changent. */}
           <span className="cgm-demo-value">
-            112 <small>{labels.unit}</small>
+            {labels.patients[0].value} <small>{labels.unit}</small>
           </span>
         </div>
         <svg viewBox="0 0 720 230" aria-hidden="true">

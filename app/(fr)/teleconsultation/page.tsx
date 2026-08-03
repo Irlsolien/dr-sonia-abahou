@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
+import { MobileActionBar } from "../../components/MobileActionBar";
 import { PhoneIcon, WhatsAppIcon } from "../../components/Icons";
 import {
   appointment,
@@ -77,6 +78,8 @@ export default function TeleconsultationMaintenancePage() {
     <main id="main-content" className="appointment-page teleconsultation-page">
       <SiteHeader internal />
 
+      <MobileActionBar />
+
       <section className="appointment-hero teleconsultation-hero section-shell">
         <p className="eyebrow">Téléconsultation vidéo</p>
         <h1>Fonctionnalité en maintenance.</h1>
@@ -92,7 +95,7 @@ export default function TeleconsultationMaintenancePage() {
             Appeler le cabinet
           </a>
           <a
-            className="secondary-button"
+            className="secondary-button whatsapp-button"
             href={whatsappHref}
             target="_blank"
             rel="noreferrer"

@@ -3,8 +3,9 @@ import Link from "next/link";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { MapEmbed } from "../components/MapEmbed";
+import { MobileActionBar } from "../components/MobileActionBar";
 import { CgmDemoDashboard } from "../components/CgmDemoDashboard";
-import { MapPinIcon, PhoneIcon, WhatsAppIcon } from "../components/Icons";
+import { PhoneIcon, WhatsAppIcon } from "../components/Icons";
 import {
   absoluteUrl,
   appointment,
@@ -32,6 +33,7 @@ import {
   faqItems,
   gallery,
   googleMapsPlaceUrl,
+  googleRatingFillWidth,
   googleReviews,
   lastModified,
   mapsQuery,
@@ -276,39 +278,7 @@ export default function Home() {
       />
       <SiteHeader />
 
-      {/* Barre d'actions fixe : placée tôt dans le DOM pour être atteinte
-          rapidement au clavier et par les lecteurs d'écran, son positionnement
-          en bas d'écran restant purement visuel (position: fixed). */}
-      <nav className="mobile-action-bar" aria-label="Actions rapides du cabinet">
-        <a
-          className="mobile-action-bar-item"
-          href={phoneHref}
-          aria-label="Appeler le cabinet"
-        >
-          <PhoneIcon />
-          <span>Appeler</span>
-        </a>
-        <a
-          className="mobile-action-bar-item"
-          href={whatsappHref}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Contacter le cabinet sur WhatsApp"
-        >
-          <WhatsAppIcon />
-          <span>WhatsApp</span>
-        </a>
-        <a
-          className="mobile-action-bar-item"
-          href={mapsHref}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Itinéraire vers le cabinet"
-        >
-          <MapPinIcon />
-          <span>Itinéraire</span>
-        </a>
-      </nav>
+      <MobileActionBar />
 
       <section id="accueil" className="hero section-shell">
         <div className="hero-copy">
@@ -322,6 +292,33 @@ export default function Home() {
             diabète, des troubles thyroïdiens, de la nutrition médicale, des
             troubles hormonaux et des maladies métaboliques.
           </p>
+          {/* Les trois actions passent avant la carte signature : elles
+              doivent rester visibles sans défilement sur un écran d'ordinateur
+              portable (1440 × 900). */}
+          <div className="hero-actions" role="group" aria-label="Actions rapides">
+            <Link className="primary-button" href="/rendez-vous">
+              Prendre rendez-vous
+            </Link>
+            <a className="secondary-button" href={phoneHref}>
+              <PhoneIcon />
+              Appeler le cabinet
+            </a>
+            <a
+              className="secondary-button whatsapp-button"
+              href={whatsappHref}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <WhatsAppIcon />
+              WhatsApp
+            </a>
+          </div>
+          {/* Réassurance : horaires validés du cabinet et modalité de
+              confirmation déjà annoncée. Aucun délai de réponse promis. */}
+          <p className="hero-reassurance">
+            Secrétariat joignable du lundi au vendredi · Rendez-vous confirmé
+            par le cabinet.
+          </p>
           <div
             className="brand-signature-card"
             role="group"
@@ -332,30 +329,12 @@ export default function Home() {
               alt=""
               width={200}
               height={180}
-              sizes="112px"
+              sizes="(max-width: 640px) 112px, 88px"
             />
             <div>
               <span>Cabinet Dr Abahou Sonia</span>
               <strong>Endocrinologie et maladies métaboliques.</strong>
             </div>
-          </div>
-          <div className="hero-actions" role="group" aria-label="Actions rapides">
-            <Link className="primary-button" href="/rendez-vous">
-              Prendre rendez-vous
-            </Link>
-            <a className="secondary-button" href={phoneHref}>
-              <PhoneIcon />
-              Appeler
-            </a>
-            <a
-              className="secondary-button"
-              href={whatsappHref}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <WhatsAppIcon />
-              WhatsApp
-            </a>
           </div>
         </div>
 
@@ -381,6 +360,7 @@ export default function Home() {
               width={420}
               height={470}
               priority
+              fetchPriority="high"
               sizes="(max-width: 760px) 88vw, 420px"
             />
             <div className="portrait-caption">
@@ -582,8 +562,23 @@ export default function Home() {
         <div className="reviews-wrap">
           <p className="eyebrow reviews-eyebrow">Avis Google</p>
           <h2 className="reviews-title">Ce que disent les patients.</h2>
-          <p className="reviews-stars" aria-label="5 étoiles sur 5">
-            ★★★★★
+          {/* Rangée fidèle à la note réelle : quatre étoiles pleines et une
+              étoile remplie à hauteur de la moyenne Google (4,2 / 5). */}
+          <p className="reviews-stars">
+            <span
+              className="reviews-stars-meter"
+              role="img"
+              aria-label={`Note moyenne de ${googleReviews.averageRating} sur 5`}
+            >
+              <span aria-hidden="true">★★★★★</span>
+              <span
+                className="reviews-stars-fill"
+                style={{ width: googleRatingFillWidth }}
+                aria-hidden="true"
+              >
+                ★★★★★
+              </span>
+            </span>
           </p>
 
           <blockquote className="reviews-quote">
@@ -617,10 +612,13 @@ export default function Home() {
                 {/* Espaces insécables autour des guillemets français : le
                     chevron fermant ne doit jamais rester seul sur sa ligne. */}
                 <p className="reviews-micro-quote">{`« ${item.excerpt} »`}</p>
-                <p className="reviews-micro-name">{item.author}</p>
+                {/* La mention de traduction qualifie la citation : elle la
+                    suit immédiatement, ce qui laisse les noms d'auteur alignés
+                    sur une même ligne de base d'une colonne à l'autre. */}
                 {item.translated ? (
                   <p className="reviews-translated">Traduit de l’arabe</p>
                 ) : null}
+                <p className="reviews-micro-name">{item.author}</p>
               </div>
             ))}
           </div>
@@ -707,7 +705,7 @@ export default function Home() {
               Portable · {clinicSecondaryPhoneDisplay}
             </a>
             <a
-              className="secondary-button"
+              className="secondary-button whatsapp-button"
               href={whatsappHref}
               target="_blank"
               rel="noreferrer"

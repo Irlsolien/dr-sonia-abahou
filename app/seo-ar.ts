@@ -28,6 +28,7 @@ import type { CgmDemoLabels } from "./components/CgmDemoDashboard";
 import type { HeaderLabels } from "./components/SiteHeader";
 import type { FooterLabels } from "./components/SiteFooter";
 import type { MapEmbedLabels } from "./components/MapEmbed";
+import type { MobileActionBarLabels } from "./components/MobileActionBar";
 import type { MobileNavLabels } from "./components/MobileNav";
 
 type ServiceSlug = (typeof services)[number]["slug"];
@@ -301,12 +302,21 @@ export const uiAr = {
   directionsAriaLabel: "الاتجاهات نحو العيادة",
   bookLabel: "حجز موعد",
   contactClinic: "التواصل مع العيادة",
+  /* Chaque avis cité individuellement est bien noté 5 étoiles. */
   starsAriaLabel: "5 نجوم من 5",
+  /* Note moyenne de la fiche Google : le chiffre vient de `googleReviews`,
+     il n'est jamais recopié ici. */
+  averageStarsAriaLabelPrefix: "المعدّل: ",
+  averageStarsAriaLabelSuffix: " من 5",
 
   hero: {
     eyebrow: "طبيبة أخصائية في الغدد الصماء والسكري بتمارة",
     title: "رعاية واضحة لداء السكري والغدة الدرقية والاستقلاب بتمارة.",
     lead: "تستقبل عيادة الدكتورة سونيا أبحو المرضى لتتبّع داء السكري واضطرابات الغدة الدرقية والتغذية الطبية والاضطرابات الهرمونية والأمراض الاستقلابية.",
+    /* Réassurance sous les boutons : reprend les horaires validés
+       (`app/(fr)/page.tsx`) et la note « Accueil sur rendez-vous confirmé par
+       le cabinet ». Aucun délai de réponse n'est promis. */
+    reassurance: "السكرتارية متاحة من الاثنين إلى الجمعة · موعد تؤكّده العيادة.",
     signatureAriaLabel: "توقيع العيادة",
     signatureName: "عيادة الدكتورة سونيا أبحو",
     signatureTagline: "أمراض الغدد الصماء والأمراض الاستقلابية.",
@@ -326,6 +336,9 @@ export const uiAr = {
     eyebrow: "المسار الطبي",
     title: "مسار طبي معروض بوضوح.",
     text: "جُمعت المعلومات الأساسية للعيادة حتى يتعرّف المريض بسرعة على مجالات الاستشارة وطرق التواصل.",
+    /* Le parcours détaillé n'existe qu'en français : le lien porte
+       `hrefLang="fr"`, comme sur les pages motifs arabes. */
+    profileLink: "الاطّلاع على مسار الدكتورة سونيا أبحو",
   },
 
   approach: {
@@ -405,6 +418,20 @@ export const uiAr = {
 /* ==========================================================================
    Libellés localisés des composants partagés
    ========================================================================== */
+
+/**
+ * Barre d'actions rapides arabe : mêmes destinations que la version
+ * française, seuls les libellés changent.
+ */
+export const arMobileActionBarLabels: MobileActionBarLabels = {
+  navAriaLabel: uiAr.quickActionsAriaLabel,
+  call: { label: uiAr.callLabel, ariaLabel: uiAr.callAriaLabel },
+  whatsapp: { label: uiAr.whatsappLabel, ariaLabel: uiAr.whatsappAriaLabel },
+  directions: {
+    label: uiAr.directionsLabel,
+    ariaLabel: uiAr.directionsAriaLabel,
+  },
+};
 
 export const arMobileNavLabels: MobileNavLabels = {
   trigger: "القائمة",

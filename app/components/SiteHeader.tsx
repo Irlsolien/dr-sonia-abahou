@@ -31,7 +31,8 @@ export const frHeaderLabels: HeaderLabels = {
     { href: "cabinet", label: "Cabinet" },
     { href: "contact", label: "Contact" },
   ],
-  cta: { href: "/rendez-vous", label: "Rendez-vous" },
+  /* Libellé à l'impératif : le CTA indique l'action, pas la page. */
+  cta: { href: "/rendez-vous", label: "Prendre RDV" },
   langSwitch: {
     href: "/ar",
     label: "العربية",
@@ -87,6 +88,16 @@ export function SiteHeader({
   const langSwitch = langSwitchHref
     ? { ...labels.langSwitch, href: langSwitchHref }
     : labels.langSwitch;
+  /**
+   * Le CTA peut viser une ancre (`#contact`, version arabe) ou une route
+   * (`/rendez-vous`, version française). Une ancre doit recevoir le même
+   * préfixe que les liens de section : sur une page motif arabe, `#contact`
+   * n'existe pas localement et doit mener à `/ar#contact`. Une route reste
+   * intacte.
+   */
+  const ctaHref = labels.cta.href.startsWith("#")
+    ? `${anchor}${labels.cta.href.slice(1)}`
+    : labels.cta.href;
 
   return (
     <header className="site-header">
@@ -119,12 +130,12 @@ export function SiteHeader({
         >
           {langSwitch.label}
         </Link>
-        {labels.cta.href.startsWith("/") ? (
-          <Link className="header-cta" href={labels.cta.href}>
+        {ctaHref.startsWith("/") ? (
+          <Link className="header-cta" href={ctaHref}>
             {labels.cta.label}
           </Link>
         ) : (
-          <a className="header-cta" href={labels.cta.href}>
+          <a className="header-cta" href={ctaHref}>
             {labels.cta.label}
           </a>
         )}

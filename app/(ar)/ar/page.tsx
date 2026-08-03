@@ -5,8 +5,9 @@ import { arabicFontVariables } from "../fonts";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 import { MapEmbed } from "../../components/MapEmbed";
+import { MobileActionBar } from "../../components/MobileActionBar";
 import { CgmDemoDashboard } from "../../components/CgmDemoDashboard";
-import { MapPinIcon, PhoneIcon, WhatsAppIcon } from "../../components/Icons";
+import { PhoneIcon, WhatsAppIcon } from "../../components/Icons";
 import {
   absoluteUrl,
   appointment,
@@ -23,18 +24,23 @@ import {
   clinicSecondaryPhoneInternational,
   clinicStreetAddress,
   doctorCredentials,
+  doctorInpe,
   doctorName,
+  doctorOrderNumber,
+  doctorProfilePath,
   doctorProfessionalProfiles,
   doctorRegionalCouncil,
   doctorSameAsProfiles,
   faqItems,
   gallery,
   googleMapsPlaceUrl,
+  googleRatingFillWidth,
   googleReviews,
   lastModified,
   mapsQuery,
   patientJourney,
   services,
+  siteName,
   siteUrl,
 } from "../../seo";
 import {
@@ -44,6 +50,7 @@ import {
   arFooterLabels,
   arHeaderLabels,
   arMapEmbedLabels,
+  arMobileActionBarLabels,
   arOgImage,
   credentialsAr,
   faqAr,
@@ -199,6 +206,8 @@ const structuredDataAr = {
           "@type": "MedicalProcedure",
           name: servicesAr[service.slug].title,
           description: servicesAr[service.slug].text,
+          /* Page motif arabe correspondante (`/ar/<slug>`). */
+          url: absoluteUrl(`/ar/${service.slug}`),
         })),
         ...clinicalActivities.map((activity) => ({
           "@type": "MedicalProcedure",
@@ -236,6 +245,33 @@ const structuredDataAr = {
       image: absoluteUrl("/dr-sonia-abahou.jpg"),
       url: arPageUrl,
       sameAs: [...doctorSameAsProfiles],
+      /* Mêmes identifiants et mêmes titres que le nœud français : ce sont des
+         données professionnelles publiques validées (`app/seo.ts`), pas des
+         faits ajoutés. */
+      identifier: [
+        {
+          "@type": "PropertyValue",
+          name: "INPE",
+          value: doctorInpe,
+        },
+        {
+          "@type": "PropertyValue",
+          name: "رقم التسجيل بالهيئة",
+          value: doctorOrderNumber,
+        },
+      ],
+      hasCredential: [
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "تخصّص طبي",
+          name: "أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية",
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "دبلوم جامعي",
+          name: "الفحص بالموجات فوق الصوتية للعنق — Paris V",
+        },
+      ],
       worksFor: {
         "@id": `${arPageUrl}#clinic`,
       },
@@ -263,6 +299,22 @@ const structuredDataAr = {
         "نقص السكر في الدم",
         "الأمراض الاستقلابية",
       ],
+    },
+    /* Le site est une entité bilingue unique : le nœud `WebSite` porte le même
+       `@id` que côté français et les mêmes propriétés. Il est répété ici pour
+       que la page arabe soit autoportante — la référence `isPartOf` du
+       `WebPage` ne pend plus dans le vide pour un analyseur qui ne lirait que
+       cette page. */
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: siteName,
+      alternateName: clinicName,
+      url: `${siteUrl}/`,
+      inLanguage: "fr-MA",
+      publisher: {
+        "@id": `${siteUrl}/#clinic`,
+      },
     },
     {
       "@type": "WebPage",
@@ -326,61 +378,16 @@ export default function ArabicHomePage() {
         panelClassName={`ar-nav-panel ${arabicFontVariables}`}
       />
 
-      {/* Barre d'actions fixe : placée tôt dans le DOM pour être atteinte
-          rapidement au clavier et par les lecteurs d'écran. */}
-      <nav className="mobile-action-bar" aria-label={uiAr.quickActionsAriaLabel}>
-        <a
-          className="mobile-action-bar-item"
-          href={phoneHref}
-          aria-label={uiAr.callAriaLabel}
-        >
-          <PhoneIcon />
-          <span>{uiAr.callLabel}</span>
-        </a>
-        <a
-          className="mobile-action-bar-item"
-          href={whatsappHref}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={uiAr.whatsappAriaLabel}
-        >
-          <WhatsAppIcon />
-          <span>{uiAr.whatsappLabel}</span>
-        </a>
-        <a
-          className="mobile-action-bar-item"
-          href={mapsHref}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={uiAr.directionsAriaLabel}
-        >
-          <MapPinIcon />
-          <span>{uiAr.directionsLabel}</span>
-        </a>
-      </nav>
+      <MobileActionBar labels={arMobileActionBarLabels} />
 
       <section id="ar-content" className="hero section-shell">
         <div className="hero-copy">
           <p className="eyebrow">{uiAr.hero.eyebrow}</p>
           <h1>{uiAr.hero.title}</h1>
           <p className="hero-lead">{uiAr.hero.lead}</p>
-          <div
-            className="brand-signature-card"
-            role="group"
-            aria-label={uiAr.hero.signatureAriaLabel}
-          >
-            <Image
-              src="/dr-sonia-monogram-clean.webp"
-              alt=""
-              width={200}
-              height={180}
-              sizes="112px"
-            />
-            <div>
-              <span>{uiAr.hero.signatureName}</span>
-              <strong>{uiAr.hero.signatureTagline}</strong>
-            </div>
-          </div>
+          {/* Les trois actions passent avant la carte signature : elles
+              doivent rester visibles sans défilement sur un écran d'ordinateur
+              portable (1440 × 900). */}
           <div
             className="hero-actions"
             role="group"
@@ -394,7 +401,7 @@ export default function ArabicHomePage() {
               {uiAr.callLabel}
             </a>
             <a
-              className="secondary-button"
+              className="secondary-button whatsapp-button"
               href={whatsappHref}
               target="_blank"
               rel="noreferrer"
@@ -402,6 +409,24 @@ export default function ArabicHomePage() {
               <WhatsAppIcon />
               {uiAr.whatsappLabel}
             </a>
+          </div>
+          <p className="hero-reassurance">{uiAr.hero.reassurance}</p>
+          <div
+            className="brand-signature-card"
+            role="group"
+            aria-label={uiAr.hero.signatureAriaLabel}
+          >
+            <Image
+              src="/dr-sonia-monogram-clean.webp"
+              alt=""
+              width={200}
+              height={180}
+              sizes="(max-width: 640px) 112px, 88px"
+            />
+            <div>
+              <span>{uiAr.hero.signatureName}</span>
+              <strong>{uiAr.hero.signatureTagline}</strong>
+            </div>
           </div>
         </div>
 
@@ -425,6 +450,7 @@ export default function ArabicHomePage() {
               width={420}
               height={470}
               priority
+              fetchPriority="high"
               sizes="(max-width: 760px) 88vw, 420px"
             />
             <div className="portrait-caption">
@@ -453,6 +479,11 @@ export default function ArabicHomePage() {
           <p className="eyebrow">{uiAr.expertise.eyebrow}</p>
           <h2>{uiAr.expertise.title}</h2>
           <p className="section-text">{uiAr.expertise.text}</p>
+          {/* Le parcours détaillé n'existe qu'en français : le lien porte donc
+              `hrefLang="fr"`, comme sur les pages motifs arabes. */}
+          <Link className="text-link" href={doctorProfilePath} hrefLang="fr">
+            {uiAr.expertise.profileLink}
+          </Link>
         </div>
         <div className="credential-grid">
           {doctorCredentials.map((item) => (
@@ -627,8 +658,23 @@ export default function ArabicHomePage() {
         <div className="reviews-wrap">
           <p className="eyebrow reviews-eyebrow">{uiAr.reviews.eyebrow}</p>
           <h2 className="reviews-title">{uiAr.reviews.title}</h2>
-          <p className="reviews-stars" aria-label={uiAr.starsAriaLabel}>
-            ★★★★★
+          {/* Rangée fidèle à la note réelle : quatre étoiles pleines et une
+              étoile remplie à hauteur de la moyenne Google (4,2 / 5). */}
+          <p className="reviews-stars">
+            <span
+              className="reviews-stars-meter"
+              role="img"
+              aria-label={`${uiAr.averageStarsAriaLabelPrefix}${googleReviews.averageRating}${uiAr.averageStarsAriaLabelSuffix}`}
+            >
+              <span aria-hidden="true">★★★★★</span>
+              <span
+                className="reviews-stars-fill"
+                style={{ width: googleRatingFillWidth }}
+                aria-hidden="true"
+              >
+                ★★★★★
+              </span>
+            </span>
           </p>
 
           <blockquote className="reviews-quote" lang="fr" dir="ltr">
@@ -668,14 +714,17 @@ export default function ArabicHomePage() {
                 <p className="reviews-micro-quote" lang="fr" dir="ltr">
                   {`« ${item.excerpt} »`}
                 </p>
-                <p className="reviews-micro-name" lang="fr" dir="ltr">
-                  {item.author}
-                </p>
+                {/* La mention de traduction qualifie la citation : elle la
+                    suit immédiatement, ce qui laisse les noms d'auteur alignés
+                    sur une même ligne de base d'une colonne à l'autre. */}
                 {item.translated ? (
                   <p className="reviews-translated">
                     {uiAr.reviews.translatedFromArabic}
                   </p>
                 ) : null}
+                <p className="reviews-micro-name" lang="fr" dir="ltr">
+                  {item.author}
+                </p>
               </div>
             ))}
           </div>
@@ -772,7 +821,7 @@ export default function ArabicHomePage() {
               <bdi dir="ltr">{clinicSecondaryPhoneDisplay}</bdi>
             </a>
             <a
-              className="secondary-button"
+              className="secondary-button whatsapp-button"
               href={whatsappHref}
               target="_blank"
               rel="noreferrer"
@@ -827,11 +876,12 @@ export default function ArabicHomePage() {
             {uiAr.bookLabel}
           </a>
           <a
-            className="secondary-button"
+            className="secondary-button whatsapp-button"
             href={whatsappHref}
             target="_blank"
             rel="noreferrer"
           >
+            <WhatsAppIcon />
             {uiAr.whatsappLabel}
           </a>
           <a

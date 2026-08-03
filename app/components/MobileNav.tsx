@@ -224,11 +224,20 @@ export function MobileNav({
             {section.label}
           </a>
         ))}
-        {labels.extraLinks.map((link) =>
-          link.href.startsWith("/") ? (
+        {labels.extraLinks.map((link) => {
+          /* Même règle que pour les ancres de section : un lien
+             complémentaire pointant vers une ancre (`#contact`, version
+             arabe) reçoit le préfixe de la page courante, sans quoi il
+             viserait une ancre inexistante sur les pages internes. Les
+             routes (`/rendez-vous`) restent intactes. */
+          const href = link.href.startsWith("#")
+            ? `${anchor}${link.href.slice(1)}`
+            : link.href;
+
+          return href.startsWith("/") ? (
             <Link
               key={link.href}
-              href={link.href}
+              href={href}
               hrefLang={link.hrefLang}
               onClick={close}
             >
@@ -237,14 +246,14 @@ export function MobileNav({
           ) : (
             <a
               key={link.href}
-              href={link.href}
+              href={href}
               hrefLang={link.hrefLang}
               onClick={close}
             >
               {link.label}
             </a>
-          ),
-        )}
+          );
+        })}
         <Link
           href={langSwitch.href}
           lang={langSwitch.lang}

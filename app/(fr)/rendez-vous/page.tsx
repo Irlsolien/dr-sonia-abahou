@@ -2,16 +2,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
+import { MobileActionBar } from "../../components/MobileActionBar";
 import { PhoneIcon, WhatsAppIcon } from "../../components/Icons";
 import {
   absoluteUrl,
   appointment,
   clinicAddress,
+  clinicCity,
+  clinicCountry,
   clinicName,
   clinicPhoneDisplay,
   clinicPhoneInternational,
+  clinicPostalCode,
   clinicSecondaryPhoneDisplay,
   clinicSecondaryPhoneInternational,
+  clinicStreetAddress,
   lastModified,
   siteName,
   siteUrl,
@@ -64,7 +69,21 @@ const appointmentStructuredData = {
       "@id": `${siteUrl}/#clinic`,
       name: clinicName,
       telephone: [clinicPhoneInternational, clinicSecondaryPhoneInternational],
-      address: clinicAddress,
+      /* Même forme structurée que le nœud `#clinic` de l'accueil : les deux
+         descriptions partagent le même `@id`, elles doivent décrire l'adresse
+         de façon identique. */
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: clinicStreetAddress,
+        postalCode: clinicPostalCode,
+        addressLocality: clinicCity,
+        addressCountry: clinicCountry,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 33.928046,
+        longitude: -6.8987233,
+      },
       contactPoint: [
         {
           "@type": "ContactPoint",
@@ -95,6 +114,8 @@ export default function AppointmentPage() {
 
       <SiteHeader internal />
 
+      <MobileActionBar />
+
       <section className="appointment-hero section-shell">
         <p className="eyebrow">Rendez-vous</p>
         <h1>Choisir le type de rendez-vous.</h1>
@@ -124,7 +145,7 @@ export default function AppointmentPage() {
               Appeler le cabinet
             </a>
             <a
-              className="secondary-button"
+              className="secondary-button whatsapp-button"
               href={whatsappHref}
               target="_blank"
               rel="noreferrer"

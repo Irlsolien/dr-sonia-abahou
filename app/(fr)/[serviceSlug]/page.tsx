@@ -4,6 +4,12 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 import {
+  MobileActionBar,
+  clinicPhoneHref,
+  clinicWhatsappHref,
+} from "../../components/MobileActionBar";
+import { PhoneIcon, WhatsAppIcon } from "../../components/Icons";
+import {
   absoluteUrl,
   clinicAddress,
   clinicName,
@@ -224,14 +230,32 @@ export default async function ServicePage({ params }: ServicePageProps) {
       {/* La bascule de langue mène à la page arabe du même motif. */}
       <SiteHeader internal langSwitchHref={`/ar/${service.slug}`} />
 
+      <MobileActionBar />
+
       <section className="service-hero section-shell">
         <p className="eyebrow">Cabinet d’endocrinologie à Témara</p>
         <h1>{service.title} à Témara</h1>
         <p>{service.intro}</p>
+        {/* Mêmes actions directes que le héros de l'accueil : le patient qui
+            arrive par une page motif peut appeler ou écrire sans revenir à
+            l'accueil. */}
         <div className="hero-actions">
           <Link className="primary-button" href="/rendez-vous">
-            Rendez-vous
+            Prendre rendez-vous
           </Link>
+          <a className="secondary-button" href={clinicPhoneHref}>
+            <PhoneIcon />
+            Appeler
+          </a>
+          <a
+            className="secondary-button whatsapp-button"
+            href={clinicWhatsappHref}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <WhatsAppIcon />
+            WhatsApp
+          </a>
           <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
             Voir l’itinéraire
           </a>
