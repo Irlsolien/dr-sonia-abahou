@@ -20,9 +20,11 @@ import {
   googleMapsPlaceUrl,
   lastModified,
   services,
+  serviceQuickAnswer,
   siteName,
   siteUrl,
 } from "../../seo";
+import { entityNodes, serviceEntities, speakableSpecification } from "../../geo";
 
 type ServicePageProps = {
   params: Promise<{
@@ -175,12 +177,19 @@ export default async function ServicePage({ params }: ServicePageProps) {
         url: pageUrl,
         inLanguage: "fr-MA",
         dateModified: lastModified,
+        /* Contenu de santé : date de relecture et médecin qui en répond. */
+        lastReviewed: lastModified,
+        reviewedBy: {
+          "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
+        },
+        speakable: speakableSpecification,
         medicalAudience: "https://schema.org/Patient",
         specialty: "https://schema.org/Endocrine",
-        about: {
-          "@type": "Thing",
-          name: service.title,
-        },
+        /* Sujets de la page, reliés à leurs identifiants Wikidata et à leurs
+           articles Wikipédia français et arabes (cf. `app/geo.ts`). C'est ce
+           qui permet à un moteur de réponse de relier « diabète de type 2 »
+           ou « سكري النوع الثاني » à cette page. */
+        about: entityNodes(serviceEntities[service.slug], "fr"),
         mainEntity: {
           "@type": "MedicalProcedure",
           name: service.title,
@@ -188,6 +197,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
         },
         isPartOf: {
           "@id": `${siteUrl}/#website`,
+        },
+        /* Page jumelle arabe du même motif. */
+        workTranslation: {
+          "@id": `${absoluteUrl(`/ar/${service.slug}`)}#webpage`,
         },
         publisher: {
           "@id": `${siteUrl}/#clinic`,
@@ -259,6 +272,17 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
             Voir l’itinéraire
           </a>
+        </div>
+      </section>
+
+      {/* « Réponse rapide » : le motif, le lieu, les horaires et la façon de
+          prendre rendez-vous en un seul paragraphe autonome. Un patient
+          arrivé par une recherche trouve sa réponse sans défiler, et un
+          moteur de réponse peut citer ce paragraphe tel quel. */}
+      <section className="section-shell quick-answer-section">
+        <div className="quick-answer">
+          <p className="eyebrow">Réponse rapide</p>
+          <p className="quick-answer-text">{serviceQuickAnswer(service)}</p>
         </div>
       </section>
 

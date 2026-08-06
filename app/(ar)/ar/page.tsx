@@ -36,6 +36,7 @@ import {
   googleMapsPlaceUrl,
   googleRatingFillWidth,
   googleReviews,
+  keyFacts,
   lastModified,
   mapsQuery,
   patientJourney,
@@ -43,6 +44,7 @@ import {
   siteName,
   siteUrl,
 } from "../../seo";
+import { clinicEntities, entityNodes, speakableSpecification } from "../../geo";
 import {
   activitiesAr,
   activityHighlightsAr,
@@ -57,6 +59,7 @@ import {
   galleryAr,
   hoursAr,
   journeyAr,
+  keyFactsAr,
   metaAr,
   reviewDatesAr,
   servicesAr,
@@ -201,6 +204,11 @@ const structuredDataAr = {
         "https://schema.org/Endocrine",
         "https://schema.org/DietNutrition",
       ],
+      /* Mêmes entités qu'en français, libellées en arabe : les identifiants
+         Wikidata et les articles Wikipédia (`app/geo.ts`) sont partagés, seule
+         la langue du libellé change. Une question posée en arabe atteint donc
+         la même entité qu'une question posée en français. */
+      knowsAbout: entityNodes(clinicEntities, "ar"),
       availableService: [
         ...services.map((service) => ({
           "@type": "MedicalProcedure",
@@ -272,7 +280,25 @@ const structuredDataAr = {
           name: "الفحص بالموجات فوق الصوتية للعنق — Paris V",
         },
       ],
+      alumniOf: {
+        "@type": "CollegeOrUniversity",
+        name: "Paris V",
+      },
+      /* Reprise stricte de la légende arabe de la photographie de la section
+         « البصمة الطبية » : aucune distinction supplémentaire n'est déclarée. */
+      award: "تكريم «Tous Unis Contre le Diabète» خلال مؤتمر في طب السكري",
+      hasOccupation: {
+        "@type": "Occupation",
+        name: "طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية",
+        occupationLocation: {
+          "@type": "City",
+          name: "تمارة",
+        },
+      },
       worksFor: {
+        "@id": `${arPageUrl}#clinic`,
+      },
+      workLocation: {
         "@id": `${arPageUrl}#clinic`,
       },
       affiliation: {
@@ -290,15 +316,7 @@ const structuredDataAr = {
           name: "Pan Arab Society for Interventional Endocrinology and Diabetes Technology",
         },
       ],
-      knowsAbout: [
-        "أمراض الغدد الصماء",
-        "داء السكري",
-        "الغدة الدرقية",
-        "التغذية الطبية",
-        "السمنة",
-        "نقص السكر في الدم",
-        "الأمراض الاستقلابية",
-      ],
+      knowsAbout: entityNodes(clinicEntities, "ar"),
     },
     /* Le site est une entité bilingue unique : le nœud `WebSite` porte le même
        `@id` que côté français et les mêmes propriétés. Il est répété ici pour
@@ -324,8 +342,19 @@ const structuredDataAr = {
       description: metaAr.description,
       inLanguage: "ar",
       dateModified: lastModified,
+      /* Contenu de santé : date de relecture et médecin qui en répond. */
+      lastReviewed: lastModified,
+      reviewedBy: {
+        "@id": `${arPageUrl}#doctor`,
+      },
+      /* Passages lisibles à voix haute par un assistant vocal. */
+      speakable: speakableSpecification,
       isPartOf: {
         "@id": `${siteUrl}/#website`,
+      },
+      /* Relation inverse de celle déclarée par l'accueil français. */
+      translationOfWork: {
+        "@id": `${siteUrl}/#webpage`,
       },
       mainEntity: {
         "@id": `${arPageUrl}#clinic`,
@@ -472,6 +501,35 @@ export default function ArabicHomePage() {
             <strong>{uiAr.hero.cardThyroidValue}</strong>
           </div>
         </div>
+      </section>
+
+      {/* « في سطور » — miroir du bloc « En bref » français. Les séquences
+          latines (adresse, numéros, nom de l'organisme ordinal) sont rendues
+          à part, en LTR isolé, comme partout ailleurs sur la version arabe. */}
+      <section className="section-shell key-facts-section reveal-section">
+        <div className="key-facts-head">
+          <p className="eyebrow">{uiAr.keyFacts.eyebrow}</p>
+          <h2>{uiAr.keyFacts.title}</h2>
+        </div>
+        <dl className="key-facts" aria-label={uiAr.keyFacts.ariaLabel}>
+          {keyFacts.map((fact) => {
+            const localized = keyFactsAr[fact.label];
+
+            return (
+              <div className="key-fact" key={fact.label}>
+                <dt>{localized.label}</dt>
+                <dd>
+                  {localized.value}
+                  {localized.latin ? (
+                    <span className="ar-latin key-fact-latin" dir="ltr">
+                      {localized.latin}
+                    </span>
+                  ) : null}
+                </dd>
+              </div>
+            );
+          })}
+        </dl>
       </section>
 
       <section id="expertise" className="section-shell split-section reveal-section">

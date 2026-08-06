@@ -22,6 +22,11 @@ import {
   siteUrl,
 } from "../../../seo";
 import {
+  entityNodes,
+  serviceEntities,
+  speakableSpecification,
+} from "../../../geo";
+import {
   arFooterLabels,
   arHeaderLabels,
   arMobileActionBarLabels,
@@ -30,6 +35,7 @@ import {
   serviceFaqItemsAr,
   servicePagesAr,
   servicePointsAr,
+  serviceQuickAnswerAr,
   serviceUiAr,
   servicesAr,
   uiAr,
@@ -143,6 +149,7 @@ export default async function ArabicServicePage({
   const slug = service.slug;
   const content = servicesAr[slug];
   const meta = servicePagesAr[slug];
+  const quickAnswer = serviceQuickAnswerAr(slug);
   const pageUrl = absoluteUrl(`/ar/${slug}`);
   const arHomeUrl = `${siteUrl}/ar`;
   const frenchTwinHref = `/${slug}`;
@@ -203,12 +210,17 @@ export default async function ArabicServicePage({
         url: pageUrl,
         inLanguage: "ar",
         dateModified: lastModified,
+        /* Contenu de santé : date de relecture et médecin qui en répond. */
+        lastReviewed: lastModified,
+        reviewedBy: {
+          "@id": `${arHomeUrl}#doctor`,
+        },
+        speakable: speakableSpecification,
         medicalAudience: "https://schema.org/Patient",
         specialty: "https://schema.org/Endocrine",
-        about: {
-          "@type": "Thing",
-          name: content.title,
-        },
+        /* Mêmes entités que la page française jumelle, libellées en arabe :
+           les identifiants Wikidata sont partagés (cf. `app/geo.ts`). */
+        about: entityNodes(serviceEntities[service.slug], "ar"),
         mainEntity: {
           "@type": "MedicalProcedure",
           name: content.title,
@@ -216,6 +228,10 @@ export default async function ArabicServicePage({
         },
         isPartOf: {
           "@id": `${siteUrl}/#website`,
+        },
+        /* Relation inverse de celle déclarée par la page motif française. */
+        translationOfWork: {
+          "@id": `${absoluteUrl(`/${service.slug}`)}#webpage`,
         },
         publisher: {
           "@id": `${arHomeUrl}#clinic`,
@@ -308,6 +324,20 @@ export default async function ArabicServicePage({
           >
             {serviceUiAr.directionsLabel}
           </a>
+        </div>
+      </section>
+
+      {/* « جواب سريع » — miroir de la réponse rapide française. L'adresse et
+          les numéros, latins, sont rendus à part en LTR isolé. */}
+      <section className="section-shell quick-answer-section">
+        <div className="quick-answer">
+          <p className="eyebrow">{serviceUiAr.quickAnswerLabel}</p>
+          <p className="quick-answer-text">
+            {quickAnswer.text}
+            <span className="ar-latin key-fact-latin" dir="ltr">
+              {quickAnswer.latin}
+            </span>
+          </p>
         </div>
       </section>
 

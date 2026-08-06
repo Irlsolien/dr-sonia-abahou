@@ -210,6 +210,83 @@ export const services = [
   },
 ] as const;
 
+/**
+ * Horaires d'ouverture validés du cabinet. Source unique : la page d'accueil
+ * française, les données structurées, le bloc de faits clés et les fichiers
+ * `llms.txt` lisent tous ce tableau, afin qu'un horaire ne puisse plus être
+ * corrigé à un endroit sans l'être partout.
+ */
+export const openingHours = [
+  ["Lundi", "9h30 — 16h"],
+  ["Mardi", "9h30 — 16h"],
+  ["Mercredi", "9h30 — 16h"],
+  ["Jeudi", "9h30 — 16h"],
+  ["Vendredi", "9h30 — 12h30"],
+  ["Samedi", "Fermé"],
+  ["Dimanche", "Fermé"],
+] as const;
+
+/** Résumé des horaires en une phrase, pour les réponses courtes. */
+export const openingHoursSummary =
+  "Du lundi au jeudi de 9h30 à 16h, le vendredi de 9h30 à 12h30. Fermé le samedi et le dimanche.";
+
+/**
+ * Faits clés du cabinet — bloc « En bref ».
+ *
+ * Réunit en un seul endroit les informations qu'un patient (ou un moteur de
+ * réponse) cherche en premier : qui, où, quand, comment prendre rendez-vous.
+ * Chaque valeur est reprise des données déjà validées de ce fichier ; aucune
+ * information nouvelle n'est introduite ici.
+ */
+export const keyFacts = [
+  {
+    label: "Médecin",
+    value: `${doctorName}, médecin spécialiste`,
+  },
+  {
+    label: "Spécialité",
+    value:
+      "Endocrinologie, diabétologie, nutrition et maladies métaboliques",
+  },
+  {
+    label: "Adresse",
+    value: `${clinicAddress}, Maroc`,
+  },
+  /* Deux faits distincts plutôt qu'une seule ligne : sur mobile, un numéro
+     réuni au suivant finissait coupé en fin de ligne. */
+  {
+    label: "Téléphone fixe",
+    value: clinicPhoneDisplay,
+  },
+  {
+    label: "Portable et WhatsApp",
+    value: clinicSecondaryPhoneDisplay,
+  },
+  {
+    label: "Horaires",
+    value: openingHoursSummary,
+  },
+  {
+    label: "Rendez-vous",
+    value:
+      "Par téléphone ou WhatsApp auprès du secrétariat, puis confirmation par le cabinet.",
+  },
+  {
+    label: "Au cabinet",
+    value:
+      "Échographie thyroïdienne et cervicale, impédancemétrie médicale, atelier collectif d’éducation thérapeutique le vendredi.",
+  },
+  {
+    label: "Téléconsultation",
+    value:
+      "En préparation, pas encore ouverte. Les rendez-vous se prennent au cabinet.",
+  },
+  {
+    label: "Inscription ordinale",
+    value: `${doctorRegionalCouncil}, n° ${doctorOrderNumber}`,
+  },
+] as const;
+
 export const faqItems = [
   {
     question: "Comment prendre rendez-vous au cabinet ?",
@@ -217,9 +294,44 @@ export const faqItems = [
       "Le cabinet peut être contacté par téléphone ou WhatsApp afin de confirmer les disponibilités et les modalités pratiques du rendez-vous.",
   },
   {
+    question: "Où se trouve le cabinet du Dr Sonia Abahou ?",
+    answer:
+      "Le cabinet se trouve au 209, avenue Moulay Ali Chérif, appartement 3, quartier Massira 1, 12020 Témara, au Maroc. L’itinéraire est accessible depuis la carte du site.",
+  },
+  {
+    question: "Quels sont les horaires du cabinet ?",
+    answer:
+      "Le cabinet reçoit du lundi au jeudi de 9h30 à 16h et le vendredi de 9h30 à 12h30. Il est fermé le samedi et le dimanche.",
+  },
+  {
     question: "Quels documents apporter pour une première consultation ?",
     answer:
       "Il est recommandé d’apporter les derniers bilans biologiques, comptes rendus médicaux, ordonnances, examens d’imagerie et tout document utile au suivi.",
+  },
+  {
+    question: "L’échographie thyroïdienne est-elle réalisée au cabinet ?",
+    answer:
+      "Oui. L’échographie thyroïdienne et cervicale est réalisée au cabinet dans le cadre de l’évaluation endocrinologique, et ses résultats sont interprétés avec les données cliniques et biologiques du patient.",
+  },
+  {
+    question: "Qu’apporte l’impédancemétrie médicale proposée au cabinet ?",
+    answer:
+      "Le cabinet utilise un impédancemètre médical multifréquence BIODY XPERT ZM3. Au-delà du poids seul, il contribue au suivi de la composition corporelle : masse grasse, masse non grasse, masse musculaire et hydratation.",
+  },
+  {
+    question: "Le cabinet propose-t-il un atelier d’éducation thérapeutique ?",
+    answer:
+      "Oui. Le vendredi, le cabinet réunit des patients autour d’un temps d’échange et d’apprentissage sur le diabète, les traitements et l’auto-surveillance. Les prochaines séances et les modalités de participation sont communiquées directement par le cabinet.",
+  },
+  {
+    question: "La téléconsultation vidéo est-elle disponible ?",
+    answer:
+      "Pas encore. La consultation vidéo est en cours de préparation et aucune date d’ouverture n’est annoncée. Les rendez-vous se prennent aujourd’hui au cabinet, par téléphone ou WhatsApp.",
+  },
+  {
+    question: "Quel est le parcours du Dr Sonia Abahou ?",
+    answer:
+      "Le Dr Sonia Abahou est spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques, titulaire d’un diplôme universitaire d’échographie cervicale de Paris V. Ancien médecin au centre hospitalier universitaire de Rabat et ancien médecin attaché à l’hôpital militaire de Rabat, elle est fondatrice et présidente de l’Institut marocain de diabétologie, membre du think tank de la Global Metabolic Health Alliance et membre du board scientifique de la Pan Arab Society for Interventional Endocrinology and Diabetes Technology.",
   },
   {
     question: "Le site remplace-t-il une consultation médicale ?",
@@ -405,4 +517,15 @@ export const googleRatingFillWidth = `${
 
 export function absoluteUrl(path = "/") {
   return new URL(path, siteUrl).toString();
+}
+
+/**
+ * « Réponse rapide » d'une page motif : un paragraphe unique qui répond d'un
+ * bloc aux questions de fond (qui, quoi, où, quand, comment prendre
+ * rendez-vous). Utile au patient pressé, et directement citable par un moteur
+ * de réponse — qui extrait rarement une information dispersée sur cinq
+ * sections. Entièrement composée de données déjà validées.
+ */
+export function serviceQuickAnswer(service: (typeof services)[number]) {
+  return `${doctorName} est médecin spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques à Témara, au Maroc. ${service.text} Le cabinet reçoit sur rendez-vous au ${clinicAddress}, du lundi au jeudi de 9h30 à 16h et le vendredi de 9h30 à 12h30. Le rendez-vous se prend par téléphone au ${clinicPhoneDisplay} ou par WhatsApp au ${clinicSecondaryPhoneDisplay}.`;
 }

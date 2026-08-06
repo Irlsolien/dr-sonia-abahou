@@ -16,11 +16,17 @@
  * en caractères latins.
  */
 import {
+  clinicAddress,
   clinicalActivities,
+  clinicPhoneDisplay,
+  clinicSecondaryPhoneDisplay,
   doctorCredentials,
+  doctorOrderNumber,
+  doctorRegionalCouncil,
   faqItems,
   gallery,
   googleReviews,
+  keyFacts,
   patientJourney,
   services,
 } from "./seo";
@@ -38,6 +44,7 @@ type ActivityHighlight = (typeof clinicalActivities)[number]["highlights"][numbe
 type GallerySrc = (typeof gallery)[number]["src"];
 type JourneyTitle = (typeof patientJourney)[number]["title"];
 type FaqQuestion = (typeof faqItems)[number]["question"];
+type KeyFactLabel = (typeof keyFacts)[number]["label"];
 type ReviewDate =
   | (typeof googleReviews.items)[number]["date"]
   | (typeof googleReviews.featured)["date"];
@@ -239,16 +246,113 @@ export const galleryAr: Record<
   },
 };
 
+/**
+ * Bloc « En bref » arabe.
+ *
+ * `value` porte le texte arabe ; `latin` porte la séquence latine éventuelle
+ * (adresse postale, numéros, nom d'organisme), rendue à part en LTR isolé
+ * comme partout ailleurs sur la version arabe. Une séquence latine n'est
+ * jamais insérée au milieu d'une phrase arabe : elle est toujours donnée à
+ * part, pour que l'ordre de lecture reste stable.
+ */
+export const keyFactsAr: Record<
+  KeyFactLabel,
+  { label: string; value: string; latin?: string }
+> = {
+  Médecin: {
+    label: "الطبيبة",
+    value: "الدكتورة سونيا أبحو، طبيبة أخصائية",
+  },
+  Spécialité: {
+    label: "التخصّص",
+    value: "أمراض الغدد الصماء، والسكري، والتغذية، والأمراض الاستقلابية",
+  },
+  Adresse: {
+    label: "العنوان",
+    value: "المسيرة 1، تمارة، المغرب",
+    latin: clinicAddress,
+  },
+  /* Numéros seuls : la valeur arabe est vide, le libellé porte déjà le sens. */
+  "Téléphone fixe": {
+    label: "الهاتف الثابت",
+    value: "",
+    latin: clinicPhoneDisplay,
+  },
+  "Portable et WhatsApp": {
+    label: "الهاتف المحمول وواتساب",
+    value: "",
+    latin: clinicSecondaryPhoneDisplay,
+  },
+  Horaires: {
+    label: "أوقات العمل",
+    value:
+      "من الاثنين إلى الخميس من 9:30 إلى 16:00، ويوم الجمعة من 9:30 إلى 12:30. مغلقة يومي السبت والأحد.",
+  },
+  "Rendez-vous": {
+    label: "الموعد",
+    value: "هاتفيًا أو عبر واتساب لدى السكرتارية، ثم تأكيد من طرف العيادة.",
+  },
+  "Au cabinet": {
+    label: "بالعيادة",
+    value:
+      "الفحص بالموجات فوق الصوتية للغدة الدرقية والعنق، قياس المقاومة الكهربائية الطبي، وورشة جماعية للتربية العلاجية يوم الجمعة.",
+  },
+  Téléconsultation: {
+    label: "الاستشارة بالفيديو",
+    value: "قيد الإعداد ولم تُفتح بعد. تُؤخذ المواعيد بالعيادة.",
+  },
+  "Inscription ordinale": {
+    label: "التسجيل بالهيئة",
+    value: "مسجّلة بالمجلس الجهوي لهيئة الأطباء",
+    latin: `${doctorRegionalCouncil} — n° ${doctorOrderNumber}`,
+  },
+};
+
 export const faqAr: Record<FaqQuestion, { question: string; answer: string }> = {
   "Comment prendre rendez-vous au cabinet ?": {
     question: "كيف يمكن حجز موعد بالعيادة؟",
     answer:
       "يمكن التواصل مع العيادة هاتفيًا أو عبر واتساب لتأكيد الأوقات المتاحة والترتيبات العملية للموعد.",
   },
+  "Où se trouve le cabinet du Dr Sonia Abahou ?": {
+    question: "أين توجد عيادة الدكتورة سونيا أبحو؟",
+    answer:
+      "توجد العيادة بحي المسيرة 1 بتمارة، بالمغرب، على العنوان التالي: 209, avenue Moulay Ali Chérif, appartement 3, 12020 Témara. والاتجاهات متاحة انطلاقًا من خريطة الموقع.",
+  },
+  "Quels sont les horaires du cabinet ?": {
+    question: "ما هي أوقات عمل العيادة؟",
+    answer:
+      "تستقبل العيادة من الاثنين إلى الخميس من 9:30 إلى 16:00، ويوم الجمعة من 9:30 إلى 12:30. وهي مغلقة يومي السبت والأحد.",
+  },
   "Quels documents apporter pour une première consultation ?": {
     question: "ما الوثائق التي ينبغي إحضارها في الاستشارة الأولى؟",
     answer:
       "يُنصح بإحضار آخر التحاليل البيولوجية والتقارير الطبية والوصفات وفحوصات التصوير وكل وثيقة مفيدة للتتبّع.",
+  },
+  "L’échographie thyroïdienne est-elle réalisée au cabinet ?": {
+    question: "هل يُنجَز فحص الغدة الدرقية بالموجات فوق الصوتية داخل العيادة؟",
+    answer:
+      "نعم. يُنجَز الفحص بالموجات فوق الصوتية للغدة الدرقية والعنق داخل العيادة في إطار تقييم أمراض الغدد الصماء، وتُقرأ نتائجه مع المعطيات السريرية والبيولوجية للمريض.",
+  },
+  "Qu’apporte l’impédancemétrie médicale proposée au cabinet ?": {
+    question: "ما الذي يضيفه قياس المقاومة الكهربائية الطبي المتوفّر بالعيادة؟",
+    answer:
+      "تستعمل العيادة جهازًا طبيًا متعدّد الترددات BIODY XPERT ZM3. وإلى جانب الوزن وحده، يساهم هذا الجهاز في تتبّع تركيب الجسم: الكتلة الدهنية، والكتلة غير الدهنية، والكتلة العضلية، ونسبة الماء.",
+  },
+  "Le cabinet propose-t-il un atelier d’éducation thérapeutique ?": {
+    question: "هل تقترح العيادة ورشة للتربية العلاجية؟",
+    answer:
+      "نعم. يوم الجمعة، تجمع العيادة مرضى حول وقت للتبادل والتعلّم بخصوص داء السكري والعلاجات والمراقبة الذاتية. وتُعلن العيادة مباشرة عن الحصص المقبلة وشروط المشاركة.",
+  },
+  "La téléconsultation vidéo est-elle disponible ?": {
+    question: "هل الاستشارة بالفيديو متاحة؟",
+    answer:
+      "ليس بعد. الاستشارة بالفيديو قيد الإعداد ولم يُعلَن أي تاريخ لانطلاقها. وتُؤخذ المواعيد حاليًا بالعيادة، هاتفيًا أو عبر واتساب.",
+  },
+  "Quel est le parcours du Dr Sonia Abahou ?": {
+    question: "ما هو المسار الطبي للدكتورة سونيا أبحو؟",
+    answer:
+      "الدكتورة سونيا أبحو أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية، حاصلة على دبلوم جامعي في الفحص بالموجات فوق الصوتية للعنق من Paris V. طبيبة سابقة بالمركز الاستشفائي الجامعي بالرباط وطبيبة سابقة ملحقة بالمستشفى العسكري بالرباط، وهي مؤسِّسة ورئيسة المعهد المغربي للسكري، وعضوة في خلية التفكير التابعة لـ Global Metabolic Health Alliance، وعضوة في المجلس العلمي لـ Pan Arab Society for Interventional Endocrinology and Diabetes Technology.",
   },
   "Le site remplace-t-il une consultation médicale ?": {
     question: "هل يُغني الموقع عن الاستشارة الطبية؟",
@@ -339,6 +443,13 @@ export const uiAr = {
     /* Le parcours détaillé n'existe qu'en français : le lien porte
        `hrefLang="fr"`, comme sur les pages motifs arabes. */
     profileLink: "الاطّلاع على مسار الدكتورة سونيا أبحو",
+  },
+
+  /* Bloc de faits clés, miroir du « En bref » français. */
+  keyFacts: {
+    eyebrow: "في سطور",
+    title: "المعلومات الأساسية للعيادة.",
+    ariaLabel: "المعلومات الأساسية للعيادة",
   },
 
   approach: {
@@ -710,6 +821,7 @@ export const serviceUiAr = {
 
   specialtyLabel: "التخصّص",
   pointsTitle: "ما الذي تتيح الاستشارة تناوله",
+  quickAnswerLabel: "جواب سريع",
 
   copy: {
     title: "معلومات واضحة، دون أن تُغني عن الرأي الطبي",
@@ -764,6 +876,22 @@ export const serviceUiAr = {
 
   breadcrumbHome: "الصفحة الرئيسية",
 } as const;
+
+/**
+ * « Jواب سريع » — réponse rapide arabe d'une page motif, miroir de
+ * `serviceQuickAnswer` (`app/seo.ts`). Répond d'un bloc au qui, quoi, où,
+ * quand et comment prendre rendez-vous.
+ *
+ * `text` est entièrement en arabe ; `latin` regroupe l'adresse postale et les
+ * numéros, rendus séparément en LTR isolé. Aucune séquence latine n'est
+ * insérée au milieu d'une phrase arabe.
+ */
+export function serviceQuickAnswerAr(slug: ServiceSlug) {
+  return {
+    text: `الدكتورة سونيا أبحو طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية بتمارة، بالمغرب. ${servicesAr[slug].text} تستقبل العيادة بموعد من الاثنين إلى الخميس من 9:30 إلى 16:00، ويوم الجمعة من 9:30 إلى 12:30. ويُؤخذ الموعد هاتفيًا أو عبر واتساب — العنوان والأرقام:`,
+    latin: `${clinicAddress} · ${clinicPhoneDisplay} · ${clinicSecondaryPhoneDisplay}`,
+  };
+}
 
 /**
  * FAQ arabe d'une page motif : même composition que la version française

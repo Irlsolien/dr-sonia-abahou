@@ -35,13 +35,16 @@ import {
   googleMapsPlaceUrl,
   googleRatingFillWidth,
   googleReviews,
+  keyFacts,
   lastModified,
   mapsQuery,
+  openingHours,
   patientJourney,
   services,
   siteName,
   siteUrl,
 } from "../seo";
+import { clinicEntities, entityNodes, speakableSpecification } from "../geo";
 
 const phoneHref = `tel:${clinicPhoneInternational}`;
 const secondaryPhoneHref = `tel:${clinicSecondaryPhoneInternational}`;
@@ -53,15 +56,11 @@ const whatsappHref = `https://wa.me/${appointment.whatsappPhone}?text=${encodeUR
   appointment.whatsappMessage,
 )}`;
 
-const hours = [
-  ["Lundi", "9h30 — 16h"],
-  ["Mardi", "9h30 — 16h"],
-  ["Mercredi", "9h30 — 16h"],
-  ["Jeudi", "9h30 — 16h"],
-  ["Vendredi", "9h30 — 12h30"],
-  ["Samedi", "Fermé"],
-  ["Dimanche", "Fermé"],
-];
+/* Horaires : source unique dans `app/seo.ts`, partagée avec les données
+   structurées, le bloc « En bref » et les fichiers `llms.txt`. */
+const hours = openingHours;
+
+const arPageUrl = `${siteUrl}/ar`;
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -105,14 +104,16 @@ const structuredData = {
           telephone: clinicPhoneInternational,
           contactType: "Prise de rendez-vous",
           areaServed: clinicCountry,
-          availableLanguage: "fr",
+          /* Le site est publié en français et en arabe : les deux langues sont
+             déclarées de façon identique sur les deux versions. */
+          availableLanguage: ["fr", "ar"],
         },
         {
           "@type": "ContactPoint",
           telephone: clinicSecondaryPhoneInternational,
           contactType: "Téléphone portable et WhatsApp du cabinet",
           areaServed: clinicCountry,
-          availableLanguage: "fr",
+          availableLanguage: ["fr", "ar"],
         },
       ],
       employee: {
@@ -123,6 +124,11 @@ const structuredData = {
         "https://schema.org/Endocrine",
         "https://schema.org/DietNutrition",
       ],
+      /* Ancrage d'entités : chaque concept est relié à son identifiant
+         Wikidata et à ses articles Wikipédia (cf. `app/geo.ts`), afin qu'un
+         moteur de réponse rattache le cabinet aux mêmes entités que celles de
+         son propre graphe de connaissances. */
+      knowsAbout: entityNodes(clinicEntities, "fr"),
       availableService: [
         ...services.map((service) => ({
           "@type": "MedicalProcedure",
@@ -189,7 +195,26 @@ const structuredData = {
           name: "Échographie cervicale - Paris V",
         },
       ],
+      alumniOf: {
+        "@type": "CollegeOrUniversity",
+        name: "Paris V",
+      },
+      /* Reprise stricte de la légende de la photographie publiée dans la
+         section « Signature médicale » : aucune distinction supplémentaire
+         n'est déclarée. */
+      award: "Distinction « Tous Unis Contre le Diabète », remise lors d’un congrès de diabétologie",
+      hasOccupation: {
+        "@type": "Occupation",
+        name: "Médecin endocrinologue, diabétologue et nutritionniste",
+        occupationLocation: {
+          "@type": "City",
+          name: clinicCity,
+        },
+      },
       worksFor: {
+        "@id": `${siteUrl}/#clinic`,
+      },
+      workLocation: {
         "@id": `${siteUrl}/#clinic`,
       },
       affiliation: {
@@ -207,15 +232,9 @@ const structuredData = {
           name: "Pan Arab Society for Interventional Endocrinology and Diabetes Technology",
         },
       ],
-      knowsAbout: [
-        "Endocrinologie",
-        "Diabétologie",
-        "Thyroïde",
-        "Nutrition médicale",
-        "Obésité",
-        "Hypoglycémies",
-        "Maladies métaboliques",
-      ],
+      /* Mêmes entités que le cabinet : la docteure est reliée aux concepts
+         médicaux par leurs identifiants publics, pas seulement par des mots. */
+      knowsAbout: entityNodes(clinicEntities, "fr"),
     },
     {
       "@type": "WebSite",
@@ -237,8 +256,21 @@ const structuredData = {
         "Site officiel du cabinet du Dr Sonia Abahou à Témara : endocrinologie, diabétologie, nutrition et maladies métaboliques.",
       inLanguage: "fr-MA",
       dateModified: lastModified,
+      /* Contenu de santé : qui l'a relu, et quand. C'est ce que les moteurs de
+         réponse citent pour justifier la fiabilité d'une source médicale. */
+      lastReviewed: lastModified,
+      reviewedBy: {
+        "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
+      },
+      /* Passages lisibles à voix haute par un assistant vocal. */
+      speakable: speakableSpecification,
       isPartOf: {
         "@id": `${siteUrl}/#website`,
+      },
+      /* Page jumelle arabe, déclarée dans les deux sens (l'accueil arabe
+         porte la relation inverse). */
+      workTranslation: {
+        "@id": `${arPageUrl}#webpage`,
       },
       mainEntity: {
         "@id": `${siteUrl}/#clinic`,
@@ -254,6 +286,7 @@ const structuredData = {
     {
       "@type": "FAQPage",
       "@id": `${siteUrl}/#faq`,
+      inLanguage: "fr-MA",
       isPartOf: {
         "@id": `${siteUrl}/#webpage`,
       },
@@ -382,6 +415,26 @@ export default function Home() {
             <strong>Bilan et orientation</strong>
           </div>
         </div>
+      </section>
+
+      {/* « En bref » — les informations les plus demandées, regroupées et
+          formulées de façon autonome : un patient pressé y trouve tout sans
+          défiler, et un moteur de réponse peut les extraire sans reconstituer
+          l'information depuis cinq sections différentes. La classe
+          `key-facts` est aussi la cible `speakable` des données structurées. */}
+      <section className="section-shell key-facts-section reveal-section">
+        <div className="key-facts-head">
+          <p className="eyebrow">En bref</p>
+          <h2>L’essentiel du cabinet.</h2>
+        </div>
+        <dl className="key-facts">
+          {keyFacts.map((fact) => (
+            <div className="key-fact" key={fact.label}>
+              <dt>{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       <section id="expertise" className="section-shell split-section reveal-section">

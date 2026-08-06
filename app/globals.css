@@ -984,7 +984,8 @@ h3 {
 .gallery-section,
 .cabinet-section,
 .final-cta,
-.approach-flow-section {
+.approach-flow-section,
+.key-facts-section {
   padding: clamp(74px, 10vw, 132px) 0;
 }
 
@@ -1015,6 +1016,54 @@ h3 {
 
 .section-text {
   max-width: 620px;
+}
+
+/* --- « En bref » : faits clés du cabinet ---------------------------------
+   Registre volontairement documentaire : pas de carte, pas d'ombre, juste
+   une colonne éditoriale et une liste de définitions séparée par des filets.
+   L'information passe avant l'effet, et la structure `dl` reste la plus
+   lisible pour un lecteur d'écran comme pour un moteur de réponse.
+   Propriétés logiques uniquement : le miroir RTL de la page arabe fonctionne
+   sans règle supplémentaire. */
+.key-facts-section {
+  display: grid;
+  grid-template-columns: 0.86fr 1.14fr;
+  gap: clamp(28px, 5vw, 70px);
+  align-items: start;
+}
+
+.key-facts-head h2:last-child {
+  margin-bottom: 0;
+}
+
+.key-facts {
+  margin: 0;
+  border-block-start: 1px solid rgba(7, 150, 173, 0.2);
+}
+
+.key-fact {
+  display: grid;
+  grid-template-columns: minmax(0, 150px) minmax(0, 1fr);
+  gap: 4px clamp(18px, 2.4vw, 34px);
+  padding-block: clamp(15px, 1.6vw, 19px);
+  border-block-end: 1px solid rgba(7, 150, 173, 0.14);
+}
+
+.key-fact dt {
+  color: var(--color-primary-deep);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  line-height: 1.7;
+  text-transform: uppercase;
+}
+
+.key-fact dd {
+  margin: 0;
+  color: var(--color-foreground);
+  font-size: 1.02rem;
+  line-height: 1.62;
+  text-wrap: pretty;
 }
 
 .credential-grid {
@@ -3450,6 +3499,32 @@ h3 {
   font-size: clamp(1.08rem, 2vw, 1.32rem);
 }
 
+/* --- « Réponse rapide » des pages motifs --------------------------------
+   Un encadré unique, sans ombre ni carte, marqué par un filet vertical côté
+   début de ligne (propriété logique : le miroir RTL de `/ar` suit tout seul).
+   Le paragraphe est écrit pour être compréhensible seul, hors de la page. */
+.quick-answer-section {
+  padding-block: 6px 4px;
+}
+
+.quick-answer {
+  padding-inline-start: clamp(18px, 2.4vw, 30px);
+  border-inline-start: 3px solid var(--color-secondary);
+}
+
+.quick-answer .eyebrow {
+  margin-bottom: 12px;
+}
+
+.quick-answer-text {
+  max-width: 820px;
+  margin: 0;
+  color: var(--color-foreground);
+  font-size: clamp(1.02rem, 1.5vw, 1.14rem);
+  line-height: 1.72;
+  text-wrap: pretty;
+}
+
 .service-detail-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
@@ -4151,6 +4226,17 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  /* « En bref » : une seule colonne, et les libellés passent au-dessus de
+     leur valeur pour ne pas écraser le texte sur un écran étroit. */
+  .key-facts-section {
+    grid-template-columns: 1fr;
+  }
+
+  .key-fact {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
   /* Approche du cabinet : le fil bascule à la verticale, côté début de
      ligne, et les jalons se calent sur le fil au lieu d'être centrés. */
   .approach-flow-head {
@@ -4352,7 +4438,8 @@ h3 {
   .cabinet-section,
   .final-cta,
   .approach-flow-section,
-  .signature-section {
+  .signature-section,
+  .key-facts-section {
     padding: 58px 0;
   }
 
@@ -4908,7 +4995,8 @@ h3 {
   .reviews-section,
   .gallery-section,
   .cabinet-section,
-  .final-cta {
+  .final-cta,
+  .key-facts-section {
     content-visibility: auto;
     contain-intrinsic-size: auto 900px;
   }
@@ -5179,6 +5267,28 @@ h3 {
   direction: ltr;
   text-align: right;
   unicode-bidi: isolate;
+}
+
+/* Bloc « في سطور » : la séquence latine d'un fait (adresse, numéros, nom de
+   l'organisme ordinal) passe à la ligne sous sa formulation arabe, jamais au
+   milieu d'une phrase — c'est le seul moyen de garder un ordre de lecture
+   stable dans un paragraphe RTL. */
+.ar-page .key-fact-latin {
+  display: block;
+  margin-top: 3px;
+  color: var(--color-muted);
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+/* Fait dont la valeur est entièrement latine (numéros de téléphone) : la
+   séquence n'accompagne plus un texte arabe, elle *est* la valeur. Elle
+   reprend donc le corps et la couleur des autres valeurs. */
+.ar-page .key-fact dd > .key-fact-latin:first-child {
+  margin-top: 0;
+  color: var(--color-foreground);
+  font-size: 1.02rem;
+  line-height: 1.62;
 }
 
 /* Lien d'évitement arabe : ramené en haut à droite, côté début de ligne.

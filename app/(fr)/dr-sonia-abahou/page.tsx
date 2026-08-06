@@ -21,6 +21,7 @@ import {
   siteName,
   siteUrl,
 } from "../../seo";
+import { clinicEntities, entityNodes, speakableSpecification } from "../../geo";
 
 const lastModifiedLabel = new Intl.DateTimeFormat("fr-MA", {
   day: "numeric",
@@ -73,6 +74,12 @@ const profileStructuredData = {
         "Parcours et domaines d’expertise du Dr Sonia Abahou, médecin spécialiste à Témara.",
       inLanguage: "fr-MA",
       dateModified: lastModified,
+      /* Contenu de santé : date de relecture et médecin qui en répond. */
+      lastReviewed: lastModified,
+      reviewedBy: {
+        "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
+      },
+      speakable: speakableSpecification,
       isPartOf: {
         "@id": `${siteUrl}/#website`,
       },
@@ -121,7 +128,25 @@ const profileStructuredData = {
           name: "Échographie cervicale - Paris V",
         },
       ],
+      alumniOf: {
+        "@type": "CollegeOrUniversity",
+        name: "Paris V",
+      },
+      /* Reprise stricte de la légende de la photographie publiée sur
+         l'accueil : aucune distinction supplémentaire n'est déclarée. */
+      award: "Distinction « Tous Unis Contre le Diabète », remise lors d’un congrès de diabétologie",
+      hasOccupation: {
+        "@type": "Occupation",
+        name: "Médecin endocrinologue, diabétologue et nutritionniste",
+        occupationLocation: {
+          "@type": "City",
+          name: clinicCity,
+        },
+      },
       worksFor: {
+        "@id": `${siteUrl}/#clinic`,
+      },
+      workLocation: {
         "@id": `${siteUrl}/#clinic`,
       },
       affiliation: {
@@ -139,7 +164,10 @@ const profileStructuredData = {
           name: "Pan Arab Society for Interventional Endocrinology and Diabetes Technology",
         },
       ],
-      knowsAbout: services.map((service) => service.title),
+      /* Mêmes entités que le nœud `#doctor` de l'accueil : les deux pages
+         décrivent la même personne sous le même `@id`, leurs déclarations ne
+         doivent pas diverger. */
+      knowsAbout: entityNodes(clinicEntities, "fr"),
     },
     {
       "@type": "BreadcrumbList",
