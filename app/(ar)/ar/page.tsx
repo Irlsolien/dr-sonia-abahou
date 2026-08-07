@@ -36,7 +36,6 @@ import {
   googleMapsPlaceUrl,
   googleRatingFillWidth,
   googleReviews,
-  keyFacts,
   lastModified,
   mapsQuery,
   patientJourney,
@@ -59,7 +58,6 @@ import {
   galleryAr,
   hoursAr,
   journeyAr,
-  keyFactsAr,
   metaAr,
   reviewDatesAr,
   servicesAr,
@@ -501,35 +499,6 @@ export default function ArabicHomePage() {
             <strong>{uiAr.hero.cardThyroidValue}</strong>
           </div>
         </div>
-      </section>
-
-      {/* « في سطور » — miroir du bloc « En bref » français. Les séquences
-          latines (adresse, numéros, nom de l'organisme ordinal) sont rendues
-          à part, en LTR isolé, comme partout ailleurs sur la version arabe. */}
-      <section className="section-shell key-facts-section reveal-section">
-        <div className="key-facts-head">
-          <p className="eyebrow">{uiAr.keyFacts.eyebrow}</p>
-          <h2>{uiAr.keyFacts.title}</h2>
-        </div>
-        <dl className="key-facts" aria-label={uiAr.keyFacts.ariaLabel}>
-          {keyFacts.map((fact) => {
-            const localized = keyFactsAr[fact.label];
-
-            return (
-              <div className="key-fact" key={fact.label}>
-                <dt>{localized.label}</dt>
-                <dd>
-                  {localized.value}
-                  {localized.latin ? (
-                    <span className="ar-latin key-fact-latin" dir="ltr">
-                      {localized.latin}
-                    </span>
-                  ) : null}
-                </dd>
-              </div>
-            );
-          })}
-        </dl>
       </section>
 
       <section id="expertise" className="section-shell split-section reveal-section">

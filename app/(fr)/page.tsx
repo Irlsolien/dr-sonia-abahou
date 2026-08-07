@@ -35,7 +35,6 @@ import {
   googleMapsPlaceUrl,
   googleRatingFillWidth,
   googleReviews,
-  keyFacts,
   lastModified,
   mapsQuery,
   openingHours,
@@ -415,26 +414,6 @@ export default function Home() {
             <strong>Bilan et orientation</strong>
           </div>
         </div>
-      </section>
-
-      {/* « En bref » — les informations les plus demandées, regroupées et
-          formulées de façon autonome : un patient pressé y trouve tout sans
-          défiler, et un moteur de réponse peut les extraire sans reconstituer
-          l'information depuis cinq sections différentes. La classe
-          `key-facts` est aussi la cible `speakable` des données structurées. */}
-      <section className="section-shell key-facts-section reveal-section">
-        <div className="key-facts-head">
-          <p className="eyebrow">En bref</p>
-          <h2>L’essentiel du cabinet.</h2>
-        </div>
-        <dl className="key-facts">
-          {keyFacts.map((fact) => (
-            <div className="key-fact" key={fact.label}>
-              <dt>{fact.label}</dt>
-              <dd>{fact.value}</dd>
-            </div>
-          ))}
-        </dl>
       </section>
 
       <section id="expertise" className="section-shell split-section reveal-section">
