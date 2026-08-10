@@ -104,7 +104,7 @@ export default function LegalNoticePage() {
             Le site est hébergé par <strong>Vercel Inc.</strong>, 340 S Lemon Ave
             #4133, Walnut, CA 91789, États-Unis. Le service d’hébergement est
             accessible depuis{" "}
-            <a href="https://vercel.com" target="_blank" rel="noreferrer">
+            <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">
               vercel.com
             </a>
             .

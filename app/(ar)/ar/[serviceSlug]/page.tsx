@@ -311,7 +311,7 @@ export default async function ArabicServicePage({
             className="secondary-button whatsapp-button"
             href={clinicWhatsappHref}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <WhatsAppIcon />
             {uiAr.whatsappLabel}
@@ -320,7 +320,7 @@ export default async function ArabicServicePage({
             className="secondary-button"
             href={mapsHref}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             {serviceUiAr.directionsLabel}
           </a>
@@ -475,7 +475,7 @@ export default async function ArabicServicePage({
             className="secondary-button"
             href={mapsHref}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             {serviceUiAr.directionsLabel}
           </a>

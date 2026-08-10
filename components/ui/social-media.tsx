@@ -36,7 +36,9 @@ export function SocialTooltip({ items }: SocialTooltipProps) {
           className="social-tooltip-item"
           style={{ "--social-color": item.color } as CSSProperties}
           target={item.href.startsWith("http") ? "_blank" : undefined}
-          rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+          rel={
+            item.href.startsWith("http") ? "noopener noreferrer" : undefined
+          }
         >
           <span className="social-tooltip-bubble">{item.tooltip}</span>
           <span className="social-tooltip-icon">{icons[item.icon]}</span>

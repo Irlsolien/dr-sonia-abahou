@@ -5057,13 +5057,22 @@ h3 {
 }
 
 /* Keep in-page anchors (nav links, brand mark) clear of the sticky
-   .site-header when the browser scrolls a section into view. */
+   .site-header when the browser scrolls a section into view.
+   `#ar-content` est la cible du lien d'évitement arabe ; les quatre ancres
+   d'actes cliniques sont publiées comme URL de service dans les données
+   structurées (`/#echographie-thyroidienne`, …) : on peut donc y arriver
+   directement depuis un moteur. */
 #expertise,
 #soins,
 #pratiques,
 #avis,
 #cabinet,
-#contact {
+#contact,
+#ar-content,
+#echographie-thyroidienne,
+#impedancemetrie-medicale,
+#education-therapeutique,
+#surveillance-glycemique-continue {
   scroll-margin-top: clamp(90px, 14vw, 120px);
 }
 

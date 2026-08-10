@@ -264,12 +264,12 @@ export default async function ServicePage({ params }: ServicePageProps) {
             className="secondary-button whatsapp-button"
             href={clinicWhatsappHref}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <WhatsAppIcon />
             WhatsApp
           </a>
-          <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
+          <a className="secondary-button" href={mapsHref} target="_blank" rel="noopener noreferrer">
             Voir l’itinéraire
           </a>
         </div>
@@ -406,7 +406,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <Link className="primary-button" href="/rendez-vous">
             Rendez-vous
           </Link>
-          <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
+          <a className="secondary-button" href={mapsHref} target="_blank" rel="noopener noreferrer">
             Voir l’itinéraire
           </a>
         </div>

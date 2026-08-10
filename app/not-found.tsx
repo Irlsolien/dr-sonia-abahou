@@ -108,7 +108,7 @@ export default function NotFound() {
                 <PhoneIcon />
                 Appeler le cabinet
               </a>
-              <a href={whatsappHref} target="_blank" rel="noreferrer">
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
                 <WhatsAppIcon />
                 Écrire sur WhatsApp
               </a>

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
+import { MobileActionBar } from "../../components/MobileActionBar";
 import {
   absoluteUrl,
   clinicCity,
@@ -202,6 +203,12 @@ export default function DoctorProfilePage() {
 
       <SiteHeader internal />
 
+      {/* Appel, WhatsApp et itinéraire en une interaction, comme sur les pages
+          motifs : cette page est une page d'arrivée fréquente sur recherche du
+          nom du médecin, et le seul chemin de contact y était jusqu'ici le
+          bloc de bas de page. */}
+      <MobileActionBar />
+
       <section className="service-hero section-shell profile-hero">
         <p className="eyebrow">Parcours médical</p>
         <h1>Dr Sonia Abahou, endocrinologue à Témara.</h1>
@@ -295,7 +302,7 @@ export default function DoctorProfilePage() {
           <a
             href={doctorProfessionalProfiles[0]}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <strong>Profil médical public</strong>
             <span>Med.ma</span>
@@ -303,7 +310,7 @@ export default function DoctorProfilePage() {
           <a
             href={doctorProfessionalProfiles[1]}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <strong>Profil de prise de contact</strong>
             <span>DabaDoc</span>
@@ -311,7 +318,7 @@ export default function DoctorProfilePage() {
           <a
             href={doctorSameAsProfiles[0]}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <strong>Profil professionnel</strong>
             <span>LinkedIn</span>

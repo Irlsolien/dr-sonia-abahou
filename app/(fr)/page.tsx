@@ -339,7 +339,7 @@ export default function Home() {
               className="secondary-button whatsapp-button"
               href={whatsappHref}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               <WhatsAppIcon />
               WhatsApp
@@ -667,7 +667,7 @@ export default function Home() {
               className="secondary-button"
               href={googleReviews.sourceUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               Voir les avis sur Google
             </a>
@@ -724,7 +724,7 @@ export default function Home() {
               className="primary-button"
               href={mapsHref}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               Ouvrir l’itinéraire GPS
             </a>
@@ -740,7 +740,7 @@ export default function Home() {
               className="secondary-button whatsapp-button"
               href={whatsappHref}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               <WhatsAppIcon />
               WhatsApp
@@ -791,7 +791,7 @@ export default function Home() {
           <Link className="primary-button" href="/rendez-vous">
             Rendez-vous
           </Link>
-          <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
+          <a className="secondary-button" href={mapsHref} target="_blank" rel="noopener noreferrer">
             Voir l’itinéraire
           </a>
         </div>
