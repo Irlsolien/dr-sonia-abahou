@@ -245,7 +245,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
       <MobileActionBar />
 
-      <section className="service-hero section-shell">
+      {/* Cible du lien d'évitement français posé par `app/(fr)/layout.tsx`. */}
+      <section id="fr-content" className="service-hero section-shell">
         <p className="eyebrow">Cabinet d’endocrinologie à Témara</p>
         <h1>{service.title} à Témara</h1>
         <p>{service.intro}</p>
@@ -264,12 +265,12 @@ export default async function ServicePage({ params }: ServicePageProps) {
             className="secondary-button whatsapp-button"
             href={clinicWhatsappHref}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <WhatsAppIcon />
             WhatsApp
           </a>
-          <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
+          <a className="secondary-button" href={mapsHref} target="_blank" rel="noopener noreferrer">
             Voir l’itinéraire
           </a>
         </div>
@@ -406,7 +407,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <Link className="primary-button" href="/rendez-vous">
             Rendez-vous
           </Link>
-          <a className="secondary-button" href={mapsHref} target="_blank" rel="noreferrer">
+          <a className="secondary-button" href={mapsHref} target="_blank" rel="noopener noreferrer">
             Voir l’itinéraire
           </a>
         </div>

@@ -104,7 +104,7 @@ export function MapEmbed({
       <div className="map-overlay">
         <span>{labels.overlayEyebrow}</span>
         <strong>{labels.overlayPlace}</strong>
-        <a ref={mapsLinkRef} href={mapsHref} target="_blank" rel="noreferrer">
+        <a ref={mapsLinkRef} href={mapsHref} target="_blank" rel="noopener noreferrer">
           {labels.overlayLink}
         </a>
       </div>

@@ -18,6 +18,7 @@ import {
   clinicSecondaryPhoneInternational,
   clinicStreetAddress,
   lastModified,
+  ogCoverImage,
   siteName,
   siteUrl,
 } from "../../seo";
@@ -37,6 +38,27 @@ export const metadata: Metadata = {
     siteName,
     type: "website",
     locale: "fr_MA",
+    /* Une page qui déclare son propre bloc `openGraph` remplace entièrement
+       celui du layout : sans cette image, un partage WhatsApp ou Facebook de
+       la page de rendez-vous s'affichait sans visuel. Même image de partage
+       que les autres pages sans visuel propre. */
+    images: [
+      {
+        url: ogCoverImage,
+        width: 1200,
+        height: 630,
+        alt: "Dr Sonia Abahou — Endocrinologie, diabétologie, nutrition à Témara",
+      },
+    ],
+  },
+  /* Idem pour la carte Twitter : sans bloc propre, la page héritait du titre
+     et de la description de l'accueil, qui ne décrivent pas cette page. */
+  twitter: {
+    card: "summary_large_image",
+    title: "Prendre rendez-vous | Dr Sonia Abahou",
+    description:
+      "Contacter le cabinet par appel ou WhatsApp. La réservation vidéo est temporairement en maintenance.",
+    images: [absoluteUrl(ogCoverImage)],
   },
 };
 
@@ -116,7 +138,8 @@ export default function AppointmentPage() {
 
       <MobileActionBar />
 
-      <section className="appointment-hero section-shell">
+      {/* Cible du lien d'évitement français posé par `app/(fr)/layout.tsx`. */}
+      <section id="fr-content" className="appointment-hero section-shell">
         <p className="eyebrow">Rendez-vous</p>
         <h1>Choisir le type de rendez-vous.</h1>
         <p>
@@ -148,7 +171,7 @@ export default function AppointmentPage() {
               className="secondary-button whatsapp-button"
               href={whatsappHref}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               <WhatsAppIcon />
               Écrire sur WhatsApp

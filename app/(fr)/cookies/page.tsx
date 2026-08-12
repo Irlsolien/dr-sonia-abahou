@@ -41,7 +41,8 @@ export default function CookiesPage() {
     <main id="main-content" className="legal-page">
       <SiteHeader internal />
 
-      <section className="legal-hero section-shell">
+      {/* Cible du lien d'évitement français posé par `app/(fr)/layout.tsx`. */}
+      <section id="fr-content" className="legal-hero section-shell">
         <p className="eyebrow">Cookies</p>
         <h1>Politique cookies</h1>
         <p>

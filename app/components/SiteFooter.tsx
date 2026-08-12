@@ -147,7 +147,7 @@ export function SiteFooter({
           <h3>{labels.contactTitle}</h3>
           <ul className="footer-contact-list">
             <li>
-              <a href={mapsHref} target="_blank" rel="noreferrer">
+              <a href={mapsHref} target="_blank" rel="noopener noreferrer">
                 <MapPinIcon />
                 {labels.isolateLatin ? (
                   <span dir="ltr" className="footer-latin">
@@ -191,7 +191,7 @@ export function SiteFooter({
               </a>
             </li>
             <li>
-              <a href={whatsappHref} target="_blank" rel="noreferrer">
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
                 <WhatsAppIcon />
                 <span>{labels.whatsapp}</span>
               </a>

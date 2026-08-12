@@ -70,7 +70,7 @@ export function MobileActionBar({
         className="mobile-action-bar-item mobile-action-bar-whatsapp"
         href={whatsappHref}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         aria-label={labels.whatsapp.ariaLabel}
       >
         <WhatsAppIcon />
@@ -80,7 +80,7 @@ export function MobileActionBar({
         className="mobile-action-bar-item"
         href={mapsHref}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         aria-label={labels.directions.ariaLabel}
       >
         <MapPinIcon />

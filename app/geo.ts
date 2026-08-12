@@ -256,5 +256,8 @@ export function entityNames(keys: readonly EntityKey[], lang: "fr" | "ar") {
  */
 export const speakableSpecification = {
   "@type": "SpeakableSpecification",
-  cssSelector: ["h1", ".key-facts", ".quick-answer-text"],
+  /* `.key-facts` retiré : le bloc « En bref » n'est plus rendu depuis sa
+     suppression des deux pages d'accueil, le sélecteur ne désignait donc plus
+     aucun passage. */
+  cssSelector: ["h1", ".quick-answer-text"],
 } as const;

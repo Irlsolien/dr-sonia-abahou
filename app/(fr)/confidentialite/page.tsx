@@ -49,7 +49,8 @@ export default function PrivacyPage() {
     <main id="main-content" className="legal-page">
       <SiteHeader internal />
 
-      <section className="legal-hero section-shell">
+      {/* Cible du lien d'évitement français posé par `app/(fr)/layout.tsx`. */}
+      <section id="fr-content" className="legal-hero section-shell">
         <p className="eyebrow">Données personnelles</p>
         <h1>Politique de confidentialité</h1>
         <p>
@@ -145,9 +146,19 @@ export default function PrivacyPage() {
             Les données peuvent être accessibles au cabinet, à ses prestataires
             techniques strictement nécessaires au fonctionnement du site, et aux
             services tiers intégrés ou ouverts depuis le site, comme Google Maps,
-            WhatsApp, LinkedIn ou Instagram. La carte Google Maps est chargée sur
-            la page d’accueil ; les autres services sont ouverts sur action de
-            l’utilisateur.
+            WhatsApp, LinkedIn ou Instagram. Aucun de ces services n’est
+            sollicité automatiquement : ils ne sont ouverts que sur action de
+            l’utilisateur. La carte Google Maps de la page d’accueil n’affiche
+            par défaut qu’une façade statique et ne se charge qu’après un clic
+            explicite.
+          </p>
+          <p>
+            Une mesure d’audience anonyme est par ailleurs réalisée via Vercel
+            Web Analytics, l’outil de l’hébergeur du site. Cet outil ne dépose
+            aucun cookie, ne suit pas les visiteurs individuellement et ne
+            collecte que des statistiques agrégées (pages consultées, type
+            d’appareil, pays). Aucune donnée nominative n’est associée à ces
+            mesures.
           </p>
         </article>
 

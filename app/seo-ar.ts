@@ -21,12 +21,9 @@ import {
   clinicPhoneDisplay,
   clinicSecondaryPhoneDisplay,
   doctorCredentials,
-  doctorOrderNumber,
-  doctorRegionalCouncil,
   faqItems,
   gallery,
   googleReviews,
-  keyFacts,
   patientJourney,
   services,
 } from "./seo";
@@ -44,7 +41,6 @@ type ActivityHighlight = (typeof clinicalActivities)[number]["highlights"][numbe
 type GallerySrc = (typeof gallery)[number]["src"];
 type JourneyTitle = (typeof patientJourney)[number]["title"];
 type FaqQuestion = (typeof faqItems)[number]["question"];
-type KeyFactLabel = (typeof keyFacts)[number]["label"];
 type ReviewDate =
   | (typeof googleReviews.items)[number]["date"]
   | (typeof googleReviews.featured)["date"];
@@ -246,68 +242,6 @@ export const galleryAr: Record<
   },
 };
 
-/**
- * Bloc « En bref » arabe.
- *
- * `value` porte le texte arabe ; `latin` porte la séquence latine éventuelle
- * (adresse postale, numéros, nom d'organisme), rendue à part en LTR isolé
- * comme partout ailleurs sur la version arabe. Une séquence latine n'est
- * jamais insérée au milieu d'une phrase arabe : elle est toujours donnée à
- * part, pour que l'ordre de lecture reste stable.
- */
-export const keyFactsAr: Record<
-  KeyFactLabel,
-  { label: string; value: string; latin?: string }
-> = {
-  Médecin: {
-    label: "الطبيبة",
-    value: "الدكتورة سونيا أبحو، طبيبة أخصائية",
-  },
-  Spécialité: {
-    label: "التخصّص",
-    value: "أمراض الغدد الصماء، والسكري، والتغذية، والأمراض الاستقلابية",
-  },
-  Adresse: {
-    label: "العنوان",
-    value: "المسيرة 1، تمارة، المغرب",
-    latin: clinicAddress,
-  },
-  /* Numéros seuls : la valeur arabe est vide, le libellé porte déjà le sens. */
-  "Téléphone fixe": {
-    label: "الهاتف الثابت",
-    value: "",
-    latin: clinicPhoneDisplay,
-  },
-  "Portable et WhatsApp": {
-    label: "الهاتف المحمول وواتساب",
-    value: "",
-    latin: clinicSecondaryPhoneDisplay,
-  },
-  Horaires: {
-    label: "أوقات العمل",
-    value:
-      "من الاثنين إلى الخميس من 9:30 إلى 16:00، ويوم الجمعة من 9:30 إلى 12:30. مغلقة يومي السبت والأحد.",
-  },
-  "Rendez-vous": {
-    label: "الموعد",
-    value: "هاتفيًا أو عبر واتساب لدى السكرتارية، ثم تأكيد من طرف العيادة.",
-  },
-  "Au cabinet": {
-    label: "بالعيادة",
-    value:
-      "الفحص بالموجات فوق الصوتية للغدة الدرقية والعنق، قياس المقاومة الكهربائية الطبي، وورشة جماعية للتربية العلاجية يوم الجمعة.",
-  },
-  Téléconsultation: {
-    label: "الاستشارة بالفيديو",
-    value: "قيد الإعداد ولم تُفتح بعد. تُؤخذ المواعيد بالعيادة.",
-  },
-  "Inscription ordinale": {
-    label: "التسجيل بالهيئة",
-    value: "مسجّلة بالمجلس الجهوي لهيئة الأطباء",
-    latin: `${doctorRegionalCouncil} — n° ${doctorOrderNumber}`,
-  },
-};
-
 export const faqAr: Record<FaqQuestion, { question: string; answer: string }> = {
   "Comment prendre rendez-vous au cabinet ?": {
     question: "كيف يمكن حجز موعد بالعيادة؟",
@@ -443,13 +377,6 @@ export const uiAr = {
     /* Le parcours détaillé n'existe qu'en français : le lien porte
        `hrefLang="fr"`, comme sur les pages motifs arabes. */
     profileLink: "الاطّلاع على مسار الدكتورة سونيا أبحو",
-  },
-
-  /* Bloc de faits clés, miroir du « En bref » français. */
-  keyFacts: {
-    eyebrow: "في سطور",
-    title: "المعلومات الأساسية للعيادة.",
-    ariaLabel: "المعلومات الأساسية للعيادة",
   },
 
   approach: {

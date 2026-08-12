@@ -5,11 +5,13 @@ import { SiteFooter } from "../../components/SiteFooter";
 import { MobileActionBar } from "../../components/MobileActionBar";
 import { PhoneIcon, WhatsAppIcon } from "../../components/Icons";
 import {
+  absoluteUrl,
   appointment,
   clinicAddress,
   clinicPhoneDisplay,
   clinicPhoneInternational,
   clinicSecondaryPhoneDisplay,
+  ogCoverImage,
   siteName,
 } from "../../seo";
 
@@ -32,6 +34,27 @@ export const metadata: Metadata = {
     siteName,
     type: "website",
     locale: "fr_MA",
+    /* Une page qui déclare son propre bloc `openGraph` remplace entièrement
+       celui du layout : sans cette image, un partage de la page s'affichait
+       sans visuel. Même image de partage que les autres pages sans visuel
+       propre. */
+    images: [
+      {
+        url: ogCoverImage,
+        width: 1200,
+        height: 630,
+        alt: "Dr Sonia Abahou — Endocrinologie, diabétologie, nutrition à Témara",
+      },
+    ],
+  },
+  /* Idem pour la carte Twitter : sans bloc propre, la page héritait du titre
+     et de la description de l'accueil, qui ne décrivent pas cette page. */
+  twitter: {
+    card: "summary_large_image",
+    title: "Téléconsultation en maintenance | Dr Sonia Abahou",
+    description:
+      "La fonctionnalité sera bientôt disponible. Le cabinet reste joignable par téléphone ou WhatsApp.",
+    images: [absoluteUrl(ogCoverImage)],
   },
 };
 
@@ -80,7 +103,11 @@ export default function TeleconsultationMaintenancePage() {
 
       <MobileActionBar />
 
-      <section className="appointment-hero teleconsultation-hero section-shell">
+      {/* Cible du lien d'évitement français posé par `app/(fr)/layout.tsx`. */}
+      <section
+        id="fr-content"
+        className="appointment-hero teleconsultation-hero section-shell"
+      >
         <p className="eyebrow">Téléconsultation vidéo</p>
         <h1>Fonctionnalité en maintenance.</h1>
         <p>
@@ -98,7 +125,7 @@ export default function TeleconsultationMaintenancePage() {
             className="secondary-button whatsapp-button"
             href={whatsappHref}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <WhatsAppIcon />
             Écrire sur WhatsApp

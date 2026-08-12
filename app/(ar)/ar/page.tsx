@@ -328,8 +328,12 @@ const structuredDataAr = {
       alternateName: clinicName,
       url: `${siteUrl}/`,
       inLanguage: "fr-MA",
+      /* Le cabinet décrit par cette page porte l'identifiant `/ar#clinic` :
+         référencer ici le nœud français `/#clinic`, absent du graphe de cette
+         page, laissait la relation pendante pour un analyseur qui ne lit que
+         `/ar`. */
       publisher: {
-        "@id": `${siteUrl}/#clinic`,
+        "@id": `${arPageUrl}#clinic`,
       },
     },
     {
@@ -431,7 +435,7 @@ export default function ArabicHomePage() {
               className="secondary-button whatsapp-button"
               href={whatsappHref}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               <WhatsAppIcon />
               {uiAr.whatsappLabel}
@@ -772,7 +776,7 @@ export default function ArabicHomePage() {
               className="secondary-button"
               href={googleReviews.sourceUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               {uiAr.reviews.seeOnGoogle}
             </a>
@@ -833,7 +837,7 @@ export default function ArabicHomePage() {
               className="primary-button"
               href={mapsHref}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               {uiAr.cabinet.openDirections}
             </a>
@@ -851,7 +855,7 @@ export default function ArabicHomePage() {
               className="secondary-button whatsapp-button"
               href={whatsappHref}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               <WhatsAppIcon />
               {uiAr.whatsappLabel}
@@ -906,7 +910,7 @@ export default function ArabicHomePage() {
             className="secondary-button whatsapp-button"
             href={whatsappHref}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <WhatsAppIcon />
             {uiAr.whatsappLabel}
@@ -915,7 +919,7 @@ export default function ArabicHomePage() {
             className="secondary-button"
             href={mapsHref}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             {uiAr.finalCta.seeDirections}
           </a>
