@@ -598,7 +598,7 @@ export default function Home() {
           <p className="eyebrow reviews-eyebrow">Avis Google</p>
           <h2 className="reviews-title">Ce que disent les patients.</h2>
           {/* Rangée fidèle à la note réelle : quatre étoiles pleines et une
-              étoile remplie à hauteur de la moyenne Google (4,2 / 5). */}
+              étoile remplie à hauteur de la moyenne Google (3,6 / 5). */}
           <p className="reviews-stars">
             <span
               className="reviews-stars-meter"

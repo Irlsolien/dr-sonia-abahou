@@ -690,7 +690,7 @@ export default function ArabicHomePage() {
           <p className="eyebrow reviews-eyebrow">{uiAr.reviews.eyebrow}</p>
           <h2 className="reviews-title">{uiAr.reviews.title}</h2>
           {/* Rangée fidèle à la note réelle : quatre étoiles pleines et une
-              étoile remplie à hauteur de la moyenne Google (4,2 / 5). */}
+              étoile remplie à hauteur de la moyenne Google (3,6 / 5). */}
           <p className="reviews-stars">
             <span
               className="reviews-stars-meter"
