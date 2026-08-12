@@ -53,7 +53,7 @@ type SiteHeaderProps = {
   internal?: boolean;
   /** Libellés et destinations ; français par défaut. */
   labels?: HeaderLabels;
-  /** Cible du logo ; par défaut `/` (pages internes) ou `#accueil`. */
+  /** Cible du logo ; par défaut `/` (pages internes) ou `#fr-content`. */
   homeHref?: string;
   /**
    * Préfixe d'ancre explicite (`/ar#` sur les pages internes arabes, dont
@@ -84,7 +84,7 @@ export function SiteHeader({
   panelClassName,
 }: SiteHeaderProps) {
   const anchor = anchorPrefix ?? (internal ? "/#" : "#");
-  const brandHref = homeHref ?? (internal ? "/" : "#accueil");
+  const brandHref = homeHref ?? (internal ? "/" : "#fr-content");
   const langSwitch = langSwitchHref
     ? { ...labels.langSwitch, href: langSwitchHref }
     : labels.langSwitch;

@@ -138,7 +138,8 @@ export default function AppointmentPage() {
 
       <MobileActionBar />
 
-      <section className="appointment-hero section-shell">
+      {/* Cible du lien d'évitement français posé par `app/(fr)/layout.tsx`. */}
+      <section id="fr-content" className="appointment-hero section-shell">
         <p className="eyebrow">Rendez-vous</p>
         <h1>Choisir le type de rendez-vous.</h1>
         <p>

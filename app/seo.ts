@@ -64,6 +64,11 @@ export const appointment = {
 } as const;
 
 export const teleconsultation = {
+  /* Non utilisé tant que la téléconsultation est en préparation : aucune page
+     ne charge Calendly, et la CSP de `vercel.json` ne l'autorise donc plus.
+     À la réouverture du service, réautoriser `assets.calendly.com`
+     (`script-src`, `style-src`) et `calendly.com` (`frame-src`,
+     `connect-src`) avant de rebrancher ce parcours. */
   calendlyUrl: "https://calendly.com/dr-sonia-abahou/teleconsultation-video",
   confirmationMessage:
     "Votre demande de téléconsultation a bien été enregistrée. Le cabinet reviendra vers vous avec les prochaines étapes dès que le service sera ouvert.",

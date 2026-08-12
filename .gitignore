@@ -60,3 +60,6 @@ next-env.d.ts
 # client-facing documents (not for the public repo)
 /*.docx
 /docs-cliente/
+
+# document de cadrage interne (tarifs, argumentaire commercial) — hors dépôt public
+/PROJET-DR-SONIA.md

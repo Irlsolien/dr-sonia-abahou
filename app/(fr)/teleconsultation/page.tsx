@@ -103,7 +103,11 @@ export default function TeleconsultationMaintenancePage() {
 
       <MobileActionBar />
 
-      <section className="appointment-hero teleconsultation-hero section-shell">
+      {/* Cible du lien d'évitement français posé par `app/(fr)/layout.tsx`. */}
+      <section
+        id="fr-content"
+        className="appointment-hero teleconsultation-hero section-shell"
+      >
         <p className="eyebrow">Téléconsultation vidéo</p>
         <h1>Fonctionnalité en maintenance.</h1>
         <p>

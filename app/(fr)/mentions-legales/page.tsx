@@ -53,7 +53,8 @@ export default function LegalNoticePage() {
     <main id="main-content" className="legal-page">
       <SiteHeader internal />
 
-      <section className="legal-hero section-shell">
+      {/* Cible du lien d'évitement français posé par `app/(fr)/layout.tsx`. */}
+      <section id="fr-content" className="legal-hero section-shell">
         <p className="eyebrow">Cadre légal</p>
         <h1>Mentions légales</h1>
         <p>

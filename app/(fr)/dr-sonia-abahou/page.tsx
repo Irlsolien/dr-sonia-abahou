@@ -209,7 +209,8 @@ export default function DoctorProfilePage() {
           bloc de bas de page. */}
       <MobileActionBar />
 
-      <section className="service-hero section-shell profile-hero">
+      {/* Cible du lien d'évitement français posé par `app/(fr)/layout.tsx`. */}
+      <section id="fr-content" className="service-hero section-shell profile-hero">
         <p className="eyebrow">Parcours médical</p>
         <h1>Dr Sonia Abahou, endocrinologue à Témara.</h1>
         <p>

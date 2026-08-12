@@ -328,8 +328,12 @@ const structuredDataAr = {
       alternateName: clinicName,
       url: `${siteUrl}/`,
       inLanguage: "fr-MA",
+      /* Le cabinet décrit par cette page porte l'identifiant `/ar#clinic` :
+         référencer ici le nœud français `/#clinic`, absent du graphe de cette
+         page, laissait la relation pendante pour un analyseur qui ne lit que
+         `/ar`. */
       publisher: {
-        "@id": `${siteUrl}/#clinic`,
+        "@id": `${arPageUrl}#clinic`,
       },
     },
     {

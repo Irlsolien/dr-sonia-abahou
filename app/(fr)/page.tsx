@@ -312,7 +312,10 @@ export default function Home() {
 
       <MobileActionBar />
 
-      <section id="accueil" className="hero section-shell">
+      {/* Cible du lien d'évitement français (`app/(fr)/layout.tsx`) et du lien
+          de marque de l'en-tête : l'ancre existe sur toutes les routes
+          françaises, comme `#ar-content` côté arabe. */}
+      <section id="fr-content" className="hero section-shell">
         <div className="hero-copy">
           <p className="eyebrow">Endocrinologue diabétologue à Témara</p>
           <h1>

@@ -138,8 +138,13 @@ export default function RootLayout({
     <html lang="fr-MA" className={latinFontVariables}>
       <body>
         <NavigationProgress />
-        {/* Lien d'évitement : premier élément focalisable du document. */}
-        <a className="skip-link" href="#main-content">
+        {/* Lien d'évitement : premier élément focalisable du document. Il vise
+            `#fr-content`, la première section éditoriale — c'est-à-dire le
+            contenu situé *après* l'en-tête. Il visait auparavant le `<main>`,
+            qui contient l'en-tête : la navigation n'était donc pas contournée
+            et le critère WCAG 2.4.1 (Contournement de blocs) n'était pas
+            satisfait. Même construction que le lien d'évitement arabe. */}
+        <a className="skip-link" href="#fr-content">
           Aller au contenu
         </a>
         {children}

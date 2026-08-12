@@ -80,15 +80,17 @@ export default function NotFound() {
     <html lang="fr-MA" className={latinFontVariables}>
       <body>
         <NavigationProgress />
-        {/* Lien d'évitement : premier élément focalisable du document. */}
-        <a className="skip-link" href="#main-content">
+        {/* Lien d'évitement : premier élément focalisable du document. Il vise
+            la première section éditoriale, située après l'en-tête, et non le
+            `<main>` qui contient celui-ci (WCAG 2.4.1). */}
+        <a className="skip-link" href="#fr-content">
           Aller au contenu
         </a>
 
         <main id="main-content" className="not-found-page">
           <SiteHeader internal />
 
-          <section className="not-found-hero section-shell">
+          <section id="fr-content" className="not-found-hero section-shell">
             <p className="eyebrow">Erreur 404</p>
             <h1>Page introuvable.</h1>
             <p>
