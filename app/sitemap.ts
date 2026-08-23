@@ -3,6 +3,7 @@ import {
   absoluteUrl,
   doctorProfilePath,
   lastModified,
+  professionalGallery,
   services,
 } from "./seo";
 
@@ -24,6 +25,11 @@ const homeImages = [
   absoluteUrl("/cabinet-consultation-patiente.webp"),
   absoluteUrl("/dr-abahou-trophee-diabete.webp"),
 ];
+
+/* Photographies de congrès et médias publiées sur les deux pages bio. */
+const profileMediaImages = professionalGallery.map((image) =>
+  absoluteUrl(image.src),
+);
 
 /**
  * Appariement de langues d'une paire de pages jumelles. Déclaré directement
@@ -67,7 +73,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl(doctorProfilePath),
       lastModified: modifiedAt,
       priority: 0.8,
-      images: [absoluteUrl("/dr-sonia-abahou.jpg")],
+      alternates: languageAlternates(doctorProfilePath, `/ar${doctorProfilePath}`),
+      images: [absoluteUrl("/dr-sonia-abahou.jpg"), ...profileMediaImages],
+    },
+    /* Page bio arabe : miroir de `/dr-sonia-abahou`, un cran sous la française. */
+    {
+      url: absoluteUrl(`/ar${doctorProfilePath}`),
+      lastModified: modifiedAt,
+      priority: 0.7,
+      alternates: languageAlternates(doctorProfilePath, `/ar${doctorProfilePath}`),
+      images: [absoluteUrl("/dr-sonia-abahou.jpg"), ...profileMediaImages],
     },
     ...services.map((service) => ({
       url: absoluteUrl(`/${service.slug}`),

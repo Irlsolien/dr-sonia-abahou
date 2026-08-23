@@ -18,6 +18,7 @@ import {
   doctorRegionalCouncil,
   doctorSameAsProfiles,
   lastModified,
+  professionalGallery,
   services,
   siteName,
   siteUrl,
@@ -36,6 +37,11 @@ export const metadata: Metadata = {
     "Découvrez le parcours du Dr Sonia Abahou, médecin spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques à Témara.",
   alternates: {
     canonical: doctorProfilePath,
+    languages: {
+      "fr-MA": doctorProfilePath,
+      ar: `/ar${doctorProfilePath}`,
+      "x-default": doctorProfilePath,
+    },
   },
   openGraph: {
     title: "Dr Sonia Abahou, endocrinologue à Témara",
@@ -275,6 +281,36 @@ export default function DoctorProfilePage() {
               <span />
               <p>{credential}</p>
             </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-shell profile-section gallery-section">
+        <div className="section-heading">
+          <p className="eyebrow">Engagement scientifique et médias</p>
+          <h2>Congrès, formation et actions de santé publique.</h2>
+          <p>
+            Au-delà du cabinet, le Dr Sonia Abahou intervient dans des congrès
+            médicaux nationaux et internationaux et participe à des actions de
+            sensibilisation au diabète.
+          </p>
+        </div>
+        <div className="proof-grid">
+          {professionalGallery.map((image) => (
+            <figure key={image.src} className={`gallery-card ${image.variant}`}>
+              <Image
+                src={image.src}
+                alt={image.alt}
+                width={900}
+                height={720}
+                loading="lazy"
+                sizes={image.sizes}
+              />
+              <figcaption>
+                <span>{image.label}</span>
+                <strong>{image.title}</strong>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </section>

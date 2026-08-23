@@ -1943,6 +1943,31 @@ h3 {
   line-height: 1.24;
 }
 
+/* Galerie « congrès et médias » de la page bio : même identité visuelle que
+   `.gallery-card`, mais une mosaïque en flux (une bande d'ouverture, deux
+   rangées de trois, une paire) qui accueille 9 photographies sans position
+   figée. */
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.proof-hero {
+  grid-column: span 6;
+  min-height: 400px;
+}
+
+.proof-half {
+  grid-column: span 3;
+  min-height: 320px;
+}
+
+.proof-third {
+  grid-column: span 2;
+  min-height: 300px;
+}
+
 .diagnostic-band {
   position: relative;
   display: grid;
@@ -4277,6 +4302,17 @@ h3 {
   .gallery-compact {
     grid-column: auto;
     grid-row: auto;
+  }
+
+  .proof-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proof-hero,
+  .proof-half,
+  .proof-third {
+    grid-column: auto;
+    min-height: 300px;
   }
 
   .gallery-large {

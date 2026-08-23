@@ -25,6 +25,7 @@ import {
   gallery,
   googleReviews,
   patientJourney,
+  professionalGallery,
   services,
 } from "./seo";
 import type { CgmDemoLabels } from "./components/CgmDemoDashboard";
@@ -39,6 +40,7 @@ type ServicePoint = (typeof services)[number]["points"][number];
 type ActivityId = (typeof clinicalActivities)[number]["id"];
 type ActivityHighlight = (typeof clinicalActivities)[number]["highlights"][number];
 type GallerySrc = (typeof gallery)[number]["src"];
+type ProfessionalGallerySrc = (typeof professionalGallery)[number]["src"];
 type JourneyTitle = (typeof patientJourney)[number]["title"];
 type FaqQuestion = (typeof faqItems)[number]["question"];
 type ReviewDate =
@@ -241,6 +243,99 @@ export const galleryAr: Record<
     alt: "استشارة بعيادة الدكتورة سونيا أبحو بتمارة، مع مريضة طُمس وجهها احترامًا للسرّية",
   },
 };
+
+/* Miroir arabe de `professionalGallery` (page bio). Les noms propres, sigles
+   et villes restent en caractères latins, comme le reste du site. */
+export const professionalGalleryAr: Record<
+  ProfessionalGallerySrc,
+  { label: string; title: string; alt: string }
+> = {
+  "/media/distinction-pasid-2025-remise.webp": {
+    label: "PASID 25 · Alexandrie",
+    title: "مؤتمر Pan Arab Society for Interventional Endocrinology & Diabetes Technology.",
+    alt: "الدكتورة سونيا أبحو تتسلّم درعًا خلال مؤتمر PASID 25 بالإسكندرية",
+  },
+  "/media/dr-sonia-abahou-congres-portrait.webp": {
+    label: "مؤتمر",
+    title: "ممارسة تغذّيها مواكبة التكوين المستمر.",
+    alt: "صورة للدكتورة سونيا أبحو خلال مؤتمر طبي",
+  },
+  "/media/media-interview-2m.webp": {
+    label: "إعلام · 2M",
+    title: "التحسيس بمرض السكري لدى عموم الناس.",
+    alt: "الدكتورة سونيا أبحو في حوار مع قناة 2M خلال حملة للتحسيس بالسكري",
+  },
+  "/media/media-village-diabete-laayoune.webp": {
+    label: "قرية السكري · العيون",
+    title: "الكشف والتربية الصحية في قرب من الساكنة.",
+    alt: "الدكتورة سونيا أبحو في قرية السكري بالعيون، ضمن حملة للكشف والتربية الصحية",
+  },
+  "/media/congres-dia-egypt-2025.webp": {
+    label: "DIA Egypt 2025 · Le Caire",
+    title: "متدخّلة في المؤتمر الدولي للسكري.",
+    alt: "الدكتورة سونيا أبحو متدخّلة في مؤتمر DIA Egypt 2025 بالقاهرة",
+  },
+  "/media/congres-conference.webp": {
+    label: "مؤتمر طبي",
+    title: "مداخلة علمية في أمراض الغدد الصماء والسكري.",
+    alt: "الدكتورة سونيا أبحو تتدخّل على منبر مؤتمر طبي",
+  },
+  "/media/distinction-pasid-2025.webp": {
+    label: "PASID 25 · Alexandrie",
+    title: "تسليم درع مؤتمر عربي.",
+    alt: "تسليم درع للدكتورة سونيا أبحو خلال المؤتمر العربي PASID 25",
+  },
+  "/media/congres-chu-oujda.webp": {
+    label: "CHU Mohammed VI · Oujda",
+    title: "مداخلة في الذكرى العاشرة لمصلحة أمراض الغدد الصماء.",
+    alt: "الدكتورة سونيا أبحو تتدخّل بالمركز الاستشفائي الجامعي محمد السادس بوجدة",
+  },
+  "/media/congres-casablanca.webp": {
+    label: "مؤتمر · Casablanca",
+    title: "تبادل علمي بين المختصّين.",
+    alt: "الدكتورة سونيا أبحو على منبر مؤتمر طبي بالدار البيضاء",
+  },
+};
+
+/* Page bio arabe `/ar/dr-sonia-abahou` — miroir de
+   `app/(fr)/dr-sonia-abahou/page.tsx`. Aucun fait nouveau : traduction des
+   libellés français déjà validés. */
+export const profileAr = {
+  metaTitle: "الدكتورة سونيا أبحو، طبيبة الغدد الصماء بتمارة | المسار",
+  metaDescription:
+    "تعرّفوا على مسار الدكتورة سونيا أبحو، الطبيبة الأخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية بتمارة.",
+  eyebrow: "المسار الطبي",
+  h1: "الدكتورة سونيا أبحو، طبيبة الغدد الصماء بتمارة.",
+  intro:
+    "طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية، تستقبل الدكتورة سونيا أبحو مرضاها بعيادة المسيرة 1 بتمارة.",
+  updatedPrefix: "تحديث المعلومات بتاريخ",
+  portraitCaption: "الدكتورة سونيا أبحو · الغدد الصماء والأمراض الاستقلابية",
+  identityEyebrow: "الهوية المهنية",
+  identityTitle: "خبرة طبية واضحة المعالم.",
+  identityText:
+    "يجمع الموقع المعلومات المُوثّقة للعيادة، ومجالات الاستشارة والمعطيات المفيدة لتحضير موعد بتمارة.",
+  orderLabel: "التسجيل بالهيئة",
+  inpeLabel: "INPE",
+  councilLabel: "المجلس الجهوي",
+  credentialsEyebrow: "التكوين والمسؤوليات",
+  credentialsTitle: "معالم المسار المهني.",
+  galleryEyebrow: "الانخراط العلمي والإعلام",
+  galleryTitle: "المؤتمرات والتكوين وأعمال الصحة العمومية.",
+  galleryText:
+    "إلى جانب العيادة، تتدخّل الدكتورة سونيا أبحو في مؤتمرات طبية وطنية ودولية وتشارك في حملات التحسيس بمرض السكري.",
+  servicesEyebrow: "مجالات الاستشارة",
+  servicesTitle: "صفحات مخصّصة للفهم قبل الموعد.",
+  serviceLinkLabel: "الاطّلاع على الصفحة ←",
+  referencesEyebrow: "معطيات عمومية",
+  referencesTitle: "ملفات مهنية منسجمة مع العيادة.",
+  refMedical: { strong: "ملف طبي عمومي", span: "Med.ma" },
+  refContact: { strong: "ملف لأخذ موعد", span: "DabaDoc" },
+  refLinkedin: { strong: "ملف مهني", span: "LinkedIn" },
+  ctaEyebrow: "الموعد",
+  ctaTitle: "الاتصال بعيادة الدكتورة سونيا أبحو.",
+  ctaText: "يتم حاليًا تأكيد المواعيد عبر الهاتف أو واتساب.",
+  ctaButton: "أخذ موعد",
+} as const;
 
 export const faqAr: Record<FaqQuestion, { question: string; answer: string }> = {
   "Comment prendre rendez-vous au cabinet ?": {

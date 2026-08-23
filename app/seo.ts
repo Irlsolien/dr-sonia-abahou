@@ -459,6 +459,87 @@ export const gallery = [
   },
 ] as const;
 
+/* Galerie « engagement scientifique, congrès et médias » de la page bio.
+   Chaque photo est une image réelle du Dr Abahou lors d'un congrès ou d'une
+   action publique (fichiers `public/media/`). Les légendes restent
+   descriptives et factuelles : aucun titre, prix ou fonction n'est affirmé
+   au-delà de ce que montre la photographie. Le miroir arabe est dans
+   `app/seo-ar.ts` (`professionalGalleryAr`), typé sur `src`. */
+export const professionalGallery = [
+  {
+    src: "/media/distinction-pasid-2025-remise.webp",
+    alt: "Dr Sonia Abahou recevant une plaque lors du congrès PASID 25 à Alexandrie",
+    label: "PASID 25 · Alexandrie",
+    title: "Congrès de la Pan Arab Society for Interventional Endocrinology & Diabetes Technology.",
+    variant: "proof-hero",
+    sizes: "(max-width: 980px) 92vw, 1180px",
+  },
+  {
+    src: "/media/dr-sonia-abahou-congres-portrait.webp",
+    alt: "Portrait du Dr Sonia Abahou lors d’un congrès médical",
+    label: "Congrès",
+    title: "Une pratique nourrie par la formation continue.",
+    variant: "proof-third",
+    sizes: "(max-width: 980px) 92vw, 380px",
+  },
+  {
+    src: "/media/media-interview-2m.webp",
+    alt: "Dr Sonia Abahou interviewée par la chaîne 2M lors d’une action de sensibilisation au diabète",
+    label: "Média · 2M",
+    title: "Sensibilisation au diabète auprès du grand public.",
+    variant: "proof-third",
+    sizes: "(max-width: 980px) 92vw, 380px",
+  },
+  {
+    src: "/media/media-village-diabete-laayoune.webp",
+    alt: "Dr Sonia Abahou au Village du Diabète de Laâyoune, action de dépistage et d’éducation",
+    label: "Village du Diabète · Laâyoune",
+    title: "Dépistage et éducation au plus près des habitants.",
+    variant: "proof-third",
+    sizes: "(max-width: 980px) 92vw, 380px",
+  },
+  {
+    src: "/media/congres-dia-egypt-2025.webp",
+    alt: "Dr Sonia Abahou conférencière au congrès DIA Egypt 2025 au Caire",
+    label: "DIA Egypt 2025 · Le Caire",
+    title: "Conférencière au congrès international du diabète.",
+    variant: "proof-third",
+    sizes: "(max-width: 980px) 92vw, 380px",
+  },
+  {
+    src: "/media/congres-conference.webp",
+    alt: "Dr Sonia Abahou intervenant à la tribune d’un congrès médical",
+    label: "Congrès médical",
+    title: "Intervention scientifique en endocrinologie et diabétologie.",
+    variant: "proof-third",
+    sizes: "(max-width: 980px) 92vw, 380px",
+  },
+  {
+    src: "/media/distinction-pasid-2025.webp",
+    alt: "Remise de plaque au Dr Sonia Abahou lors du congrès pan-arabe PASID 25",
+    label: "PASID 25 · Alexandrie",
+    title: "Remise de plaque du congrès pan-arabe.",
+    variant: "proof-third",
+    sizes: "(max-width: 980px) 92vw, 380px",
+  },
+  {
+    src: "/media/congres-chu-oujda.webp",
+    alt: "Dr Sonia Abahou intervenant au CHU Mohammed VI d’Oujda",
+    label: "CHU Mohammed VI · Oujda",
+    title: "Intervention aux 10 ans du service d’endocrinologie.",
+    variant: "proof-half",
+    sizes: "(max-width: 980px) 92vw, 580px",
+  },
+  {
+    src: "/media/congres-casablanca.webp",
+    alt: "Dr Sonia Abahou à la tribune d’un congrès médical à Casablanca",
+    label: "Congrès · Casablanca",
+    title: "Échanges scientifiques entre spécialistes.",
+    variant: "proof-half",
+    sizes: "(max-width: 980px) 92vw, 580px",
+  },
+] as const;
+
 export const googleReviews = {
   /* URL directe et pérenne de la fiche Google du cabinet (le lien court
      `share.google` est opaque et non garanti dans la durée). */
