@@ -30,11 +30,10 @@ export const googleMapsPlaceUrl =
 
 export const doctorCredentials = [
   "Spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques",
+  "Fondatrice et présidente de la Société Marocaine de Diabétologie (SMD)",
   "Diplôme universitaire d’échographie cervicale Paris V",
   "Ancien médecin au centre hospitalier universitaire de Rabat",
   "Ancien médecin attaché à l’hôpital militaire de Rabat",
-  "Présidente de la Société Marocaine de Diabétologie (SMD)",
-  "Fondatrice et présidente de l’Institut marocain de diabétologie",
   "Membre du think tank de la Global Metabolic Health Alliance (GMHA)",
   "Membre du board scientifique de la Pan Arab Society for Interventional Endocrinology and Diabetes Technology (PASID)",
 ] as const;
@@ -337,7 +336,7 @@ export const faqItems = [
   {
     question: "Quel est le parcours du Dr Sonia Abahou ?",
     answer:
-      "Le Dr Sonia Abahou est spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques, titulaire d’un diplôme universitaire d’échographie cervicale de Paris V. Ancien médecin au centre hospitalier universitaire de Rabat et ancien médecin attaché à l’hôpital militaire de Rabat, elle est fondatrice et présidente de l’Institut marocain de diabétologie, membre du think tank de la Global Metabolic Health Alliance et membre du board scientifique de la Pan Arab Society for Interventional Endocrinology and Diabetes Technology.",
+      "Le Dr Sonia Abahou est spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques, titulaire d’un diplôme universitaire d’échographie cervicale de Paris V. Ancien médecin au centre hospitalier universitaire de Rabat et ancien médecin attaché à l’hôpital militaire de Rabat, elle est fondatrice et présidente de la Société Marocaine de Diabétologie (SMD), membre du think tank de la Global Metabolic Health Alliance et membre du board scientifique de la Pan Arab Society for Interventional Endocrinology and Diabetes Technology.",
   },
   {
     question: "Le site remplace-t-il une consultation médicale ?",

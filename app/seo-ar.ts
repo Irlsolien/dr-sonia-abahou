@@ -88,16 +88,14 @@ export const metaAr = {
 export const credentialsAr: Record<(typeof doctorCredentials)[number], string> = {
   "Spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques":
     "أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية",
+  "Fondatrice et présidente de la Société Marocaine de Diabétologie (SMD)":
+    "مؤسِّسة ورئيسة الجمعية المغربية للسكري (SMD)",
   "Diplôme universitaire d’échographie cervicale Paris V":
     "دبلوم جامعي في الفحص بالموجات فوق الصوتية للعنق — Paris V",
   "Ancien médecin au centre hospitalier universitaire de Rabat":
     "طبيبة سابقة بالمركز الاستشفائي الجامعي بالرباط",
   "Ancien médecin attaché à l’hôpital militaire de Rabat":
     "طبيبة سابقة ملحقة بالمستشفى العسكري بالرباط",
-  "Présidente de la Société Marocaine de Diabétologie (SMD)":
-    "رئيسة الجمعية المغربية للسكري (SMD)",
-  "Fondatrice et présidente de l’Institut marocain de diabétologie":
-    "مؤسِّسة ورئيسة المعهد المغربي للسكري",
   "Membre du think tank de la Global Metabolic Health Alliance (GMHA)":
     "عضوة في خلية التفكير التابعة لـ Global Metabolic Health Alliance (GMHA)",
   "Membre du board scientifique de la Pan Arab Society for Interventional Endocrinology and Diabetes Technology (PASID)":
@@ -383,7 +381,7 @@ export const faqAr: Record<FaqQuestion, { question: string; answer: string }> = 
   "Quel est le parcours du Dr Sonia Abahou ?": {
     question: "ما هو المسار الطبي للدكتورة سونيا أبحو؟",
     answer:
-      "الدكتورة سونيا أبحو أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية، حاصلة على دبلوم جامعي في الفحص بالموجات فوق الصوتية للعنق من Paris V. طبيبة سابقة بالمركز الاستشفائي الجامعي بالرباط وطبيبة سابقة ملحقة بالمستشفى العسكري بالرباط، وهي مؤسِّسة ورئيسة المعهد المغربي للسكري، وعضوة في خلية التفكير التابعة لـ Global Metabolic Health Alliance، وعضوة في المجلس العلمي لـ Pan Arab Society for Interventional Endocrinology and Diabetes Technology.",
+      "الدكتورة سونيا أبحو أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية، حاصلة على دبلوم جامعي في الفحص بالموجات فوق الصوتية للعنق من Paris V. طبيبة سابقة بالمركز الاستشفائي الجامعي بالرباط وطبيبة سابقة ملحقة بالمستشفى العسكري بالرباط، وهي مؤسِّسة ورئيسة الجمعية المغربية للسكري (SMD)، وعضوة في خلية التفكير التابعة لـ Global Metabolic Health Alliance، وعضوة في المجلس العلمي لـ Pan Arab Society for Interventional Endocrinology and Diabetes Technology.",
   },
   "Le site remplace-t-il une consultation médicale ?": {
     question: "هل يُغني الموقع عن الاستشارة الطبية؟",
