@@ -1,5 +1,5 @@
 const configuredSiteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://dr-sonia-abahou.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.drsoniaabahou.com";
 
 export const siteUrl = configuredSiteUrl.replace(/\/+$/, "");
 export const siteName = "Dr Sonia Abahou";
