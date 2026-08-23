@@ -33,6 +33,7 @@ import {
   doctorSameAsProfiles,
   faqItems,
   gallery,
+  professionalGallery,
   googleMapsPlaceUrl,
   googleRatingFillWidth,
   googleReviews,
@@ -56,6 +57,8 @@ import {
   credentialsAr,
   faqAr,
   galleryAr,
+  professionalGalleryAr,
+  profileAr,
   hoursAr,
   journeyAr,
   metaAr,
@@ -510,9 +513,9 @@ export default function ArabicHomePage() {
           <p className="eyebrow">{uiAr.expertise.eyebrow}</p>
           <h2>{uiAr.expertise.title}</h2>
           <p className="section-text">{uiAr.expertise.text}</p>
-          {/* Le parcours détaillé n'existe qu'en français : le lien porte donc
-              `hrefLang="fr"`, comme sur les pages motifs arabes. */}
-          <Link className="text-link" href={doctorProfilePath} hrefLang="fr">
+          {/* La page bio arabe existe désormais (`/ar/dr-sonia-abahou`) : le
+              lien pointe vers elle, sans `hrefLang="fr"`. */}
+          <Link className="text-link" href={`/ar${doctorProfilePath}`}>
             {uiAr.expertise.profileLink}
           </Link>
         </div>
@@ -523,6 +526,34 @@ export default function ArabicHomePage() {
               <p>{credentialsAr[item]}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="section-shell profile-section gallery-section reveal-section">
+        <div className="section-heading">
+          <p className="eyebrow">{profileAr.galleryEyebrow}</p>
+          <h2>{profileAr.galleryTitle}</h2>
+        </div>
+        <div className="proof-grid">
+          {professionalGallery.map((image) => {
+            const t = professionalGalleryAr[image.src];
+            return (
+              <figure key={image.src} className={`gallery-card ${image.variant}`}>
+                <Image
+                  src={image.src}
+                  alt={t.alt}
+                  width={900}
+                  height={720}
+                  loading="lazy"
+                  sizes={image.sizes}
+                />
+                <figcaption>
+                  <span dir="ltr">{t.label}</span>
+                  <strong>{t.title}</strong>
+                </figcaption>
+              </figure>
+            );
+          })}
         </div>
       </section>
 
