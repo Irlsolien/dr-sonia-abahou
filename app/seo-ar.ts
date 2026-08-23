@@ -522,11 +522,10 @@ export const arFooterLabels: FooterLabels = {
     { href: "pratiques", label: "الأعمال الطبية" },
     { href: "cabinet", label: "العيادة" },
   ],
-  /* Les pages juridiques existent désormais en arabe (`/ar/<page>`) : le lien
-     reste dans la langue du document, sans `hrefLang="fr"`. Le parcours de
-     rendez-vous n'existe encore qu'en français : lui seul porte `hrefLang="fr"`. */
+  /* Les pages juridiques et le parcours de rendez-vous existent désormais en
+     arabe (`/ar/<page>`) : chaque lien reste dans la langue du document. */
   pages: [
-    { href: "/rendez-vous", label: "حجز موعد", hrefLang: "fr" },
+    { href: "/ar/rendez-vous", label: "حجز موعد" },
     { href: "/ar/mentions-legales", label: "المعلومات القانونية" },
     { href: "/ar/confidentialite", label: "الخصوصية" },
     { href: "/ar/cookies", label: "ملفات تعريف الارتباط" },

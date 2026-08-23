@@ -86,6 +86,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl("/rendez-vous"),
       lastModified: modifiedAt,
       priority: 0.7,
+      alternates: languageAlternates("/rendez-vous", "/ar/rendez-vous"),
+    },
+    {
+      url: absoluteUrl("/ar/rendez-vous"),
+      lastModified: modifiedAt,
+      priority: 0.7,
+      alternates: languageAlternates("/rendez-vous", "/ar/rendez-vous"),
     },
     /* Pages légales : indexables mais secondaires. Chaque page a désormais une
        jumelle arabe `/ar/<page>`, appariée par `hreflang` comme les motifs. */

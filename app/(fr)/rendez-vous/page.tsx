@@ -29,6 +29,14 @@ export const metadata: Metadata = {
     "Contacter le cabinet du Dr Sonia Abahou pour un rendez-vous. La réservation vidéo est temporairement en maintenance.",
   alternates: {
     canonical: "/rendez-vous",
+    /* Page jumelle arabe : même contenu, langue différente. */
+    languages: {
+      "fr-MA": "/rendez-vous",
+      ar: "/ar/rendez-vous",
+      /* Version servie par défaut aux visiteurs dont la langue n'est ni le
+         français ni l'arabe. */
+      "x-default": "/rendez-vous",
+    },
   },
   openGraph: {
     title: "Prendre rendez-vous | Dr Sonia Abahou",
