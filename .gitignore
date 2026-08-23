@@ -63,3 +63,6 @@ next-env.d.ts
 
 # document de cadrage interne (tarifs, argumentaire commercial) — hors dépôt public
 /PROJET-DR-SONIA.md
+
+# graphify knowledge graph output (local only, never for the public repo)
+/graphify-out/

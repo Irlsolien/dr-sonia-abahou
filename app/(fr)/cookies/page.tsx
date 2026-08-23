@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     "Politique cookies du site du cabinet Dr Sonia Abahou à Témara.",
   alternates: {
     canonical: "/cookies",
+    /* Page jumelle arabe : même contenu, langue différente. */
+    languages: {
+      "fr-MA": "/cookies",
+      ar: "/ar/cookies",
+      /* Version servie par défaut aux visiteurs dont la langue n'est ni le
+         français ni l'arabe. */
+      "x-default": "/cookies",
+    },
   },
   openGraph: {
     title: "Politique cookies | Dr Sonia Abahou",

@@ -21,6 +21,14 @@ export const metadata: Metadata = {
     "Mentions légales du site du cabinet Dr Abahou Sonia, endocrinologie et maladies métaboliques à Témara.",
   alternates: {
     canonical: "/mentions-legales",
+    /* Page jumelle arabe : même contenu, langue différente. */
+    languages: {
+      "fr-MA": "/mentions-legales",
+      ar: "/ar/mentions-legales",
+      /* Version servie par défaut aux visiteurs dont la langue n'est ni le
+         français ni l'arabe. */
+      "x-default": "/mentions-legales",
+    },
   },
   openGraph: {
     title: "Mentions légales | Dr Sonia Abahou",

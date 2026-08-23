@@ -17,6 +17,14 @@ export const metadata: Metadata = {
     "Politique de confidentialité du site du cabinet Dr Abahou Sonia à Témara.",
   alternates: {
     canonical: "/confidentialite",
+    /* Page jumelle arabe : même contenu, langue différente. */
+    languages: {
+      "fr-MA": "/confidentialite",
+      ar: "/ar/confidentialite",
+      /* Version servie par défaut aux visiteurs dont la langue n'est ni le
+         français ni l'arabe. */
+      "x-default": "/confidentialite",
+    },
   },
   openGraph: {
     title: "Politique de confidentialité | Dr Sonia Abahou",

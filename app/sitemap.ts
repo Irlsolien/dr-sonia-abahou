@@ -87,11 +87,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: modifiedAt,
       priority: 0.7,
     },
-    /* Pages légales : indexables mais secondaires. */
-    ...["/mentions-legales", "/confidentialite", "/cookies"].map((path) => ({
-      url: absoluteUrl(path),
-      lastModified: modifiedAt,
-      priority: 0.3,
-    })),
+    /* Pages légales : indexables mais secondaires. Chaque page a désormais une
+       jumelle arabe `/ar/<page>`, appariée par `hreflang` comme les motifs. */
+    ...["/mentions-legales", "/confidentialite", "/cookies"].flatMap((path) => [
+      {
+        url: absoluteUrl(path),
+        lastModified: modifiedAt,
+        priority: 0.3,
+        alternates: languageAlternates(path, `/ar${path}`),
+      },
+      {
+        url: absoluteUrl(`/ar${path}`),
+        lastModified: modifiedAt,
+        priority: 0.3,
+        alternates: languageAlternates(path, `/ar${path}`),
+      },
+    ]),
   ];
 }
