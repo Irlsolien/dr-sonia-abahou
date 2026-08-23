@@ -94,6 +94,8 @@ export const credentialsAr: Record<(typeof doctorCredentials)[number], string> =
     "طبيبة سابقة بالمركز الاستشفائي الجامعي بالرباط",
   "Ancien médecin attaché à l’hôpital militaire de Rabat":
     "طبيبة سابقة ملحقة بالمستشفى العسكري بالرباط",
+  "Présidente de la Société Marocaine de Diabétologie (SMD)":
+    "رئيسة الجمعية المغربية للسكري (SMD)",
   "Fondatrice et présidente de l’Institut marocain de diabétologie":
     "مؤسِّسة ورئيسة المعهد المغربي للسكري",
   "Membre du think tank de la Global Metabolic Health Alliance (GMHA)":

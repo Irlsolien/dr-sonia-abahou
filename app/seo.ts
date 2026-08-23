@@ -33,6 +33,7 @@ export const doctorCredentials = [
   "Diplôme universitaire d’échographie cervicale Paris V",
   "Ancien médecin au centre hospitalier universitaire de Rabat",
   "Ancien médecin attaché à l’hôpital militaire de Rabat",
+  "Présidente de la Société Marocaine de Diabétologie (SMD)",
   "Fondatrice et présidente de l’Institut marocain de diabétologie",
   "Membre du think tank de la Global Metabolic Health Alliance (GMHA)",
   "Membre du board scientifique de la Pan Arab Society for Interventional Endocrinology and Diabetes Technology (PASID)",
