@@ -97,6 +97,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
       alternates: languageAlternates(`/${service.slug}`, `/ar/${service.slug}`),
     })),
+    /* Page géolocalisée Rabat : capte « endocrinologue / diabétologue Rabat »
+       sans doorway (cabinet à Témara, dans l'agglomération de Rabat). Priorité
+       alignée sur les motifs français. */
+    {
+      url: absoluteUrl("/endocrinologue-diabetologue-rabat"),
+      lastModified: modifiedAt,
+      priority: 0.8,
+      alternates: languageAlternates(
+        "/endocrinologue-diabetologue-rabat",
+        "/ar/endocrinologue-diabetologue-rabat",
+      ),
+      images: [absoluteUrl("/dr-sonia-abahou.jpg")],
+    },
+    {
+      url: absoluteUrl("/ar/endocrinologue-diabetologue-rabat"),
+      lastModified: modifiedAt,
+      priority: 0.7,
+      alternates: languageAlternates(
+        "/endocrinologue-diabetologue-rabat",
+        "/ar/endocrinologue-diabetologue-rabat",
+      ),
+      images: [absoluteUrl("/dr-sonia-abahou.jpg")],
+    },
     {
       url: absoluteUrl("/rendez-vous"),
       lastModified: modifiedAt,
