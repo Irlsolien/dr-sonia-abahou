@@ -7,6 +7,7 @@ import {
   clinicAddress,
   clinicEmail,
   clinicPhoneDisplay,
+  clinicIce,
   clinicSecondaryPhoneDisplay,
   doctorInpe,
   doctorOrderNumber,
@@ -111,6 +112,7 @@ export default function ArabicLegalNoticePage() {
             <li>رقم التسجيل في هيئة الأطباء: {doctorOrderNumber}.</li>
             <li>المجلس الجهوي لهيئة الأطباء بالرباط.</li>
             <li>الرقم الوطني لمهني الصحة (INPE): {doctorInpe}.</li>
+            <li>المُعرّف المشترك للمقاولة (ICE): {clinicIce}.</li>
           </ul>
         </article>
 
@@ -121,7 +123,6 @@ export default function ArabicLegalNoticePage() {
             ولا تُعرَض كمعلومات رسمية.
           </p>
           <ul>
-            <li>المُعرّف المشترك للمقاولة (ICE) للعيادة: غير مُقدَّم.</li>
             <li>رقم الباتيندا / الضريبة المهنية: غير مُقدَّم.</li>
             <li>الشكل القانوني للعيادة: غير مُقدَّم.</li>
             <li>رقم CNDP أو وصل التصريح: غير مُقدَّم.</li>

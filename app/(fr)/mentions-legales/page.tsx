@@ -7,6 +7,7 @@ import {
   clinicEmail,
   clinicName,
   clinicPhoneDisplay,
+  clinicIce,
   clinicSecondaryPhoneDisplay,
   doctorInpe,
   doctorOrderNumber,
@@ -91,6 +92,7 @@ export default function LegalNoticePage() {
             <li>Numéro d’inscription à l’Ordre des médecins : {doctorOrderNumber}.</li>
             <li>{doctorRegionalCouncil}.</li>
             <li>INPE : {doctorInpe}.</li>
+            <li>ICE : {clinicIce}.</li>
           </ul>
         </article>
 
@@ -102,7 +104,6 @@ export default function LegalNoticePage() {
             informations officielles.
           </p>
           <ul>
-            <li>ICE du cabinet : non communiqué.</li>
             <li>Numéro de patente / taxe professionnelle : non communiqué.</li>
             <li>Forme juridique du cabinet : non communiquée.</li>
             <li>Numéro CNDP ou récépissé de déclaration : non communiqué.</li>
