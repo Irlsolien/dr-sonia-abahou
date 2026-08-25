@@ -36,6 +36,7 @@ export const doctorCredentials = [
   "Ancien médecin attaché à l’hôpital militaire de Rabat",
   "Membre du think tank de la Global Metabolic Health Alliance (GMHA)",
   "Membre du board scientifique de la Pan Arab Society for Interventional Endocrinology and Diabetes Technology (PASID)",
+  "Ancienne secrétaire générale de la SMEDIAN",
 ] as const;
 
 export const doctorSocialProfiles = [
@@ -233,13 +234,13 @@ export const openingHours = [
   ["Mercredi", "9h30 — 16h"],
   ["Jeudi", "9h30 — 16h"],
   ["Vendredi", "9h30 — 12h30"],
-  ["Samedi", "Fermé"],
+  ["Samedi", "9h30 — 12h"],
   ["Dimanche", "Fermé"],
 ] as const;
 
 /** Résumé des horaires en une phrase, pour les réponses courtes. */
 export const openingHoursSummary =
-  "Du lundi au jeudi de 9h30 à 16h, le vendredi de 9h30 à 12h30. Fermé le samedi et le dimanche.";
+  "Du lundi au jeudi de 9h30 à 16h, le vendredi de 9h30 à 12h30 et le samedi de 9h30 à 12h. Fermé le dimanche.";
 
 /**
  * Faits clés du cabinet — bloc « En bref ».
@@ -312,7 +313,7 @@ export const faqItems = [
   {
     question: "Quels sont les horaires du cabinet ?",
     answer:
-      "Le cabinet reçoit du lundi au jeudi de 9h30 à 16h et le vendredi de 9h30 à 12h30. Il est fermé le samedi et le dimanche.",
+      "Le cabinet reçoit du lundi au jeudi de 9h30 à 16h, le vendredi de 9h30 à 12h30 et le samedi de 9h30 à 12h. Il est fermé le dimanche.",
   },
   {
     question: "Quels documents apporter pour une première consultation ?",
@@ -490,8 +491,8 @@ export const professionalGallery = [
   },
   {
     src: "/media/media-interview-2m.webp",
-    alt: "Dr Sonia Abahou interviewée par la chaîne 2M lors d’une action de sensibilisation au diabète",
-    label: "Média · 2M",
+    alt: "Dr Sonia Abahou interviewée par la chaîne Medi1 lors d’une action de sensibilisation au diabète",
+    label: "Média · Medi1",
     title: "Sensibilisation au diabète auprès du grand public.",
     variant: "proof-third",
     sizes: "(max-width: 980px) 92vw, 380px",
@@ -514,8 +515,8 @@ export const professionalGallery = [
   },
   {
     src: "/media/congres-conference.webp",
-    alt: "Dr Sonia Abahou intervenant à la tribune d’un congrès médical",
-    label: "Congrès médical",
+    alt: "Dr Sonia Abahou intervenant à la tribune du congrès de Dubai 2025",
+    label: "Congrès · Dubai 2025",
     title: "Intervention scientifique en endocrinologie et diabétologie.",
     variant: "proof-third",
     sizes: "(max-width: 980px) 92vw, 380px",

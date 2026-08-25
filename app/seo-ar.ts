@@ -100,6 +100,8 @@ export const credentialsAr: Record<(typeof doctorCredentials)[number], string> =
     "عضوة في خلية التفكير التابعة لـ Global Metabolic Health Alliance (GMHA)",
   "Membre du board scientifique de la Pan Arab Society for Interventional Endocrinology and Diabetes Technology (PASID)":
     "عضوة في المجلس العلمي لـ Pan Arab Society for Interventional Endocrinology and Diabetes Technology (PASID)",
+  "Ancienne secrétaire générale de la SMEDIAN":
+    "الأمينة العامة السابقة لـ SMEDIAN",
 };
 
 export const servicesAr: Record<
@@ -261,9 +263,9 @@ export const professionalGalleryAr: Record<
     alt: "صورة للدكتورة سونيا أبحو خلال مؤتمر طبي",
   },
   "/media/media-interview-2m.webp": {
-    label: "إعلام · 2M",
+    label: "إعلام · Medi1",
     title: "التحسيس بمرض السكري لدى عموم الناس.",
-    alt: "الدكتورة سونيا أبحو في حوار مع قناة 2M خلال حملة للتحسيس بالسكري",
+    alt: "الدكتورة سونيا أبحو في حوار مع قناة Medi1 خلال حملة للتحسيس بالسكري",
   },
   "/media/media-village-diabete-laayoune.webp": {
     label: "قرية السكري · العيون",
@@ -276,7 +278,7 @@ export const professionalGalleryAr: Record<
     alt: "الدكتورة سونيا أبحو متدخّلة في مؤتمر DIA Egypt 2025 بالقاهرة",
   },
   "/media/congres-conference.webp": {
-    label: "مؤتمر طبي",
+    label: "مؤتمر · Dubai 2025",
     title: "مداخلة علمية في أمراض الغدد الصماء والسكري.",
     alt: "الدكتورة سونيا أبحو تتدخّل على منبر مؤتمر طبي",
   },
@@ -351,7 +353,7 @@ export const faqAr: Record<FaqQuestion, { question: string; answer: string }> = 
   "Quels sont les horaires du cabinet ?": {
     question: "ما هي أوقات عمل العيادة؟",
     answer:
-      "تستقبل العيادة من الاثنين إلى الخميس من 9:30 إلى 16:00، ويوم الجمعة من 9:30 إلى 12:30. وهي مغلقة يومي السبت والأحد.",
+      "تستقبل العيادة من الاثنين إلى الخميس من 9:30 إلى 16:00، ويوم الجمعة من 9:30 إلى 12:30، ويوم السبت من 9:30 إلى 12:00. وهي مغلقة يوم الأحد.",
   },
   "Quels documents apporter pour une première consultation ?": {
     question: "ما الوثائق التي ينبغي إحضارها في الاستشارة الأولى؟",
@@ -416,7 +418,7 @@ export const hoursAr = [
   ["الأربعاء", "9:30 — 16:00"],
   ["الخميس", "9:30 — 16:00"],
   ["الجمعة", "9:30 — 12:30"],
-  ["السبت", "مغلق"],
+  ["السبت", "9:30 — 12:00"],
   ["الأحد", "مغلق"],
 ] as const;
 
