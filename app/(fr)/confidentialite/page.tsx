@@ -7,6 +7,7 @@ import {
   clinicEmail,
   clinicName,
   clinicPhoneDisplay,
+  legalUpdatedFr,
   ogCoverImage,
   siteName,
 } from "../../seo";
@@ -66,6 +67,7 @@ export default function PrivacyPage() {
           cadre du site vitrine, conformément aux informations communiquées par le
           cabinet et à la loi marocaine n° 09-08.
         </p>
+        <p className="legal-updated">Dernière mise à jour : {legalUpdatedFr}.</p>
       </section>
 
       <section className="legal-content section-shell">
@@ -168,6 +170,16 @@ export default function PrivacyPage() {
             d’appareil, pays). Aucune donnée nominative n’est associée à ces
             mesures.
           </p>
+          <p>
+            Le site est hébergé par Vercel Inc., aux États-Unis. De ce fait,
+            certaines données techniques strictement nécessaires à son
+            fonctionnement (adresse IP, journaux de connexion, mesure d’audience
+            agrégée) peuvent être traitées hors du Maroc. Ce transfert est limité
+            à ces données techniques ; aucun dossier patient ni donnée de santé
+            n’est hébergé sur le site. Les formalités relatives au transfert de
+            données vers l’étranger relèvent du responsable du traitement lorsque
+            la réglementation l’exige.
+          </p>
         </article>
 
         <article>
@@ -176,6 +188,12 @@ export default function PrivacyPage() {
             Conformément à la loi marocaine n° 09-08, toute personne concernée
             peut demander l’accès, la rectification et, pour motifs légitimes,
             l’opposition au traitement de ses données personnelles.
+          </p>
+          <p>
+            Toute personne concernée peut également saisir la Commission
+            nationale de contrôle de la protection des données à caractère
+            personnel (CNDP) en cas de difficulté relative au traitement de ses
+            données.
           </p>
         </article>
 

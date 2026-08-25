@@ -22,6 +22,9 @@ export const clinicCountry = "MA";
 export const doctorOrderNumber = "10563";
 export const doctorRegionalCouncil = "Conseil régional de l’Ordre des médecins de Rabat";
 export const doctorInpe = "101193191";
+/** Date de dernière révision des pages légales, en affichage FR et AR. */
+export const legalUpdatedFr = "25 août 2026";
+export const legalUpdatedAr = "25 غشت 2026";
 export const defaultOgImage = "/dr-sonia-abahou.jpg";
 export const ogCoverImage = "/og-cover.jpg";
 export const lastModified = "2026-08-02";

@@ -3002,11 +3002,18 @@ h3 {
   font-size: clamp(2.6rem, 5.5vw, 4.2rem);
 }
 
-.legal-hero > p:last-child {
+.legal-hero > h1 + p {
   max-width: 760px;
   color: var(--color-muted);
   font-size: clamp(1.05rem, 1.7vw, 1.24rem);
   line-height: 1.7;
+}
+
+.legal-updated {
+  margin-top: 14px;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+  opacity: 0.85;
 }
 
 .legal-content {

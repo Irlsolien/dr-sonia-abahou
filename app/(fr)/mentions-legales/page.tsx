@@ -11,6 +11,7 @@ import {
   doctorInpe,
   doctorOrderNumber,
   doctorRegionalCouncil,
+  legalUpdatedFr,
   ogCoverImage,
   siteName,
 } from "../../seo";
@@ -70,6 +71,7 @@ export default function LegalNoticePage() {
           identifier l’éditeur du site, l’hébergeur et le cadre d’utilisation des
           contenus publiés.
         </p>
+        <p className="legal-updated">Dernière mise à jour : {legalUpdatedFr}.</p>
       </section>
 
       <section className="legal-content section-shell">

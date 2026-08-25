@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { arabicFontVariables } from "../../fonts";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { SiteFooter } from "../../../components/SiteFooter";
-import { absoluteUrl } from "../../../seo";
+import { absoluteUrl, legalUpdatedAr } from "../../../seo";
 import { arFooterLabels, arHeaderLabels, arOgImage, metaAr } from "../../../seo-ar";
 
 /**
@@ -81,6 +81,7 @@ export default function ArabicCookiesPage() {
           صُمِّم الموقع عمدًا للحدّ من المتتبِّعات وتجنّب ملفات تعريف الارتباط غير
           الضرورية على الصفحة التعريفية.
         </p>
+        <p className="legal-updated">آخر تحديث: {legalUpdatedAr}.</p>
       </section>
 
       <section className="legal-content section-shell">
@@ -95,6 +96,11 @@ export default function ArabicCookiesPage() {
             لا تودع هذه الأداة أي ملف تعريف ارتباط، ولا تتعقّب الزوار فرديًا، ولا
             تجمع سوى إحصاءات مُجمَّعة (الصفحات المُتصفَّحة، نوع الجهاز، البلد). ولا
             تُربَط أي معطيات اسمية بهذه القياسات.
+          </p>
+          <p>
+            وبما أنّ الموقع مُستضاف لدى Vercel Inc. بالولايات المتحدة الأمريكية،
+            فقد تُعالَج هذه القياسات التقنية خارج المغرب. ومع ذلك لا يُودَع أي ملف
+            تعريف ارتباط للتعقّب.
           </p>
         </article>
 

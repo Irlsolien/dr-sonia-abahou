@@ -10,6 +10,7 @@ import {
   clinicSecondaryPhoneDisplay,
   doctorInpe,
   doctorOrderNumber,
+  legalUpdatedAr,
 } from "../../../seo";
 import { arFooterLabels, arHeaderLabels, arOgImage, metaAr } from "../../../seo-ar";
 
@@ -91,6 +92,7 @@ export default function ArabicLegalNoticePage() {
           تعرض هذه الصفحة المعلومات التي تقدّمها العيادة للتعريف بناشر الموقع
           ومضيّفه وإطار استعمال المحتويات المنشورة.
         </p>
+        <p className="legal-updated">آخر تحديث: {legalUpdatedAr}.</p>
       </section>
 
       <section className="legal-content section-shell">

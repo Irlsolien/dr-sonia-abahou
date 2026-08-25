@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
-import { absoluteUrl, ogCoverImage, siteName } from "../../seo";
+import { absoluteUrl, legalUpdatedFr, ogCoverImage, siteName } from "../../seo";
 
 export const metadata: Metadata = {
   title: "Politique cookies | Dr Sonia Abahou",
@@ -57,6 +57,7 @@ export default function CookiesPage() {
           Le site est volontairement conçu pour limiter les traceurs et éviter les
           cookies non nécessaires sur la page vitrine.
         </p>
+        <p className="legal-updated">Dernière mise à jour : {legalUpdatedFr}.</p>
       </section>
 
       <section className="legal-content section-shell">
@@ -73,6 +74,11 @@ export default function CookiesPage() {
             collecte que des statistiques agrégées (pages consultées, type
             d’appareil, pays). Aucune donnée nominative n’est associée à ces
             mesures.
+          </p>
+          <p>
+            Le site étant hébergé par Vercel Inc. aux États-Unis, ces mesures
+            techniques peuvent être traitées hors du Maroc. Aucun cookie de suivi
+            n’est déposé pour autant.
           </p>
         </article>
 
