@@ -47,6 +47,12 @@ export const doctorProfessionalProfiles = [
   "https://www.med.ma/medecin/endocrinologue/temara/dr-sonia-abahou-173348",
   "https://www.dabadoc.com/ma/endocrinologue/temara/sonia-abahou",
   "https://www.annuaire-gratuit.ma/medecins/endocrinologue/sonia-abahou-s215142.html",
+  "https://www.doctori.ma/fr/medecin/endocrinologue-maladies-metaboliques/temara/abahou-sonia",
+  "https://medicalis.ma/fiche/ABAHOU-Sonia/35960",
+  "https://www.med.tn/medecin/endocrinologue/temara/dr-sonia-abahou-173348.html",
+  "https://www.telecontact.ma/annonceur/abahou-sonia/3237832/temara.php",
+  "https://www.santeaumaroc.com/annuaire/19878-Docteur-Sonia-Abahou.html",
+  "http://smedian.ma/smedianj3/index.php/qui-somme-nous/membre-du-bureau/62-sonia-abahou",
 ] as const;
 
 export const doctorSameAsProfiles = [
