@@ -3,41 +3,67 @@ import Link from "next/link";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 import { MobileActionBar } from "../../components/MobileActionBar";
+import { CalendlyEmbed } from "../../components/CalendlyEmbed";
 import { PhoneIcon, WhatsAppIcon } from "../../components/Icons";
 import {
   absoluteUrl,
   appointment,
   clinicAddress,
+  clinicName,
   clinicPhoneDisplay,
   clinicPhoneInternational,
   clinicSecondaryPhoneDisplay,
+  lastModified,
   ogCoverImage,
   siteName,
+  siteUrl,
+  teleconsultation,
 } from "../../seo";
 
+/**
+ * TÉLÉCONSULTATION — Phase 1 (Calendly + Google Meet).
+ *
+ * Parcours patient : réservation d'un créneau via Calendly (chargé au clic,
+ * consentement par action), puis virement bancaire et transmission d'une preuve
+ * via un canal sécurisé communiqué par le cabinet, enfin réception du lien
+ * Google Meet après validation.
+ *
+ * `robots.index = false` volontairement : la page reste hors index et n'est
+ * liée nulle part publiquement tant que l'événement Calendly réel et la boîte
+ * `teleconsultation@drsoniaabahou.com` ne sont pas créés et testés (voir
+ * `teleconsultation.calendlyUrl` dans `app/seo.ts`). Mise en ligne = passer
+ * `index: true`, ajouter la page au sitemap et activer les CTA du site.
+ *
+ * Aucune donnée médicale n'est demandée à aucune étape. Aucun tarif, aucune
+ * coordonnée bancaire n'est inventé : ces informations sont transmises par le
+ * cabinet après la réservation, hors de cette page publique.
+ */
+
 export const metadata: Metadata = {
-  title: "Téléconsultation en maintenance | Dr Sonia Abahou",
+  title: "Téléconsultation vidéo | Dr Sonia Abahou",
   description:
-    "La réservation de téléconsultation vidéo du cabinet Dr Sonia Abahou est temporairement en maintenance.",
+    "Réservez une téléconsultation vidéo avec le Dr Sonia Abahou, endocrinologue à Témara : choix du créneau en ligne, paiement par virement et lien Google Meet sécurisé.",
   alternates: {
     canonical: "/teleconsultation",
+    languages: {
+      "fr-MA": "/teleconsultation",
+      ar: "/ar/teleconsultation",
+      "x-default": "/teleconsultation",
+    },
   },
+  /* Hors index tant que le service n'est pas ouvert (voir en-tête de fichier). */
   robots: {
     index: false,
     follow: true,
   },
   openGraph: {
-    title: "Téléconsultation en maintenance | Dr Sonia Abahou",
+    title: "Téléconsultation vidéo | Dr Sonia Abahou",
     description:
-      "La fonctionnalité sera bientôt disponible. Le cabinet reste joignable par téléphone ou WhatsApp.",
+      "Consultez le Dr Sonia Abahou à distance : créneau en ligne, paiement par virement, lien Google Meet sécurisé.",
     url: "/teleconsultation",
     siteName,
     type: "website",
     locale: "fr_MA",
-    /* Une page qui déclare son propre bloc `openGraph` remplace entièrement
-       celui du layout : sans cette image, un partage de la page s'affichait
-       sans visuel. Même image de partage que les autres pages sans visuel
-       propre. */
     images: [
       {
         url: ogCoverImage,
@@ -47,13 +73,11 @@ export const metadata: Metadata = {
       },
     ],
   },
-  /* Idem pour la carte Twitter : sans bloc propre, la page héritait du titre
-     et de la description de l'accueil, qui ne décrivent pas cette page. */
   twitter: {
     card: "summary_large_image",
-    title: "Téléconsultation en maintenance | Dr Sonia Abahou",
+    title: "Téléconsultation vidéo | Dr Sonia Abahou",
     description:
-      "La fonctionnalité sera bientôt disponible. Le cabinet reste joignable par téléphone ou WhatsApp.",
+      "Consultez le Dr Sonia Abahou à distance : créneau en ligne, paiement par virement, lien Google Meet sécurisé.",
     images: [absoluteUrl(ogCoverImage)],
   },
 };
@@ -63,42 +87,87 @@ const whatsappHref = `https://wa.me/${appointment.whatsappPhone}?text=${encodeUR
   appointment.whatsappMessage,
 )}`;
 
+/* Quatre étapes du parcours. Le contenu reste générique : aucune donnée
+   médicale, aucun tarif, aucune coordonnée bancaire. */
 const steps = [
   {
-    title: "Réserver un créneau",
-    text: "Un créneau disponible sera proposé en ligne dès l’ouverture du service, sans passer par le cabinet.",
+    title: "Choisissez votre créneau",
+    text: "Sélectionnez une date et une heure disponibles directement en ligne, sans passer par le secrétariat.",
   },
   {
-    title: "Recevoir un lien vidéo sécurisé",
-    text: "Un lien de visioconférence sécurisé sera transmis avant la consultation pour l’échange à distance.",
+    title: "Effectuez le virement",
+    text: "Après votre réservation, le cabinet vous communique les informations bancaires nécessaires au paiement.",
   },
   {
-    title: "Consultation et suivi",
-    text: "L’échange se déroule comme une consultation classique, avec un suivi adapté à la situation du patient.",
+    title: "Envoyez votre preuve de paiement",
+    text: "Transmettez votre justificatif via le canal sécurisé indiqué par le cabinet. N’y joignez aucune information médicale.",
+  },
+  {
+    title: "Recevez votre lien de consultation",
+    text: "Après validation du paiement, vous recevez la confirmation ainsi que le lien Google Meet de la consultation.",
   },
 ] as const;
 
 const teleconsultationFaq = [
   {
-    question: "Quand la téléconsultation sera-t-elle disponible ?",
+    question: "Comment se déroule la téléconsultation ?",
     answer:
-      "Le service est en cours de préparation. Aucune date d’ouverture précise n’est communiquée pour le moment.",
+      "La consultation se déroule par visioconférence Google Meet. Le lien sécurisé vous est envoyé par email après la validation de votre paiement ; il vous suffit de l’ouvrir à l’heure du rendez-vous.",
   },
   {
-    question: "Comment être informé de l’ouverture du service ?",
+    question: "Comment se fait le paiement ?",
     answer:
-      "Le cabinet informera les patients par téléphone et par WhatsApp dès que la téléconsultation sera disponible.",
+      "Le paiement s’effectue par virement bancaire après la réservation du créneau. Le cabinet vous transmet les informations nécessaires et le canal sécurisé pour envoyer votre preuve de paiement.",
   },
   {
-    question: "Les rendez-vous au cabinet continuent-ils normalement ?",
+    question: "Quand est-ce que je reçois le lien Google Meet ?",
     answer:
-      "Oui. Les consultations au cabinet restent accessibles par téléphone et WhatsApp, sans aucune interruption.",
+      "Le lien vous est adressé une fois le paiement vérifié par le cabinet. Il est strictement personnel et ne doit pas être partagé.",
+  },
+  {
+    question: "Les rendez-vous au cabinet restent-ils possibles ?",
+    answer:
+      "Oui. Les consultations au cabinet restent accessibles par téléphone et WhatsApp, en parallèle de la téléconsultation vidéo.",
   },
 ] as const;
 
-export default function TeleconsultationMaintenancePage() {
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalWebPage",
+      "@id": `${absoluteUrl("/teleconsultation")}#webpage`,
+      name: "Téléconsultation vidéo — Dr Sonia Abahou",
+      description:
+        "Réservation d’une téléconsultation vidéo d’endocrinologie avec le Dr Sonia Abahou à Témara.",
+      url: absoluteUrl("/teleconsultation"),
+      inLanguage: "fr-MA",
+      dateModified: lastModified,
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      about: { "@id": `${siteUrl}/#clinic` },
+    },
+    {
+      "@type": "MedicalClinic",
+      "@id": `${siteUrl}/#clinic`,
+      name: clinicName,
+      telephone: clinicPhoneInternational,
+      availableService: {
+        "@type": "MedicalProcedure",
+        name: "Téléconsultation d’endocrinologie",
+        procedureType: "https://schema.org/NoninvasiveProcedure",
+      },
+    },
+  ],
+};
+
+export default function TeleconsultationPage() {
   return (
     <main id="main-content" className="appointment-page teleconsultation-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
       <SiteHeader internal />
 
       <MobileActionBar />
@@ -109,34 +178,25 @@ export default function TeleconsultationMaintenancePage() {
         className="appointment-hero teleconsultation-hero section-shell"
       >
         <p className="eyebrow">Téléconsultation vidéo</p>
-        <h1>Fonctionnalité en maintenance.</h1>
+        <h1>Consultez votre médecin à distance.</h1>
         <p>
-          La réservation de téléconsultation vidéo est en cours de préparation.
-          Elle sera proposée avec un parcours sécurisé, sans date précise pour
-          le moment. En attendant, merci de contacter le cabinet par téléphone
-          ou WhatsApp.
+          Réservez une téléconsultation vidéo avec le Dr Sonia Abahou en
+          quelques étapes : choisissez un créneau, réglez par virement, puis
+          recevez votre lien Google Meet sécurisé. Indiquez uniquement un motif
+          général — ne transmettez aucune donnée médicale sensible dans les
+          formulaires.
         </p>
         <div className="hero-actions">
-          <a className="primary-button" href={phoneHref}>
-            <PhoneIcon />
-            Appeler le cabinet
-          </a>
-          <a
-            className="secondary-button whatsapp-button"
-            href={whatsappHref}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <WhatsAppIcon />
-            Écrire sur WhatsApp
+          <a className="primary-button" href="#reserver">
+            Choisir un créneau
           </a>
         </div>
       </section>
 
       <section className="section-shell">
         <div className="section-heading">
-          <p className="eyebrow">À venir</p>
-          <h2>Le futur parcours de téléconsultation.</h2>
+          <p className="eyebrow">Comment ça marche</p>
+          <h2>Votre parcours de téléconsultation.</h2>
         </div>
         <div className="teleconsultation-steps">
           {steps.map((step, index) => (
@@ -147,6 +207,35 @@ export default function TeleconsultationMaintenancePage() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section id="reserver" className="section-shell">
+        <div className="section-heading">
+          <p className="eyebrow">Réservation</p>
+          <h2>Choisissez votre créneau.</h2>
+        </div>
+        <CalendlyEmbed
+          url={teleconsultation.calendlyUrl}
+          labels={{
+            title: "Ouvrir le calendrier de réservation",
+            hint: "Le calendrier Calendly s’ouvre à la demande. Aucune information médicale ne doit y être saisie : indiquez seulement votre nom, votre email et un motif général.",
+            cta: "Choisir un créneau",
+            loading: "Ouverture du calendrier…",
+            consentNote:
+              "En ouvrant le calendrier, le service tiers Calendly est chargé et peut déposer des cookies nécessaires à son fonctionnement.",
+          }}
+        />
+      </section>
+
+      <section className="section-shell appointment-privacy">
+        <strong>Confidentialité et paiement</strong>
+        <p>
+          Les informations de virement et le canal sécurisé pour transmettre
+          votre preuve de paiement vous sont communiqués par le cabinet après la
+          réservation. Ne transmettez aucune information médicale, ordonnance,
+          résultat d’analyse ou document de santé dans ces échanges. Vos données
+          servent uniquement à gérer le rendez-vous et le paiement.
+        </p>
       </section>
 
       <section className="section-shell faq-section">
@@ -169,15 +258,29 @@ export default function TeleconsultationMaintenancePage() {
       </section>
 
       <section className="section-shell appointment-privacy">
-        <strong>En attendant, le cabinet reste joignable</strong>
+        <strong>Besoin d’aide pour réserver ?</strong>
         <p>
           Adresse : {clinicAddress}. Fixe : {clinicPhoneDisplay}. Portable /
-          WhatsApp : {clinicSecondaryPhoneDisplay}. Pour confirmer un
-          rendez-vous au cabinet, contactez le secrétariat par appel ou
-          WhatsApp.
+          WhatsApp : {clinicSecondaryPhoneDisplay}. Le secrétariat peut vous
+          accompagner par téléphone ou WhatsApp.
         </p>
         <div className="hero-actions">
-          <Link className="secondary-button" href="/rendez-vous">
+          <a className="primary-button" href={phoneHref}>
+            <PhoneIcon />
+            Appeler le cabinet
+          </a>
+          <a
+            className="secondary-button whatsapp-button"
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <WhatsAppIcon />
+            Écrire sur WhatsApp
+          </a>
+        </div>
+        <div className="hero-actions">
+          <Link className="text-link" href="/rendez-vous">
             Voir les options de rendez-vous
           </Link>
         </div>

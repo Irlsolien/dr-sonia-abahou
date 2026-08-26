@@ -75,14 +75,21 @@ export const appointment = {
 } as const;
 
 export const teleconsultation = {
-  /* Non utilisé tant que la téléconsultation est en préparation : aucune page
-     ne charge Calendly, et la CSP de `vercel.json` ne l'autorise donc plus.
-     À la réouverture du service, réautoriser `assets.calendly.com`
-     (`script-src`, `style-src`) et `calendly.com` (`frame-src`,
-     `connect-src`) avant de rebrancher ce parcours. */
+  /* Parcours de téléconsultation — Phase 1 (Calendly + Google Meet).
+   *
+   * `calendlyUrl` est l'URL publique de l'événement Calendly. Elle doit pointer
+   * vers un événement réel, créé sous le compte Google professionnel du cabinet
+   * (`teleconsultation@drsoniaabahou.com`) et connecté à Google Calendar + Meet.
+   * Tant que cet événement et cette boîte n'existent pas, le calendrier
+   * affichera une erreur Calendly : la page reste donc `noindex` et n'est liée
+   * nulle part publiquement (voir CLAUDE-HANDOFF). Vérifier / remplacer ce slug
+   * avant la mise en ligne.
+   *
+   * La CSP de `vercel.json` autorise à nouveau `assets.calendly.com`
+   * (script/style/police) et `calendly.com` (iframe/connexion) — uniquement.
+   * Le widget n'est chargé qu'au clic du patient (voir `CalendlyEmbed`), donc
+   * aucun traceur tiers n'est déposé avant consentement. */
   calendlyUrl: "https://calendly.com/dr-sonia-abahou/teleconsultation-video",
-  confirmationMessage:
-    "Votre demande de téléconsultation a bien été enregistrée. Le cabinet reviendra vers vous avec les prochaines étapes dès que le service sera ouvert.",
 } as const;
 
 export const services = [

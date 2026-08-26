@@ -2745,6 +2745,69 @@ h3 {
   font-size: clamp(1.35rem, 2.4vw, 2rem);
 }
 
+/* Intégration Calendly — carte de pré-chargement (avant clic) puis conteneur
+   du widget inline (après clic). Le widget n'est injecté qu'au clic : voir
+   `app/components/CalendlyEmbed.tsx`. */
+.calendly-embed {
+  margin-top: 8px;
+}
+
+.calendly-launcher {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 720px;
+  padding: 32px;
+  border: 1px solid rgba(7, 150, 173, 0.14);
+  border-radius: 30px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(238, 253, 250, 0.68));
+  box-shadow: 0 20px 70px rgba(7, 150, 173, 0.08);
+}
+
+.calendly-launcher h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+}
+
+.calendly-launcher p {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.calendly-launcher small {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.calendly-launcher .primary-button[disabled] {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+/* Conteneur du calendrier inline. Hauteur fixe : le widget Calendly remplit un
+   parent dimensionné et gère son propre défilement interne. */
+.calendly-inline-container {
+  min-width: 320px;
+  height: 720px;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.calendly-inline-container[hidden] {
+  display: none;
+}
+
+/* La carte de pré-chargement est un contenu latin (Calendly) : on garde le
+   texte aligné au début de la ligne, y compris en lecture arabe RTL. */
+.ar-page .calendly-launcher {
+  align-items: flex-start;
+}
+
 .setup-note {
   grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
   background:
@@ -4854,6 +4917,18 @@ h3 {
 
   .teleconsultation-step span {
     margin-bottom: 22px;
+  }
+
+  .calendly-launcher {
+    padding: 24px 22px;
+    border-radius: 24px;
+  }
+
+  /* Sur mobile, la mise en page Calendly est plus haute : on laisse davantage
+     de hauteur pour éviter un double défilement inconfortable. */
+  .calendly-inline-container {
+    height: 1040px;
+    border-radius: 24px;
   }
 
   .setup-note {
