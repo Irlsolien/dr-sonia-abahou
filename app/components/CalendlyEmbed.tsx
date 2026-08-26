@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
+import { track } from "@vercel/analytics";
 
 /**
  * Intégration Calendly « au clic » (consentement par action).
@@ -53,9 +54,20 @@ type CalendlyEmbedProps = {
   labels: CalendlyEmbedLabels;
   /** Direction du texte pour la carte de pré-chargement (RTL en arabe). */
   dir?: "ltr" | "rtl";
+  /**
+   * Nom de l'événement de mesure d'audience anonyme émis à l'ouverture du
+   * calendrier. Vercel Analytics est sans cookie et n'associe aucune donnée
+   * nominative : on ne transmet qu'un compteur d'ouvertures.
+   */
+  analyticsEvent?: string;
 };
 
-export function CalendlyEmbed({ url, labels, dir = "ltr" }: CalendlyEmbedProps) {
+export function CalendlyEmbed({
+  url,
+  labels,
+  dir = "ltr",
+  analyticsEvent = "teleconsultation_calendly_open",
+}: CalendlyEmbedProps) {
   const [status, setStatus] = useState<"idle" | "loading" | "ready">("idle");
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -69,6 +81,9 @@ export function CalendlyEmbed({ url, labels, dir = "ltr" }: CalendlyEmbedProps) 
   const openCalendar = useCallback(() => {
     if (status !== "idle") return;
     setStatus("loading");
+
+    /* Mesure d'audience anonyme (aucune donnée nominative, aucun cookie). */
+    if (analyticsEvent) track(analyticsEvent);
 
     if (window.Calendly) {
       mountWidget();
@@ -88,7 +103,7 @@ export function CalendlyEmbed({ url, labels, dir = "ltr" }: CalendlyEmbedProps) 
     script.async = true;
     script.addEventListener("load", mountWidget, { once: true });
     document.body.appendChild(script);
-  }, [status, mountWidget]);
+  }, [status, mountWidget, analyticsEvent]);
 
   return (
     <div className="calendly-embed" dir={dir}>
