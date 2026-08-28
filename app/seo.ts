@@ -77,20 +77,22 @@ export const appointment = {
 export const teleconsultation = {
   /* Parcours de téléconsultation — Phase 1 (Calendly + Outlook Calendar + Zoom).
    *
-   * `calendlyUrl` est l'URL publique de l'événement Calendly. Elle doit pointer
-   * vers un événement réel, créé sur le compte Calendly du cabinet, connecté au
-   * calendrier Outlook (`rdv.drsoniaabahou@outlook.com`) et à un compte Zoom
-   * pour le lien vidéo (Google Meet nécessiterait un compte Google : la voie
-   * retenue est Outlook + Zoom, conforme au plan projet). Tant que cet événement
-   * n'existe pas, le calendrier affiche une erreur Calendly : la page reste donc
-   * `noindex` et n'est liée nulle part publiquement (voir CLAUDE-HANDOFF).
-   * Vérifier / remplacer ce slug avant la mise en ligne.
+   * `calendlyUrl` est l'URL publique Calendly du cabinet (compte
+   * `rdv.drsoniaabahou@outlook.com`, calendrier Outlook + Zoom pour le lien
+   * vidéo ; Google Meet nécessiterait un compte Google — voie retenue Outlook +
+   * Zoom, conforme au plan projet). L'embed inline affiche les types
+   * d'événement du compte ; on peut cibler un événement précis en suffixant le
+   * slug (`.../rdv-drsoniaabahou/<evenement>`) si le cabinet en communique un.
    *
-   * La CSP de `vercel.json` autorise à nouveau `assets.calendly.com`
-   * (script/style/police) et `calendly.com` (iframe/connexion) — uniquement.
-   * Le widget n'est chargé qu'au clic du patient (voir `CalendlyEmbed`), donc
-   * aucun traceur tiers n'est déposé avant consentement. */
-  calendlyUrl: "https://calendly.com/dr-sonia-abahou/teleconsultation-video",
+   * La CSP de `vercel.json` autorise `assets.calendly.com` (script/style/police)
+   * et `calendly.com` (iframe/connexion) — uniquement. Le widget n'est chargé
+   * qu'au clic du patient (voir `CalendlyEmbed`), donc aucun traceur tiers n'est
+   * déposé avant consentement.
+   *
+   * Les pages restent `noindex` tant que les prérequis légaux d'ouverture de la
+   * téléconsultation (CLAUDE-HANDOFF §13 : autorisation télémédecine, formalités
+   * CNDP, consentement patient) ne sont pas confirmés par le cabinet. */
+  calendlyUrl: "https://calendly.com/rdv-drsoniaabahou",
 } as const;
 
 export const services = [
