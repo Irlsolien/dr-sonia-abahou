@@ -75,15 +75,16 @@ export const appointment = {
 } as const;
 
 export const teleconsultation = {
-  /* Parcours de téléconsultation — Phase 1 (Calendly + Google Meet).
+  /* Parcours de téléconsultation — Phase 1 (Calendly + Outlook Calendar + Zoom).
    *
    * `calendlyUrl` est l'URL publique de l'événement Calendly. Elle doit pointer
-   * vers un événement réel, créé sous le compte Google professionnel du cabinet
-   * (`teleconsultation@drsoniaabahou.com`) et connecté à Google Calendar + Meet.
-   * Tant que cet événement et cette boîte n'existent pas, le calendrier
-   * affichera une erreur Calendly : la page reste donc `noindex` et n'est liée
-   * nulle part publiquement (voir CLAUDE-HANDOFF). Vérifier / remplacer ce slug
-   * avant la mise en ligne.
+   * vers un événement réel, créé sur le compte Calendly du cabinet, connecté au
+   * calendrier Outlook (`rdv.drsoniaabahou@outlook.com`) et à un compte Zoom
+   * pour le lien vidéo (Google Meet nécessiterait un compte Google : la voie
+   * retenue est Outlook + Zoom, conforme au plan projet). Tant que cet événement
+   * n'existe pas, le calendrier affiche une erreur Calendly : la page reste donc
+   * `noindex` et n'est liée nulle part publiquement (voir CLAUDE-HANDOFF).
+   * Vérifier / remplacer ce slug avant la mise en ligne.
    *
    * La CSP de `vercel.json` autorise à nouveau `assets.calendly.com`
    * (script/style/police) et `calendly.com` (iframe/connexion) — uniquement.

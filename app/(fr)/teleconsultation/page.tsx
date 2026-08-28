@@ -21,12 +21,14 @@ import {
 } from "../../seo";
 
 /**
- * TÉLÉCONSULTATION — Phase 1 (Calendly + Google Meet).
+ * TÉLÉCONSULTATION — Phase 1 (Calendly + Outlook Calendar + Zoom).
  *
  * Parcours patient : réservation d'un créneau via Calendly (chargé au clic,
  * consentement par action), puis virement bancaire et transmission d'une preuve
  * via un canal sécurisé communiqué par le cabinet, enfin réception du lien
- * Google Meet après validation.
+ * de visioconférence après validation. Fournisseur visio géré par Calendly
+ * (Zoom dans la configuration actuelle) : la formulation reste neutre côté
+ * patient pour ne pas dépendre d'un outil précis.
  *
  * `robots.index = false` volontairement : la page reste hors index et n'est
  * liée nulle part publiquement tant que l'événement Calendly réel et la boîte
@@ -42,7 +44,7 @@ import {
 export const metadata: Metadata = {
   title: "Téléconsultation vidéo | Dr Sonia Abahou",
   description:
-    "Réservez une téléconsultation vidéo avec le Dr Sonia Abahou, endocrinologue à Témara : choix du créneau en ligne, paiement par virement et lien Google Meet sécurisé.",
+    "Réservez une téléconsultation vidéo avec le Dr Sonia Abahou, endocrinologue à Témara : choix du créneau en ligne, paiement par virement et lien de visioconférence sécurisé.",
   alternates: {
     canonical: "/teleconsultation",
     languages: {
@@ -59,7 +61,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Téléconsultation vidéo | Dr Sonia Abahou",
     description:
-      "Consultez le Dr Sonia Abahou à distance : créneau en ligne, paiement par virement, lien Google Meet sécurisé.",
+      "Consultez le Dr Sonia Abahou à distance : créneau en ligne, paiement par virement, lien de visioconférence sécurisé.",
     url: "/teleconsultation",
     siteName,
     type: "website",
@@ -77,7 +79,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Téléconsultation vidéo | Dr Sonia Abahou",
     description:
-      "Consultez le Dr Sonia Abahou à distance : créneau en ligne, paiement par virement, lien Google Meet sécurisé.",
+      "Consultez le Dr Sonia Abahou à distance : créneau en ligne, paiement par virement, lien de visioconférence sécurisé.",
     images: [absoluteUrl(ogCoverImage)],
   },
 };
@@ -104,7 +106,7 @@ const steps = [
   },
   {
     title: "Recevez votre lien de consultation",
-    text: "Après validation du paiement, vous recevez la confirmation ainsi que le lien Google Meet de la consultation.",
+    text: "Après validation du paiement, vous recevez la confirmation ainsi que le lien de visioconférence de la consultation.",
   },
 ] as const;
 
@@ -112,7 +114,7 @@ const teleconsultationFaq = [
   {
     question: "Comment se déroule la téléconsultation ?",
     answer:
-      "La consultation se déroule par visioconférence Google Meet. Le lien sécurisé vous est envoyé par email après la validation de votre paiement ; il vous suffit de l’ouvrir à l’heure du rendez-vous.",
+      "La consultation se déroule par visioconférence sécurisée. Le lien vous est envoyé par email après la validation de votre paiement ; il vous suffit de l’ouvrir à l’heure du rendez-vous.",
   },
   {
     question: "Comment se fait le paiement ?",
@@ -120,7 +122,7 @@ const teleconsultationFaq = [
       "Le paiement s’effectue par virement bancaire après la réservation du créneau. Le cabinet vous transmet les informations nécessaires et le canal sécurisé pour envoyer votre preuve de paiement.",
   },
   {
-    question: "Quand est-ce que je reçois le lien Google Meet ?",
+    question: "Quand est-ce que je reçois le lien de visioconférence ?",
     answer:
       "Le lien vous est adressé une fois le paiement vérifié par le cabinet. Il est strictement personnel et ne doit pas être partagé.",
   },
@@ -182,7 +184,7 @@ export default function TeleconsultationPage() {
         <p>
           Réservez une téléconsultation vidéo avec le Dr Sonia Abahou en
           quelques étapes : choisissez un créneau, réglez par virement, puis
-          recevez votre lien Google Meet sécurisé. Indiquez uniquement un motif
+          recevez votre lien de visioconférence sécurisé. Indiquez uniquement un motif
           général — ne transmettez aucune donnée médicale sensible dans les
           formulaires.
         </p>
