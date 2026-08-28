@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 import { NavigationProgress } from "../components/NavigationProgress";
+import { ConsoleWarning } from "../components/ConsoleWarning";
 import { latinFontVariables } from "../fonts";
 import { arabicFontVariables } from "./fonts";
 import {
@@ -150,6 +151,8 @@ export default function ArabicRootLayout({
           {uiAr.skipLink}
         </a>
         {children}
+        {/* Avertissement anti self-XSS dans la console (ne bloque rien à l'écran). */}
+        <ConsoleWarning lang="ar" />
         {/* Mesure d'audience anonyme et sans cookies (Vercel Web Analytics). */}
         <Analytics />
       </body>
