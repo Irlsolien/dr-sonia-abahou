@@ -58,7 +58,6 @@ export const frFooterLabels: FooterLabels = {
   ],
   pages: [
     { href: "/rendez-vous", label: "Rendez-vous" },
-    { href: "/teleconsultation", label: "Téléconsultation" },
     { href: "/mentions-legales", label: "Mentions légales" },
     { href: "/confidentialite", label: "Confidentialité" },
     { href: "/cookies", label: "Cookies" },

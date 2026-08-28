@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 import { MobileActionBar } from "../../components/MobileActionBar";
@@ -26,7 +25,7 @@ import {
 export const metadata: Metadata = {
   title: "Prendre rendez-vous | Dr Sonia Abahou",
   description:
-    "Prendre rendez-vous avec le Dr Sonia Abahou à Témara : au cabinet par appel ou WhatsApp, ou en téléconsultation vidéo à réserver en ligne.",
+    "Contacter le cabinet du Dr Sonia Abahou pour un rendez-vous. La réservation vidéo est temporairement en maintenance.",
   alternates: {
     canonical: "/rendez-vous",
     /* Page jumelle arabe : même contenu, langue différente. */
@@ -41,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Prendre rendez-vous | Dr Sonia Abahou",
     description:
-      "Rendez-vous au cabinet par appel ou WhatsApp, ou téléconsultation vidéo à réserver en ligne.",
+      "Contacter le cabinet par appel ou WhatsApp. La réservation vidéo est temporairement en maintenance.",
     url: "/rendez-vous",
     siteName,
     type: "website",
@@ -65,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Prendre rendez-vous | Dr Sonia Abahou",
     description:
-      "Rendez-vous au cabinet par appel ou WhatsApp, ou téléconsultation vidéo à réserver en ligne.",
+      "Contacter le cabinet par appel ou WhatsApp. La réservation vidéo est temporairement en maintenance.",
     images: [absoluteUrl(ogCoverImage)],
   },
 };
@@ -151,9 +150,9 @@ export default function AppointmentPage() {
         <p className="eyebrow">Rendez-vous</p>
         <h1>Choisir le type de rendez-vous.</h1>
         <p>
-          La téléconsultation vidéo est désormais disponible : réservez un
-          créneau en ligne. Pour une consultation au cabinet, contactez le
-          secrétariat par appel ou WhatsApp afin de confirmer les disponibilités.
+          La prise de rendez-vous en ligne et la téléconsultation vidéo sont en
+          cours de préparation. Pour le moment, merci de contacter le cabinet par
+          appel ou WhatsApp afin de confirmer les disponibilités.
         </p>
       </section>
 
@@ -188,15 +187,12 @@ export default function AppointmentPage() {
         </article>
 
         <article className="appointment-card appointment-card-video appointment-card-compact">
-          <span>À distance</span>
+          <span>En préparation</span>
           <h2>Téléconsultation vidéo</h2>
           <p>
-            Réservez un créneau en ligne et recevez un lien de visioconférence
-            sécurisé. Indiquez uniquement un motif général, sans donnée médicale.
+            La réservation vidéo n’est pas encore ouverte aux patients. En
+            attendant, le cabinet reste joignable par téléphone ou WhatsApp.
           </p>
-          <Link className="primary-button" href="/teleconsultation">
-            Réserver une téléconsultation
-          </Link>
         </article>
       </section>
 

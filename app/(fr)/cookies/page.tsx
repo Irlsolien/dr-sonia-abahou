@@ -107,19 +107,6 @@ export default function CookiesPage() {
         </article>
 
         <article>
-          <h2>Réservation en ligne (Calendly)</h2>
-          <p>
-            La page de téléconsultation propose la réservation d’un créneau via
-            Calendly. Le calendrier ne se charge qu’après un clic sur « Choisir un
-            créneau » : aucun script ni cookie Calendly n’est déposé tant que
-            l’utilisateur n’a pas effectué ce clic. Une fois ouvert, Calendly peut
-            déposer les cookies nécessaires à son fonctionnement et applique ses
-            propres règles de confidentialité. Aucune donnée médicale ne doit être
-            saisie dans le formulaire de réservation.
-          </p>
-        </article>
-
-        <article>
           <h2>Gestion par le navigateur</h2>
           <p>
             L’utilisateur peut configurer son navigateur pour bloquer ou supprimer

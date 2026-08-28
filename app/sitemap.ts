@@ -50,8 +50,8 @@ function languageAlternates(frenchPath: string, arabicPath: string) {
 /**
  * Hiérarchie de priorités explicite et cohérente :
  * 1.0 accueil français · 0.9 accueil arabe · 0.8 parcours et motifs français ·
- * 0.7 motifs arabes, prise de rendez-vous et téléconsultation · 0.3 pages
- * légales.
+ * 0.7 motifs arabes et prise de rendez-vous · 0.3 pages légales.
+ * La téléconsultation reste hors sitemap : elle est en `noindex`.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -131,20 +131,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: modifiedAt,
       priority: 0.7,
       alternates: languageAlternates("/rendez-vous", "/ar/rendez-vous"),
-    },
-    /* Téléconsultation vidéo (réservation Calendly). Paire FR/AR appariée par
-       `hreflang`, même priorité que la prise de rendez-vous. */
-    {
-      url: absoluteUrl("/teleconsultation"),
-      lastModified: modifiedAt,
-      priority: 0.7,
-      alternates: languageAlternates("/teleconsultation", "/ar/teleconsultation"),
-    },
-    {
-      url: absoluteUrl("/ar/teleconsultation"),
-      lastModified: modifiedAt,
-      priority: 0.7,
-      alternates: languageAlternates("/teleconsultation", "/ar/teleconsultation"),
     },
     /* Pages légales : indexables mais secondaires. Chaque page a désormais une
        jumelle arabe `/ar/<page>`, appariée par `hreflang` comme les motifs. */

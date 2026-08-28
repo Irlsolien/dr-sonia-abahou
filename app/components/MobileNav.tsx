@@ -63,10 +63,7 @@ export const frMobileNavLabels: MobileNavLabels = {
     { href: "cabinet", label: "Cabinet" },
     { href: "contact", label: "Contact" },
   ],
-  extraLinks: [
-    { href: "/rendez-vous", label: "Rendez-vous" },
-    { href: "/teleconsultation", label: "Téléconsultation" },
-  ],
+  extraLinks: [{ href: "/rendez-vous", label: "Rendez-vous" }],
   langSwitch: {
     href: "/ar",
     label: "العربية",

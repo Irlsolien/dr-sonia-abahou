@@ -75,24 +75,14 @@ export const appointment = {
 } as const;
 
 export const teleconsultation = {
-  /* Parcours de téléconsultation — Phase 1 (Calendly + Outlook Calendar + Zoom).
-   *
-   * `calendlyUrl` est l'URL publique Calendly du cabinet (compte
-   * `rdv.drsoniaabahou@outlook.com`, calendrier Outlook + Zoom pour le lien
-   * vidéo ; Google Meet nécessiterait un compte Google — voie retenue Outlook +
-   * Zoom, conforme au plan projet). L'embed inline affiche les types
-   * d'événement du compte ; on peut cibler un événement précis en suffixant le
-   * slug (`.../rdv-drsoniaabahou/<evenement>`) si le cabinet en communique un.
-   *
-   * La CSP de `vercel.json` autorise `assets.calendly.com` (script/style/police)
-   * et `calendly.com` (iframe/connexion) — uniquement. Le widget n'est chargé
-   * qu'au clic du patient (voir `CalendlyEmbed`), donc aucun traceur tiers n'est
-   * déposé avant consentement.
-   *
-   * Les pages restent `noindex` tant que les prérequis légaux d'ouverture de la
-   * téléconsultation (CLAUDE-HANDOFF §13 : autorisation télémédecine, formalités
-   * CNDP, consentement patient) ne sont pas confirmés par le cabinet. */
-  calendlyUrl: "https://calendly.com/rdv-drsoniaabahou",
+  /* Non utilisé tant que la téléconsultation est en préparation : aucune page
+     ne charge Calendly, et la CSP de `vercel.json` ne l'autorise donc plus.
+     À la réouverture du service, réautoriser `assets.calendly.com`
+     (`script-src`, `style-src`) et `calendly.com` (`frame-src`,
+     `connect-src`) avant de rebrancher ce parcours. */
+  calendlyUrl: "https://calendly.com/dr-sonia-abahou/teleconsultation-video",
+  confirmationMessage:
+    "Votre demande de téléconsultation a bien été enregistrée. Le cabinet reviendra vers vous avec les prochaines étapes dès que le service sera ouvert.",
 } as const;
 
 export const services = [

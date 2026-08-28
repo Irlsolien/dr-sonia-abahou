@@ -120,28 +120,10 @@ export default function PrivacyPage() {
           </p>
           <p>
             Si le cabinet met ultérieurement en place un formulaire médical, un
-            espace patient ou une application de suivi, un cadre spécifique devra
-            être défini avant publication : information claire, sécurité
-            renforcée, durée de conservation adaptée et formalités CNDP lorsque
-            requises.
-          </p>
-        </article>
-
-        <article>
-          <h2>Téléconsultation</h2>
-          <p>
-            La réservation d’une téléconsultation s’effectue via Calendly. Les
-            données traitées à cette étape se limitent au nom, à l’email et au
-            créneau choisi ; aucune donnée médicale n’est demandée. Le
-            rendez-vous est enregistré dans l’agenda du cabinet (Outlook) et le
-            lien de visioconférence est fourni par Zoom. Ces prestataires peuvent
-            traiter les données hors du Maroc, dans les limites nécessaires à la
-            réservation et à la tenue de la consultation.
-          </p>
-          <p>
-            L’échange médical se déroule en visioconférence et n’est pas
-            enregistré sur le site. Les formalités applicables à la télémédecine
-            et au transfert de données relèvent du responsable du traitement.
+            espace patient, une téléconsultation ou une application de suivi, un
+            cadre spécifique devra être défini avant publication : information
+            claire, sécurité renforcée, durée de conservation adaptée et
+            formalités CNDP lorsque requises.
           </p>
         </article>
 
@@ -174,8 +156,7 @@ export default function PrivacyPage() {
             Les données peuvent être accessibles au cabinet, à ses prestataires
             techniques strictement nécessaires au fonctionnement du site, et aux
             services tiers intégrés ou ouverts depuis le site, comme Google Maps,
-            WhatsApp, LinkedIn, Instagram, Calendly ou Zoom. Aucun de ces
-            services n’est
+            WhatsApp, LinkedIn ou Instagram. Aucun de ces services n’est
             sollicité automatiquement : ils ne sont ouverts que sur action de
             l’utilisateur. La carte Google Maps de la page d’accueil n’affiche
             par défaut qu’une façade statique et ne se charge qu’après un clic
