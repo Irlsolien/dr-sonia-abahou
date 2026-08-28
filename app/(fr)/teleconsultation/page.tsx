@@ -24,27 +24,28 @@ import {
  * TÉLÉCONSULTATION — Phase 1 (Calendly + Outlook Calendar + Zoom).
  *
  * Parcours patient : réservation d'un créneau via Calendly (chargé au clic,
- * consentement par action), puis virement bancaire et transmission d'une preuve
- * via un canal sécurisé communiqué par le cabinet, enfin réception du lien
- * de visioconférence après validation. Fournisseur visio géré par Calendly
- * (Zoom dans la configuration actuelle) : la formulation reste neutre côté
- * patient pour ne pas dépendre d'un outil précis.
+ * consentement par action), confirmation par le cabinet, puis réception du lien
+ * de visioconférence. Fournisseur visio géré par Calendly (Zoom dans la
+ * configuration actuelle) : la formulation reste neutre côté patient pour ne
+ * pas dépendre d'un outil précis.
  *
- * `robots.index = false` volontairement : la page reste hors index et n'est
- * liée nulle part publiquement tant que l'événement Calendly réel et la boîte
- * `teleconsultation@drsoniaabahou.com` ne sont pas créés et testés (voir
- * `teleconsultation.calendlyUrl` dans `app/seo.ts`). Mise en ligne = passer
- * `index: true`, ajouter la page au sitemap et activer les CTA du site.
+ * Périmètre public actuel = RÉSERVATION SEULE. Le volet paiement (virement +
+ * preuve) n'est volontairement pas exposé : décisions client (montant, RIB,
+ * canal de preuve) et cadre légal en cours. Ne rien réintroduire à ce sujet
+ * sans validation.
+ *
+ * La page est indexable (réservation ouverte). Prérequis légaux d'ouverture de
+ * la téléconsultation (autorisation télémédecine, formalités CNDP, consentement
+ * patient — voir CLAUDE-HANDOFF §13) : relèvent du cabinet.
  *
  * Aucune donnée médicale n'est demandée à aucune étape. Aucun tarif, aucune
- * coordonnée bancaire n'est inventé : ces informations sont transmises par le
- * cabinet après la réservation, hors de cette page publique.
+ * coordonnée bancaire n'est affiché.
  */
 
 export const metadata: Metadata = {
   title: "Téléconsultation vidéo | Dr Sonia Abahou",
   description:
-    "Réservez une téléconsultation vidéo avec le Dr Sonia Abahou, endocrinologue à Témara : choix du créneau en ligne, paiement par virement et lien de visioconférence sécurisé.",
+    "Réservez une téléconsultation vidéo avec le Dr Sonia Abahou, endocrinologue à Témara : choix du créneau en ligne et lien de visioconférence sécurisé.",
   alternates: {
     canonical: "/teleconsultation",
     languages: {
@@ -53,15 +54,10 @@ export const metadata: Metadata = {
       "x-default": "/teleconsultation",
     },
   },
-  /* Hors index tant que le service n'est pas ouvert (voir en-tête de fichier). */
-  robots: {
-    index: false,
-    follow: true,
-  },
   openGraph: {
     title: "Téléconsultation vidéo | Dr Sonia Abahou",
     description:
-      "Consultez le Dr Sonia Abahou à distance : créneau en ligne, paiement par virement, lien de visioconférence sécurisé.",
+      "Consultez le Dr Sonia Abahou à distance : créneau en ligne et lien de visioconférence sécurisé.",
     url: "/teleconsultation",
     siteName,
     type: "website",
@@ -79,7 +75,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Téléconsultation vidéo | Dr Sonia Abahou",
     description:
-      "Consultez le Dr Sonia Abahou à distance : créneau en ligne, paiement par virement, lien de visioconférence sécurisé.",
+      "Consultez le Dr Sonia Abahou à distance : créneau en ligne et lien de visioconférence sécurisé.",
     images: [absoluteUrl(ogCoverImage)],
   },
 };
@@ -89,24 +85,21 @@ const whatsappHref = `https://wa.me/${appointment.whatsappPhone}?text=${encodeUR
   appointment.whatsappMessage,
 )}`;
 
-/* Quatre étapes du parcours. Le contenu reste générique : aucune donnée
-   médicale, aucun tarif, aucune coordonnée bancaire. */
+/* Étapes du parcours. Le contenu reste générique : aucune donnée médicale.
+   Le volet paiement n'est pas encore ouvert au public (décisions client et
+   cadre légal en cours) : il n'est donc pas décrit ici. */
 const steps = [
   {
     title: "Choisissez votre créneau",
     text: "Sélectionnez une date et une heure disponibles directement en ligne, sans passer par le secrétariat.",
   },
   {
-    title: "Effectuez le virement",
-    text: "Après votre réservation, le cabinet vous communique les informations bancaires nécessaires au paiement.",
-  },
-  {
-    title: "Envoyez votre preuve de paiement",
-    text: "Transmettez votre justificatif via le canal sécurisé indiqué par le cabinet. N’y joignez aucune information médicale.",
+    title: "Recevez votre confirmation",
+    text: "Le cabinet confirme le rendez-vous et vous précise les modalités pratiques de la consultation.",
   },
   {
     title: "Recevez votre lien de consultation",
-    text: "Après validation du paiement, vous recevez la confirmation ainsi que le lien de visioconférence de la consultation.",
+    text: "Vous recevez par email le lien de visioconférence sécurisé, strictement personnel, à ouvrir à l’heure du rendez-vous.",
   },
 ] as const;
 
@@ -114,17 +107,17 @@ const teleconsultationFaq = [
   {
     question: "Comment se déroule la téléconsultation ?",
     answer:
-      "La consultation se déroule par visioconférence sécurisée. Le lien vous est envoyé par email après la validation de votre paiement ; il vous suffit de l’ouvrir à l’heure du rendez-vous.",
-  },
-  {
-    question: "Comment se fait le paiement ?",
-    answer:
-      "Le paiement s’effectue par virement bancaire après la réservation du créneau. Le cabinet vous transmet les informations nécessaires et le canal sécurisé pour envoyer votre preuve de paiement.",
+      "La consultation se déroule par visioconférence sécurisée. Le lien vous est envoyé par email après la confirmation du rendez-vous ; il vous suffit de l’ouvrir à l’heure convenue.",
   },
   {
     question: "Quand est-ce que je reçois le lien de visioconférence ?",
     answer:
-      "Le lien vous est adressé une fois le paiement vérifié par le cabinet. Il est strictement personnel et ne doit pas être partagé.",
+      "Le lien vous est adressé après la confirmation du rendez-vous par le cabinet. Il est strictement personnel et ne doit pas être partagé.",
+  },
+  {
+    question: "Que dois-je indiquer lors de la réservation ?",
+    answer:
+      "Seulement votre nom, votre email et un motif général. Ne transmettez aucune information médicale sensible, ordonnance ou résultat d’analyse dans le formulaire de réservation.",
   },
   {
     question: "Les rendez-vous au cabinet restent-ils possibles ?",
@@ -183,10 +176,10 @@ export default function TeleconsultationPage() {
         <h1>Consultez votre médecin à distance.</h1>
         <p>
           Réservez une téléconsultation vidéo avec le Dr Sonia Abahou en
-          quelques étapes : choisissez un créneau, réglez par virement, puis
-          recevez votre lien de visioconférence sécurisé. Indiquez uniquement un motif
-          général — ne transmettez aucune donnée médicale sensible dans les
-          formulaires.
+          quelques étapes : choisissez un créneau, recevez la confirmation du
+          cabinet, puis votre lien de visioconférence sécurisé. Indiquez
+          uniquement un motif général — ne transmettez aucune donnée médicale
+          sensible dans les formulaires.
         </p>
         <div className="hero-actions">
           <a className="primary-button" href="#reserver">
@@ -230,13 +223,12 @@ export default function TeleconsultationPage() {
       </section>
 
       <section className="section-shell appointment-privacy">
-        <strong>Confidentialité et paiement</strong>
+        <strong>Confidentialité</strong>
         <p>
-          Les informations de virement et le canal sécurisé pour transmettre
-          votre preuve de paiement vous sont communiqués par le cabinet après la
-          réservation. Ne transmettez aucune information médicale, ordonnance,
-          résultat d’analyse ou document de santé dans ces échanges. Vos données
-          servent uniquement à gérer le rendez-vous et le paiement.
+          Ne transmettez aucune information médicale, ordonnance, résultat
+          d’analyse ou document de santé dans le formulaire de réservation. Vos
+          données servent uniquement à gérer le rendez-vous. Les modalités
+          pratiques de la consultation vous sont précisées par le cabinet.
         </p>
       </section>
 

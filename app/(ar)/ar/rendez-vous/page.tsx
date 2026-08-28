@@ -39,14 +39,14 @@ import {
  * sont des traductions du contenu français validé : aucun canal, numéro ou
  * délai n'a été ajouté. Les données factuelles proviennent de `app/seo.ts`.
  *
- * Le lien « en savoir plus » mène à la page téléconsultation, qui n'existe
- * qu'en français : il porte donc `hrefLang="fr"`.
+ * La carte téléconsultation mène à `/ar/teleconsultation` (page arabe
+ * désormais disponible), réservation Calendly ouverte.
  */
 
 export const metadata: Metadata = {
   title: "حجز موعد | الدكتورة سونيا أبحو",
   description:
-    "التواصل مع عيادة الدكتورة سونيا أبحو لأخذ موعد. الحجز بالفيديو في طور الإعداد مؤقتًا.",
+    "حجز موعد مع الدكتورة سونيا أبحو بتمارة: بالعيادة عبر الاتصال أو واتساب، أو استشارة بالفيديو تُحجز عبر الإنترنت.",
   alternates: {
     canonical: "/ar/rendez-vous",
     languages: {
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "حجز موعد | الدكتورة سونيا أبحو",
     description:
-      "التواصل مع العيادة عبر الاتصال أو واتساب. الحجز بالفيديو في طور الإعداد مؤقتًا.",
+      "موعد بالعيادة عبر الاتصال أو واتساب، أو استشارة بالفيديو تُحجز عبر الإنترنت.",
     url: "/ar/rendez-vous",
     siteName: metaAr.siteName,
     type: "website",
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "حجز موعد | الدكتورة سونيا أبحو",
     description:
-      "التواصل مع العيادة عبر الاتصال أو واتساب. الحجز بالفيديو في طور الإعداد مؤقتًا.",
+      "موعد بالعيادة عبر الاتصال أو واتساب، أو استشارة بالفيديو تُحجز عبر الإنترنت.",
     images: [absoluteUrl(arOgImage)],
   },
 };
@@ -175,8 +175,8 @@ export default function ArabicAppointmentPage() {
         <p className="eyebrow">الموعد</p>
         <h1>اختيار نوع الموعد.</h1>
         <p>
-          الحجز عبر الإنترنت والاستشارة بالفيديو قيد الإعداد حاليًا. في الوقت
-          الراهن، يُرجى التواصل مع العيادة هاتفيًا أو عبر واتساب لتأكيد الأوقات
+          الاستشارة بالفيديو متاحة الآن: احجزوا موعدًا عبر الإنترنت. للاستشارة
+          بالعيادة، تواصلوا مع السكرتارية هاتفيًا أو عبر واتساب لتأكيد الأوقات
           المتاحة.
         </p>
       </section>
@@ -212,14 +212,14 @@ export default function ArabicAppointmentPage() {
         </article>
 
         <article className="appointment-card appointment-card-video appointment-card-compact">
-          <span>قيد الإعداد</span>
+          <span>عن بُعد</span>
           <h2>الاستشارة بالفيديو</h2>
           <p>
-            الحجز بالفيديو ليس مفتوحًا بعد للمرضى. في انتظار ذلك، تبقى العيادة
-            متاحة هاتفيًا أو عبر واتساب.
+            احجزوا موعدًا عبر الإنترنت واستلموا رابط فيديو آمن. اذكروا سببًا عامًا
+            فقط، دون أي معلومة طبية.
           </p>
-          <Link className="text-link" href="/teleconsultation" hrefLang="fr">
-            مزيد من المعلومات حول الاستشارة بالفيديو
+          <Link className="primary-button" href="/ar/teleconsultation">
+            حجز استشارة بالفيديو
           </Link>
         </article>
       </section>

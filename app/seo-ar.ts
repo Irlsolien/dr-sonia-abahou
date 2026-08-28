@@ -581,7 +581,10 @@ export const arMobileNavLabels: MobileNavLabels = {
     { href: "cabinet", label: "العيادة" },
     { href: "contact", label: "التواصل" },
   ],
-  extraLinks: [{ href: "#contact", label: "حجز موعد" }],
+  extraLinks: [
+    { href: "#contact", label: "حجز موعد" },
+    { href: "/ar/teleconsultation", label: "الاستشارة بالفيديو" },
+  ],
   langSwitch: {
     href: "/",
     label: "Français",
@@ -623,6 +626,7 @@ export const arFooterLabels: FooterLabels = {
      arabe (`/ar/<page>`) : chaque lien reste dans la langue du document. */
   pages: [
     { href: "/ar/rendez-vous", label: "حجز موعد" },
+    { href: "/ar/teleconsultation", label: "الاستشارة بالفيديو" },
     { href: "/ar/mentions-legales", label: "المعلومات القانونية" },
     { href: "/ar/confidentialite", label: "الخصوصية" },
     { href: "/ar/cookies", label: "ملفات تعريف الارتباط" },
