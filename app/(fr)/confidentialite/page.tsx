@@ -171,6 +171,13 @@ export default function PrivacyPage() {
             mesures.
           </p>
           <p>
+            Le site étant diffusé via le réseau Cloudflare, une mesure d’audience
+            anonyme Cloudflare Web Analytics peut également être active : sans
+            cookie, sans suivi individuel, limitée à des statistiques agrégées de
+            fréquentation et de performance. Ces données techniques peuvent être
+            traitées hors du Maroc.
+          </p>
+          <p>
             Le site est hébergé par Vercel Inc., aux États-Unis. De ce fait,
             certaines données techniques strictement nécessaires à son
             fonctionnement (adresse IP, journaux de connexion, mesure d’audience

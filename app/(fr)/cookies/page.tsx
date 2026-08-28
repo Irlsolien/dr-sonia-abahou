@@ -80,6 +80,14 @@ export default function CookiesPage() {
             techniques peuvent être traitées hors du Maroc. Aucun cookie de suivi
             n’est déposé pour autant.
           </p>
+          <p>
+            Le site est par ailleurs diffusé via le réseau Cloudflare, qui
+            fournit une mesure d’audience anonyme (Cloudflare Web Analytics).
+            Cet outil ne dépose aucun cookie, ne suit pas les visiteurs
+            individuellement et ne collecte que des statistiques agrégées de
+            fréquentation et de performance. Ces données techniques peuvent être
+            traitées hors du Maroc.
+          </p>
         </article>
 
         <article>
