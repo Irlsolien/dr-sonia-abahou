@@ -496,7 +496,7 @@ export const uiAr = {
 
   practice: {
     title: "أعمال طبية وأوقات رعاية تُكمّل الاستشارة.",
-    dashboardCaption: "لمحة عن التتبّع",
+    dashboardCaption: "توضيح — بيانات افتراضية",
   },
 
   faq: {
@@ -653,7 +653,7 @@ export const arMapEmbedLabels: MapEmbedLabels = {
  * sont traduits. Aucune donnée personnelle.
  */
 export const arCgmDemoLabels: CgmDemoLabels = {
-  ariaLabel: "لمحة عن لوحة تتبّع مستمر لنسبة السكر في الدم تحترم السرّية",
+  ariaLabel: "توضيح — لوحة تتبّع افتراضية لنسبة السكر في الدم، دون أي معلومة شخصية",
   live: "تتبّع آمن",
   title: "تتبّع قريب لنسبة السكر في الدم",
   privacy: "السرّية",
@@ -666,7 +666,7 @@ export const arCgmDemoLabels: CgmDemoLabels = {
     { name: "ملف تتبّع 02", value: "138", status: "قراءة حديثة" },
     { name: "ملف تتبّع 03", value: "101", status: "مستشعر نشِط" },
   ],
-  disclaimer: "لا تُعرض أي معلومة شخصية.",
+  disclaimer: "توضيح — بيانات افتراضية. لا تُعرض أي معلومة شخصية.",
 };
 
 /* ==========================================================================
@@ -912,7 +912,7 @@ export const serviceUiAr = {
  */
 export function serviceQuickAnswerAr(slug: ServiceSlug) {
   return {
-    text: `الدكتورة سونيا أبحو طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية بتمارة، بالمغرب. ${servicesAr[slug].text} تستقبل العيادة بموعد من الاثنين إلى الخميس من 9:30 إلى 16:00، ويوم الجمعة من 9:30 إلى 12:30. ويُؤخذ الموعد هاتفيًا أو عبر واتساب — العنوان والأرقام:`,
+    text: `الدكتورة سونيا أبحو طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية بتمارة، بالمغرب. ${servicesAr[slug].text} تستقبل العيادة بموعد من الاثنين إلى الخميس من 9:30 إلى 16:00، ويوم الجمعة من 9:30 إلى 12:30، ويوم السبت من 9:30 إلى 12:00. ويُؤخذ الموعد هاتفيًا أو عبر واتساب — العنوان والأرقام:`,
     latin: `${clinicAddress} · ${clinicPhoneDisplay} · ${clinicSecondaryPhoneDisplay}`,
   };
 }

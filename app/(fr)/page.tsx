@@ -581,7 +581,9 @@ export default function Home() {
                 ) : (
                   <CgmDemoDashboard />
                 )}
-                {!activity.image && <figcaption>Aperçu du suivi</figcaption>}
+                {!activity.image && (
+                  <figcaption>Illustration — données fictives</figcaption>
+                )}
                 <span className="practice-number" aria-hidden="true">
                   {String(index + 1).padStart(2, "0")}
                 </span>

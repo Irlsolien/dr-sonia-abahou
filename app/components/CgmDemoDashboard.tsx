@@ -29,7 +29,7 @@ export type CgmDemoLabels = {
 
 export const frCgmDemoLabels: CgmDemoLabels = {
   ariaLabel:
-    "Aperçu d’un tableau de bord de suivi glycémique continu respectant la confidentialité",
+    "Illustration — tableau de bord fictif de suivi glycémique continu, sans donnée personnelle",
   live: "Suivi sécurisé",
   title: "Suivi glycémique rapproché",
   privacy: "Confidentialité",
@@ -42,7 +42,8 @@ export const frCgmDemoLabels: CgmDemoLabels = {
     { name: "Profil suivi 02", value: "138", status: "Lecture récente" },
     { name: "Profil suivi 03", value: "101", status: "Capteur actif" },
   ],
-  disclaimer: "Aucune information personnelle n’est affichée.",
+  disclaimer:
+    "Illustration — données fictives. Aucune information personnelle n’est affichée.",
 };
 
 type CgmDemoDashboardProps = {

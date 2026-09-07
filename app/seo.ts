@@ -624,5 +624,5 @@ export function absoluteUrl(path = "/") {
  * sections. Entièrement composée de données déjà validées.
  */
 export function serviceQuickAnswer(service: (typeof services)[number]) {
-  return `${doctorName} est médecin spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques à Témara, au Maroc. ${service.text} Le cabinet reçoit sur rendez-vous au ${clinicAddress}, du lundi au jeudi de 9h30 à 16h et le vendredi de 9h30 à 12h30. Le rendez-vous se prend par téléphone au ${clinicPhoneDisplay} ou par WhatsApp au ${clinicSecondaryPhoneDisplay}.`;
+  return `${doctorName} est médecin spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques à Témara, au Maroc. ${service.text} Le cabinet reçoit sur rendez-vous au ${clinicAddress}. ${openingHoursSummary} Le rendez-vous se prend par téléphone au ${clinicPhoneDisplay} ou par WhatsApp au ${clinicSecondaryPhoneDisplay}.`;
 }

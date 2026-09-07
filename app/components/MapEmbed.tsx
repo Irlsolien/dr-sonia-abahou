@@ -98,7 +98,11 @@ export function MapEmbed({
         src={embedSrc}
         title={title}
         loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
+        /* Aligné sur l'en-tête `Referrer-Policy` du site (`vercel.json`).
+           L'attribut posait ici une règle plus permissive que la politique
+           générale : Google recevait l'URL complète de la page au lieu de sa
+           seule origine. L'embed `output=embed` ne vérifie que l'origine. */
+        referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
       />
       <div className="map-overlay">

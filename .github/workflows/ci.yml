@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [main]
 
+# Le workflow ne fait que lire le dépôt, installer et construire : le jeton
+# n'a besoin d'aucun droit d'écriture. Déclaré explicitement plutôt que laissé
+# au réglage par défaut du dépôt.
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Lint, typecheck and build

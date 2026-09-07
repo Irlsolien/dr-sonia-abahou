@@ -191,6 +191,15 @@ export function MobileNav({
     <div
       ref={panelRef}
       id={panelId}
+      /* Le panneau se comporte déjà comme une boîte de dialogue modale (focus
+         initial, piège au Tab, Échap, défilement du corps bloqué) mais ne le
+         déclarait pas : un lecteur d'écran continuait donc de parcourir la
+         page restée derrière lui. `role="dialog"` + `aria-modal` restreignent
+         l'exploration au panneau ; `aria-label` reprend l'intitulé déjà
+         affiché en tête (« Navigation » / « التنقّل »), sans texte nouveau. */
+      role="dialog"
+      aria-modal="true"
+      aria-label={labels.panelTitle}
       className={
         panelClassName ? `mobile-nav-panel ${panelClassName}` : "mobile-nav-panel"
       }

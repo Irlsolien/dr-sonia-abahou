@@ -2821,6 +2821,11 @@ h3 {
   display: inline-flex;
   align-items: flex-start;
   gap: 10px;
+  /* Cible tactile WCAG 2.5.8 : 44px de haut plutôt que les ~21px du seul
+     texte, via un padding symétrique qui laisse l'alignement du texte et
+     de l'icône inchangé. */
+  padding: 11px 0;
+  margin: -11px 0;
   color: inherit;
   font-size: 0.94rem;
   line-height: 1.4;
@@ -2844,6 +2849,11 @@ h3 {
 }
 
 .footer-info-nav a {
+  display: inline-block;
+  /* Même trame que `.footer-contact-list a` : 44px de cible tactile sans
+     agrandir visuellement le pied de page. */
+  padding: 11px 0;
+  margin: -11px 0;
   color: inherit;
   font-size: 0.94rem;
   transition: color 180ms ease;
