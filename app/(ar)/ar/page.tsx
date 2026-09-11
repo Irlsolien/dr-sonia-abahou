@@ -869,6 +869,15 @@ export default function ArabicHomePage() {
           <p className="ar-latin" dir="ltr">
             {clinicAddress}
           </p>
+          <p>
+            {uiAr.cabinet.localNote}{" "}
+            <Link
+              className="text-link"
+              href="/ar/endocrinologue-diabetologue-rabat"
+            >
+              {uiAr.cabinet.rabatLinkLabel}
+            </Link>
+          </p>
           <div className="contact-actions">
             <a
               className="primary-button"
