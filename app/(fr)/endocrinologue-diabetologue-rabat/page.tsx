@@ -309,6 +309,9 @@ export default function RabatPage() {
               </p>
             </li>
           </ol>
+          <Link className="text-link" href={doctorProfilePath}>
+            Découvrir le parcours complet du {doctorName}
+          </Link>
         </article>
       </section>
 

@@ -34,6 +34,7 @@ import {
   arMobileActionBarLabels,
   arOgImage,
   metaAr,
+  servicesAr,
 } from "../../../seo-ar";
 import { entityNodes, speakableSpecification } from "../../../geo";
 
@@ -316,6 +317,9 @@ export default function ArabicRabatPage() {
               </p>
             </li>
           </ol>
+          <Link className="text-link" href={`/ar${doctorProfilePath}`}>
+            الاطّلاع على المسار الكامل للدكتورة سونيا أبحو
+          </Link>
         </article>
       </section>
 
@@ -339,7 +343,9 @@ export default function ArabicRabatPage() {
               <span className="care-row-compact-number">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <span className="care-row-compact-title">{item.title}</span>
+              <span className="care-row-compact-title">
+                {servicesAr[item.slug].title}
+              </span>
               <span className="care-row-compact-arrow" aria-hidden="true">
                 ←
               </span>
