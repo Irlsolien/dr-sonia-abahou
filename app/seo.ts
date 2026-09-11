@@ -556,11 +556,11 @@ export const googleReviews = {
      `share.google` est opaque et non garanti dans la durée). */
   sourceUrl:
     "https://www.google.com/maps/place/Cabinet+Endocrino+Dr.+Sonya+Abahou/@33.928046,-6.8987233,17z",
-  /* Note moyenne et nombre d'avis relevés sur la fiche Google le 12 août 2026.
+  /* Note moyenne et nombre d'avis relevés sur la fiche Google le 11 septembre 2026.
      À mettre à jour lorsque la fiche évolue — ne jamais afficher une valeur
      différente de la fiche réelle. */
-  averageRating: "3,6",
-  reviewCount: 27,
+  averageRating: "3,5",
+  reviewCount: 26,
   featured: {
     text: "On sent sa compréhension avant même qu'elle ne commence à expliquer.",
     author: "Karima" as string | null,
