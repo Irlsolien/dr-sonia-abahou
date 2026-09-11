@@ -5068,6 +5068,138 @@ h3 {
   scroll-margin-top: clamp(90px, 14vw, 120px);
 }
 
+/* ==========================================================================
+   CONFORT DE LECTURE ET PARCOURS PATIENT
+   --------------------------------------------------------------------------
+   Ajustements volontaires et ciblés : l'identité visuelle, les contenus et
+   l'architecture de la page restent inchangés. Le gain vient d'une échelle de
+   lecture plus généreuse, de cibles tactiles cohérentes et d'une hiérarchie
+   plus nette au moment où un patient cherche une information pratique.
+   ========================================================================== */
+
+body {
+  font-size: 17px;
+  text-rendering: optimizeLegibility;
+}
+
+/* Les liens éditoriaux deviennent de vraies cibles, sans alourdir le texte. */
+.text-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding-block: 6px;
+}
+
+.care-row-description,
+.practice-description,
+.faq-answer p,
+.hours-list span,
+.hours-list strong,
+.reviews-average,
+.reviews-disclaimer {
+  font-size: clamp(1rem, 1.2vw, 1.08rem);
+}
+
+.care-row,
+.faq-card summary,
+.hours-list div {
+  scroll-margin-top: 120px;
+}
+
+.care-row:focus-visible,
+.faq-card:has(summary:focus-visible) {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 5px;
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+
+  .site-header {
+    width: min(100% - 20px, 1180px);
+    margin-top: 10px;
+  }
+
+  .section-shell {
+    width: min(100% - 32px, 1180px);
+  }
+
+  h1 {
+    font-size: clamp(2.6rem, 13.5vw, 3.85rem);
+    line-height: 1.08;
+  }
+
+  h2 {
+    font-size: clamp(2.05rem, 10.5vw, 3.15rem);
+    line-height: 1.1;
+  }
+
+  .hero-lead,
+  .section-heading p,
+  .section-text,
+  .approach-flow-lede,
+  .glass-panel p,
+  .final-cta p,
+  .diagnostic-band > p,
+  .practice-description,
+  .faq-answer p {
+    font-size: 1.06rem;
+    line-height: 1.7;
+  }
+
+  .care-row-description,
+  .approach-flow-step p,
+  .reviews-micro-quote,
+  .reviews-micro-name,
+  .reviews-average,
+  .reviews-disclaimer {
+    font-size: 1rem;
+  }
+
+  .primary-button,
+  .secondary-button,
+  .video-button {
+    min-height: 52px;
+    padding-inline: 20px;
+    font-size: 1rem;
+  }
+
+  .care-row {
+    padding-block: 28px;
+  }
+
+  .care-row-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .faq-card summary {
+    min-height: 78px;
+    padding: 20px;
+    font-size: 1.08rem;
+    line-height: 1.35;
+  }
+
+  .faq-answer {
+    padding: 0 20px 24px;
+  }
+
+  .hours-list div {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 14px;
+    padding-block: 15px;
+  }
+
+  .hours-list strong {
+    font-size: 1.02rem;
+    text-align: end;
+  }
+
+}
+
 .mobile-action-bar {
   display: none;
 }
@@ -5573,5 +5705,9 @@ h3 {
   .ar-page .practice-media figcaption,
   .ar-page .practice-number {
     right: 14px;
+  }
+
+  .mobile-action-bar-item {
+    font-size: 0.78rem;
   }
 }
