@@ -324,10 +324,9 @@ export default function Home() {
           françaises, comme `#ar-content` côté arabe. */}
       <section id="fr-content" className="hero section-shell">
         <div className="hero-copy">
-          <p className="eyebrow">Endocrinologue diabétologue à Témara</p>
+          <p className="eyebrow">Endocrinologie · diabétologie · maladies métaboliques</p>
           <h1>
-            Une prise en charge claire du diabète, de la thyroïde et du
-            métabolisme à Témara.
+            Dr Sonia Abahou, endocrinologue et diabétologue à Témara.
           </h1>
           <p className="hero-lead">
             Le cabinet du Dr Sonia Abahou reçoit les patients pour le suivi du
@@ -756,6 +755,14 @@ export default function Home() {
           <p className="eyebrow">Accès au cabinet</p>
           <h2>Cabinet situé à Massira I, Témara.</h2>
           <p>{clinicAddress}</p>
+          <p>
+            Cabinet d’endocrinologie et de diabétologie installé dans le
+            quartier Massira 1, à Témara, ouvert aux patients de Témara et des
+            environs.{" "}
+            <Link className="text-link" href="/endocrinologue-diabetologue-rabat">
+              Informations pour les patients venant de Rabat
+            </Link>
+          </p>
           <div className="contact-actions">
             <a
               className="primary-button"

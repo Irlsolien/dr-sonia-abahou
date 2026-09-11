@@ -35,11 +35,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: siteName,
   title: {
-    default: "Dr Sonia Abahou | Endocrinologie et maladies métaboliques à Témara",
+    default: "Endocrinologue à Témara | Dr Sonia Abahou – Diabétologie",
     template: "%s",
   },
   description:
-    "Cabinet du Dr Abahou Sonia à Témara : endocrinologie, diabète, thyroïde, nutrition, obésité, hypoglycémies et maladies métaboliques.",
+    "Dr Sonia Abahou, endocrinologue et diabétologue à Témara (Massira 1) : diabète, thyroïde, nutrition et maladies métaboliques. Rendez-vous par téléphone ou WhatsApp.",
   keywords: [
     "Dr Sonia Abahou",
     "endocrinologue Témara",
