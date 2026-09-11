@@ -238,13 +238,13 @@ export const openingHours = [
   ["Mercredi", "9h30 — 16h"],
   ["Jeudi", "9h30 — 16h"],
   ["Vendredi", "9h30 — 12h30"],
-  ["Samedi", "9h30 — 12h"],
+  ["Samedi", "Fermé"],
   ["Dimanche", "Fermé"],
 ] as const;
 
 /** Résumé des horaires en une phrase, pour les réponses courtes. */
 export const openingHoursSummary =
-  "Du lundi au jeudi de 9h30 à 16h, le vendredi de 9h30 à 12h30 et le samedi de 9h30 à 12h. Fermé le dimanche.";
+  "Du lundi au jeudi de 9h30 à 16h et le vendredi de 9h30 à 12h30. Fermé le samedi et le dimanche.";
 
 /**
  * Faits clés du cabinet — bloc « En bref ».
@@ -317,7 +317,7 @@ export const faqItems = [
   {
     question: "Quels sont les horaires du cabinet ?",
     answer:
-      "Le cabinet reçoit du lundi au jeudi de 9h30 à 16h, le vendredi de 9h30 à 12h30 et le samedi de 9h30 à 12h. Il est fermé le dimanche.",
+      "Le cabinet reçoit du lundi au jeudi de 9h30 à 16h et le vendredi de 9h30 à 12h30. Il est fermé le samedi et le dimanche.",
   },
   {
     question: "Quels documents apporter pour une première consultation ?",

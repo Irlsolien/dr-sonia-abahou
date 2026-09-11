@@ -238,12 +238,6 @@ const structuredDataAr = {
           opens: "09:30",
           closes: "12:30",
         },
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: "Saturday",
-          opens: "09:30",
-          closes: "12:00",
-        },
       ],
     },
     {
