@@ -1,0 +1,5 @@
+# Exclus de la cartographie graphify (rapports et scripts d audit, hors code du site)
+audit/
+.codex-tmp/
+AUDIT_SEO_DR_SONIA_ABAHOU.md
+audit-seo-google-sources.md
