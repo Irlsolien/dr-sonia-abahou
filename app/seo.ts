@@ -24,8 +24,14 @@ export const doctorRegionalCouncil = "Conseil régional de l’Ordre des médeci
 export const doctorInpe = "101193191";
 export const clinicIce = "001730654000055";
 /** Date de dernière révision des pages légales, en affichage FR et AR. */
-export const legalUpdatedFr = "25 août 2026";
-export const legalUpdatedAr = "25 غشت 2026";
+export const legalUpdatedFr = "13 septembre 2026";
+export const legalUpdatedAr = "13 شتنبر 2026";
+/**
+ * Identifiant de mesure Google Analytics 4 (propriété du cabinet). Le script
+ * gtag.js n'est chargé qu'après acceptation explicite des cookies
+ * (`app/components/CookieConsent.tsx`).
+ */
+export const gaMeasurementId = "G-66D46YVM0X";
 export const defaultOgImage = "/dr-sonia-abahou.jpg";
 export const ogCoverImage = "/og-cover.jpg";
 export const lastModified = "2026-08-02";

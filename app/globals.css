@@ -5200,6 +5200,174 @@ body {
 
 }
 
+/* ==========================================================================
+   BANDEAU COOKIES (Google Analytics 4, chargé après acceptation)
+   Rendu par le layout racine, hors de <main>. Non bloquant : carte flottante
+   en bas d'écran, au-dessus de la barre d'actions mobile sans la couvrir.
+   ========================================================================== */
+.cookie-banner {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 95;
+  display: flex;
+  justify-content: center;
+  padding: 0 16px calc(16px + env(safe-area-inset-bottom));
+  pointer-events: none;
+}
+
+.cookie-banner-card {
+  display: grid;
+  width: 100%;
+  max-width: 760px;
+  gap: 12px;
+  padding: 20px 22px;
+  border: 1px solid rgba(7, 150, 173, 0.18);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 18px 50px rgba(7, 89, 133, 0.18);
+  backdrop-filter: blur(18px);
+  pointer-events: auto;
+  animation: cookie-banner-in 320ms ease-out both;
+}
+
+@keyframes cookie-banner-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.cookie-banner-card h2 {
+  margin: 0;
+  color: var(--color-ink);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.12rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.cookie-banner-card p {
+  margin: 0;
+  color: var(--color-ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.cookie-banner-card p a {
+  color: var(--color-primary-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cookie-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+/* Refuser et accepter : mêmes dimensions, même niveau, un clic chacun. */
+.cookie-banner-button {
+  min-width: 140px;
+  border: 1px solid transparent;
+  font-size: 0.92rem;
+  font-family: inherit;
+}
+
+.cookie-banner-button.secondary-button {
+  border-color: rgba(7, 150, 173, 0.25);
+}
+
+.cookie-banner-button:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* Version arabe : police d'interface arabe et sens de lecture droite→gauche.
+   Le bandeau vit hors de `<main class="ar-page">`, il porte donc ses propres
+   règles, comme `.ar-nav-panel`. */
+.cookie-banner-ar {
+  direction: rtl;
+  text-align: right;
+  font-family: var(--font-ar-ui), "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+.cookie-banner-ar .cookie-banner-card h2 {
+  font-family: var(--font-ar-serif), "Times New Roman", serif;
+  letter-spacing: 0;
+}
+
+.cookie-banner-ar .cookie-banner-card p,
+.cookie-banner-ar .cookie-banner-button {
+  letter-spacing: 0;
+  line-height: 1.75;
+}
+
+/* Bouton « Gérer les cookies » du pied de page : même trame que les liens de
+   la colonne Informations (44px de cible tactile, couleur héritée). */
+.footer-cookie-settings {
+  display: inline-block;
+  padding: 11px 0;
+  margin: -11px 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.94rem;
+  text-align: inherit;
+  cursor: pointer;
+  transition: color 180ms ease;
+}
+
+.footer-cookie-settings:hover,
+.footer-cookie-settings:focus-visible {
+  color: white;
+}
+
+/* Bouton de réouverture dans la politique cookies. */
+.legal-cookie-settings {
+  margin-top: 6px;
+}
+
+@media (max-width: 768px) {
+  /* Au-dessus de la barre d'actions fixe (appel, WhatsApp, itinéraire) sur
+     les pages qui en ont une : elle reste cliquable pendant le choix. */
+  body:has(.mobile-action-bar) .cookie-banner {
+    bottom: calc(64px + env(safe-area-inset-bottom));
+    padding-bottom: 10px;
+  }
+
+  .cookie-banner {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .cookie-banner-card {
+    gap: 10px;
+    padding: 16px 18px;
+  }
+
+  .cookie-banner-card h2 {
+    font-size: 1.02rem;
+  }
+
+  .cookie-banner-card p {
+    font-size: 0.88rem;
+  }
+
+  .cookie-banner-button {
+    flex: 1 1 120px;
+    min-width: 0;
+  }
+}
+
 .mobile-action-bar {
   display: none;
 }

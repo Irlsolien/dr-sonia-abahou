@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 import { NavigationProgress } from "../components/NavigationProgress";
 import { ConsoleWarning } from "../components/ConsoleWarning";
+import { CookieConsent } from "../components/CookieConsent";
 import { latinFontVariables } from "../fonts";
 import {
   absoluteUrl,
@@ -153,6 +154,9 @@ export default function RootLayout({
         <ConsoleWarning lang="fr" />
         {/* Mesure d'audience anonyme et sans cookies (Vercel Web Analytics). */}
         <Analytics />
+        {/* Bandeau cookies + Google Analytics 4, chargé après acceptation
+            seulement. */}
+        <CookieConsent lang="fr" />
       </body>
     </html>
   );

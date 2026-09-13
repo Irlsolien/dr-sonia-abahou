@@ -29,6 +29,7 @@ import {
   services,
 } from "./seo";
 import type { CgmDemoLabels } from "./components/CgmDemoDashboard";
+import type { CookieConsentLabels } from "./components/CookieConsent";
 import type { HeaderLabels } from "./components/SiteHeader";
 import type { FooterLabels } from "./components/SiteFooter";
 import type { MapEmbedLabels } from "./components/MapEmbed";
@@ -638,6 +639,22 @@ export const arFooterLabels: FooterLabels = {
       isLangSwitch: true,
     },
   ],
+  cookieSettings: "إدارة ملفات تعريف الارتباط",
+};
+
+/**
+ * Bandeau de consentement aux cookies (Google Analytics 4) : traduction
+ * fidèle de `frCookieConsentLabels` (`app/components/CookieConsent.tsx`).
+ */
+export const arCookieConsentLabels: CookieConsentLabels = {
+  regionAriaLabel: "الاختيار المتعلق بملفات تعريف الارتباط",
+  title: "ملفات تعريف الارتباط لقياس الجمهور",
+  body: "ترغب العيادة في استعمال Google Analytics لقياس إقبال الزوار على الموقع وتحسين معلوماته العملية. لا تودع هذه الأداة ملفات تعريف الارتباط إلا إذا قبلتم ذلك. ويمكنكم تغيير اختياركم في أي وقت.",
+  policyLabel: "معرفة المزيد",
+  policyHref: "/ar/cookies",
+  accept: "قبول",
+  refuse: "رفض",
+  settings: "إدارة ملفات تعريف الارتباط",
 };
 
 export const arMapEmbedLabels: MapEmbedLabels = {

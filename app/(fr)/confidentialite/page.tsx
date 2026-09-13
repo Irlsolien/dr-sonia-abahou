@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 import {
@@ -96,6 +97,7 @@ export default function PrivacyPage() {
             <li>Données d’identification et de contact communiquées volontairement.</li>
             <li>Informations nécessaires à la prise de rendez-vous ou à la réponse à une demande.</li>
             <li>Données techniques minimales liées à la consultation du site par l’hébergeur.</li>
+            <li>Statistiques de fréquentation (Google Analytics), uniquement après acceptation des cookies.</li>
           </ul>
         </article>
 
@@ -106,6 +108,7 @@ export default function PrivacyPage() {
             <li>répondre aux demandes de contact ;</li>
             <li>faciliter la prise ou la confirmation de rendez-vous ;</li>
             <li>assurer le fonctionnement technique et la sécurité du site ;</li>
+            <li>mesurer la fréquentation du site afin d’améliorer ses informations pratiques, avec votre accord ;</li>
             <li>respecter les obligations légales et professionnelles applicables.</li>
           </ul>
         </article>
@@ -161,6 +164,18 @@ export default function PrivacyPage() {
             l’utilisateur. La carte Google Maps de la page d’accueil n’affiche
             par défaut qu’une façade statique et ne se charge qu’après un clic
             explicite.
+          </p>
+          <p>
+            Avec votre accord exprimé via le bandeau cookies, le site utilise
+            Google Analytics 4 (Google Ireland Limited) pour mesurer sa
+            fréquentation : pages consultées, provenance des visites, type
+            d’appareil et pays. Cet outil dépose des cookies et traite des
+            données techniques (identifiant aléatoire, adresse IP tronquée et
+            non conservée) qui peuvent l’être hors du Maroc, notamment aux
+            États-Unis. Aucun cookie Google n’est déposé sans votre accord et
+            votre choix peut être retiré à tout moment via « Gérer les
+            cookies ». Les détails figurent dans la{" "}
+            <Link href="/cookies">politique cookies</Link>.
           </p>
           <p>
             Une mesure d’audience anonyme est par ailleurs réalisée via Vercel

@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 import { NavigationProgress } from "../components/NavigationProgress";
 import { ConsoleWarning } from "../components/ConsoleWarning";
+import { CookieConsent } from "../components/CookieConsent";
 import { latinFontVariables } from "../fonts";
 import { arabicFontVariables } from "./fonts";
 import {
@@ -11,7 +12,7 @@ import {
   doctorProfilePath,
   siteUrl,
 } from "../seo";
-import { arOgImage, metaAr, uiAr } from "../seo-ar";
+import { arCookieConsentLabels, arOgImage, metaAr, uiAr } from "../seo-ar";
 
 /**
  * LAYOUT RACINE ARABE (groupe de routes `(ar)`).
@@ -155,6 +156,9 @@ export default function ArabicRootLayout({
         <ConsoleWarning lang="ar" />
         {/* Mesure d'audience anonyme et sans cookies (Vercel Web Analytics). */}
         <Analytics />
+        {/* Bandeau cookies + Google Analytics 4, chargé après acceptation
+            seulement (miroir du layout français). */}
+        <CookieConsent lang="ar" labels={arCookieConsentLabels} />
       </body>
     </html>
   );

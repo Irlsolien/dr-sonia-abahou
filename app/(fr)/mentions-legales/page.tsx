@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 import {
@@ -120,6 +121,20 @@ export default function LegalNoticePage() {
               vercel.com
             </a>
             .
+          </p>
+        </article>
+
+        <article>
+          <h2>Mesure d’audience</h2>
+          <p>
+            Le site utilise Google Analytics 4, service fourni par{" "}
+            <strong>Google Ireland Limited</strong>, Gordon House, Barrow
+            Street, Dublin 4, Irlande, pour mesurer sa fréquentation. Les
+            cookies correspondants ne sont déposés qu’après acceptation via le
+            bandeau prévu à cet effet ; le choix peut être modifié à tout
+            moment. Les modalités sont détaillées dans la{" "}
+            <Link href="/cookies">politique cookies</Link> et la{" "}
+            <Link href="/confidentialite">politique de confidentialité</Link>.
           </p>
         </article>
 

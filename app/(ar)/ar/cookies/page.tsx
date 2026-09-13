@@ -2,8 +2,15 @@ import type { Metadata } from "next";
 import { arabicFontVariables } from "../../fonts";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { SiteFooter } from "../../../components/SiteFooter";
-import { absoluteUrl, legalUpdatedAr } from "../../../seo";
-import { arFooterLabels, arHeaderLabels, arOgImage, metaAr } from "../../../seo-ar";
+import { CookieSettingsButton } from "../../../components/CookieConsent";
+import { absoluteUrl, gaMeasurementId, legalUpdatedAr } from "../../../seo";
+import {
+  arCookieConsentLabels,
+  arFooterLabels,
+  arHeaderLabels,
+  arOgImage,
+  metaAr,
+} from "../../../seo-ar";
 
 /**
  * VERSION ARABE — politique cookies `/ar/cookies`.
@@ -78,15 +85,77 @@ export default function ArabicCookiesPage() {
         <p className="eyebrow">ملفات تعريف الارتباط</p>
         <h1>سياسة ملفات تعريف الارتباط</h1>
         <p>
-          صُمِّم الموقع عمدًا للحدّ من المتتبِّعات وتجنّب ملفات تعريف الارتباط غير
-          الضرورية على الصفحة التعريفية.
+          صُمِّم الموقع عمدًا للحدّ من المتتبِّعات. ملفات تعريف الارتباط غير
+          الضرورية الوحيدة، وهي ملفات Google Analytics، لا تُودَع إلا بموافقتكم.
         </p>
         <p className="legal-updated">آخر تحديث: {legalUpdatedAr}.</p>
       </section>
 
       <section className="legal-content section-shell">
         <article>
-          <h2>ملفات تعريف الارتباط التي يستعملها الموقع</h2>
+          <h2>اختياركم</h2>
+          <p>
+            عند زيارتكم الأولى، يقترح عليكم شريط قبولَ ملفات تعريف الارتباط
+            الخاصة بقياس الجمهور أو رفضَها. الرفض بسيط كالقبول ولا يمنع تصفّح
+            الموقع. وما لم يُعبَّر عن اختيار، لا يُودَع أي ملف تعريف ارتباط من
+            Google.
+          </p>
+          <p>
+            يُحفَظ اختياركم في التخزين المحلي لمتصفّحكم (دون إرساله إلى أي طرف
+            آخر)، ويمكن تغييره في أي وقت عبر الزر أدناه أو رابط «إدارة ملفات
+            تعريف الارتباط» في أسفل الصفحة.
+          </p>
+          <CookieSettingsButton
+            label={arCookieConsentLabels.settings}
+            className="secondary-button legal-cookie-settings"
+          />
+        </article>
+
+        <article>
+          <h2>ملفات تعريف الارتباط لقياس الجمهور (Google Analytics)</h2>
+          <p>
+            بموافقتكم، يستعمل الموقع Google Analytics 4، وهي خدمة من Google
+            Ireland Limited (Gordon House, Barrow Street, Dublin 4, Ireland)،
+            لقياس إقبال الزوار على الموقع: الصفحات المُتصفَّحة، ومصدر الزيارات،
+            ونوع الجهاز، والبلد. وتساعد هذه الإحصاءات العيادة على تحسين
+            معلوماتها العملية. ولا تُستعمل للإعلان ولا لتحديد هوية زائر بالاسم.
+          </p>
+          <ul>
+            <li>
+              ملف <strong>_ga</strong>: مُعرِّف عشوائي يميّز بين الزوار. المدة: 13
+              شهرًا على الأكثر.
+            </li>
+            <li>
+              ملف{" "}
+              <strong dir="ltr">_ga_{gaMeasurementId.replace(/^G-/, "")}</strong>:
+              الحفاظ على جلسة القياس. المدة: 13 شهرًا على الأكثر.
+            </li>
+          </ul>
+          <p>
+            لا يحتفظ Google Analytics 4 بعناوين IP. وتُعالِج Google معطيات
+            القياس، وقد تُعالَج خارج المغرب، لا سيّما في الولايات المتحدة
+            الأمريكية، وفق{" "}
+            <a
+              href="https://policies.google.com/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              قواعد الخصوصية لدى Google
+            </a>
+            . كما يمكنكم تثبيت{" "}
+            <a
+              href="https://tools.google.com/dlpage/gaoptout"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              وحدة تعطيل Google Analytics
+            </a>
+            .
+          </p>
+        </article>
+
+        <article>
+          <h2>قياسات الجمهور دون ملفات تعريف ارتباط</h2>
           <p>
             لا يضع الموقع أي ملفات تعريف ارتباط إعلانية ولا بيكسلات تسويقية ولا
             أداة تعقّب فردي للزوار.
@@ -143,9 +212,9 @@ export default function ArabicCookiesPage() {
         <article>
           <h2>التطوّر</h2>
           <p>
-            إذا أُضيفت لاحقًا أداة لقياس الجمهور أو للحجز عبر الإنترنت أو خدمة
-            خارجية أخرى، فسيتعيّن تحديث هذه السياسة وإضافة آلية للموافقة عند
-            الاقتضاء.
+            إذا أُضيفت لاحقًا أداة للحجز عبر الإنترنت أو خدمة خارجية أخرى تودع
+            ملفات تعريف ارتباط، فستُحدَّث هذه السياسة ويُستكمَل شريط الموافقة
+            تبعًا لذلك.
           </p>
         </article>
       </section>

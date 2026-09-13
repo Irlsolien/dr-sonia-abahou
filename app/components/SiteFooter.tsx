@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SocialTooltip, type SocialItem } from "@/components/ui/social-media";
 import { MapPinIcon, PhoneIcon, WhatsAppIcon } from "./Icons";
+import { CookieSettingsButton } from "./CookieConsent";
 import type { NavLink } from "./MobileNav";
 import {
   appointment,
@@ -30,6 +31,8 @@ export type FooterLabels = {
   sections: readonly NavLink[];
   /** Liens de page complets (`/rendez-vous`, `/ar`, …). */
   pages: readonly NavLink[];
+  /** Bouton qui rouvre le bandeau cookies (retrait du consentement). */
+  cookieSettings: string;
   /**
    * `true` lorsque les séquences latines (adresse postale, numéros) doivent
    * être isolées en sens de lecture gauche→droite (page arabe). Le rendu
@@ -70,6 +73,7 @@ export const frFooterLabels: FooterLabels = {
       isLangSwitch: true,
     },
   ],
+  cookieSettings: "Gérer les cookies",
 };
 
 type SiteFooterProps = {
@@ -218,6 +222,7 @@ export function SiteFooter({
                 {page.label}
               </Link>
             ))}
+            <CookieSettingsButton label={labels.cookieSettings} />
           </nav>
         </div>
       </div>

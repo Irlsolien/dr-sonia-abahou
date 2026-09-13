@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { arabicFontVariables } from "../../fonts";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { SiteFooter } from "../../../components/SiteFooter";
@@ -139,6 +140,19 @@ export default function ArabicLegalNoticePage() {
               vercel.com
             </a>
             .
+          </p>
+        </article>
+
+        <article>
+          <h2>قياس الجمهور</h2>
+          <p>
+            يستعمل الموقع Google Analytics 4، وهي خدمة تقدّمها{" "}
+            <strong>Google Ireland Limited</strong>، Gordon House, Barrow
+            Street, Dublin 4, Ireland، لقياس إقبال الزوار عليه. ولا تُودَع ملفات
+            تعريف الارتباط المقابلة إلا بعد القبول عبر الشريط المخصَّص لذلك؛
+            ويمكن تغيير الاختيار في أي وقت. وترد التفاصيل في{" "}
+            <Link href="/ar/cookies">سياسة ملفات تعريف الارتباط</Link> و
+            <Link href="/ar/confidentialite">سياسة الخصوصية</Link>.
           </p>
         </article>
 
