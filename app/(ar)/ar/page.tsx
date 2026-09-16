@@ -391,6 +391,12 @@ const structuredDataAr = {
   ],
 };
 
+const lastModifiedLabelAr = new Intl.DateTimeFormat("ar-MA", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(new Date(`${lastModified}T12:00:00+01:00`));
+
 export default function ArabicHomePage() {
   return (
     <main
@@ -710,6 +716,14 @@ export default function ArabicHomePage() {
             </details>
           ))}
         </div>
+        {/* Signature éditoriale visible, miroir de la version française. */}
+        <p className="content-signature">
+          {uiAr.reviewNote.before}
+          <bdi dir="ltr">{doctorOrderNumber}</bdi>
+          {uiAr.reviewNote.middle}
+          <time dateTime={lastModified}>{lastModifiedLabelAr}</time>
+          {uiAr.reviewNote.after}
+        </p>
       </section>
 
       {/* Avis Google : le chrome de la section est en arabe, mais les avis

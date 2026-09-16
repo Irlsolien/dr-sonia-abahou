@@ -302,6 +302,12 @@ const structuredData = {
   ],
 };
 
+const lastModifiedLabel = new Intl.DateTimeFormat("fr-MA", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(new Date(`${lastModified}T12:00:00+01:00`));
+
 export default function Home() {
   return (
     <main id="main-content">
@@ -618,6 +624,15 @@ export default function Home() {
             </details>
           ))}
         </div>
+        {/* Signature éditoriale visible : qui a relu le contenu, et quand.
+            Reprend les mêmes faits que `reviewedBy` / `lastReviewed`. */}
+        <p className="content-signature">
+          Contenu relu par le {doctorName}, médecin spécialiste en
+          endocrinologie, diabétologie, nutrition et maladies métaboliques,
+          inscrite au {doctorRegionalCouncil} sous le n° {doctorOrderNumber}.
+          Dernière révision le{" "}
+          <time dateTime={lastModified}>{lastModifiedLabel}</time>.
+        </p>
       </section>
 
       <section id="avis" className="section-shell reviews-section reveal-section">

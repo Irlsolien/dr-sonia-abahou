@@ -5879,3 +5879,46 @@ body {
     font-size: 0.78rem;
   }
 }
+
+/* ==========================================================================
+   Repères chiffrés sourcés (pages motifs) et signature éditoriale visible
+   ========================================================================== */
+
+.service-evidence ul {
+  display: grid;
+  gap: 14px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service-evidence li {
+  padding: 16px 20px;
+  border-radius: 18px;
+  background: rgba(7, 150, 173, 0.06);
+  color: var(--color-ink);
+  line-height: 1.7;
+}
+
+.service-evidence li small {
+  display: block;
+  margin-top: 6px;
+  color: var(--color-muted);
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.service-evidence li small a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.content-signature {
+  max-width: 820px;
+  margin: 22px auto 0;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  text-align: center;
+}

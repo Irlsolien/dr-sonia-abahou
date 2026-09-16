@@ -20,6 +20,9 @@ import {
   lastModified,
   services,
   siteUrl,
+  doctorOrderNumber,
+  evidenceSourceIds,
+  evidenceSources,
 } from "../../../seo";
 import {
   entityNodes,
@@ -39,6 +42,8 @@ import {
   serviceUiAr,
   servicesAr,
   uiAr,
+  evidenceSourcesAr,
+  serviceEvidenceAr,
 } from "../../../seo-ar";
 
 /**
@@ -180,6 +185,8 @@ export default async function ArabicServicePage({
     },
   ];
 
+  const evidence = serviceEvidenceAr[service.slug];
+  const citedSources = evidenceSourceIds(service.slug);
   const pageStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -215,6 +222,19 @@ export default async function ArabicServicePage({
         reviewedBy: {
           "@id": `${arHomeUrl}#doctor`,
         },
+        author: {
+          "@id": `${arHomeUrl}#doctor`,
+        },
+        /* Mêmes sources publiques que la page française, libellées en arabe. */
+        ...(citedSources.length > 0
+          ? {
+              citation: citedSources.map((id) => ({
+                "@type": "CreativeWork",
+                name: evidenceSourcesAr[id].label,
+                url: evidenceSources[id].url,
+              })),
+            }
+          : {}),
         speakable: speakableSpecification,
         medicalAudience: "https://schema.org/Patient",
         specialty: "https://schema.org/Endocrine",
@@ -368,6 +388,32 @@ export default async function ArabicServicePage({
         <p>{serviceUiAr.preparationNote}</p>
       </section>
 
+      {/* Repères chiffrés sourcés : miroir strict du bloc français. */}
+      {evidence.length > 0 ? (
+        <section className="section-shell service-copy service-evidence">
+          <p className="eyebrow">{serviceUiAr.evidence.eyebrow}</p>
+          <h2>{serviceUiAr.evidence.title}</h2>
+          <p>{serviceUiAr.evidence.intro}</p>
+          <ul>
+            {evidence.map((item) => (
+              <li key={item.fact}>
+                {item.fact}
+                <small>
+                  {serviceUiAr.evidence.sourceLabel}
+                  <a
+                    href={evidenceSources[item.source].url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {evidenceSourcesAr[item.source].label}
+                  </a>
+                </small>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
       <section className="section-shell contact-steps-section">
         <div className="section-heading">
           <p className="eyebrow">{serviceUiAr.contact.eyebrow}</p>
@@ -390,6 +436,8 @@ export default async function ArabicServicePage({
           <h2>{serviceUiAr.editorial.title}</h2>
           <p>
             {serviceUiAr.editorial.textBefore}
+            <bdi dir="ltr">{doctorOrderNumber}</bdi>
+            {serviceUiAr.editorial.textMiddle}
             <time dateTime={lastModified}>{lastModifiedLabelAr}</time>
             {serviceUiAr.editorial.textAfter}
           </p>

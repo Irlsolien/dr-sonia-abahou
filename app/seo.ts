@@ -34,7 +34,13 @@ export const legalUpdatedAr = "13 شتنبر 2026";
 export const gaMeasurementId = "G-66D46YVM0X";
 export const defaultOgImage = "/dr-sonia-abahou.jpg";
 export const ogCoverImage = "/og-cover.jpg";
-export const lastModified = "2026-08-02";
+/**
+ * Date de dernière révision du contenu. À mettre à jour à chaque livraison
+ * qui touche un texte public : elle alimente `dateModified` / `lastReviewed`
+ * des JSON-LD, le sitemap, `llms.txt` et les signatures visibles des pages.
+ * Une date figée fait douter les moteurs de réponse de la fraîcheur du site.
+ */
+export const lastModified = "2026-09-13";
 export const googleMapsPlaceUrl =
   "https://maps.app.goo.gl/iQDGmhWtGaSKDLJt7";
 
@@ -365,6 +371,28 @@ export const faqItems = [
     answer:
       "Le site présente notamment le diabète, les troubles thyroïdiens, la nutrition médicale, l’obésité, les maladies métaboliques, l’hyperprolactinémie, les hypoglycémies et certaines pathologies endocriniennes.",
   },
+  /* Sous-questions pratiques : attributs confirmés de la fiche Google
+     (rendez-vous obligatoire, accès PMR, cartes Visa et MasterCard) et
+     géographie de l’agglomération. Aucun tarif ni délai n’est annoncé. */
+  {
+    question: "Le cabinet reçoit-il sans rendez-vous ?",
+    answer:
+      "Non. Le cabinet reçoit uniquement sur rendez-vous, confirmé par le secrétariat par téléphone ou WhatsApp.",
+  },
+  {
+    question: "Le cabinet est-il accessible aux personnes à mobilité réduite ?",
+    answer:
+      "Oui. L’accès du cabinet est adapté aux personnes à mobilité réduite, comme indiqué sur sa fiche Google. Le secrétariat renseigne sur les modalités pratiques d’accès.",
+  },
+  {
+    question: "Peut-on régler la consultation par carte bancaire ?",
+    answer: "Oui. Le cabinet accepte les cartes Visa et MasterCard.",
+  },
+  {
+    question: "Depuis quelles villes vient-on consulter au cabinet ?",
+    answer:
+      "Le cabinet se trouve à Massira 1, à Témara (aussi écrit Temara), dans l’agglomération de Rabat-Salé-Témara. Il est facilement accessible depuis Témara centre, Harhoura, Aïn Atiq, Skhirat, Rabat et Salé.",
+  },
 ] as const;
 
 /**
@@ -631,4 +659,91 @@ export function absoluteUrl(path = "/") {
  */
 export function serviceQuickAnswer(service: (typeof services)[number]) {
   return `${doctorName} est médecin spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques à Témara, au Maroc. ${service.text} Le cabinet reçoit sur rendez-vous au ${clinicAddress}. ${openingHoursSummary} Le rendez-vous se prend par téléphone au ${clinicPhoneDisplay} ou par WhatsApp au ${clinicSecondaryPhoneDisplay}.`;
+}
+
+/* ==========================================================================
+   Repères chiffrés sourcés (pages motifs)
+   ========================================================================== */
+
+/**
+ * Sources publiques citées sur les pages motifs. Un moteur de réponse retient
+ * plus volontiers un passage qui donne un chiffre précis et nomme sa source
+ * (papier GEO, Aggarwal et al., 2024 ; méta-analyse Shepard, 2026). Chaque
+ * source a été ouverte et lue le 13 septembre 2026 ; les URL pointent vers le
+ * document d'origine ou, à défaut, vers la reprise de presse du communiqué.
+ */
+export const evidenceSources = {
+  steps2018: {
+    label:
+      "Ministère de la Santé (Maroc), Enquête nationale sur les facteurs de risque communs des maladies non transmissibles (STEPS), 2017-2018 — rapport publié en 2019",
+    url: "https://www.sante.gov.ma/documents/2019/05/rapport%20de%20l%20enqu%C3%AAte%20stepwise.pdf",
+  },
+  ministere2024: {
+    label:
+      "Ministère de la Santé et de la Protection sociale, chiffres communiqués pour la Journée mondiale du diabète, 14 novembre 2024 (repris par Le Matin)",
+    url: "https://lematin.ma/societe/diabete-plus-de-27-millions-de-marocains-touches-dont-25000-enfants/251381",
+  },
+} as const;
+
+export type EvidenceSourceId = keyof typeof evidenceSources;
+
+type EvidenceFact = {
+  readonly fact: string;
+  readonly source: EvidenceSourceId;
+};
+
+/**
+ * Faits chiffrés par motif. Chaque valeur est recopiée telle qu'elle figure
+ * dans la source (pages 103 et 106 du rapport STEPS pour les prévalences ;
+ * communiqué ministériel de novembre 2024 pour les effectifs). Les motifs sans
+ * donnée nationale fiable n'ont volontairement aucun repère : ne rien écrire
+ * plutôt qu'approximer. Le `Record` est indexé sur les slugs : ajouter un
+ * motif sans statuer sur ses repères casse la compilation.
+ */
+export const serviceEvidence: Record<
+  (typeof services)[number]["slug"],
+  readonly EvidenceFact[]
+> = {
+  "diabete-temara": [
+    {
+      fact: "Au Maroc, 10,6 % des adultes de 18 ans et plus présentent un diabète (glycémie élevée ou traitement en cours) : 12,6 % des femmes et 8,6 % des hommes.",
+      source: "steps2018",
+    },
+    {
+      fact: "10,4 % des adultes sont en prédiabète, c’est-à-dire une glycémie perturbée sans diabète installé.",
+      source: "steps2018",
+    },
+    {
+      fact: "Deux adultes sur trois (63,2 %) n’avaient jamais fait mesurer leur glycémie au moment de l’enquête.",
+      source: "steps2018",
+    },
+    {
+      fact: "Plus de 2,7 millions de Marocains adultes vivent avec un diabète, dont environ la moitié sans diagnostic, et plus de 2,2 millions sont prédiabétiques.",
+      source: "ministere2024",
+    },
+  ],
+  "thyroide-temara": [],
+  "nutrition-maladies-metaboliques-temara": [
+    {
+      fact: "Au Maroc, 53 % des adultes présentent un surpoids ou une obésité (IMC ≥ 25) et 20 % une obésité (IMC ≥ 30).",
+      source: "steps2018",
+    },
+    {
+      fact: "L’obésité touche 29 % des femmes contre 11 % des hommes, et 22,8 % des habitants des villes contre 14,9 % en milieu rural.",
+      source: "steps2018",
+    },
+  ],
+  "surrenales-hypophyse-parathyroides-temara": [],
+  "hyperprolactinemie-hypoglycemies-temara": [],
+  "education-therapeutique-temara": [
+    {
+      fact: "Deux adultes marocains sur trois (63,2 %) n’avaient jamais fait mesurer leur glycémie au moment de l’enquête nationale STEPS 2017-2018.",
+      source: "steps2018",
+    },
+  ],
+};
+
+/** Sources distinctes citées par un motif, pour le champ `citation` du JSON-LD. */
+export function evidenceSourceIds(slug: (typeof services)[number]["slug"]) {
+  return [...new Set(serviceEvidence[slug].map((item) => item.source))];
 }

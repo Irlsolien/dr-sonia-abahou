@@ -23,6 +23,11 @@ import {
   serviceQuickAnswer,
   siteName,
   siteUrl,
+  doctorOrderNumber,
+  doctorRegionalCouncil,
+  evidenceSourceIds,
+  evidenceSources,
+  serviceEvidence,
 } from "../../seo";
 import { entityNodes, serviceEntities, speakableSpecification } from "../../geo";
 
@@ -148,6 +153,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
         "Le rendez-vous se confirme actuellement par téléphone ou WhatsApp auprès du cabinet du Dr Sonia Abahou à Témara.",
     },
   ];
+  const evidence = serviceEvidence[service.slug];
+  const citedSources = evidenceSourceIds(service.slug);
   const pageStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -182,6 +189,19 @@ export default async function ServicePage({ params }: ServicePageProps) {
         reviewedBy: {
           "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
         },
+        author: {
+          "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
+        },
+        /* Sources publiques citées dans le bloc « Repères chiffrés ». */
+        ...(citedSources.length > 0
+          ? {
+              citation: citedSources.map((id) => ({
+                "@type": "CreativeWork",
+                name: evidenceSources[id].label,
+                url: evidenceSources[id].url,
+              })),
+            }
+          : {}),
         speakable: speakableSpecification,
         medicalAudience: "https://schema.org/Patient",
         specialty: "https://schema.org/Endocrine",
@@ -319,6 +339,38 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <p>{preparationNote}</p>
       </section>
 
+      {/* Repères chiffrés : un fait précis, attribué à une source publique
+          nommée et liée. C'est le type de passage qu'un moteur de réponse
+          cite ; il reste absent des motifs sans donnée nationale fiable. */}
+      {evidence.length > 0 ? (
+        <section className="section-shell service-copy service-evidence">
+          <p className="eyebrow">Repères chiffrés et sources</p>
+          <h2>Ce que disent les enquêtes nationales au Maroc</h2>
+          <p>
+            Chiffres officiels, cités avec leur source, pour situer ce motif de
+            consultation dans son contexte marocain. Ils ne remplacent pas
+            l’évaluation médicale individuelle réalisée au cabinet.
+          </p>
+          <ul>
+            {evidence.map((item) => (
+              <li key={item.fact}>
+                {item.fact}
+                <small>
+                  Source :{" "}
+                  <a
+                    href={evidenceSources[item.source].url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {evidenceSources[item.source].label}
+                  </a>
+                </small>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
       <section className="section-shell contact-steps-section">
         <div className="section-heading">
           <p className="eyebrow">Prise de contact</p>
@@ -340,8 +392,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <p className="eyebrow">Information et confiance</p>
           <h2>Contenu informatif du {clinicName}.</h2>
           <p>
+            Contenu relu par le {doctorName}, médecin spécialiste en
+            endocrinologie, diabétologie, nutrition et maladies métaboliques,
+            inscrite au {doctorRegionalCouncil} sous le n° {doctorOrderNumber}.
             Cette page présente les motifs de consultation du cabinet sans
-            établir de diagnostic à distance. Informations mises à jour le{" "}
+            établir de diagnostic à distance. Dernière révision le{" "}
             <time dateTime={lastModified}>{lastModifiedLabel}</time>.
           </p>
         </div>

@@ -28,6 +28,7 @@ import {
   services,
   siteName,
   siteUrl,
+  doctorOrderNumber,
 } from "../../seo";
 import { entityNodes, speakableSpecification } from "../../geo";
 
@@ -99,7 +100,7 @@ const rabatFaqItems = [
   {
     question: "Le cabinet du Dr Sonia Abahou est-il à Rabat ?",
     answer:
-      "Le cabinet est situé à Massira 1, Témara, dans l’agglomération de Rabat-Salé-Témara, à quelques minutes de Rabat. Il accueille des patients de Rabat, Salé et Témara pour un suivi en endocrinologie, diabétologie et nutrition.",
+      "Le cabinet est situé à Massira 1, Témara (aussi écrit Temara), dans l’agglomération de Rabat-Salé-Témara, à quelques minutes de Rabat. Il accueille des patients de Rabat, Salé et Témara pour un suivi en endocrinologie, diabétologie et nutrition.",
   },
   {
     question: "Le Dr Sonia Abahou suit-elle des patients venant de Rabat ?",
@@ -209,6 +210,12 @@ const pageStructuredData = {
   ],
 };
 
+const lastModifiedLabel = new Intl.DateTimeFormat("fr-MA", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(new Date(`${lastModified}T12:00:00+01:00`));
+
 export default function RabatPage() {
   return (
     <main id="main-content" className="service-page">
@@ -279,7 +286,7 @@ export default function RabatPage() {
           <h2>Un cabinet dans l’agglomération de Rabat.</h2>
           <p>
             Situé à Massira 1, Témara, le cabinet est facilement accessible
-            depuis Rabat et Salé. Les patients de la région y trouvent un suivi
+            depuis Rabat, Salé, Harhoura, Aïn Atiq et Skhirat. Les patients de la région y trouvent un suivi
             endocrinologique de proximité, sans se déplacer au centre de Rabat.
             Adresse : {clinicAddress}.
           </p>
@@ -357,6 +364,13 @@ export default function RabatPage() {
             </article>
           ))}
         </div>
+        <p className="content-signature">
+          Contenu relu par le {doctorName}, médecin spécialiste en
+          endocrinologie, diabétologie, nutrition et maladies métaboliques,
+          inscrite au {doctorRegionalCouncil} sous le n° {doctorOrderNumber}.
+          Dernière révision le{" "}
+          <time dateTime={lastModified}>{lastModifiedLabel}</time>.
+        </p>
       </section>
 
       <section className="final-cta section-shell">

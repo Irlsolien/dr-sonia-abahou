@@ -27,6 +27,7 @@ import {
   lastModified,
   services,
   siteUrl,
+  doctorOrderNumber,
 } from "../../../seo";
 import {
   arFooterLabels,
@@ -35,6 +36,7 @@ import {
   arOgImage,
   metaAr,
   servicesAr,
+  uiAr,
 } from "../../../seo-ar";
 import { entityNodes, speakableSpecification } from "../../../geo";
 
@@ -210,6 +212,12 @@ const pageStructuredData = {
   ],
 };
 
+const lastModifiedLabelAr = new Intl.DateTimeFormat("ar-MA", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(new Date(`${lastModified}T12:00:00+01:00`));
+
 export default function ArabicRabatPage() {
   return (
     <main
@@ -290,7 +298,8 @@ export default function ArabicRabatPage() {
           <span>على مشارف الرباط</span>
           <h2>عيادة داخل تجمّع الرباط.</h2>
           <p>
-            تقع العيادة بالمسيرة 1 بتمارة، ويسهل الوصول إليها من الرباط وسلا.
+            تقع العيادة بالمسيرة 1 بتمارة، ويسهل الوصول إليها من الرباط وسلا
+            والهرهورة وعين عتيق والصخيرات.
             يجد مرضى الجهة متابعةً قريبة لأمراض الغدد دون التنقّل إلى وسط الرباط.
             العنوان: {clinicAddress}.
           </p>
@@ -367,6 +376,13 @@ export default function ArabicRabatPage() {
             </article>
           ))}
         </div>
+        <p className="content-signature">
+          {uiAr.reviewNote.before}
+          <bdi dir="ltr">{doctorOrderNumber}</bdi>
+          {uiAr.reviewNote.middle}
+          <time dateTime={lastModified}>{lastModifiedLabelAr}</time>
+          {uiAr.reviewNote.after}
+        </p>
       </section>
 
       <section className="final-cta section-shell">

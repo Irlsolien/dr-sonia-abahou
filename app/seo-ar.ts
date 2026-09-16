@@ -27,6 +27,8 @@ import {
   patientJourney,
   professionalGallery,
   services,
+  evidenceSources,
+  serviceEvidence,
 } from "./seo";
 import type { CgmDemoLabels } from "./components/CgmDemoDashboard";
 import type { CookieConsentLabels } from "./components/CookieConsent";
@@ -396,6 +398,25 @@ export const faqAr: Record<FaqQuestion, { question: string; answer: string }> = 
     answer:
       "يعرض الموقع على الخصوص داء السكري واضطرابات الغدة الدرقية والتغذية الطبية والسمنة والأمراض الاستقلابية وفرط برولاكتين الدم ونقص السكر في الدم وبعض أمراض الغدد الصماء.",
   },
+  "Le cabinet reçoit-il sans rendez-vous ?": {
+    question: "هل تستقبل العيادة بدون موعد؟",
+    answer:
+      "لا. تستقبل العيادة بموعد فقط، تؤكّده السكرتارية هاتفيًا أو عبر واتساب.",
+  },
+  "Le cabinet est-il accessible aux personnes à mobilité réduite ?": {
+    question: "هل العيادة مهيّأة للأشخاص ذوي الحركة المحدودة؟",
+    answer:
+      "نعم. مدخل العيادة مهيّأ للأشخاص ذوي الحركة المحدودة، كما هو مبيّن في صفحتها على Google. وتقدّم السكرتارية التوضيحات العملية حول الوصول.",
+  },
+  "Peut-on régler la consultation par carte bancaire ?": {
+    question: "هل يمكن أداء ثمن الاستشارة بالبطاقة البنكية؟",
+    answer: "نعم. تقبل العيادة بطاقات Visa وMasterCard.",
+  },
+  "Depuis quelles villes vient-on consulter au cabinet ?": {
+    question: "من أي مدن يأتي المرضى إلى العيادة؟",
+    answer:
+      "توجد العيادة بالمسيرة 1 بتمارة، ضمن تجمّع الرباط-سلا-تمارة. ويسهل الوصول إليها من وسط تمارة والهرهورة وعين عتيق والصخيرات والرباط وسلا.",
+  },
 };
 
 /**
@@ -502,6 +523,15 @@ export const uiAr = {
 
   faq: {
     title: "معلومات عملية قبل الاستشارة.",
+  },
+
+  /* Signature éditoriale visible : qui a relu le contenu, et quand. Le numéro
+     d'inscription à l'Ordre est latin, il se compose en JSX dans un `<bdi>`. */
+  reviewNote: {
+    before:
+      "محتوى راجعته الدكتورة سونيا أبحو، طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية، مسجَّلة بالمجلس الجهوي لهيئة الأطباء بالرباط تحت رقم ",
+    middle: ". آخر مراجعة للمحتوى في ",
+    after: ".",
   },
 
   reviews: {
@@ -890,11 +920,22 @@ export const serviceUiAr = {
     documentsTitle: "إحضار تحاليلكم وعلاجاتكم الجارية",
   },
 
+  /* Repères chiffrés sourcés, miroir du bloc français (`serviceEvidenceAr`). */
+  evidence: {
+    eyebrow: "أرقام ومصادر",
+    title: "ما تقوله البحوث الوطنية في المغرب",
+    intro:
+      "أرقام رسمية، مذكورة مع مصدرها، لوضع سبب الاستشارة في سياقه المغربي. وهي لا تُغني عن التقييم الطبي الفردي الذي يُنجَز بالعيادة.",
+    sourceLabel: "المصدر: ",
+  },
+
   editorial: {
     eyebrow: "معلومات وثقة",
     title: "محتوى إعلامي من عيادة الدكتورة سونيا أبحو.",
     textBefore:
-      "تعرض هذه الصفحة أسباب الاستشارة بالعيادة دون إجراء تشخيص عن بُعد. حُدِّثت المعلومات في ",
+      "محتوى راجعته الدكتورة سونيا أبحو، طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية، مسجَّلة بالمجلس الجهوي لهيئة الأطباء بالرباط تحت رقم ",
+    textMiddle:
+      ". تعرض هذه الصفحة أسباب الاستشارة بالعيادة دون إجراء تشخيص عن بُعد. آخر مراجعة للمحتوى في ",
     textAfter: ".",
     profileLink: "الاطّلاع على مسار الدكتورة سونيا أبحو",
   },
@@ -960,4 +1001,81 @@ export function serviceFaqItemsAr(slug: ServiceSlug) {
         "يُؤكَّد الموعد حاليًا هاتفيًا أو عبر واتساب لدى عيادة الدكتورة سونيا أبحو بتمارة.",
     },
   ] as const;
+}
+
+/* ==========================================================================
+   Repères chiffrés sourcés — miroir arabe de `serviceEvidence`
+   ========================================================================== */
+
+type EvidenceSourceId = keyof typeof evidenceSources;
+
+/** Libellés arabes des sources ; les URL restent celles de `app/seo.ts`. */
+export const evidenceSourcesAr: Record<EvidenceSourceId, { label: string }> = {
+  steps2018: {
+    label:
+      "وزارة الصحة (المغرب)، البحث الوطني حول عوامل الخطر المشتركة للأمراض غير السارية (STEPS)، 2017-2018 — تقرير صدر سنة 2019",
+  },
+  ministere2024: {
+    label:
+      "وزارة الصحة والحماية الاجتماعية، أرقام بمناسبة اليوم العالمي للسكري، 14 نونبر 2024 (نقلتها جريدة Le Matin)",
+  },
+};
+
+/**
+ * Mêmes faits, mêmes chiffres, mêmes sources que la version française. Les
+ * pourcentages sont écrits « في المائة » plutôt qu'avec le signe « % », qui se
+ * détache mal en fin de séquence dans un paragraphe RTL.
+ */
+export const serviceEvidenceAr: Record<
+  ServiceSlug,
+  readonly { fact: string; source: EvidenceSourceId }[]
+> = {
+  "diabete-temara": [
+    {
+      fact: "في المغرب، يعاني 10,6 في المائة من البالغين (18 سنة فما فوق) من السكري (ارتفاع السكر في الدم أو علاج جارٍ): 12,6 في المائة لدى النساء و8,6 في المائة لدى الرجال.",
+      source: "steps2018",
+    },
+    {
+      fact: "10,4 في المائة من البالغين في مرحلة ما قبل السكري، أي اختلال في السكر في الدم دون سكري مستقر.",
+      source: "steps2018",
+    },
+    {
+      fact: "اثنان من كل ثلاثة بالغين (63,2 في المائة) لم يقيسوا نسبة السكر في دمهم قط وقت إجراء البحث.",
+      source: "steps2018",
+    },
+    {
+      fact: "أكثر من 2,7 مليون مغربي بالغ يعيشون مع السكري، نحو نصفهم دون تشخيص، وأكثر من 2,2 مليون في مرحلة ما قبل السكري.",
+      source: "ministere2024",
+    },
+  ],
+  "thyroide-temara": [],
+  "nutrition-maladies-metaboliques-temara": [
+    {
+      fact: "في المغرب، 53 في المائة من البالغين لديهم فرط وزن أو سمنة (مؤشر كتلة الجسم 25 فما فوق)، و20 في المائة لديهم سمنة (مؤشر كتلة الجسم 30 فما فوق).",
+      source: "steps2018",
+    },
+    {
+      fact: "تصيب السمنة 29 في المائة من النساء مقابل 11 في المائة من الرجال، و22,8 في المائة من سكان المدن مقابل 14,9 في المائة في الوسط القروي.",
+      source: "steps2018",
+    },
+  ],
+  "surrenales-hypophyse-parathyroides-temara": [],
+  "hyperprolactinemie-hypoglycemies-temara": [],
+  "education-therapeutique-temara": [
+    {
+      fact: "اثنان من كل ثلاثة بالغين مغاربة (63,2 في المائة) لم يقيسوا نسبة السكر في دمهم قط وقت إجراء البحث الوطني STEPS 2017-2018.",
+      source: "steps2018",
+    },
+  ],
+};
+
+/* Garde de parité : chaque motif porte le même nombre de repères en arabe
+   qu'en français. Le typage garantit les clés ; ce contrôle garantit les
+   effectifs, et fait échouer le build statique si la parité est rompue. */
+for (const slug of Object.keys(serviceEvidence) as ServiceSlug[]) {
+  if (serviceEvidence[slug].length !== serviceEvidenceAr[slug].length) {
+    throw new Error(
+      `Parité FR/AR rompue : repères chiffrés du motif « ${slug} » (${serviceEvidence[slug].length} FR / ${serviceEvidenceAr[slug].length} AR).`,
+    );
+  }
 }
