@@ -60,6 +60,10 @@ const STORAGE_KEY = "drsonia-cookie-consent";
 const OPEN_EVENT = "drsonia:cookie-consent-open";
 /* Événement DOM émis après chaque enregistrement du choix. */
 const CHANGE_EVENT = "drsonia:cookie-consent-change";
+/* Exposés à `ReviewNudge`, qui n'apparaît qu'une fois le choix exprimé
+   (jamais deux bandeaux superposés à l'ouverture du site). */
+export const COOKIE_CONSENT_STORAGE_KEY = STORAGE_KEY;
+export const COOKIE_CONSENT_CHANGE_EVENT = CHANGE_EVENT;
 
 /**
  * État du consentement : `pending` tant que le document n'est pas hydraté

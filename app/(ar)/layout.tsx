@@ -4,6 +4,8 @@ import "../globals.css";
 import { NavigationProgress } from "../components/NavigationProgress";
 import { ConsoleWarning } from "../components/ConsoleWarning";
 import { CookieConsent } from "../components/CookieConsent";
+import { ReviewNudge } from "../components/ReviewNudge";
+import { reviewRequestPath } from "../seo";
 import { arabicFontVariables, latinFontVariablesAr } from "./fonts";
 import {
   absoluteUrl,
@@ -11,7 +13,13 @@ import {
   doctorProfilePath,
   siteUrl,
 } from "../seo";
-import { arCookieConsentLabels, arOgImage, metaAr, uiAr } from "../seo-ar";
+import {
+  arCookieConsentLabels,
+  arOgImage,
+  arReviewNudgeLabels,
+  metaAr,
+  uiAr,
+} from "../seo-ar";
 
 /**
  * LAYOUT RACINE ARABE (groupe de routes `(ar)`).
@@ -159,6 +167,12 @@ export default function ArabicRootLayout({
         {/* Bandeau cookies + Google Analytics 4, chargé après acceptation
             seulement (miroir du layout français). */}
         <CookieConsent lang="ar" labels={arCookieConsentLabels} />
+        {/* Invitation discrète à laisser un avis, miroir du layout français. */}
+        <ReviewNudge
+          lang="ar"
+          labels={arReviewNudgeLabels}
+          href={`/ar${reviewRequestPath}`}
+        />
       </body>
     </html>
   );

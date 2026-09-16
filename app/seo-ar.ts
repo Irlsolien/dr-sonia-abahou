@@ -31,6 +31,7 @@ import {
   serviceEvidence,
 } from "./seo";
 import type { ReviewRequestCopy } from "./seo";
+import type { ReviewNudgeLabels } from "./components/ReviewNudge";
 import type { CgmDemoLabels } from "./components/CgmDemoDashboard";
 import type { CookieConsentLabels } from "./components/CookieConsent";
 import type { HeaderLabels } from "./components/SiteHeader";
@@ -688,6 +689,16 @@ export const arCookieConsentLabels: CookieConsentLabels = {
   accept: "قبول",
   refuse: "رفض",
   settings: "إدارة ملفات تعريف الارتباط",
+};
+
+/** Invitation discrète à laisser un avis (miroir de `frReviewNudgeLabels`). */
+export const arReviewNudgeLabels: ReviewNudgeLabels = {
+  regionAriaLabel: "دعوة لترك رأي",
+  title: "سبق أن زرتم العيادة؟",
+  body: "رأيكم على Google يساعد مرضى آخرين في تمارة على إيجاد العيادة. دقيقة واحدة تكفي.",
+  cta: "ترك رأي",
+  later: "لاحقًا",
+  close: "إغلاق",
 };
 
 export const arMapEmbedLabels: MapEmbedLabels = {
