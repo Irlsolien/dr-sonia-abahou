@@ -137,8 +137,8 @@ export function SiteFooter({
             <Image
               src="/dr-sonia-monogram-clean.webp"
               alt=""
-              width={200}
-              height={180}
+              width={176}
+              height={158}
               sizes="64px"
             />
           </span>

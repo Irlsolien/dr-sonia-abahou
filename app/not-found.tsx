@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import Link from "next/link";
 import "./globals.css";
-import { latinFontVariables } from "./fonts";
+import { latinFontVariablesLazy } from "./fonts-lazy";
 import { NavigationProgress } from "./components/NavigationProgress";
 import { SiteHeader } from "./components/SiteHeader";
 import { SiteFooter } from "./components/SiteFooter";
@@ -77,7 +77,7 @@ const whatsappHref = `https://wa.me/${appointment.whatsappPhone}?text=${encodeUR
 
 export default function NotFound() {
   return (
-    <html lang="fr-MA" className={latinFontVariables}>
+    <html lang="fr-MA" className={latinFontVariablesLazy}>
       <body>
         <NavigationProgress />
         {/* Lien d'évitement : premier élément focalisable du document. Il vise

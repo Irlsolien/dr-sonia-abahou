@@ -4,8 +4,7 @@ import "../globals.css";
 import { NavigationProgress } from "../components/NavigationProgress";
 import { ConsoleWarning } from "../components/ConsoleWarning";
 import { CookieConsent } from "../components/CookieConsent";
-import { latinFontVariables } from "../fonts";
-import { arabicFontVariables } from "./fonts";
+import { arabicFontVariables, latinFontVariablesAr } from "./fonts";
 import {
   absoluteUrl,
   doctorName,
@@ -137,12 +136,13 @@ export default function ArabicRootLayout({
      et les deux latines, car les classes partagées avec la version française
      référencent `--font-serif` (numéros du fil de consultation, index des
      motifs) et `--font-medical-ui` (bascule de langue « Français », séquences
-     latines conservées telles quelles). */
+     latines conservées telles quelles). Les latines viennent de `./fonts`
+     (instances sans préchargement, cf. commentaire là-bas). */
   return (
     <html
       lang="ar"
       dir="rtl"
-      className={`${latinFontVariables} ${arabicFontVariables}`}
+      className={`${latinFontVariablesAr} ${arabicFontVariables}`}
     >
       <body>
         <NavigationProgress />

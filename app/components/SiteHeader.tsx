@@ -109,6 +109,7 @@ export function SiteHeader({
             width={58}
             height={52}
             sizes="58px"
+            loading="eager"
           />
         </span>
         <strong>{labels.brand}</strong>

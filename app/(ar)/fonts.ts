@@ -9,7 +9,12 @@
  * Noto Naskh Arabic : naskh sobre et contrasté, équivalent arabe du serif
  * éditorial utilisé côté français, réservé aux titres.
  */
-import { IBM_Plex_Sans_Arabic, Noto_Naskh_Arabic } from "next/font/google";
+import {
+  Fraunces,
+  IBM_Plex_Sans_Arabic,
+  Noto_Naskh_Arabic,
+  Public_Sans,
+} from "next/font/google";
 
 /*
  * Deux graisses par famille au lieu de quatre : chaque graisse est un fichier
@@ -39,3 +44,36 @@ const arabicSerif = Noto_Naskh_Arabic({
 });
 
 export const arabicFontVariables = `${arabicUi.variable} ${arabicSerif.variable}`;
+/*
+ * Familles latines du document arabe, instanciées ICI avec `preload: false`
+ * (mêmes réglages que `app/fonts.ts`, rendu identique). Sur `/ar` elles ne
+ * servent qu'à quelques séquences latines (numéros du fil de consultation,
+ * index des motifs, bascule « Français ») ; les précharger coûtait 94 Ko sur
+ * le chemin critique mobile.
+ *
+ * Nécessite `experimental.cssChunking: "graph"` (next.config.ts) et la page
+ * 404 sur `app/fonts-lazy.ts` : sinon Turbopack fusionne les `@font-face` de
+ * `app/fonts.ts` dans le chunk partagé de `globals.css`, et leurs fichiers
+ * préchargés ressortent alors sur `/ar` aussi. Contrôle après build : le
+ * nombre de `<link rel="preload" as="font">` dans `out/ar.html` est 5,
+ * jamais 7 ; 2 dans `out/index.html`.
+ */
+const latinSerifAr = Fraunces({
+  subsets: ["latin"],
+  axes: ["opsz"],
+  display: "swap",
+  preload: false,
+  variable: "--font-serif",
+  fallback: ["Georgia", "Times New Roman", "serif"],
+});
+
+const latinUiAr = Public_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
+  variable: "--font-medical-ui",
+  fallback: ["Segoe UI", "Helvetica Neue", "Arial", "sans-serif"],
+});
+
+export const latinFontVariablesAr = `${latinSerifAr.variable} ${latinUiAr.variable}`;

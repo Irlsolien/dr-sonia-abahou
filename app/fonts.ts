@@ -4,9 +4,12 @@
  * communes y référencent `--font-serif` et `--font-medical-ui`) et la page
  * 404, qui compose son propre document.
  *
- * Instanciation unique : deux appels `next/font` identiques dans des
- * fichiers différents produisent deux modules CSS distincts, donc des
- * `@font-face` en double dans le bundle.
+ * Instanciation unique pour les routes françaises : deux appels `next/font`
+ * identiques dans des fichiers différents produisent deux modules CSS
+ * distincts, donc des `@font-face` en double dans le bundle. Deux exceptions
+ * volontaires, en `preload: false` : `app/(ar)/fonts.ts` (document arabe) et
+ * `app/fonts-lazy.ts` (page 404), pour que le préchargement de ces deux
+ * familles reste limité aux routes françaises.
  *
  * Fraunces : serif éditoriale (axe optique) pour les grands titres.
  * Public Sans : sans-serif institutionnelle et sobre pour l'interface.
