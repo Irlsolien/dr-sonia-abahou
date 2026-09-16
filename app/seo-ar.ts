@@ -30,6 +30,7 @@ import {
   evidenceSources,
   serviceEvidence,
 } from "./seo";
+import type { ReviewRequestCopy } from "./seo";
 import type { CgmDemoLabels } from "./components/CgmDemoDashboard";
 import type { CookieConsentLabels } from "./components/CookieConsent";
 import type { HeaderLabels } from "./components/SiteHeader";
@@ -543,6 +544,8 @@ export const uiAr = {
     ratingSuffix: "من 5",
     ratingCountLabel: "رأيًا على Google",
     seeOnGoogle: "الاطّلاع على الآراء على Google",
+    /* Lien vers la page /ar/avis (sollicitation d'avis, miroir de /avis). */
+    leaveReview: "ترك رأي على Google",
     disclaimer: "مقتطفات من آراء عمومية منشورة على Google، مقتبسة دون تعديل.",
     originalLanguageNote: "آراء منشورة على Google بلغتها الأصلية.",
     translatedFromArabic: "مترجَم من العربية",
@@ -1079,3 +1082,59 @@ for (const slug of Object.keys(serviceEvidence) as ServiceSlug[]) {
     );
   }
 }
+
+/* ==========================================================================
+   Page « رأيكم » (/ar/avis) — miroir de `reviewRequestCopy`
+   ========================================================================== */
+
+export const reviewRequestCopyAr: ReviewRequestCopy = {
+  metaTitle: "رأيكم في العيادة | الدكتورة سونيا أبحو",
+  metaDescription:
+    "ترك رأي على Google حول عيادة الدكتورة سونيا أبحو، طبيبة الغدد الصماء بتمارة. رأي صادق يساعد مرضى آخرين على إيجاد متابعة قريبة منهم.",
+  eyebrow: "شكرًا على ثقتكم",
+  title: "رأيكم يساعد مرضى آخرين في تمارة.",
+  lead: "بضعة أسطر صادقة عن تجربتكم في العيادة تساعد أشخاصًا آخرين على إيجاد متابعة في أمراض الغدد الصماء قريبًا منهم. أيًّا كان رأيكم، فهو يُقرأ ويُؤخذ بعين الاعتبار.",
+  signature: "الدكتورة سونيا أبحو وفريق العيادة",
+  reviewButton: "ترك رأي على Google",
+  homeButton: "العودة إلى الصفحة الرئيسية",
+  topicsEyebrow: "ماذا تكتبون؟",
+  topicsTitle: "ثلاث أفكار إن لم تعرفوا من أين تبدؤون.",
+  topics: [
+    {
+      title: "سبب زيارتكم",
+      text: "السكري، الغدة الدرقية، التغذية، فحص هرموني: ذكر سبب زيارتكم يساعد من يبحث عن الشيء نفسه.",
+    },
+    {
+      title: "الاستقبال والتنظيم",
+      text: "أخذ الموعد، الانتظار، وكيفية استقبالكم ومواكبتكم.",
+    },
+    {
+      title: "ما فهمتموه",
+      text: "هل بدت لكم الشروحات حول حالتكم أو تحاليلكم أو علاجكم واضحة؟",
+    },
+  ],
+  privacyNote:
+    "الرأي على Google علني: لا تكتبوا فيه أي تفصيل طبي شخصي. ولا تؤكد العيادة أبدًا في ردودها أن شخصًا ما مريض لديها.",
+  faqEyebrow: "أسئلة متكرّرة",
+  faqTitle: "كيف يتم ذلك؟",
+  faq: [
+    {
+      question: "هل يلزم حساب Google؟",
+      answer: "نعم. معظم الهواتف تتوفر عليه مسبقًا. الزر يفتح مباشرة نافذة التقييم.",
+    },
+    {
+      question: "كم يستغرق الأمر؟",
+      answer: "نحو دقيقة واحدة: تقييم، بضعة أسطر، ثم يُنشر.",
+    },
+    {
+      question: "هل يمكنني الكتابة بالعربية؟",
+      answer: "نعم، باللغة التي تختارونها. تردّ العيادة على كل رأي، بالفرنسية كما بالعربية.",
+    },
+  ],
+  contactEyebrow: "سؤال حول متابعتكم؟",
+  contactTitle: "السكرتارية تبقى في خدمتكم.",
+  contactText:
+    "لأخذ موعد أو الاستفسار عن نتيجة أو عن متابعتكم، تواصلوا مباشرة مع العيادة بدل المرور عبر رأي علني.",
+  callLabel: "الاتصال",
+  whatsappLabel: "واتساب",
+};

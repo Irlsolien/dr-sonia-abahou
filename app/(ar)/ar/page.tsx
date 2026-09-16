@@ -43,6 +43,7 @@ import {
   services,
   siteName,
   siteUrl,
+  reviewRequestPath,
 } from "../../seo";
 import { clinicEntities, entityNodes, speakableSpecification } from "../../geo";
 import {
@@ -826,6 +827,9 @@ export default function ArabicHomePage() {
             >
               {uiAr.reviews.seeOnGoogle}
             </a>
+            <Link className="text-link reviews-leave" href={`/ar${reviewRequestPath}`}>
+              {uiAr.reviews.leaveReview}
+            </Link>
             <p className="reviews-disclaimer">{uiAr.reviews.disclaimer}</p>
             <p className="reviews-disclaimer">
               {uiAr.reviews.originalLanguageNote}

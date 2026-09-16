@@ -43,6 +43,7 @@ import {
   services,
   siteName,
   siteUrl,
+  reviewRequestPath,
 } from "../seo";
 import { clinicEntities, entityNodes, speakableSpecification } from "../geo";
 
@@ -717,6 +718,11 @@ export default function Home() {
             >
               Voir les avis sur Google
             </a>
+            {/* Sollicitation neutre : la page /avis explique comment laisser un
+                avis, sans tri ni récompense (règles Google). */}
+            <Link className="text-link reviews-leave" href={reviewRequestPath}>
+              Laisser un avis Google
+            </Link>
             <p className="reviews-disclaimer">
               Extraits d’avis Google publics, cités sans modification.
             </p>

@@ -747,3 +747,100 @@ export const serviceEvidence: Record<
 export function evidenceSourceIds(slug: (typeof services)[number]["slug"]) {
   return [...new Set(serviceEvidence[slug].map((item) => item.source))];
 }
+
+/* ==========================================================================
+   Page « Votre avis » (/avis) — sollicitation d'avis Google
+   ========================================================================== */
+
+/**
+ * Lien direct de notation Google du cabinet : il ouvre la fenêtre « Donner
+ * une note » sans passer par la fiche. C'est le lien fourni par Google dans
+ * « Demander des avis ». Il n'est publié que sur la page `/avis`, atteinte par
+ * QR code ou par message après la consultation.
+ */
+export const googleReviewUrl = "https://g.page/r/CcTrMdRuzhZOEBM/review";
+export const reviewRequestPath = "/avis";
+
+/**
+ * Contenu de la page `/avis`. Typé pour que la version arabe
+ * (`reviewRequestCopyAr`, dans `app/seo-ar.ts`) porte exactement les mêmes
+ * champs. Règles Google respectées : demande neutre (aucun tri des patients
+ * satisfaits), aucune récompense, aucun texte dicté.
+ */
+export type ReviewRequestCopy = {
+  readonly metaTitle: string;
+  readonly metaDescription: string;
+  readonly eyebrow: string;
+  readonly title: string;
+  readonly lead: string;
+  readonly signature: string;
+  readonly reviewButton: string;
+  readonly homeButton: string;
+  readonly topicsEyebrow: string;
+  readonly topicsTitle: string;
+  readonly topics: readonly { readonly title: string; readonly text: string }[];
+  readonly privacyNote: string;
+  readonly faqEyebrow: string;
+  readonly faqTitle: string;
+  readonly faq: readonly {
+    readonly question: string;
+    readonly answer: string;
+  }[];
+  readonly contactEyebrow: string;
+  readonly contactTitle: string;
+  readonly contactText: string;
+  readonly callLabel: string;
+  readonly whatsappLabel: string;
+};
+
+export const reviewRequestCopy: ReviewRequestCopy = {
+  metaTitle: "Votre avis sur le cabinet | Dr Sonia Abahou",
+  metaDescription:
+    "Laisser un avis Google sur le cabinet du Dr Sonia Abahou, endocrinologue à Témara. Un avis sincère aide d’autres patients à trouver un suivi près de chez eux.",
+  eyebrow: "Merci pour votre confiance",
+  title: "Votre avis aide d’autres patients de Témara.",
+  lead: "Quelques lignes sincères sur votre expérience au cabinet aident d’autres personnes à trouver un suivi en endocrinologie près de chez elles. Quel qu’il soit, votre avis est lu, et il compte.",
+  signature: "Dr Sonia Abahou et l’équipe du cabinet",
+  reviewButton: "Laisser un avis sur Google",
+  homeButton: "Retour à l’accueil",
+  topicsEyebrow: "Que raconter ?",
+  topicsTitle: "Trois pistes, si vous ne savez pas par où commencer.",
+  topics: [
+    {
+      title: "Le motif de votre venue",
+      text: "Diabète, thyroïde, nutrition, bilan hormonal : dire pourquoi vous êtes venu aide celles et ceux qui cherchent la même chose.",
+    },
+    {
+      title: "L’accueil et l’organisation",
+      text: "La prise de rendez-vous, l’attente, la façon dont vous avez été reçu et accompagné.",
+    },
+    {
+      title: "Ce que vous avez compris",
+      text: "Les explications reçues sur votre situation, vos analyses ou votre traitement vous ont-elles paru claires ?",
+    },
+  ],
+  privacyNote:
+    "Un avis Google est public : n’y écrivez aucun détail médical personnel. Le cabinet ne confirme jamais dans ses réponses qu’une personne est patiente.",
+  faqEyebrow: "Questions fréquentes",
+  faqTitle: "Comment ça marche ?",
+  faq: [
+    {
+      question: "Faut-il un compte Google ?",
+      answer: "Oui. La plupart des téléphones en ont déjà un. Le bouton ouvre directement la fenêtre de notation.",
+    },
+    {
+      question: "Combien de temps cela prend-il ?",
+      answer: "Une minute environ : une note, quelques lignes, et c’est publié.",
+    },
+    {
+      question: "Puis-je écrire en arabe ?",
+      answer: "Oui, dans la langue de votre choix. Le cabinet répond à chaque avis, en français comme en arabe.",
+    },
+  ],
+  contactEyebrow: "Une question sur votre suivi ?",
+  contactTitle: "Le secrétariat reste joignable.",
+  contactText:
+    "Pour un rendez-vous, un résultat ou une question sur votre suivi, contactez directement le cabinet plutôt que de passer par un avis public.",
+  callLabel: "Appeler",
+  whatsappLabel: "WhatsApp",
+};
