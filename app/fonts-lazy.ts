@@ -17,7 +17,6 @@ import { Fraunces, Public_Sans } from "next/font/google";
 
 const frauncesLazy = Fraunces({
   subsets: ["latin"],
-  axes: ["opsz"],
   display: "swap",
   preload: false,
   variable: "--font-serif",

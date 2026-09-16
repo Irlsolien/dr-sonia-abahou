@@ -60,7 +60,6 @@ export const arabicFontVariables = `${arabicUi.variable} ${arabicSerif.variable}
  */
 const latinSerifAr = Fraunces({
   subsets: ["latin"],
-  axes: ["opsz"],
   display: "swap",
   preload: false,
   variable: "--font-serif",
