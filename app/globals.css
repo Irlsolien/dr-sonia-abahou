@@ -5645,13 +5645,28 @@ body {
   z-index: 92;
   width: min(360px, calc(100vw - 36px));
   pointer-events: none;
+  /* Chorégraphie : courbe de sortie vive (ease-out), sens des reflets (miroir
+     en arabe) et hauteur de montée à l'entrée. */
+  --nudge-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --nudge-dir: 1;
+  --nudge-rise: 20px;
+  /* Glissé tactile : `--swipe-x` et `--swipe-o` suivent le doigt (posées par
+     `ReviewNudge`), puis la transition ramène ou évacue la carte. */
+  transform: translateX(var(--swipe-x, 0px));
+  opacity: var(--swipe-o, 1);
+  transition:
+    transform 200ms ease-out,
+    opacity 200ms ease-out;
+}
+
+.review-nudge[data-dragging] {
+  transition: none;
 }
 
 .review-nudge-card {
   position: relative;
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 8px 14px;
+  gap: 6px;
   padding: 18px 20px 16px;
   border: 1px solid rgba(7, 150, 173, 0.18);
   border-radius: 22px;
@@ -5659,13 +5674,79 @@ body {
   box-shadow: 0 18px 50px rgba(7, 89, 133, 0.2);
   backdrop-filter: blur(18px);
   pointer-events: auto;
-  animation: review-nudge-in 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* Le défilement vertical reste à la page ; le glissé latéral à la carte. */
+  touch-action: pan-y;
+  /* La carte grandit depuis son coin d'ancrage, pas depuis son centre. */
+  transform-origin: 100% 100%;
+  transition:
+    transform 220ms var(--nudge-ease),
+    box-shadow 220ms ease;
+  animation: review-nudge-in 400ms var(--nudge-ease) backwards;
+}
+
+/* Sortie plus rapide que l'entrée ; la carte est démontée juste après. */
+.review-nudge[data-state="closing"] .review-nudge-card {
+  pointer-events: none;
+  animation: review-nudge-out 200ms ease-out forwards;
+}
+
+.review-nudge[data-state="swiped"] .review-nudge-card {
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .review-nudge-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 24px 60px rgba(7, 89, 133, 0.24);
+  }
 }
 
 @keyframes review-nudge-in {
   from {
     opacity: 0;
-    transform: translateY(26px) scale(0.97);
+    transform: translateY(var(--nudge-rise)) scale(0.96);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes review-nudge-out {
+  to {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+    filter: blur(2px);
+  }
+}
+
+/* Révélation en cascade du contenu, 60 ms entre chaque bloc. */
+.review-nudge-stars,
+.review-nudge-text h2,
+.review-nudge-text p,
+.review-nudge-actions {
+  animation: review-nudge-rise 300ms var(--nudge-ease) backwards;
+  animation-delay: calc(100ms + var(--nudge-step, 0) * 60ms);
+}
+
+.review-nudge-text h2 {
+  --nudge-step: 1;
+}
+
+.review-nudge-text p {
+  --nudge-step: 2;
+}
+
+.review-nudge-actions {
+  --nudge-step: 3;
+}
+
+@keyframes review-nudge-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -5673,24 +5754,110 @@ body {
   }
 }
 
-.review-nudge-stars {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  background: rgba(217, 119, 6, 0.12);
-  color: var(--color-star);
-  animation: review-nudge-star 1.4s ease-in-out 460ms 2;
+@keyframes review-nudge-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-@keyframes review-nudge-star {
-  0%,
-  100% {
-    transform: scale(1) rotate(0deg);
+/* Cinq étoiles décoratives : elles s'allument une à une, puis un reflet
+   unique les traverse. Aucune boucle : la carte redevient immobile. */
+.review-nudge-stars {
+  position: relative;
+  display: inline-flex;
+  justify-self: start;
+  gap: 3px;
+  /* Marge interne : laisse la place au léger dépassement d'échelle des
+     étoiles sous `overflow: hidden` (nécessaire au reflet). */
+  margin: -4px;
+  padding: 4px;
+  overflow: hidden;
+  color: var(--color-star);
+}
+
+.review-nudge-stars::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 38%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.9) 50%,
+    transparent
+  );
+  transform: translateX(calc(var(--nudge-dir) * -110%));
+  animation: review-nudge-glint 700ms ease-in-out 900ms backwards;
+  pointer-events: none;
+}
+
+@keyframes review-nudge-glint {
+  from {
+    transform: translateX(calc(var(--nudge-dir) * -110%));
   }
-  50% {
-    transform: scale(1.12) rotate(-8deg);
+  to {
+    transform: translateX(calc(var(--nudge-dir) * 290%));
+  }
+}
+
+.review-nudge-star {
+  display: block;
+  overflow: visible;
+  transition: transform 240ms var(--nudge-ease);
+  transition-delay: calc(var(--nudge-star, 0) * 35ms);
+}
+
+.review-nudge-star:nth-child(2) {
+  --nudge-star: 1;
+}
+
+.review-nudge-star:nth-child(3) {
+  --nudge-star: 2;
+}
+
+.review-nudge-star:nth-child(4) {
+  --nudge-star: 3;
+}
+
+.review-nudge-star:nth-child(5) {
+  --nudge-star: 4;
+}
+
+.review-nudge-star-base {
+  fill: rgba(7, 89, 133, 0.16);
+}
+
+.review-nudge-star-fill {
+  fill: currentColor;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: review-nudge-star-on 320ms ease-out backwards;
+  animation-delay: calc(220ms + var(--nudge-star, 0) * 70ms);
+}
+
+@keyframes review-nudge-star-on {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-24deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.16) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Survol du bouton : les étoiles se soulèvent en vague. */
+@media (hover: hover) {
+  .review-nudge-card:has(.review-nudge-button:hover) .review-nudge-star {
+    transform: translateY(-3px);
   }
 }
 
@@ -5720,9 +5887,38 @@ body {
 }
 
 .review-nudge-button {
+  position: relative;
   min-height: 44px;
   padding: 10px 18px;
+  overflow: hidden;
   font-size: 0.92rem;
+}
+
+/* Reflet unique sur le bouton, une fois la carte installée. */
+.review-nudge-button::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 46%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent
+  );
+  transform: translateX(calc(var(--nudge-dir) * -110%));
+  animation: review-nudge-shine 900ms ease-in-out 1300ms backwards;
+  pointer-events: none;
+}
+
+@keyframes review-nudge-shine {
+  from {
+    transform: translateX(calc(var(--nudge-dir) * -110%));
+  }
+  to {
+    transform: translateX(calc(var(--nudge-dir) * 240%));
+  }
 }
 
 .review-nudge-later,
@@ -5750,11 +5946,24 @@ body {
   width: 32px;
   height: 32px;
   border-radius: 50%;
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    transform 180ms var(--nudge-ease);
+  animation: review-nudge-fade 300ms ease-out 340ms backwards;
 }
 
 .review-nudge-close:hover,
 .review-nudge-later:hover {
   color: var(--color-ink);
+}
+
+.review-nudge-close:hover {
+  background: rgba(7, 89, 133, 0.08);
+}
+
+.review-nudge-close:active {
+  transform: scale(0.92);
 }
 
 .review-nudge-close:focus-visible,
@@ -5772,6 +5981,12 @@ body {
   direction: rtl;
   text-align: right;
   font-family: var(--font-ar-ui), "Segoe UI", Tahoma, Arial, sans-serif;
+  /* Reflets en miroir : ils suivent le sens de lecture. */
+  --nudge-dir: -1;
+}
+
+.review-nudge-ar .review-nudge-card {
+  transform-origin: 0% 100%;
 }
 
 .review-nudge-ar .review-nudge-close {
@@ -5788,5 +6003,28 @@ body {
     left: 12px;
     bottom: calc(76px + env(safe-area-inset-bottom));
     width: auto;
+    --nudge-rise: 28px;
+  }
+
+  /* Pleine largeur : la carte monte depuis le bas, centrée. */
+  .review-nudge-card,
+  .review-nudge-ar .review-nudge-card {
+    transform-origin: 50% 100%;
+  }
+}
+
+/* Mouvement réduit : la règle globale ramène les durées à 1 ms mais conserve
+   les délais ; on retire donc toute la chorégraphie, la carte apparaît et
+   disparaît d'un bloc (`ReviewNudge` la démonte sans attendre). */
+@media (prefers-reduced-motion: reduce) {
+  .review-nudge-card,
+  .review-nudge-card *,
+  .review-nudge-card *::after {
+    animation: none !important;
+  }
+
+  .review-nudge-stars::after,
+  .review-nudge-button::after {
+    display: none;
   }
 }
