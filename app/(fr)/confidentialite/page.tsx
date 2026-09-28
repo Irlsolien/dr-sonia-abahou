@@ -57,7 +57,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <main id="main-content" className="legal-page">
-      <SiteHeader internal />
+      <SiteHeader internal langSwitchHref="/ar/confidentialite" />
 
       {/* Cible du lien d'évitement français posé par `app/(fr)/layout.tsx`. */}
       <section id="fr-content" className="legal-hero section-shell">
@@ -230,7 +230,7 @@ export default function PrivacyPage() {
         </article>
       </section>
 
-      <SiteFooter internal />
+      <SiteFooter internal langSwitchHref="/ar/confidentialite" />
     </main>
   );
 }

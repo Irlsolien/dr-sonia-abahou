@@ -2509,6 +2509,32 @@ h3 {
   margin: 0;
 }
 
+/* Page rendez-vous : le bloc « Adresse et accès » reprend le panneau des
+   horaires de l'accueil ; seuls ses espacements internes sont ajoutés. */
+.appointment-access p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.appointment-access p + p {
+  margin-top: 12px;
+}
+
+.appointment-access .hero-actions {
+  margin-top: 26px;
+}
+
+/* Étapes de prise de rendez-vous : même respiration que les cartes de
+   rendez-vous avant la note de confidentialité. */
+.appointment-page .contact-steps-section {
+  margin-bottom: 34px;
+}
+
+/* Un numéro de téléphone ne se coupe jamais en fin de ligne. */
+.appointment-phone {
+  white-space: nowrap;
+}
+
 .teleconsultation-steps {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

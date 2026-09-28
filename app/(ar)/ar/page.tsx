@@ -16,6 +16,7 @@ import {
   clinicCity,
   clinicCountry,
   clinicEmail,
+  clinicGoogleBusinessName,
   clinicName,
   clinicPhoneDisplay,
   clinicPhoneInternational,
@@ -24,13 +25,9 @@ import {
   clinicSecondaryPhoneInternational,
   clinicStreetAddress,
   doctorCredentials,
-  doctorInpe,
-  doctorName,
   doctorOrderNumber,
   doctorProfilePath,
   doctorProfessionalProfiles,
-  doctorRegionalCouncil,
-  doctorSameAsProfiles,
   faqItems,
   gallery,
   professionalGallery,
@@ -46,6 +43,7 @@ import {
   reviewRequestPath,
 } from "../../seo";
 import { clinicEntities, entityNodes, speakableSpecification } from "../../geo";
+import { doctorIdAr, doctorNodeAr } from "../../structured-data";
 import {
   activitiesAr,
   activityHighlightsAr,
@@ -152,10 +150,10 @@ const structuredDataAr = {
       "@type": "MedicalClinic",
       "@id": `${arPageUrl}#clinic`,
       name: "عيادة الدكتورة سونيا أبحو",
-      alternateName: clinicName,
+      /* Nom français du cabinet et nom exact de sa fiche Google. */
+      alternateName: [clinicName, clinicGoogleBusinessName],
       description:
         "عيادة لأمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية بتمارة.",
-      inLanguage: "ar",
       image: {
         "@type": "ImageObject",
         url: absoluteUrl("/dr-sonia-abahou.jpg"),
@@ -199,7 +197,7 @@ const structuredDataAr = {
         },
       ],
       employee: {
-        "@id": `${arPageUrl}#doctor`,
+        "@id": doctorIdAr,
       },
       areaServed: "تمارة",
       medicalSpecialty: [
@@ -241,85 +239,7 @@ const structuredDataAr = {
         },
       ],
     },
-    {
-      "@type": "Person",
-      "@id": `${arPageUrl}#doctor`,
-      name: "الدكتورة سونيا أبحو",
-      alternateName: doctorName,
-      honorificPrefix: "د.",
-      jobTitle:
-        "طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية",
-      description:
-        "طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية تمارس بتمارة.",
-      inLanguage: "ar",
-      image: absoluteUrl("/dr-sonia-abahou.jpg"),
-      url: arPageUrl,
-      sameAs: [...doctorSameAsProfiles],
-      /* Mêmes identifiants et mêmes titres que le nœud français : ce sont des
-         données professionnelles publiques validées (`app/seo.ts`), pas des
-         faits ajoutés. */
-      identifier: [
-        {
-          "@type": "PropertyValue",
-          name: "INPE",
-          value: doctorInpe,
-        },
-        {
-          "@type": "PropertyValue",
-          name: "رقم التسجيل بالهيئة",
-          value: doctorOrderNumber,
-        },
-      ],
-      hasCredential: [
-        {
-          "@type": "EducationalOccupationalCredential",
-          credentialCategory: "تخصّص طبي",
-          name: "أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية",
-        },
-        {
-          "@type": "EducationalOccupationalCredential",
-          credentialCategory: "دبلوم جامعي",
-          name: "الفحص بالموجات فوق الصوتية للعنق — Paris V",
-        },
-      ],
-      alumniOf: {
-        "@type": "CollegeOrUniversity",
-        name: "Paris V",
-      },
-      /* Reprise stricte de la légende arabe de la photographie de la section
-         « البصمة الطبية » : aucune distinction supplémentaire n'est déclarée. */
-      award: "تكريم «Tous Unis Contre le Diabète» خلال مؤتمر في طب السكري",
-      hasOccupation: {
-        "@type": "Occupation",
-        name: "طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية",
-        occupationLocation: {
-          "@type": "City",
-          name: "تمارة",
-        },
-      },
-      worksFor: {
-        "@id": `${arPageUrl}#clinic`,
-      },
-      workLocation: {
-        "@id": `${arPageUrl}#clinic`,
-      },
-      affiliation: {
-        "@type": "MedicalOrganization",
-        name: doctorRegionalCouncil,
-      },
-      memberOf: [
-        {
-          "@type": "Organization",
-          name: "Global Metabolic Health Alliance",
-          url: "https://gmha.global",
-        },
-        {
-          "@type": "Organization",
-          name: "Pan Arab Society for Interventional Endocrinology and Diabetes Technology",
-        },
-      ],
-      knowsAbout: entityNodes(clinicEntities, "ar"),
-    },
+    doctorNodeAr,
     /* Le site est une entité bilingue unique : le nœud `WebSite` porte le même
        `@id` que côté français et les mêmes propriétés. Il est répété ici pour
        que la page arabe soit autoportante — la référence `isPartOf` du
@@ -351,7 +271,7 @@ const structuredDataAr = {
       /* Contenu de santé : date de relecture et médecin qui en répond. */
       lastReviewed: lastModified,
       reviewedBy: {
-        "@id": `${arPageUrl}#doctor`,
+        "@id": doctorIdAr,
       },
       /* Passages lisibles à voix haute par un assistant vocal. */
       speakable: speakableSpecification,
@@ -366,7 +286,7 @@ const structuredDataAr = {
         "@id": `${arPageUrl}#clinic`,
       },
       about: {
-        "@id": `${arPageUrl}#doctor`,
+        "@id": doctorIdAr,
       },
       primaryImageOfPage: {
         "@type": "ImageObject",

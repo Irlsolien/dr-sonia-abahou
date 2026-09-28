@@ -10,6 +10,7 @@ import {
   absoluteUrl,
   appointment,
   clinicAddress,
+  clinicAlternateNames,
   clinicalActivities,
   clinicCity,
   clinicCountry,
@@ -21,15 +22,12 @@ import {
   clinicSecondaryPhoneDisplay,
   clinicSecondaryPhoneInternational,
   clinicStreetAddress,
-  doctorAlternateName,
   doctorCredentials,
-  doctorInpe,
   doctorName,
   doctorOrderNumber,
   doctorProfilePath,
   doctorProfessionalProfiles,
   doctorRegionalCouncil,
-  doctorSameAsProfiles,
   faqItems,
   gallery,
   professionalGallery,
@@ -46,6 +44,7 @@ import {
   reviewRequestPath,
 } from "../seo";
 import { clinicEntities, entityNodes, speakableSpecification } from "../geo";
+import { doctorIdFr, doctorNodeFr } from "../structured-data";
 
 const phoneHref = `tel:${clinicPhoneInternational}`;
 const secondaryPhoneHref = `tel:${clinicSecondaryPhoneInternational}`;
@@ -70,7 +69,8 @@ const structuredData = {
       "@type": "MedicalClinic",
       "@id": `${siteUrl}/#clinic`,
       name: clinicName,
-      alternateName: siteName,
+      /* Nom de marque et nom exact de la fiche Google du cabinet. */
+      alternateName: [...clinicAlternateNames],
       description:
         "Cabinet d’endocrinologie, diabétologie, nutrition et maladies métaboliques à Témara.",
       image: {
@@ -118,7 +118,7 @@ const structuredData = {
         },
       ],
       employee: {
-        "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
+        "@id": doctorIdFr,
       },
       areaServed: "Témara",
       medicalSpecialty: [
@@ -159,84 +159,7 @@ const structuredData = {
         },
       ],
     },
-    {
-      "@type": "Person",
-      "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
-      name: doctorName,
-      alternateName: doctorAlternateName,
-      honorificPrefix: "Dr",
-      jobTitle:
-        "Médecin spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques",
-      description:
-        "Médecin spécialiste en endocrinologie, diabétologie, nutrition et maladies métaboliques exerçant à Témara.",
-      image: absoluteUrl("/dr-sonia-abahou.jpg"),
-      url: absoluteUrl(doctorProfilePath),
-      sameAs: [...doctorSameAsProfiles],
-      identifier: [
-        {
-          "@type": "PropertyValue",
-          name: "INPE",
-          value: doctorInpe,
-        },
-        {
-          "@type": "PropertyValue",
-          name: "Numéro ordinal",
-          value: doctorOrderNumber,
-        },
-      ],
-      hasCredential: [
-        {
-          "@type": "EducationalOccupationalCredential",
-          credentialCategory: "Spécialité médicale",
-          name: "Endocrinologie, diabétologie, nutrition et maladies métaboliques",
-        },
-        {
-          "@type": "EducationalOccupationalCredential",
-          credentialCategory: "Diplôme universitaire",
-          name: "Échographie cervicale - Paris V",
-        },
-      ],
-      alumniOf: {
-        "@type": "CollegeOrUniversity",
-        name: "Paris V",
-      },
-      /* Reprise stricte de la légende de la photographie publiée dans la
-         section « Signature médicale » : aucune distinction supplémentaire
-         n'est déclarée. */
-      award: "Distinction « Tous Unis Contre le Diabète », remise lors d’un congrès de diabétologie",
-      hasOccupation: {
-        "@type": "Occupation",
-        name: "Médecin endocrinologue, diabétologue et nutritionniste",
-        occupationLocation: {
-          "@type": "City",
-          name: clinicCity,
-        },
-      },
-      worksFor: {
-        "@id": `${siteUrl}/#clinic`,
-      },
-      workLocation: {
-        "@id": `${siteUrl}/#clinic`,
-      },
-      affiliation: {
-        "@type": "MedicalOrganization",
-        name: doctorRegionalCouncil,
-      },
-      memberOf: [
-        {
-          "@type": "Organization",
-          name: "Global Metabolic Health Alliance",
-          url: "https://gmha.global",
-        },
-        {
-          "@type": "Organization",
-          name: "Pan Arab Society for Interventional Endocrinology and Diabetes Technology",
-        },
-      ],
-      /* Mêmes entités que le cabinet : la docteure est reliée aux concepts
-         médicaux par leurs identifiants publics, pas seulement par des mots. */
-      knowsAbout: entityNodes(clinicEntities, "fr"),
-    },
+    doctorNodeFr,
     {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
@@ -261,7 +184,7 @@ const structuredData = {
          réponse citent pour justifier la fiabilité d'une source médicale. */
       lastReviewed: lastModified,
       reviewedBy: {
-        "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
+        "@id": doctorIdFr,
       },
       /* Passages lisibles à voix haute par un assistant vocal. */
       speakable: speakableSpecification,
@@ -277,7 +200,7 @@ const structuredData = {
         "@id": `${siteUrl}/#clinic`,
       },
       about: {
-        "@id": `${absoluteUrl(doctorProfilePath)}#doctor`,
+        "@id": doctorIdFr,
       },
       primaryImageOfPage: {
         "@type": "ImageObject",

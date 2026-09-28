@@ -6,6 +6,16 @@ export const siteName = "Dr Sonia Abahou";
 export const clinicName = "Cabinet Dr Abahou Sonia";
 export const doctorName = "Dr Sonia Abahou";
 export const doctorAlternateName = "Dr Abahou Sonia";
+/**
+ * Nom exact de la fiche Google Business Profile du cabinet. Il n'est pas
+ * affiché sur le site (le nom de marque reste « Dr Sonia Abahou » /
+ * « Cabinet Dr Abahou Sonia ») : il est seulement déclaré en `alternateName`
+ * du nœud `MedicalClinic` des JSON-LD, pour que le site et la fiche Google
+ * désignent explicitement le même établissement.
+ */
+export const clinicGoogleBusinessName = "Cabinet Endocrino Dr. Sonia Abahou";
+/** Variantes du nom du cabinet (`alternateName` du nœud `#clinic` français). */
+export const clinicAlternateNames = [siteName, clinicGoogleBusinessName] as const;
 export const doctorProfilePath = "/dr-sonia-abahou";
 export const clinicPhoneDisplay = "05 37 60 63 64";
 export const clinicPhoneInternational = "+212537606364";
@@ -41,6 +51,26 @@ export const ogCoverImage = "/og-cover.jpg";
  * Une date figée fait douter les moteurs de réponse de la fraîcheur du site.
  */
 export const lastModified = "2026-09-13";
+
+/**
+ * Pages modifiées après `lastModified`, avec la date réelle de leur dernière
+ * modification. Alimente `<lastmod>` du sitemap et le `dateModified` de leurs
+ * JSON-LD : une date identique sur toutes les URL n'apprend rien aux moteurs.
+ * N'y inscrire qu'un changement de contenu réel (pas une retouche technique),
+ * et ne pas confondre avec la relecture médicale : `lastReviewed` et les
+ * signatures « Dernière révision » restent sur `lastModified`, une page
+ * pratique mise à jour n'a pas été relue médicalement pour autant.
+ */
+export const pageLastModified: Readonly<Record<string, string>> = {
+  "/rendez-vous": "2026-09-28",
+  "/ar/rendez-vous": "2026-09-28",
+};
+
+/** Date de dernière modification d'une page (chemin public, sans domaine). */
+export function lastModifiedFor(path: string) {
+  return pageLastModified[path] ?? lastModified;
+}
+
 export const googleMapsPlaceUrl =
   "https://maps.app.goo.gl/iQDGmhWtGaSKDLJt7";
 
@@ -147,7 +177,7 @@ export const services = [
   {
     slug: "nutrition-maladies-metaboliques-temara",
     title: "Nutrition, obésité et maladies métaboliques",
-    seoTitle: "Nutrition médicale à Témara | Obésité et métabolisme | Dr Abahou Sonia",
+    seoTitle: "Nutrition médicale et obésité à Témara | Dr Abahou Sonia",
     description:
       "Accompagnement en nutrition médicale à Témara : obésité, poids, insulinorésistance, métabolisme, prévention et maladies métaboliques.",
     text: "Accompagnement médical autour de la nutrition, de l’obésité, du métabolisme et de la prévention.",
@@ -257,6 +287,30 @@ export const openingHours = [
 /** Résumé des horaires en une phrase, pour les réponses courtes. */
 export const openingHoursSummary =
   "Du lundi au jeudi de 9h30 à 16h et le vendredi de 9h30 à 12h30. Fermé le samedi et le dimanche.";
+
+/**
+ * Préparation du rendez-vous et étapes de prise de contact, partagées par les
+ * pages motifs et la page `/rendez-vous` : un seul texte source pour tous les
+ * emplacements (miroir arabe : `serviceUiAr.contact` et
+ * `serviceUiAr.preparationNote` dans `app/seo-ar.ts`).
+ */
+export const appointmentPreparationNote =
+  "Pour préparer le rendez-vous, il est conseillé d’apporter les derniers bilans, ordonnances, comptes rendus, imageries et traitements en cours.";
+
+export const appointmentSteps = [
+  {
+    title: "Appeler ou écrire sur WhatsApp",
+    text: `Fixe : ${clinicPhoneDisplay}. Portable / WhatsApp : ${clinicSecondaryPhoneDisplay}.`,
+  },
+  {
+    title: "Convenir d’un créneau avec le secrétariat",
+    text: "Le secrétariat confirme la disponibilité et les modalités pratiques du rendez-vous.",
+  },
+  {
+    title: "Apporter vos bilans et traitements en cours",
+    text: appointmentPreparationNote,
+  },
+] as const;
 
 /**
  * Faits clés du cabinet — bloc « En bref ».

@@ -9,7 +9,6 @@ import {
   absoluteUrl,
   doctorCredentials,
   doctorInpe,
-  doctorName,
   doctorOrderNumber,
   doctorProfilePath,
   doctorProfessionalProfiles,
@@ -21,6 +20,7 @@ import {
   siteUrl,
 } from "../../../seo";
 import { speakableSpecification } from "../../../geo";
+import { doctorIdAr, doctorNodeAr } from "../../../structured-data";
 import {
   arFooterLabels,
   arHeaderLabels,
@@ -99,13 +99,16 @@ const profileStructuredData = {
       dateModified: lastModified,
       lastReviewed: lastModified,
       reviewedBy: {
-        "@id": `${arHomeUrl}#doctor`,
+        "@id": doctorIdAr,
       },
       speakable: speakableSpecification,
-      /* La personne décrite est le nœud `#doctor` partagé, déjà défini sur
-         l'accueil arabe : la page bio n'en redéclare pas les faits. */
+      /* La personne décrite : nœud médecin arabe partagé avec l'accueil `/ar`
+         (`app/structured-data.ts`), déclaré en entier dans le graphe de cette
+         page. Une page profil doit décrire elle-même sa personne : un simple
+         renvoi vers un nœud défini sur une autre page n'est pas lu par les
+         moteurs. */
       mainEntity: {
-        "@id": `${arHomeUrl}#doctor`,
+        "@id": doctorIdAr,
       },
       isPartOf: {
         "@id": `${siteUrl}/#website`,
@@ -122,6 +125,7 @@ const profileStructuredData = {
         "@id": `${absoluteUrl(arProfilePath)}#breadcrumb`,
       },
     },
+    doctorNodeAr,
     {
       "@type": "BreadcrumbList",
       "@id": `${absoluteUrl(arProfilePath)}#breadcrumb`,
@@ -135,7 +139,7 @@ const profileStructuredData = {
         {
           "@type": "ListItem",
           position: 2,
-          name: doctorName,
+          name: "الدكتورة سونيا أبحو",
           item: absoluteUrl(arProfilePath),
         },
       ],

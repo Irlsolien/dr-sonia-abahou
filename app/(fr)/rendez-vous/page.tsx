@@ -6,7 +6,9 @@ import { PhoneIcon, WhatsAppIcon } from "../../components/Icons";
 import {
   absoluteUrl,
   appointment,
+  appointmentSteps,
   clinicAddress,
+  clinicAlternateNames,
   clinicCity,
   clinicCountry,
   clinicName,
@@ -16,16 +18,27 @@ import {
   clinicSecondaryPhoneDisplay,
   clinicSecondaryPhoneInternational,
   clinicStreetAddress,
-  lastModified,
+  doctorName,
+  googleMapsPlaceUrl,
+  lastModifiedFor,
   ogCoverImage,
+  openingHours,
   siteName,
   siteUrl,
 } from "../../seo";
+import { openingHoursSpecification } from "../../structured-data";
+
+/* Page d'arrivée des recherches « rendez-vous » : elle répond d'abord aux
+   questions pratiques (comment, quand, où). La téléconsultation, encore en
+   préparation, reste mentionnée plus bas mais n'apparaît ni dans le titre ni
+   dans la description. */
+const seoTitle = "Prendre rendez-vous au cabinet à Témara | Dr Sonia Abahou";
+const seoDescription =
+  "Rendez-vous au cabinet du Dr Sonia Abahou à Témara (Massira 1), par téléphone ou WhatsApp. Horaires, adresse, itinéraire et documents à apporter.";
 
 export const metadata: Metadata = {
-  title: "Prendre rendez-vous | Dr Sonia Abahou",
-  description:
-    "Contacter le cabinet du Dr Sonia Abahou pour un rendez-vous. La réservation vidéo est temporairement en maintenance.",
+  title: seoTitle,
+  description: seoDescription,
   alternates: {
     canonical: "/rendez-vous",
     /* Page jumelle arabe : même contenu, langue différente. */
@@ -38,9 +51,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Prendre rendez-vous | Dr Sonia Abahou",
-    description:
-      "Contacter le cabinet par appel ou WhatsApp. La réservation vidéo est temporairement en maintenance.",
+    title: seoTitle,
+    description: seoDescription,
     url: "/rendez-vous",
     siteName,
     type: "website",
@@ -62,9 +74,8 @@ export const metadata: Metadata = {
      et de la description de l'accueil, qui ne décrivent pas cette page. */
   twitter: {
     card: "summary_large_image",
-    title: "Prendre rendez-vous | Dr Sonia Abahou",
-    description:
-      "Contacter le cabinet par appel ou WhatsApp. La réservation vidéo est temporairement en maintenance.",
+    title: seoTitle,
+    description: seoDescription,
     images: [absoluteUrl(ogCoverImage)],
   },
 };
@@ -73,6 +84,7 @@ const phoneHref = `tel:${clinicPhoneInternational}`;
 const whatsappHref = `https://wa.me/${appointment.whatsappPhone}?text=${encodeURIComponent(
   appointment.whatsappMessage,
 )}`;
+const mapsHref = googleMapsPlaceUrl;
 
 const appointmentStructuredData = {
   "@context": "https://schema.org",
@@ -82,10 +94,10 @@ const appointmentStructuredData = {
       "@id": `${absoluteUrl("/rendez-vous")}#webpage`,
       name: "Prendre rendez-vous avec le Dr Sonia Abahou",
       description:
-        "Coordonnées pour prendre rendez-vous avec le cabinet du Dr Sonia Abahou à Témara.",
+        "Coordonnées, horaires et accès pour prendre rendez-vous au cabinet du Dr Sonia Abahou à Témara.",
       url: absoluteUrl("/rendez-vous"),
       inLanguage: "fr-MA",
-      dateModified: lastModified,
+      dateModified: lastModifiedFor("/rendez-vous"),
       isPartOf: {
         "@id": `${siteUrl}/#website`,
       },
@@ -97,10 +109,12 @@ const appointmentStructuredData = {
       "@type": "MedicalClinic",
       "@id": `${siteUrl}/#clinic`,
       name: clinicName,
+      alternateName: [...clinicAlternateNames],
       telephone: [clinicPhoneInternational, clinicSecondaryPhoneInternational],
+      hasMap: mapsHref,
       /* Même forme structurée que le nœud `#clinic` de l'accueil : les deux
          descriptions partagent le même `@id`, elles doivent décrire l'adresse
-         de façon identique. */
+         et les horaires de façon identique. */
       address: {
         "@type": "PostalAddress",
         streetAddress: clinicStreetAddress,
@@ -113,6 +127,7 @@ const appointmentStructuredData = {
         latitude: 33.928046,
         longitude: -6.8987233,
       },
+      openingHoursSpecification,
       contactPoint: [
         {
           "@type": "ContactPoint",
@@ -141,18 +156,19 @@ export default function AppointmentPage() {
         }}
       />
 
-      <SiteHeader internal />
+      <SiteHeader internal langSwitchHref="/ar/rendez-vous" />
 
       <MobileActionBar />
 
       {/* Cible du lien d'évitement français posé par `app/(fr)/layout.tsx`. */}
       <section id="fr-content" className="appointment-hero section-shell">
         <p className="eyebrow">Rendez-vous</p>
-        <h1>Choisir le type de rendez-vous.</h1>
+        <h1>Prendre rendez-vous au cabinet à Témara.</h1>
         <p>
-          La prise de rendez-vous en ligne et la téléconsultation vidéo sont en
-          cours de préparation. Pour le moment, merci de contacter le cabinet par
-          appel ou WhatsApp afin de confirmer les disponibilités.
+          Le cabinet du {doctorName}, à Massira 1 ({clinicCity}), reçoit
+          uniquement sur rendez-vous. Contactez le secrétariat par appel ou
+          WhatsApp : il confirme la disponibilité et les modalités pratiques du
+          rendez-vous.
         </p>
       </section>
 
@@ -165,8 +181,16 @@ export default function AppointmentPage() {
             ou WhatsApp afin de confirmer les disponibilités.
           </p>
           <div className="appointment-meta">
-            <strong>Fixe : {clinicPhoneDisplay}</strong>
-            <strong>Portable / WhatsApp : {clinicSecondaryPhoneDisplay}</strong>
+            <strong>
+              Fixe :{" "}
+              <span className="appointment-phone">{clinicPhoneDisplay}</span>
+            </strong>
+            <strong>
+              Portable / WhatsApp :{" "}
+              <span className="appointment-phone">
+                {clinicSecondaryPhoneDisplay}
+              </span>
+            </strong>
             <small>{clinicAddress}</small>
           </div>
           <div className="hero-actions">
@@ -183,6 +207,14 @@ export default function AppointmentPage() {
               <WhatsAppIcon />
               Écrire sur WhatsApp
             </a>
+            <a
+              className="secondary-button"
+              href={mapsHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Voir l’itinéraire
+            </a>
           </div>
         </article>
 
@@ -196,6 +228,63 @@ export default function AppointmentPage() {
         </article>
       </section>
 
+      {/* Horaires et accès : mêmes données que l'accueil (`openingHours`,
+          FAQ accès et règlement), présentées avec les mêmes blocs. */}
+      <section className="section-shell appointment-practical">
+        <div className="section-heading">
+          <p className="eyebrow">Informations pratiques</p>
+          <h2>Horaires et accès au cabinet.</h2>
+        </div>
+        <div className="service-detail-grid">
+          <div className="hours-panel">
+            <h3>Horaires d’ouverture</h3>
+            <div className="hours-list">
+              {openingHours.map(([day, time]) => (
+                <div key={day}>
+                  <span>{day}</span>
+                  <strong>{time}</strong>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="hours-panel appointment-access">
+            <h3>Adresse et accès</h3>
+            <p>{clinicAddress}.</p>
+            <p>
+              L’accès du cabinet est adapté aux personnes à mobilité réduite ;
+              le secrétariat renseigne sur les modalités pratiques d’accès.
+            </p>
+            <p>Le cabinet accepte les cartes Visa et MasterCard.</p>
+            <div className="hero-actions">
+              <a
+                className="primary-button"
+                href={mapsHref}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ouvrir l’itinéraire GPS
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell contact-steps-section">
+        <div className="section-heading">
+          <p className="eyebrow">Prise de rendez-vous</p>
+          <h2>Comment se passe la prise de rendez-vous.</h2>
+        </div>
+        <div className="contact-steps-grid">
+          {appointmentSteps.map((step, index) => (
+            <article key={step.title} className="contact-step-card">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="section-shell appointment-privacy">
         <strong>Confidentialité médicale</strong>
         <p>
@@ -205,7 +294,7 @@ export default function AppointmentPage() {
         </p>
       </section>
 
-      <SiteFooter internal />
+      <SiteFooter internal langSwitchHref="/ar/rendez-vous" />
     </main>
   );
 }

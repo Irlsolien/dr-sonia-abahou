@@ -12,6 +12,7 @@ import { PhoneIcon, WhatsAppIcon } from "../../../components/Icons";
 import {
   absoluteUrl,
   clinicAddress,
+  clinicAlternateNames,
   clinicCity,
   clinicCountry,
   clinicName,
@@ -53,9 +54,11 @@ const canonical = "/ar/endocrinologue-diabetologue-rabat";
 const pageUrl = absoluteUrl(canonical);
 const mapsHref = googleMapsPlaceUrl;
 
-const seoTitle = "طبيبة الغدد والسكري للرباط وتمارة | الدكتورة سونيا أبحو";
+/* Miroir du titre et de la description français : cabinet à Témara,
+   accessible depuis Rabat, description tenue sous 155 caractères. */
+const seoTitle = "طبيبة الغدد والسكري قرب الرباط، بتمارة | الدكتورة سونيا أبحو";
 const seoDescription =
-  "طبيبة غدد صماء وسكري تستقبل بعيادة المسيرة 1 بتمارة، على مشارف الرباط: السكري، الغدة الدرقية، التغذية والأمراض الأيضية. الدكتورة سونيا أبحو، رئيسة الجمعية المغربية لأمراض السكري.";
+  "الدكتورة سونيا أبحو، طبيبة الغدد الصماء والسكري، رئيسة الجمعية المغربية للسكري. عيادة بتمارة (المسيرة 1)، يسهل الوصول إليها من الرباط.";
 
 export const metadata: Metadata = {
   title: seoTitle,
@@ -175,6 +178,7 @@ const pageStructuredData = {
       "@type": "MedicalClinic",
       "@id": `${siteUrl}/#clinic`,
       name: clinicName,
+      alternateName: [...clinicAlternateNames],
       telephone: [clinicPhoneInternational, clinicSecondaryPhoneInternational],
       address: {
         "@type": "PostalAddress",

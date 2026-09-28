@@ -11,6 +11,8 @@ import {
 import { PhoneIcon, WhatsAppIcon } from "../../components/Icons";
 import {
   absoluteUrl,
+  appointmentPreparationNote,
+  appointmentSteps,
   clinicAddress,
   clinicName,
   clinicPhoneDisplay,
@@ -44,25 +46,11 @@ const lastModifiedLabel = new Intl.DateTimeFormat("fr-MA", {
   year: "numeric",
 }).format(new Date(`${lastModified}T12:00:00+01:00`));
 
-// Formulation reprise à l'identique du paragraphe "service-copy" ci-dessous,
-// afin de garder un seul texte source pour les deux emplacements.
-const preparationNote =
-  "Pour préparer le rendez-vous, il est conseillé d’apporter les derniers bilans, ordonnances, comptes rendus, imageries et traitements en cours.";
-
-const contactSteps = [
-  {
-    title: "Appeler ou écrire sur WhatsApp",
-    text: `Fixe : ${clinicPhoneDisplay}. Portable / WhatsApp : ${clinicSecondaryPhoneDisplay}.`,
-  },
-  {
-    title: "Convenir d’un créneau avec le secrétariat",
-    text: "Le secrétariat confirme la disponibilité et les modalités pratiques du rendez-vous.",
-  },
-  {
-    title: "Apporter vos bilans et traitements en cours",
-    text: preparationNote,
-  },
-] as const;
+// Texte source unique (`app/seo.ts`), repris à l'identique dans le paragraphe
+// "service-copy" ci-dessous, dans la troisième étape de prise de contact et
+// sur la page `/rendez-vous`.
+const preparationNote = appointmentPreparationNote;
+const contactSteps = appointmentSteps;
 
 function findService(slug: string) {
   return services.find((service) => service.slug === slug);

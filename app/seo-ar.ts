@@ -619,7 +619,9 @@ export const arMobileNavLabels: MobileNavLabels = {
     { href: "cabinet", label: "العيادة" },
     { href: "contact", label: "التواصل" },
   ],
-  extraLinks: [{ href: "#contact", label: "حجز موعد" }],
+  /* Même destination que le lien « Rendez-vous » du menu français : la page
+     de prise de rendez-vous arabe (horaires, accès, étapes). */
+  extraLinks: [{ href: "/ar/rendez-vous", label: "حجز موعد" }],
   langSwitch: {
     href: "/",
     label: "Français",
@@ -634,7 +636,8 @@ export const arHeaderLabels: HeaderLabels = {
   homeAriaLabel: "الصفحة الرئيسية",
   navAriaLabel: "التنقّل الرئيسي",
   sections: arMobileNavLabels.sections,
-  cta: { href: "#contact", label: "حجز موعد" },
+  /* Miroir du bouton « Prendre RDV » français (`/rendez-vous`). */
+  cta: { href: "/ar/rendez-vous", label: "حجز موعد" },
   langSwitch: arMobileNavLabels.langSwitch,
   mobile: arMobileNavLabels,
 };
@@ -832,7 +835,7 @@ export const servicePagesAr: Record<
     ],
   },
   "thyroide-temara": {
-    seoTitle: "طبيبة الغدة الدرقية بتمارة | أمراض الغدد الصماء | الدكتورة سونيا أبحو",
+    seoTitle: "طبيبة الغدة الدرقية بتمارة | الدكتورة سونيا أبحو",
     description:
       "استشارة في أمراض الغدد الصماء بتمارة لاضطرابات الغدة الدرقية وتضخّم الغدة والعُقيدات وسرطانات الغدة الدرقية والتتبّع الطبي.",
     keywords: [
@@ -844,7 +847,7 @@ export const servicePagesAr: Record<
     ],
   },
   "nutrition-maladies-metaboliques-temara": {
-    seoTitle: "التغذية الطبية بتمارة | السمنة والاستقلاب | الدكتورة سونيا أبحو",
+    seoTitle: "التغذية الطبية والسمنة بتمارة | الدكتورة سونيا أبحو",
     description:
       "مواكبة في التغذية الطبية بتمارة: السمنة والوزن ومقاومة الأنسولين والاستقلاب والوقاية والأمراض الاستقلابية.",
     keywords: [
@@ -857,7 +860,7 @@ export const servicePagesAr: Record<
   },
   "surrenales-hypophyse-parathyroides-temara": {
     seoTitle:
-      "الغدد الكظرية والغدة النخامية والغدد جارات الدرقية بتمارة | الدكتورة سونيا أبحو",
+      "الغدد الكظرية والنخامية وجارات الدرقية بتمارة | الدكتورة سونيا أبحو",
     description:
       "استشارة في أمراض الغدد الصماء بتمارة لأمراض الغدد الكظرية والغدة النخامية والغدد جارات الدرقية.",
     keywords: [
@@ -870,7 +873,7 @@ export const servicePagesAr: Record<
   },
   "hyperprolactinemie-hypoglycemies-temara": {
     seoTitle:
-      "فرط برولاكتين الدم ونقص السكر في الدم بتمارة | الدكتورة سونيا أبحو",
+      "فرط برولاكتين الدم ونقص سكر الدم بتمارة | الدكتورة سونيا أبحو",
     description:
       "استشارة في أمراض الغدد الصماء بتمارة لفرط برولاكتين الدم ونقص السكر في الدم والاختلالات الهرمونية التي تتكفّل بها العيادة.",
     keywords: [
@@ -882,7 +885,7 @@ export const servicePagesAr: Record<
     ],
   },
   "education-therapeutique-temara": {
-    seoTitle: "التربية العلاجية بتمارة | داء السكري والتتبّع | الدكتورة سونيا أبحو",
+    seoTitle: "التربية العلاجية بتمارة | الدكتورة سونيا أبحو",
     description:
       "التربية العلاجية بتمارة لمساعدة المرضى على فهم مرضهم وتتبّعهم وأهدافهم الطبية بشكل أفضل.",
     keywords: [

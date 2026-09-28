@@ -57,7 +57,7 @@ export const metadata: Metadata = {
 export default function CookiesPage() {
   return (
     <main id="main-content" className="legal-page">
-      <SiteHeader internal />
+      <SiteHeader internal langSwitchHref="/ar/cookies" />
 
       {/* Cible du lien d'évitement français posé par `app/(fr)/layout.tsx`. */}
       <section id="fr-content" className="legal-hero section-shell">
@@ -208,7 +208,7 @@ export default function CookiesPage() {
         </article>
       </section>
 
-      <SiteFooter internal />
+      <SiteFooter internal langSwitchHref="/ar/cookies" />
     </main>
   );
 }

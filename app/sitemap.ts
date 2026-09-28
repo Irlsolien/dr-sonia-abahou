@@ -2,14 +2,17 @@ import type { MetadataRoute } from "next";
 import {
   absoluteUrl,
   doctorProfilePath,
-  lastModified,
+  lastModifiedFor,
   professionalGallery,
   services,
 } from "./seo";
 
 export const dynamic = "force-static";
 
-const modifiedAt = new Date(`${lastModified}T00:00:00+01:00`);
+/* Date de dernière modification propre à chaque page (`lastModifiedFor`) :
+   une date identique sur toutes les URL n'apprend rien aux moteurs. */
+const modifiedAt = (path: string) =>
+  new Date(`${lastModifiedFor(path)}T00:00:00+01:00`);
 
 /* Images publiées sur les deux accueils : la version arabe montre exactement
    les mêmes photographies que la version française, elle mérite donc les
@@ -57,21 +60,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: absoluteUrl("/"),
-      lastModified: modifiedAt,
+      lastModified: modifiedAt("/"),
       priority: 1,
       alternates: languageAlternates("/", "/ar"),
       images: homeImages,
     },
     {
       url: absoluteUrl("/ar"),
-      lastModified: modifiedAt,
+      lastModified: modifiedAt("/ar"),
       priority: 0.9,
       alternates: languageAlternates("/", "/ar"),
       images: homeImages,
     },
     {
       url: absoluteUrl(doctorProfilePath),
-      lastModified: modifiedAt,
+      lastModified: modifiedAt(doctorProfilePath),
       priority: 0.8,
       alternates: languageAlternates(doctorProfilePath, `/ar${doctorProfilePath}`),
       images: [absoluteUrl("/dr-sonia-abahou.jpg"), ...profileMediaImages],
@@ -79,21 +82,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     /* Page bio arabe : miroir de `/dr-sonia-abahou`, un cran sous la française. */
     {
       url: absoluteUrl(`/ar${doctorProfilePath}`),
-      lastModified: modifiedAt,
+      lastModified: modifiedAt(`/ar${doctorProfilePath}`),
       priority: 0.7,
       alternates: languageAlternates(doctorProfilePath, `/ar${doctorProfilePath}`),
       images: [absoluteUrl("/dr-sonia-abahou.jpg"), ...profileMediaImages],
     },
     ...services.map((service) => ({
       url: absoluteUrl(`/${service.slug}`),
-      lastModified: modifiedAt,
+      lastModified: modifiedAt(`/${service.slug}`),
       priority: 0.8,
       alternates: languageAlternates(`/${service.slug}`, `/ar/${service.slug}`),
     })),
     /* Pages motifs arabes : mêmes slugs, un cran sous les motifs français. */
     ...services.map((service) => ({
       url: absoluteUrl(`/ar/${service.slug}`),
-      lastModified: modifiedAt,
+      lastModified: modifiedAt(`/ar/${service.slug}`),
       priority: 0.7,
       alternates: languageAlternates(`/${service.slug}`, `/ar/${service.slug}`),
     })),
@@ -102,7 +105,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
        alignée sur les motifs français. */
     {
       url: absoluteUrl("/endocrinologue-diabetologue-rabat"),
-      lastModified: modifiedAt,
+      lastModified: modifiedAt("/endocrinologue-diabetologue-rabat"),
       priority: 0.8,
       alternates: languageAlternates(
         "/endocrinologue-diabetologue-rabat",
@@ -112,7 +115,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl("/ar/endocrinologue-diabetologue-rabat"),
-      lastModified: modifiedAt,
+      lastModified: modifiedAt("/ar/endocrinologue-diabetologue-rabat"),
       priority: 0.7,
       alternates: languageAlternates(
         "/endocrinologue-diabetologue-rabat",
@@ -122,13 +125,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl("/rendez-vous"),
-      lastModified: modifiedAt,
+      lastModified: modifiedAt("/rendez-vous"),
       priority: 0.7,
       alternates: languageAlternates("/rendez-vous", "/ar/rendez-vous"),
     },
     {
       url: absoluteUrl("/ar/rendez-vous"),
-      lastModified: modifiedAt,
+      lastModified: modifiedAt("/ar/rendez-vous"),
       priority: 0.7,
       alternates: languageAlternates("/rendez-vous", "/ar/rendez-vous"),
     },
@@ -137,13 +140,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...["/mentions-legales", "/confidentialite", "/cookies"].flatMap((path) => [
       {
         url: absoluteUrl(path),
-        lastModified: modifiedAt,
+        lastModified: modifiedAt(path),
         priority: 0.3,
         alternates: languageAlternates(path, `/ar${path}`),
       },
       {
         url: absoluteUrl(`/ar${path}`),
-        lastModified: modifiedAt,
+        lastModified: modifiedAt(`/ar${path}`),
         priority: 0.3,
         alternates: languageAlternates(path, `/ar${path}`),
       },

@@ -11,6 +11,7 @@ import { PhoneIcon, WhatsAppIcon } from "../../components/Icons";
 import {
   absoluteUrl,
   clinicAddress,
+  clinicAlternateNames,
   clinicCity,
   clinicCountry,
   clinicName,
@@ -49,9 +50,13 @@ const arabicPath = "/ar/endocrinologue-diabetologue-rabat";
 const pageUrl = absoluteUrl(canonical);
 const mapsHref = googleMapsPlaceUrl;
 
-const seoTitle = "Endocrinologue diabétologue Rabat–Témara | Dr Sonia Abahou";
+/* Titre et description orientés vers la recherche « endocrinologue Rabat »,
+   sans jamais laisser croire à un cabinet à Rabat : le cabinet est à Témara,
+   accessible depuis Rabat. Description tenue sous 155 caractères pour ne pas
+   être coupée dans les résultats Google. */
+const seoTitle = "Endocrinologue près de Rabat, à Témara | Dr Sonia Abahou";
 const seoDescription =
-  "Endocrinologue et diabétologue consultant à Massira 1, Témara, aux portes de Rabat : diabète, thyroïde, nutrition et maladies métaboliques. Dr Sonia Abahou, présidente de la Société Marocaine de Diabétologie.";
+  "Dr Sonia Abahou, endocrinologue-diabétologue, présidente de la Société Marocaine de Diabétologie. Cabinet à Témara (Massira 1), accessible depuis Rabat.";
 
 export const metadata: Metadata = {
   title: seoTitle,
@@ -173,6 +178,7 @@ const pageStructuredData = {
       "@type": "MedicalClinic",
       "@id": `${siteUrl}/#clinic`,
       name: clinicName,
+      alternateName: [...clinicAlternateNames],
       telephone: [clinicPhoneInternational, clinicSecondaryPhoneInternational],
       address: {
         "@type": "PostalAddress",

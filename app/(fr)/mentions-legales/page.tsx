@@ -62,7 +62,7 @@ export const metadata: Metadata = {
 export default function LegalNoticePage() {
   return (
     <main id="main-content" className="legal-page">
-      <SiteHeader internal />
+      <SiteHeader internal langSwitchHref="/ar/mentions-legales" />
 
       {/* Cible du lien d'évitement français posé par `app/(fr)/layout.tsx`. */}
       <section id="fr-content" className="legal-hero section-shell">
@@ -178,7 +178,7 @@ export default function LegalNoticePage() {
         </article>
       </section>
 
-      <SiteFooter internal />
+      <SiteFooter internal langSwitchHref="/ar/mentions-legales" />
     </main>
   );
 }
