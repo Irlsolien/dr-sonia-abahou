@@ -4,6 +4,7 @@ import "../globals.css";
 import { NavigationProgress } from "../components/NavigationProgress";
 import { ConsoleWarning } from "../components/ConsoleWarning";
 import { CookieConsent } from "../components/CookieConsent";
+import { ConversionTracking } from "../components/ConversionTracking";
 import { ReviewNudge } from "../components/ReviewNudge";
 import { reviewRequestPath } from "../seo";
 import { arabicFontVariables, latinFontVariablesAr } from "./fonts";
@@ -167,6 +168,9 @@ export default function ArabicRootLayout({
         {/* Bandeau cookies + Google Analytics 4, chargé après acceptation
             seulement (miroir du layout français). */}
         <CookieConsent lang="ar" labels={arCookieConsentLabels} />
+        {/* Mesure des prises de contact (appel, WhatsApp, itinéraire,
+            rendez-vous) : envoyée à GA4 seulement après acceptation. */}
+        <ConversionTracking />
         {/* Invitation discrète à laisser un avis, miroir du layout français. */}
         <ReviewNudge
           lang="ar"

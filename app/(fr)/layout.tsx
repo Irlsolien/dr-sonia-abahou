@@ -4,6 +4,7 @@ import "../globals.css";
 import { NavigationProgress } from "../components/NavigationProgress";
 import { ConsoleWarning } from "../components/ConsoleWarning";
 import { CookieConsent } from "../components/CookieConsent";
+import { ConversionTracking } from "../components/ConversionTracking";
 import { ReviewNudge } from "../components/ReviewNudge";
 import { latinFontVariables } from "../fonts";
 import {
@@ -158,6 +159,9 @@ export default function RootLayout({
         {/* Bandeau cookies + Google Analytics 4, chargé après acceptation
             seulement. */}
         <CookieConsent lang="fr" />
+        {/* Mesure des prises de contact (appel, WhatsApp, itinéraire,
+            rendez-vous) : envoyée à GA4 seulement après acceptation. */}
+        <ConversionTracking />
         {/* Invitation discrète à laisser un avis Google : après le choix
             cookies et un temps de lecture, jamais sur /avis. */}
         <ReviewNudge lang="fr" />
