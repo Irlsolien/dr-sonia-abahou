@@ -254,7 +254,6 @@ export default function AppointmentPage() {
               L’accès du cabinet est adapté aux personnes à mobilité réduite ;
               le secrétariat renseigne sur les modalités pratiques d’accès.
             </p>
-            <p>Le cabinet accepte les cartes Visa et MasterCard.</p>
             <div className="hero-actions">
               <a
                 className="primary-button"

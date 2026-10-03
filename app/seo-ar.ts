@@ -344,6 +344,9 @@ export const profileAr = {
   ctaButton: "أخذ موعد",
 } as const;
 
+export const openingHoursSummaryAr =
+  "تستقبل العيادة من الاثنين إلى الجمعة من 9:30 إلى 16:00، ويوم السبت من 9:30 إلى 12:00. وهي مغلقة يوم الأحد.";
+
 export const faqAr: Record<FaqQuestion, { question: string; answer: string }> = {
   "Comment prendre rendez-vous au cabinet ?": {
     question: "كيف يمكن حجز موعد بالعيادة؟",
@@ -357,8 +360,7 @@ export const faqAr: Record<FaqQuestion, { question: string; answer: string }> = 
   },
   "Quels sont les horaires du cabinet ?": {
     question: "ما هي أوقات عمل العيادة؟",
-    answer:
-      "تستقبل العيادة من الاثنين إلى الخميس من 9:30 إلى 16:00، ويوم الجمعة من 9:30 إلى 12:30. وهي مغلقة يومي السبت والأحد.",
+    answer: openingHoursSummaryAr,
   },
   "Quels documents apporter pour une première consultation ?": {
     question: "ما الوثائق التي ينبغي إحضارها في الاستشارة الأولى؟",
@@ -412,7 +414,8 @@ export const faqAr: Record<FaqQuestion, { question: string; answer: string }> = 
   },
   "Peut-on régler la consultation par carte bancaire ?": {
     question: "هل يمكن أداء ثمن الاستشارة بالبطاقة البنكية؟",
-    answer: "نعم. تقبل العيادة بطاقات Visa وMasterCard.",
+    answer:
+      "الأداء بالبطاقة البنكية غير متاح حاليًا. لا تتوفر العيادة بعد على جهاز للأداء بالبطاقة.",
   },
   "Depuis quelles villes vient-on consulter au cabinet ?": {
     question: "من أي مدن يأتي المرضى إلى العيادة؟",
@@ -441,8 +444,8 @@ export const hoursAr = [
   ["الثلاثاء", "9:30 — 16:00"],
   ["الأربعاء", "9:30 — 16:00"],
   ["الخميس", "9:30 — 16:00"],
-  ["الجمعة", "9:30 — 12:30"],
-  ["السبت", "مغلق"],
+  ["الجمعة", "9:30 — 16:00"],
+  ["السبت", "9:30 — 12:00"],
   ["الأحد", "مغلق"],
 ] as const;
 
@@ -990,7 +993,7 @@ export const serviceUiAr = {
  */
 export function serviceQuickAnswerAr(slug: ServiceSlug) {
   return {
-    text: `الدكتورة سونيا أبحو طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية بتمارة، بالمغرب. ${servicesAr[slug].text} تستقبل العيادة بموعد من الاثنين إلى الخميس من 9:30 إلى 16:00، ويوم الجمعة من 9:30 إلى 12:30. ويُؤخذ الموعد هاتفيًا أو عبر واتساب — العنوان والأرقام:`,
+    text: `الدكتورة سونيا أبحو طبيبة أخصائية في أمراض الغدد الصماء والسكري والتغذية والأمراض الاستقلابية بتمارة، بالمغرب. ${servicesAr[slug].text} ${openingHoursSummaryAr} يتم الاستقبال بموعد، ويُؤخذ الموعد هاتفيًا أو عبر واتساب — العنوان والأرقام:`,
     latin: `${clinicAddress} · ${clinicPhoneDisplay} · ${clinicSecondaryPhoneDisplay}`,
   };
 }

@@ -312,7 +312,6 @@ export default function ArabicAppointmentPage() {
               مدخل العيادة مهيّأ للأشخاص ذوي الحركة المحدودة، وتقدّم السكرتارية
               التوضيحات العملية حول الوصول.
             </p>
-            <p>تقبل العيادة بطاقات Visa وMasterCard.</p>
             <div className="hero-actions">
               <a
                 className="primary-button"

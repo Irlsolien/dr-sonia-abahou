@@ -35,6 +35,7 @@ import {
   googleRatingFillWidth,
   googleReviews,
   lastModified,
+  lastModifiedFor,
   mapsQuery,
   patientJourney,
   services,
@@ -43,7 +44,11 @@ import {
   reviewRequestPath,
 } from "../../seo";
 import { clinicEntities, entityNodes, speakableSpecification } from "../../geo";
-import { doctorIdAr, doctorNodeAr } from "../../structured-data";
+import {
+  doctorIdAr,
+  doctorNodeAr,
+  openingHoursSpecification,
+} from "../../structured-data";
 import {
   activitiesAr,
   activityHighlightsAr,
@@ -224,20 +229,7 @@ const structuredDataAr = {
           url: `${arPageUrl}#${activity.id}`,
         })),
       ],
-      openingHoursSpecification: [
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
-          opens: "09:30",
-          closes: "16:00",
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: "Friday",
-          opens: "09:30",
-          closes: "12:30",
-        },
-      ],
+      openingHoursSpecification,
     },
     doctorNodeAr,
     /* Le site est une entité bilingue unique : le nœud `WebSite` porte le même
@@ -267,7 +259,7 @@ const structuredDataAr = {
       name: metaAr.title,
       description: metaAr.description,
       inLanguage: "ar",
-      dateModified: lastModified,
+      dateModified: lastModifiedFor("/ar"),
       /* Contenu de santé : date de relecture et médecin qui en répond. */
       lastReviewed: lastModified,
       reviewedBy: {

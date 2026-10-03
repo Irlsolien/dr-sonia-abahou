@@ -35,6 +35,7 @@ import {
   googleRatingFillWidth,
   googleReviews,
   lastModified,
+  lastModifiedFor,
   mapsQuery,
   openingHours,
   patientJourney,
@@ -44,7 +45,11 @@ import {
   reviewRequestPath,
 } from "../seo";
 import { clinicEntities, entityNodes, speakableSpecification } from "../geo";
-import { doctorIdFr, doctorNodeFr } from "../structured-data";
+import {
+  doctorIdFr,
+  doctorNodeFr,
+  openingHoursSpecification,
+} from "../structured-data";
 
 const phoneHref = `tel:${clinicPhoneInternational}`;
 const secondaryPhoneHref = `tel:${clinicSecondaryPhoneInternational}`;
@@ -144,20 +149,7 @@ const structuredData = {
           url: absoluteUrl(`/#${activity.id}`),
         })),
       ],
-      openingHoursSpecification: [
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
-          opens: "09:30",
-          closes: "16:00",
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: "Friday",
-          opens: "09:30",
-          closes: "12:30",
-        },
-      ],
+      openingHoursSpecification,
     },
     doctorNodeFr,
     {
@@ -179,7 +171,7 @@ const structuredData = {
       description:
         "Site officiel du cabinet du Dr Sonia Abahou à Témara : endocrinologie, diabétologie, nutrition et maladies métaboliques.",
       inLanguage: "fr-MA",
-      dateModified: lastModified,
+      dateModified: lastModifiedFor("/"),
       /* Contenu de santé : qui l'a relu, et quand. C'est ce que les moteurs de
          réponse citent pour justifier la fiabilité d'une source médicale. */
       lastReviewed: lastModified,

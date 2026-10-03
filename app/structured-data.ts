@@ -36,15 +36,15 @@ const doctorNameArSearchVariant = "الدكتورة صونية أباحو";
 export const openingHoursSpecification = [
   {
     "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
     opens: "09:30",
     closes: "16:00",
   },
   {
     "@type": "OpeningHoursSpecification",
-    dayOfWeek: "Friday",
+    dayOfWeek: "Saturday",
     opens: "09:30",
-    closes: "12:30",
+    closes: "12:00",
   },
 ] as const;
 

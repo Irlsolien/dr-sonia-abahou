@@ -62,8 +62,10 @@ export const lastModified = "2026-09-13";
  * pratique mise à jour n'a pas été relue médicalement pour autant.
  */
 export const pageLastModified: Readonly<Record<string, string>> = {
-  "/rendez-vous": "2026-09-28",
-  "/ar/rendez-vous": "2026-09-28",
+  "/": "2026-10-03",
+  "/ar": "2026-10-03",
+  "/rendez-vous": "2026-10-03",
+  "/ar/rendez-vous": "2026-10-03",
 };
 
 /** Date de dernière modification d'une page (chemin public, sans domaine). */
@@ -279,14 +281,14 @@ export const openingHours = [
   ["Mardi", "9h30 — 16h"],
   ["Mercredi", "9h30 — 16h"],
   ["Jeudi", "9h30 — 16h"],
-  ["Vendredi", "9h30 — 12h30"],
-  ["Samedi", "Fermé"],
+  ["Vendredi", "9h30 — 16h"],
+  ["Samedi", "9h30 — 12h"],
   ["Dimanche", "Fermé"],
 ] as const;
 
 /** Résumé des horaires en une phrase, pour les réponses courtes. */
 export const openingHoursSummary =
-  "Du lundi au jeudi de 9h30 à 16h et le vendredi de 9h30 à 12h30. Fermé le samedi et le dimanche.";
+  "Du lundi au vendredi de 9h30 à 16h et le samedi de 9h30 à 12h. Fermé le dimanche.";
 
 /**
  * Préparation du rendez-vous et étapes de prise de contact, partagées par les
@@ -382,8 +384,7 @@ export const faqItems = [
   },
   {
     question: "Quels sont les horaires du cabinet ?",
-    answer:
-      "Le cabinet reçoit du lundi au jeudi de 9h30 à 16h et le vendredi de 9h30 à 12h30. Il est fermé le samedi et le dimanche.",
+    answer: openingHoursSummary,
   },
   {
     question: "Quels documents apporter pour une première consultation ?",
@@ -426,7 +427,7 @@ export const faqItems = [
       "Le site présente notamment le diabète, les troubles thyroïdiens, la nutrition médicale, l’obésité, les maladies métaboliques, l’hyperprolactinémie, les hypoglycémies et certaines pathologies endocriniennes.",
   },
   /* Sous-questions pratiques : attributs confirmés de la fiche Google
-     (rendez-vous obligatoire, accès PMR, cartes Visa et MasterCard) et
+     (rendez-vous obligatoire, accès PMR) et
      géographie de l’agglomération. Aucun tarif ni délai n’est annoncé. */
   {
     question: "Le cabinet reçoit-il sans rendez-vous ?",
@@ -440,7 +441,8 @@ export const faqItems = [
   },
   {
     question: "Peut-on régler la consultation par carte bancaire ?",
-    answer: "Oui. Le cabinet accepte les cartes Visa et MasterCard.",
+    answer:
+      "Le paiement par carte bancaire n’est pas disponible pour le moment. Le cabinet ne dispose pas encore de TPE.",
   },
   {
     question: "Depuis quelles villes vient-on consulter au cabinet ?",
